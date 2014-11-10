@@ -40,6 +40,7 @@ public class Tile {
 		if (movable) {
 			return nextTile;
 		}
+		return null;
 	}
 
 	public void setSpawn(boolean b) {
