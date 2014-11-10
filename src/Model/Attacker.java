@@ -1,6 +1,7 @@
 package Model;
 
 //Test, let's see if git is working.
+//Test 2
 public abstract class Attacker {
 
 	private int hitpoints;
