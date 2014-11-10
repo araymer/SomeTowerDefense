@@ -6,7 +6,7 @@ public abstract class Attacker {
 	private int attackRating;
 	private int range;
 	private int speed;		//The number of milliseconds it takes to cross a full tile
-	private int defenseRating;
+	private int defenseRating;  
 
 	//private int cost; //This is for itr2, possibly
 	
