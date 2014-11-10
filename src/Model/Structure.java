@@ -21,6 +21,7 @@ public abstract class Structure {
 		rateOfFire = rate;
 		special = sp;
 		buildCost = cost;
+		new Thread(new Detector()).start();
 		
 	}
 	
@@ -49,4 +50,17 @@ public abstract class Structure {
 	public SpecialAttack getSpecial() {
 		return special;
 	}
+	
+	private class Detector implements Runnable {
+
+		@Override
+		public void run() {
+			while(true)
+			{
+			//implements detector code
+			}
+		}
+		
+	}
+	
 }

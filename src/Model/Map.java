@@ -11,6 +11,7 @@ public abstract class Map {
 	
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
+	protected Vector<Attacker> currentAttackers;
 	
 	public Map(int h, int w) { //Default constructor sets empty board
 		height = h;
