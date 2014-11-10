@@ -1,6 +1,9 @@
 /*
- * 
- * A desert marine outpost world. Conditions here are rough and supplies are sparse. The marines
+ *GIT IS WORKING IF YOU CAN READ THIS 
+ 
+
+* 
+* A desert marine outpost world. Conditions here are rough and supplies are sparse. The marines
  * want off this gods-forsaken hellhole and have taken up arms in mutiny!
  * 
  */
