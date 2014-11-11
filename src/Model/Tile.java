@@ -1,13 +1,12 @@
 package Model;
 
-import java.util.Vector;
+import java.util.Observable;
 
-public class Tile {
+public class Tile extends Observable {
 
 	private boolean spawnable;
 	private boolean buildable;
 	private boolean movable;
-	private Vector<Attacker> attackers;
 	private Structure tileStructure;
 	private Dir nextTile;
 
@@ -17,7 +16,6 @@ public class Tile {
 		buildable = false;
 		movable = false;
 		tileStructure = null;
-		attackers = new Vector<Attacker>();
 
 	}
 
@@ -60,10 +58,6 @@ public class Tile {
 
 	public void setDirection(Dir direction) {
 		nextTile = direction;
-	}
-
-	public void addAttacker(Attacker a) {
-		attackers.add(a);
 	}
 
 	public boolean build(Structure s) {
