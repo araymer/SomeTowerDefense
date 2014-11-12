@@ -1,13 +1,22 @@
 package Model;
 
+<<<<<<< HEAD
 import java.util.Vector;
 
 public class Tile {
+=======
+import java.util.Observable;
+
+public class Tile extends Observable {
+>>>>>>> FETCH_HEAD
 
 	private boolean spawnable;
 	private boolean buildable;
 	private boolean movable;
+<<<<<<< HEAD
 	private Vector<Attacker> attackers;
+=======
+>>>>>>> FETCH_HEAD
 	private Structure tileStructure;
 	private Dir nextTile;
 
@@ -17,7 +26,10 @@ public class Tile {
 		buildable = false;
 		movable = false;
 		tileStructure = null;
+<<<<<<< HEAD
 		attackers = new Vector<Attacker>();
+=======
+>>>>>>> FETCH_HEAD
 
 	}
 
@@ -62,10 +74,13 @@ public class Tile {
 		nextTile = direction;
 	}
 
+<<<<<<< HEAD
 	public void addAttacker(Attacker a) {
 		attackers.add(a);
 	}
 
+=======
+>>>>>>> FETCH_HEAD
 	public boolean build(Structure s) {
 		if (buildable && tileStructure == null) {
 			tileStructure = s;
