@@ -1,26 +1,19 @@
 package Model;
 
-<<<<<<< HEAD
 //Test, let's see if git is working.
 //Test 2
-=======
->>>>>>> FETCH_HEAD
+
 public abstract class Attacker {
 
 	private int hitpoints;
 	private int attackRating;
-<<<<<<< HEAD
-	private int range;
-	private int speed; // The number of milliseconds it takes to cross a full
-						// tile
-	private int defenseRating;
-=======
+
 	private int speed; // The number of milliseconds it takes to cross a full
 						// tile
 	private int defenseRating;
 	private int range;
 	private Tile location; // attacker keeps track of own location
->>>>>>> FETCH_HEAD
+
 
 	// private int cost; //This is for itr2, possibly
 
@@ -65,8 +58,7 @@ public abstract class Attacker {
 		return defenseRating;
 	}
 
-<<<<<<< HEAD
-=======
+
 	public Tile getLoc() {
 		return location;
 	}
@@ -75,5 +67,5 @@ public abstract class Attacker {
 		location = loc;
 	}
 
->>>>>>> FETCH_HEAD
+
 }
