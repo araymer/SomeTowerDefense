@@ -1,6 +1,14 @@
 package Model;
 
-public abstract class Structure {
+import java.util.Observable;
+import java.util.Observer;
+
+/**
+ * 
+ * @author Team Something
+ *
+ */
+public abstract class Structure implements Observer {
 
 	protected int hitpoints;
 	private int production;
@@ -10,9 +18,11 @@ public abstract class Structure {
 	private int rateOfFire; // in milliseconds
 	private int buildCost;
 	private SpecialAttack special;
+	private int x;
+	private int y;
 
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
-			int cost, SpecialAttack sp) {
+			int cost, int x, int y, SpecialAttack sp) {
 
 		hitpoints = hp;
 		production = prod;
@@ -22,6 +32,18 @@ public abstract class Structure {
 		rateOfFire = rate;
 		special = sp;
 		buildCost = cost;
+		this.x = x; // added so the structure can know where it is
+		this.y = y; // and can add itself as an observer to the tiles in its
+					// range
+		// TODO: set as observer to the tiles in its range
+		// How are we doing range in diagonal directions?
+		// Will need to be able to have a reference to the map
+		/*
+		 * for (int i = 0; i < rng; i++) {
+		 *  if (does not fall off the map and is a path) 
+		 *  tile.addObserver(this);
+		 *  }
+		 */
 
 	}
 
@@ -55,14 +77,25 @@ public abstract class Structure {
 		return rateOfFire;
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	public SpecialAttack getSpecial() {
 		return special;
 	}
 
+	public void update(Observable obs, Object atk) {
+		shoot((Attacker) atk);
+	}
 
 	/**
-	 * This class is attached to attackers and defenders to determine if a hostile
-	 * unit is in range and to initiate hostile activity against them.
+	 * This class is attached to attackers and defenders to determine if a
+	 * hostile unit is in range and to initiate hostile activity against them.
 	 * 
 	 * @author Team Something
 	 *
@@ -85,19 +118,17 @@ public abstract class Structure {
 		 * @return if something is in range and can be attacked
 		 */
 		public boolean scan() {
-			for(int a = 0; a < MasterList.unitList.toArray().length; a++){
-			
-				if(Math.abs((x - MasterList.unitList[a].toArray().length) <= range) && 
-					(Math.abs(y - MasterList.unitList[a].toArray().length) <= range) 
-					&& MasterList.unitList[a].hostile()) <= range {
-				
-				}
-			}
+			/*
+			 * for(int a = 0; a < MasterList.unitList.toArray().length; a++){
+			 * 
+			 * if(Math.abs((x - MasterList.unitList[a].toArray().length) <=
+			 * range) && (Math.abs(y - MasterList.unitList[a].toArray().length)
+			 * <= range) && MasterList.unitList[a].hostile()) <= range {
+			 * 
+			 * } }
+			 */
 			return false;
 		}
 
-		public void shoot(Object O) {
-
-		}
 	}
 }

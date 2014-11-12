@@ -7,6 +7,7 @@
 
 package Maps;
 
+import Model.Dir;
 import Model.Map;
 import Structures.BaseDesertUprising;
 
@@ -25,14 +26,14 @@ public class DesertUprising extends Map {
 	}
 
 	private void setTiles() {
-		// TODO Auto-generated method stub. PLACE ANY OTHER TILE CHANGES HERE
+		// PLACE ANY OTHER TILE CHANGES HERE
 
 	}
 
 	@Override
 	public void setBase() {
 		// For now we'll set the base in the left-middle tile (0,15)
-		gameBoard.get(0).get(15).build(new BaseDesertUprising());
+		gameBoard.get(0).get(15).build(new BaseDesertUprising(0, 15));
 
 	}
 
@@ -47,13 +48,15 @@ public class DesertUprising extends Map {
 	public void setPath() {
 		for (int i = 1; i < width; i++) {
 			gameBoard.get(i).get(15).setMove(true);
+			gameBoard.get(i).get(15).setDirection(Dir.LEFT);
+			// in this case very simple because jsut one direction
 		}
 
 	}
 
 	@Override
 	public void setStartingResources() {
-		// TODO Auto-generated method stub
+		// TODO set starting resources for the player
 
 	}
 
