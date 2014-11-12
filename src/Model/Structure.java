@@ -1,3 +1,4 @@
+
 package Model;
 
 import java.util.Observable;
@@ -132,3 +133,4 @@ public abstract class Structure implements Observer {
 
 	}
 }
+

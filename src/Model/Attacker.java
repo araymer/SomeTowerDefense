@@ -1,14 +1,19 @@
 package Model;
 
+//Test, let's see if git is working.
+//Test 2
+
 public abstract class Attacker {
 
 	private int hitpoints;
 	private int attackRating;
+
 	private int speed; // The number of milliseconds it takes to cross a full
 						// tile
 	private int defenseRating;
 	private int range;
 	private Tile location; // attacker keeps track of own location
+
 
 	// private int cost; //This is for itr2, possibly
 
@@ -53,6 +58,7 @@ public abstract class Attacker {
 		return defenseRating;
 	}
 
+
 	public Tile getLoc() {
 		return location;
 	}
@@ -60,5 +66,6 @@ public abstract class Attacker {
 	public void setLoc(Tile loc) {
 		location = loc;
 	}
+
 
 }

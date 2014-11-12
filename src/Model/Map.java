@@ -1,7 +1,4 @@
-/*
- * @author Team Something
- * Map hierarchy
- */
+
 
 package Model;
 
@@ -34,3 +31,4 @@ public abstract class Map {
 	public abstract void setStartingResources();
 
 }
+

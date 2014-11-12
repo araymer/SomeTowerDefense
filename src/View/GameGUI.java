@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 public class GameGUI implements Serializable{
 	
 	private final int FRAME_WIDTH = 800;
+	//Extra 22 for bar
 	private final int FRAME_HEIGHT = 622;
 	JFrame frame;
 	
