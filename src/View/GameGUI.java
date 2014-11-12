@@ -30,8 +30,11 @@ public class GameGUI implements Serializable{
 		createFrame();
 		
 		MapPanel mapPanel = new MapPanel("desertuprising.jpg");
+		TilePanel tilePanel = new TilePanel();
+		//Stacking panels on top of each other
 		frame.add(mapPanel);
-		mapPanel.add(new TilePanel());
+		mapPanel.add(tilePanel);
+		tilePanel.add(new ResourcePanel());
 		frame.setVisible(true);
 	}
 	
