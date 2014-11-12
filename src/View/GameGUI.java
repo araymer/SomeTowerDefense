@@ -14,9 +14,8 @@ import javax.swing.JFrame;
  */
 public class GameGUI implements Serializable{
 	
-	private int FRAME_WIDTH = 800;
-	//desertuprising.jpg seems to have height 622
-	private int FRAME_HEIGHT = 600;
+	private final int FRAME_WIDTH = 800;
+	private final int FRAME_HEIGHT = 622;
 	JFrame frame;
 	
 	public static void main(String[] args) {

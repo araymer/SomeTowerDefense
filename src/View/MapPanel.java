@@ -15,8 +15,8 @@ import javax.swing.JPanel;
  *
  */
 public class MapPanel extends JPanel{
-	int MAP_WIDTH = 800;
-	int MAP_HEIGHT = 600;
+	private final int MAP_WIDTH = 800;
+	private final int MAP_HEIGHT = 600;
 	private static Image image;
 	
 	private static String baseDir = System.getProperty("user.dir")
