@@ -23,7 +23,7 @@ public class GameController {
 		
 		for(int i = 0; i<waveCount; i++) {
 			for(int k = 0; k<spawnsPerWave[i]; k++) {
-				gui.
+			//start spawning enemies on a delay (probably about 1/2 a second)
 			}
 		}
 		
