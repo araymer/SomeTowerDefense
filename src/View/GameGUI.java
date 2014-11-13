@@ -14,12 +14,10 @@ import javax.swing.JFrame;
  */
 public class GameGUI implements Serializable{
 	
-	private int FRAME_WIDTH = 800;
-	//desertuprising.jpg seems to have height 622
-	//NOTE: I think the 22 px is coming from the bar at the top with the window buttons. I checked the image
-	// and it's definitely 600px high. 
-	private int FRAME_HEIGHT = 600;
-	private JFrame frame;
+	private final int FRAME_WIDTH = 800;
+	//Extra 22 for bar
+	private final int FRAME_HEIGHT = 622;
+	JFrame frame;
 	
 	
 	

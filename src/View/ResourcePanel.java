@@ -15,8 +15,8 @@ import javax.swing.JPanel;
  *
  */
 public class ResourcePanel extends JPanel{
-	private int WIDTH = 800;
-	private int HEIGHT = 600;
+	private final int WIDTH = 800;
+	private final int HEIGHT = 600;
 	
 	/**
 	 * Constructs the ResourcePanel for use in the GameGUI
