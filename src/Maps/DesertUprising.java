@@ -9,12 +9,14 @@ package Maps;
 
 import Model.Dir;
 import Model.Map;
+import Model.Tile;
 import Structures.BaseDesertUprising;
 
 public class DesertUprising extends Map {
 
 	private static int height = 30;
 	private static int width = 40;
+	private Tile spawnTile;
 
 	public DesertUprising() {
 		super(height, width);
@@ -23,6 +25,7 @@ public class DesertUprising extends Map {
 		setSpawnPoints();
 		setStartingResources();
 		setTiles();
+		
 	}
 
 	private void setTiles() {
@@ -41,6 +44,7 @@ public class DesertUprising extends Map {
 	public void setSpawnPoints() {
 		// One spawn point on opposite end of the board
 		gameBoard.get(width - 1).get(15).setSpawn(true);
+		spawnTile = gameBoard.get(width-1).get(15);
 
 	}
 
@@ -49,7 +53,7 @@ public class DesertUprising extends Map {
 		for (int i = 1; i < width; i++) {
 			gameBoard.get(i).get(15).setMove(true);
 			gameBoard.get(i).get(15).setDirection(Dir.LEFT);
-			// in this case very simple because jsut one direction
+			// in this case very simple because just one direction
 		}
 
 	}
@@ -58,6 +62,10 @@ public class DesertUprising extends Map {
 	public void setStartingResources() {
 		// TODO set starting resources for the player
 
+	}
+	
+	public Tile getSpawnTile() {
+		return spawnTile;
 	}
 
 }

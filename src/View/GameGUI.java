@@ -21,9 +21,7 @@ public class GameGUI implements Serializable{
 	private int FRAME_HEIGHT = 600;
 	private JFrame frame;
 	
-	public static void main(String[] args) {
-		GameGUI gui = new GameGUI();
-	}
+	
 	
 	/**
 	 * Constructs the Tower Defense GUI

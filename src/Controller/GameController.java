@@ -5,8 +5,29 @@ package Controller;
 import View.GameGUI;
 
 public class GameController {
+	private int waveCount;
+	private int[] spawnsPerWave = {5, 10, 15, 20, 25};
 	private GameGUI gui;
 	
+	public static void main(String[] args) {
+		new GameController();
+	}
+	
+	public GameController() {
+		waveCount = 5;
+		gui = new GameGUI();
+		
+	}
+	
+	public void startWaves() {
+		
+		for(int i = 0; i<waveCount; i++) {
+			for(int k = 0; k<spawnsPerWave[i]; k++) {
+				gui.
+			}
+		}
+		
+	}
 
 
 }

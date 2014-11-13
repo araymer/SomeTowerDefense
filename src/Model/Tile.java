@@ -68,6 +68,7 @@ public class Tile extends Observable {
 	}
 
 	public void addAttacker(Attacker a) {
+		if(spawnable)
 		attackers.add(a);
 	}
 
