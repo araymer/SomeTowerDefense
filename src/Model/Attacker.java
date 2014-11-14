@@ -26,7 +26,7 @@ public abstract class Attacker {
 
 	}
 
-	public void move() {
+	public void move(Dir direction) {
 		// Will need a reference to the tile it is on. These are in the super
 				// class
 				// as x and y ints. Needs a reference to the instance of the map to move
@@ -54,6 +54,8 @@ public abstract class Attacker {
 
 	// TODO: implement movement based off the direction passed from the tile
 
+	public abstract void draw();
+	
 	public abstract void attack(Structure s);
 
 	public abstract void die();
