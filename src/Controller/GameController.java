@@ -2,6 +2,7 @@
 
 package Controller;
 
+import Model.Ticker;
 import View.GameGUI;
 
 public class GameController {
@@ -16,7 +17,7 @@ public class GameController {
 	public GameController() {
 		waveCount = 5;
 		gui = new GameGUI();
-		
+		new Thread(new Ticker());
 	}
 	
 	public void startWaves() {
@@ -29,5 +30,6 @@ public class GameController {
 		
 	}
 
+	
 
 }
