@@ -56,6 +56,11 @@ public class GameGUI implements Serializable {
 
 	}
 	
+	public void repaint(){
+		tilePanel.repaint();
+		resourcePanel.repaint();
+	}
+	
 	private class PlacementListener implements MouseListener{
 
 		@Override
@@ -71,10 +76,7 @@ public class GameGUI implements Serializable {
 			
 			tilePanel.getMap().createStructure(resourcePanel.getSelectedStructure(), e.getPoint());
 			
-			// Replace map with whatever will be used to set buildings
-			// 1st variable will be enum for the structure types
-			// The value of the enum will be dependent on which is selected on the menu
-			// createStructure will have to find which tile to place the structure depending on mouse location
+			
 			
 		}
 
@@ -82,7 +84,7 @@ public class GameGUI implements Serializable {
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 			//This shouldn't be in final version
-			tilePanel.repaint();
+			repaint();
 			
 		}
 
