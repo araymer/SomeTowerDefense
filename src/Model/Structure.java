@@ -76,7 +76,7 @@ public abstract class Structure implements Observer {
 		}
 		int width = 20;
 		int height = 20;
-		g2.drawImage(image, x, y, width, height, null);
+		g2.drawImage(image, x * width, y * height, width, height, null);
 	}
 
 	public int getHP() {
