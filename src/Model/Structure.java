@@ -1,8 +1,14 @@
 
 package Model;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.imageio.ImageIO;
 
 /**
  * 
@@ -21,6 +27,11 @@ public abstract class Structure implements Observer {
 	private SpecialAttack special;
 	private int x;
 	private int y;
+	private Image image;
+	protected String imageFileName = "error.png";
+	private static String baseDir = System.getProperty("user.dir")
+			+ System.getProperty("file.separator") + "imageFiles"
+			+ System.getProperty("file.separator");
 
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
@@ -53,6 +64,20 @@ public abstract class Structure implements Observer {
 	public abstract void takeDamage(int dmg);
 
 	public abstract void explode();
+	
+	public void draw(Graphics2D g2){
+		if(image == null){
+			File imageFile = new File(baseDir + imageFileName);
+			try {
+				image = ImageIO.read(imageFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		int width = 20;
+		int height = 20;
+		g2.drawImage(image, x, y, width, height, null);
+	}
 
 	public int getHP() {
 		return hitpoints;

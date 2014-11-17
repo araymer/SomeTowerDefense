@@ -1,12 +1,17 @@
 package Structures;
 
+import java.awt.Image;
+
 import Model.Attacker;
 import Model.Structure;
 
 public class BaseDesertUprising extends Structure {
-
+	
+	
+	
 	public BaseDesertUprising(int x, int y) {
 		super(500, 0, 0, 0, 0, 0, 0, x, y, null);
+		imageFileName = "baseDesertUprising.png";
 	}
 
 	@Override
