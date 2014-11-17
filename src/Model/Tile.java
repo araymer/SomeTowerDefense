@@ -76,8 +76,11 @@ public class Tile extends Observable {
 		if (buildable && tileStructure == null) {
 			tileStructure = s;
 			return true;
-		} else
+		} else{
+			System.out.println("Cannot build here");
 			return false;
+		}
+			
 
 	}
 

@@ -57,6 +57,6 @@ public class ResourcePanel extends JPanel {
 	 */
 	public StructureType getSelectedStructure(){
 		//TODO isn't complete
-		return StructureType.MACHINEGUN;
+		return StructureType.SENTRYGUN;
 	}
 }

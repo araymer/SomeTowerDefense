@@ -14,6 +14,7 @@ import Model.Map;
 import Model.StructureType;
 import Model.Tile;
 import Structures.BaseDesertUprising;
+import Structures.MarineSentryGun;
 
 public class DesertUprising extends Map {
 
@@ -79,14 +80,22 @@ public class DesertUprising extends Map {
 	 */
 	
 	public void createStructure(StructureType selectedStructure, Point point){
-		// TODO Auto-generated method stub
-		//Calculate the tile that was clicked
+		//TODO Calculate the tile that was clicked
+		
 		Tile selectedTile = gameBoard.get(0).get(0);
 				
-		if(selectedTile.getBuild()){
-			//selectedTile.addStructure(s)
-		}else{
-			System.out.println("Cannot build here");
+		switch (selectedStructure) {
+		case BASE:	System.out.println("trying to creating base");
+					selectedTile.addStructure(new BaseDesertUprising(0, 15));
+			break;
+		case SENTRYGUN:	System.out.println("trying to creating machinegun");
+						selectedTile.addStructure(new MarineSentryGun(0, 0));
+			break;
+		//TODO more...
+		default:
+			break;
+			
+	
 		}
 	}
 
