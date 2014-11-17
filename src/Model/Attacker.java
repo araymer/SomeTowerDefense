@@ -13,6 +13,8 @@ public abstract class Attacker {
 	private int defenseRating;
 	private int range;
 	private Tile location; // attacker keeps track of own location
+	private int x;
+	private int y;
 
 	// private int cost; //This is for itr2, possibly
 
@@ -23,39 +25,29 @@ public abstract class Attacker {
 		this.range = range;
 		speed = spd;
 		defenseRating = def;
+		// TODO: set location: tile.getCoordinates
 
 	}
 
 	public void move(Dir direction) {
-		// Will need a reference to the tile it is on. These are in the super
-				// class
-				// as x and y ints. Needs a reference to the instance of the map to move
-				// TODO move in the specified direction
-				/*
-				 * switch (tile that it's on .getDirection())
-				 * case LEFT:
-				 *    move to the tile on the left (map coordinate x - 1)
-				 *    set new coordinates
-				 *    break;
-				 * case RIGHT:
-				 *    move to the tile on the right (map coordinate x + 1)
-				 *    set new coordinates
-				 *    break;
-				 * case UP:
-				 *    move to the tile on top (map coordinate y + 1)
-				 *    set new coordinates
-				 *    break;
-				 * case DOWN:
-				 *    move to the tile on bottom (map coordinate y - 1)
-				 *    set new coordinates
-				 *    break;
-				 */
+		switch (direction) {
+		case UP:
+
+		case DOWN:
+
+		case LEFT:
+
+		case RIGHT:
+
+		default:
+
+		}
 	}
 
 	// TODO: implement movement based off the direction passed from the tile
 
 	public abstract void draw();
-	
+
 	public abstract void attack(Structure s);
 
 	public abstract void die();

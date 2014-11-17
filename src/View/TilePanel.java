@@ -14,25 +14,34 @@ import javax.swing.JPanel;
  *
  */
 
-public class TilePanel extends JPanel{
+public class TilePanel extends JPanel {
 	private final int WIDTH = 800;
 	private final int HEIGHT = 600;
-	
+	private static TilePanel tilePanel;
+
 	/**
 	 * Constructs the TilePanel for use in the GameGUI
 	 */
-	public TilePanel(){
+	private TilePanel() {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setOpaque(false);
 		this.setVisible(true);
 	}
-	
+
+	public static TilePanel getInstance() {
+		if (tilePanel == null) {
+			tilePanel = new TilePanel();
+		}
+		return tilePanel;
+	}
+
 	@Override
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		
-		//Test to make sure panel is clear and drawn elements are on top of map picture
+
+		// Test to make sure panel is clear and drawn elements are on top of map
+		// picture
 		g2.setColor(Color.GREEN);
 		g2.fillRect(100, 100, 10, 10);
 		g2.fillRect(400, 400, 5, 5);
