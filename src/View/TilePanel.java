@@ -7,8 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import Maps.DesertUprising;
 import Model.Map;
-import Model.TileMap;
 
 /**
  * A clear panel that is used to display Structures and Attackers in the game
@@ -21,7 +21,7 @@ public class TilePanel extends JPanel {
 	private final int WIDTH = 800;
 	private final int HEIGHT = 600;
 	private static TilePanel tilePanel;
-	private TileMap tileMap;
+	private Map tileMap;
 
 	/**
 	 * Constructs the TilePanel for use in the GameGUI
@@ -30,7 +30,7 @@ public class TilePanel extends JPanel {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setOpaque(false);
 		this.setVisible(true);
-		tileMap = new TileMap(15, 20);
+		tileMap = new DesertUprising();
 	}
 
 	public static TilePanel getInstance() {
@@ -52,7 +52,7 @@ public class TilePanel extends JPanel {
 		g2.fillRect(400, 400, 40, 40);
 	}
 	
-	public TileMap getTileMap(){
+	public Map getMap(){
 		return tileMap;
 	}
 }

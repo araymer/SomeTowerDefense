@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.Point;
 import java.util.Vector;
 
 public abstract class Map {
@@ -15,13 +16,18 @@ public abstract class Map {
 	public Map(int h, int w) { // Default constructor sets empty board
 		height = h;
 		width = w;
-
+			
+		gameBoard = new Vector<Vector<Tile>>();
+		
 		for (int i = 0; i < width; i++) {
 			gameBoard.add(new Vector<Tile>());
 			for (int k = 0; k < height; k++) {
 				gameBoard.get(i).add(new Tile());
 			}
 		}
+		
+		structures = new Vector<Structure>();
+		attackers = new Vector<Attacker>();
 	}
 
 	public abstract void setBase();
@@ -31,5 +37,7 @@ public abstract class Map {
 	public abstract void setPath();
 
 	public abstract void setStartingResources();
+	
+	public abstract void createStructure(StructureType selectedStructure, Point point);
 
 }

@@ -69,7 +69,7 @@ public class GameGUI implements Serializable {
 			// TODO Auto-generated method stub
 			System.out.println("Creating new structure at " + e.getPoint());
 			
-			tilePanel.getTileMap().createStructure(resourcePanel.getSelectedStructure(), e.getPoint());
+			tilePanel.getMap().createStructure(resourcePanel.getSelectedStructure(), e.getPoint());
 			
 			// Replace map with whatever will be used to set buildings
 			// 1st variable will be enum for the structure types

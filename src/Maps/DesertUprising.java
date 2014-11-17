@@ -7,8 +7,11 @@
 
 package Maps;
 
+import java.awt.Point;
+
 import Model.Dir;
 import Model.Map;
+import Model.StructureType;
 import Model.Tile;
 import Structures.BaseDesertUprising;
 
@@ -36,7 +39,7 @@ public class DesertUprising extends Map {
 	@Override
 	public void setBase() {
 		// For now we'll set the base in the left-middle tile (0,15)
-		gameBoard.get(0).get(15).build(new BaseDesertUprising(0, 15));
+		gameBoard.get(0).get(15).addStructure(new BaseDesertUprising(0, 15));
 
 	}
 
@@ -66,6 +69,25 @@ public class DesertUprising extends Map {
 	
 	public Tile getSpawnTile() {
 		return spawnTile;
+	}
+	
+	/**
+	 * Calculates the correct tile to place structure given the mouse position on the GameGUI
+	 * 
+	 * @param selectedStructure   The type of structure to be created
+	 * @param point   The position on the panel where the user clicked
+	 */
+	
+	public void createStructure(StructureType selectedStructure, Point point){
+		// TODO Auto-generated method stub
+		//Calculate the tile that was clicked
+		Tile selectedTile = gameBoard.get(0).get(0);
+				
+		if(selectedTile.getBuild()){
+			//selectedTile.addStructure(s)
+		}else{
+			System.out.println("Cannot build here");
+		}
 	}
 
 }
