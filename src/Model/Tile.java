@@ -79,9 +79,16 @@ public class Tile extends Observable {
 		} else{
 			System.out.println("Cannot build here");
 			return false;
-		}
-			
+		}	
 
+	}
+	
+	public Vector<Attacker> getAttackers(){
+		return attackers;
+	}
+	
+	public Structure getStructure(){
+		return tileStructure;
 	}
 
 }

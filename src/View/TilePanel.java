@@ -4,11 +4,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Iterator;
+import java.util.Vector;
 
 import javax.swing.JPanel;
 
 import Maps.DesertUprising;
+import Model.Attacker;
 import Model.Map;
+import Model.Tile;
 
 /**
  * A clear panel that is used to display Structures and Attackers in the game
@@ -50,6 +54,26 @@ public class TilePanel extends JPanel {
 		g2.setColor(Color.GREEN);
 		g2.fillRect(100, 100, 10, 10);
 		g2.fillRect(400, 400, 40, 40);
+		
+		//Draw each structure and attacker from every tile
+		Iterator<Vector<Tile>> vectorItr = tileMap.getGameBoard().iterator();
+		while(vectorItr.hasNext()){
+			Vector<Tile> currVector = vectorItr.next();
+			Iterator<Tile> tileItr = currVector.iterator();
+			while(tileItr.hasNext()){
+				Tile currTile = tileItr.next();
+				if(currTile.getStructure() != null){
+					currTile.getStructure().draw(g2);
+				}
+				
+				Iterator<Attacker> attackerItr = currTile.getAttackers().iterator();
+				while(attackerItr.hasNext()){
+					Attacker currAttacker = attackerItr.next();
+					//currAttacker.draw(g2); Need to create draw method for attacker
+				}
+			}
+		}
+		
 	}
 	
 	public Map getMap(){

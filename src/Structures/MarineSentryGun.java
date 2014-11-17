@@ -15,6 +15,7 @@ public class MarineSentryGun extends Structure {
 
 	public MarineSentryGun(int x, int y) {
 		super(120, 0, 5, 11, 0, 200, 1500, x, y, null);
+		//imageFileName = "topdownturret.png";
 	}
 
 	@Override
