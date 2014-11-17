@@ -47,4 +47,8 @@ public class ResourcePanel extends JPanel {
 		g2.setPaint(color);
 		g2.fillRect(0, 0, 800, 30);
 	}
+	
+	private void getSelectedStructure(){
+		//return type will be enum
+	}
 }
