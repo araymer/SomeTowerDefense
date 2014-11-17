@@ -35,9 +35,7 @@ public class Ticker implements Runnable {
 						lastUpdateTime = now - timeBetweenFrames;
 
 					// interpolation for visually smooth movement
-					float interpolation = Math
-							.min(1.0f,
-									(float) ((now - lastUpdateTime) / timeBetweenFrames));
+					float interpolation = Math.min(1.0f, (float) ((now - lastUpdateTime) / timeBetweenFrames));
 					drawGame(interpolation);
 					lastRenderTime = now;
 
