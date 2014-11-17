@@ -19,6 +19,9 @@ public class GameGUI implements Serializable {
 	// Extra 22 for bar
 	private final int FRAME_HEIGHT = 622;
 	JFrame frame;
+	TilePanel tilePanel;
+	ResourcePanel resourcePanel;
+	
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -28,13 +31,14 @@ public class GameGUI implements Serializable {
 
 		MapPanel mapPanel = MapPanel.getInstance();
 		mapPanel.setMap("desertuprising.jpg");
-		TilePanel tilePanel = TilePanel.getInstance();
+		tilePanel = TilePanel.getInstance();
 		MouseListener placementListener = new PlacementListener();
 		tilePanel.addMouseListener(placementListener);
 		// Stacking panels on top of each other
 		frame.add(mapPanel);
 		mapPanel.add(tilePanel);
-		tilePanel.add(ResourcePanel.getInstance());
+		resourcePanel = ResourcePanel.getInstance();
+		tilePanel.add(resourcePanel);
 		frame.setVisible(true);
 	}
 
@@ -65,7 +69,7 @@ public class GameGUI implements Serializable {
 			// TODO Auto-generated method stub
 			System.out.println("Creating new structure at " + e.getPoint());
 			
-			// map.createStructure(ResourcePanel.getInstance().getSelectedStructure, e.getPoint());
+			tilePanel.getTileMap().createStructure(resourcePanel.getSelectedStructure(), e.getPoint());
 			
 			// Replace map with whatever will be used to set buildings
 			// 1st variable will be enum for the structure types

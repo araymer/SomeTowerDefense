@@ -7,6 +7,7 @@ public abstract class Map {
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
 	protected Vector<Attacker> attackers;
+	protected Vector<Structure> structures;
 
 	// TODO: Should we have a master list of spawnable tiles? Would make
 	// randomizing wave spawn points easier
