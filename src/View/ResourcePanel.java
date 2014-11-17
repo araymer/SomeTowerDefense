@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import Model.StructureType;
+
 /**
  * A panel used to display player information such as resource numbers, wave
  * number, and structure and attacker selection
@@ -46,5 +48,15 @@ public class ResourcePanel extends JPanel {
 		Color color = new Color(1, 0, 0, alpha); // Red
 		g2.setPaint(color);
 		g2.fillRect(0, 0, 800, 30);
+	}
+	/**
+	 * Returns the structure that is selected in the structure selection menu
+	 * 
+	 * @return
+	 * 
+	 */
+	public StructureType getSelectedStructure(){
+		//TODO isn't complete
+		return StructureType.SENTRYGUN;
 	}
 }

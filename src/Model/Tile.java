@@ -18,7 +18,7 @@ public class Tile extends Observable {
 	public Tile() {
 
 		spawnable = false;
-		buildable = false;
+		buildable = true;
 		movable = false;
 		tileStructure = null;
 		attackers = new Vector<Attacker>();
@@ -72,12 +72,15 @@ public class Tile extends Observable {
 		attackers.add(a);
 	}
 
-	public boolean build(Structure s) {
+	public boolean addStructure(Structure s) {
 		if (buildable && tileStructure == null) {
 			tileStructure = s;
 			return true;
-		} else
+		} else{
+			System.out.println("Cannot build here");
 			return false;
+		}
+			
 
 	}
 
