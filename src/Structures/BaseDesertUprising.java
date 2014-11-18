@@ -16,7 +16,7 @@ public class BaseDesertUprising extends Structure {
 	
 	public BaseDesertUprising(int x, int y) {
 		super(500, 0, 0, 0, 0, 0, 0, x, y, null);
-		imageFileName = "Base1.png";
+		//imageFileName = "Base1.png";
 	}
 
 	@Override
