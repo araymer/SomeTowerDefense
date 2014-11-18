@@ -27,9 +27,9 @@ public abstract class Structure implements Observer {
 	private SpecialAttack special;
 	private int x;
 	private int y;
-	private Image image;
+	protected Image image;
 	protected String imageFileName = "error.png";
-	private static String baseDir = System.getProperty("user.dir")
+	protected static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
 
