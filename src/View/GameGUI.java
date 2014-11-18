@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 /**
  * The class that organizes all the GUI elements for the tower defense game
  * 
- * @author Marcos
+ * @author Team Something
  *
  */
 public class GameGUI implements Serializable {

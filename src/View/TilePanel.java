@@ -1,7 +1,5 @@
 package View;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Iterator;
@@ -17,13 +15,11 @@ import Model.Tile;
 /**
  * A clear panel that is used to display Structures and Attackers in the game
  * 
- * @author Marcos
+ * @author Team Something
  *
  */
 
 public class TilePanel extends JPanel {
-	private final int WIDTH = 800;
-	private final int HEIGHT = 600;
 	private static TilePanel tilePanel;
 	private Map tileMap;
 

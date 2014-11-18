@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -13,12 +12,10 @@ import Model.StructureType;
  * A panel used to display player information such as resource numbers, wave
  * number, and structure and attacker selection
  * 
- * @author Marcos
+ * @author Team Something
  *
  */
 public class ResourcePanel extends JPanel {
-	private final int WIDTH = 800;
-	private final int HEIGHT = 600;
 	private static ResourcePanel resourcePanel;
 
 	/**
