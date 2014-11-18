@@ -22,7 +22,7 @@ public abstract class Map {
 		for (int i = 0; i < width; i++) {
 			gameBoard.add(new Vector<Tile>());
 			for (int k = 0; k < height; k++) {
-				gameBoard.get(i).add(new Tile());
+				gameBoard.get(i).add(new Tile(i, k));
 			}
 		}
 		

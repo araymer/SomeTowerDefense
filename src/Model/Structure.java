@@ -3,6 +3,7 @@ package Model;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
@@ -27,9 +28,12 @@ public abstract class Structure implements Observer {
 	private SpecialAttack special;
 	private int x;
 	private int y;
-	private Image image;
+	//Variables for drawing
+	protected int xIncrement;
+	protected int yIncrement;
+	protected BufferedImage bImage;
 	protected String imageFileName = "error.png";
-	private static String baseDir = System.getProperty("user.dir")
+	protected static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
 
@@ -47,6 +51,8 @@ public abstract class Structure implements Observer {
 		this.x = x; // added so the structure can know where it is
 		this.y = y; // and can add itself as an observer to the tiles in its
 					// range
+		xIncrement = 0;
+		yIncrement = 0;
 		// TODO: set as observer to the tiles in its range
 		// How are we doing range in diagonal directions?
 		// Will need to be able to have a reference to the map
@@ -65,20 +71,7 @@ public abstract class Structure implements Observer {
 
 	public abstract void explode();
 	
-	public void draw(Graphics2D g2){
-		if(image == null){
-			File imageFile = new File(baseDir + imageFileName);
-			try {
-				image = ImageIO.read(imageFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		int width = 20;
-		int height = 20;
-		
-		g2.drawImage(image, x * width, y * height, width, height, null);
-	}
+	public abstract void draw(Graphics2D g2);
 
 	public int getHP() {
 		return hitpoints;

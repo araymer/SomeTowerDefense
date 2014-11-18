@@ -87,7 +87,7 @@ public class GameGUI implements Serializable {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
+			//Make a new structure on click
 			System.out.println("Creating new structure at " + e.getPoint());
 			
 			tilePanel.getMap().createStructure(resourcePanel.getSelectedStructure(), e.getPoint());
@@ -98,8 +98,7 @@ public class GameGUI implements Serializable {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			//This shouldn't be in final version
+			//This is here until ticker class starts working
 			repaint();
 			
 		}
