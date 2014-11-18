@@ -31,7 +31,7 @@ public class TilePanel extends JPanel {
 	 * Constructs the TilePanel for use in the GameGUI
 	 */
 	private TilePanel() {
-		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		//this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); already set
 		this.setOpaque(false);
 		this.setVisible(true);
 		tileMap = new DesertUprising();

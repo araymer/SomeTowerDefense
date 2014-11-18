@@ -25,7 +25,6 @@ public class ResourcePanel extends JPanel {
 	 * Constructs the ResourcePanel for use in the GameGUI
 	 */
 	private ResourcePanel() {
-		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setOpaque(false);
 		this.setVisible(true);
 	}
