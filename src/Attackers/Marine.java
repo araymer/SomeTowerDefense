@@ -7,6 +7,7 @@ public class Marine extends Attacker {
 
 	public Marine() {
 		super(50, 10, 50, 2, 500);
+		//imageFileName = topdownmarines
 	}
 
 	@Override
@@ -20,10 +21,5 @@ public class Marine extends Attacker {
 
 	}
 
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-
-	}
 
 }

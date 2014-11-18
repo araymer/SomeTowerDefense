@@ -40,7 +40,7 @@ public class DesertUprising extends Map {
 	@Override
 	public void setBase() {
 		// For now we'll set the base in the left-middle tile (0,15)
-		gameBoard.get(0).get(15).addStructure(new BaseDesertUprising(0, 15));
+		gameBoard.get(5).get(14).addStructure(new BaseDesertUprising(5, 14));
 
 	}
 
@@ -81,15 +81,14 @@ public class DesertUprising extends Map {
 	
 	public void createStructure(StructureType selectedStructure, Point point){
 		//TODO Calculate the tile that was clicked
-		int selectedX = (int) (Math.random() * 40);
-		int selectedY = (int) (Math.random() * 30);
-		System.out.println("X is " + selectedX);
-		System.out.println("Y is " + selectedY);
+		int selectedX = point.x/20;
+		int selectedY = point.y/20;
+		
 		Tile selectedTile = gameBoard.get(selectedX).get(selectedY);
 				
 		switch (selectedStructure) {
 		case BASE:	System.out.println("trying to creating base");
-					selectedTile.addStructure(new BaseDesertUprising(0, 15));
+					selectedTile.addStructure(new BaseDesertUprising(selectedX, selectedY));
 			break;
 		case SENTRYGUN:	System.out.println("trying to creating machinegun");
 						selectedTile.addStructure(new MarineSentryGun(selectedX, selectedY));

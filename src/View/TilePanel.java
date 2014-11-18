@@ -48,12 +48,6 @@ public class TilePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-
-		// Test to make sure panel is clear and drawn elements are on top of map
-		// picture
-		g2.setColor(Color.GREEN);
-		g2.fillRect(100, 100, 10, 10);
-		g2.fillRect(400, 400, 40, 40);
 		
 		//Draw each structure and attacker from every tile
 		Iterator<Vector<Tile>> vectorItr = tileMap.getGameBoard().iterator();
@@ -69,7 +63,7 @@ public class TilePanel extends JPanel {
 				Iterator<Attacker> attackerItr = currTile.getAttackers().iterator();
 				while(attackerItr.hasNext()){
 					Attacker currAttacker = attackerItr.next();
-					//currAttacker.draw(g2); Need to create draw method for attacker
+					currAttacker.draw(g2);
 				}
 			}
 		}
