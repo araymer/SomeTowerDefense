@@ -17,25 +17,9 @@ public class BaseDesertUprising extends Structure {
 	
 	public BaseDesertUprising(int x, int y) {
 		super(500, 0, 0, 0, 0, 0, 0, x, y, null);
-		imageFileName = "Base1mini.png";
+		imageFileName = "error.png";
 	}
 
-	// TODO make the base image 2x2 tiles (40x40 pxl)
-	/*@Override
-	public void draw(Graphics2D g2){
-		if(image == null){
-			File imageFile = new File(baseDir + imageFileName);
-			try {
-				image = ImageIO.read(imageFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		int width = 40;
-		int height = 40;
-		
-		g2.drawImage(image, x * width, y * height, width, height, null);
-	}*/
 
 	@Override
 	public void draw(Graphics2D g2) {
@@ -49,21 +33,17 @@ public class BaseDesertUprising extends Structure {
 		}
 		
 		
-		
-		int width = 20;
-		int height = 20;
-		
-		if((xIncrement * width) + width > bImage.getWidth()){
+		if((xIncrement * WIDTH) + WIDTH > bImage.getWidth()){
 			yIncrement ++;
 			xIncrement = 0;
 		}
-		if((yIncrement * height) + height > bImage.getHeight()){
+		if((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()){
 			//Start from beginning again
 			yIncrement = 0;
 		}
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * width, yIncrement * height, width, height);
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT, WIDTH, HEIGHT);
 		xIncrement ++;
-		g2.drawImage(tempSubImage, getX() * width, getY() * height, width, height, null);
+		g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH, HEIGHT, null);
 		
 	}
 

@@ -22,7 +22,7 @@ public class MarineSentryGun extends Structure {
 
 	public MarineSentryGun(int x, int y) {
 		super(120, 0, 5, 11, 0, 200, 1500, x, y, null);
-		imageFileName = "topdownturretsmall.png";
+		imageFileName = "topdownturret40.png";
 	}
 
 
@@ -37,20 +37,17 @@ public class MarineSentryGun extends Structure {
 			}
 		}
 		
-		int width = 20;
-		int height = 20;
-		
-		if((xIncrement * width) + width > bImage.getWidth()){
+		if((xIncrement * WIDTH) + WIDTH > bImage.getWidth()){
 			yIncrement ++;
 			xIncrement = 0;
 		}
-		if((yIncrement * height) + height > bImage.getHeight()){
+		if((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()){
 			//Start from beginning again
 			yIncrement = 0;
 		}
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * width, yIncrement * height, width, height);
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT, WIDTH, HEIGHT);
 		xIncrement ++;
-		g2.drawImage(tempSubImage, getX() * width, getY() * height, width, height, null);
+		g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH, HEIGHT, null);
 		
 	}
 

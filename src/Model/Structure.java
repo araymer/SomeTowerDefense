@@ -30,6 +30,9 @@ public abstract class Structure {
 	private SpecialAttack special;
 	private int x;
 	private int y;
+	
+	protected static final int HEIGHT = 40;
+	protected static final int WIDTH = 40;
 	//Variables for drawing
 	protected int xIncrement;
 	protected int yIncrement;

@@ -18,8 +18,12 @@ import Structures.MarineSentryGun;
 
 public class DesertUprising extends Map {
 
-	private static int height = 30;
-	private static int width = 40;
+	private static int tileWidth = 40;
+	private static int guiHeight = 600;
+	private static int guiWidth =800;
+	
+	private static int height = guiHeight/tileWidth;
+	private static int width = guiWidth/tileWidth;
 	private Tile spawnTile;
 
 	public DesertUprising() {
@@ -40,23 +44,23 @@ public class DesertUprising extends Map {
 	@Override
 	public void setBase() {
 		// For now we'll set the base in the left-middle tile (0,15)
-		gameBoard.get(5).get(14).addStructure(new BaseDesertUprising(5, 14));
+		gameBoard.get(2).get(6).addStructure(new BaseDesertUprising(2, 6));
 
 	}
 
 	@Override
 	public void setSpawnPoints() {
 		// One spawn point on opposite end of the board
-		gameBoard.get(width - 1).get(15).setSpawn(true);
-		spawnTile = gameBoard.get(width-1).get(15);
+		gameBoard.get(width - 1).get(height - 1).setSpawn(true);
+		spawnTile = gameBoard.get(width-1).get(height - 1);
 
 	}
 
 	@Override
 	public void setPath() {
-		for (int i = 1; i < width; i++) {
-			gameBoard.get(i).get(15).setMove(true);
-			gameBoard.get(i).get(15).setDirection(Dir.LEFT);
+		for (int i = 0; i < width; i++) {
+			gameBoard.get(i).get(height - 1).setMove(true);
+			gameBoard.get(i).get(height - 1).setDirection(Dir.LEFT);
 			// in this case very simple because just one direction
 		}
 
@@ -81,8 +85,8 @@ public class DesertUprising extends Map {
 	
 	public void createStructure(StructureType selectedStructure, Point point){
 		//TODO Calculate the tile that was clicked
-		int selectedX = point.x/20;
-		int selectedY = point.y/20;
+		int selectedX = point.x/tileWidth;
+		int selectedY = point.y/tileWidth;
 		
 		Tile selectedTile = gameBoard.get(selectedX).get(selectedY);
 				
