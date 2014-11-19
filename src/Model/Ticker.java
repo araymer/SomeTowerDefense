@@ -1,5 +1,7 @@
 package Model;
 
+import View.*;
+
 /**
  * This class controls all timing in the game, all other objects 
  * use the same instance. Singleton Pattern.
@@ -60,27 +62,29 @@ public class Ticker implements Runnable {
 				}
 			}
 		}
-
 	}
 
-	private void drawGame(float interpolation) {
-		// TODO execute the painting of all our objects
-
+	private void drawGame() {
+		TilePanel.getInstance().repaint();
+		ResourcePanel.getInstance().repaint();
+		//BulletTravel.getInstance().repaint(); //uncomment after implementation
 	}
 
-	private void update() {
+	private void update(float interpolation) {
 		// TODO calculate everything's new position
 		// add in information for structures and towers for
 		// position, direction and last drawn image (so it actually animates)
-		//
+		// Interpolation will go into the draw methods that are called here.
+		
+		
 
 	}
 
-	public void start() {
+	public void loopStart() {
 		isRunning = true;
 	}
 
-	public void stop() {
+	public void loopStop() {
 		isRunning = false;
 	}
 	

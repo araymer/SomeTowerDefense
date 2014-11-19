@@ -8,6 +8,7 @@
 package Maps;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import Model.Dir;
 import Model.Map;
@@ -25,9 +26,11 @@ public class DesertUprising extends Map {
 	private static int height = guiHeight/tileWidth;
 	private static int width = guiWidth/tileWidth;
 	private Tile spawnTile;
+	private ArrayList<Tile> pathTiles;
 
 	public DesertUprising() {
 		super(height, width);
+		pathTiles = new ArrayList<Tile>();
 		setPath();
 		setBase();
 		setSpawnPoints();
@@ -37,7 +40,14 @@ public class DesertUprising extends Map {
 	}
 
 	private void setTiles() {
-		// PLACE ANY OTHER TILE CHANGES HERE
+		//Set blocked (non-buildable) tiles
+		
+		gameBoard.get(0).get(1).setBuild(false);
+		gameBoard.get(1).get(1).setBuild(false);
+		gameBoard.get(2).get(1).setBuild(false);
+		gameBoard.get(0).get(2).setBuild(false);
+		gameBoard.get(1).get(2).setBuild(false);
+		gameBoard.get(2).get(2).setBuild(false);
 
 	}
 
@@ -56,14 +66,189 @@ public class DesertUprising extends Map {
 
 	}
 
+	//This hardcodes our path tiles
 	@Override
 	public void setPath() {
-		for (int i = 0; i < width; i++) {
-			gameBoard.get(i).get(height - 1).setMove(true);
-			gameBoard.get(i).get(height - 1).setDirection(Dir.LEFT);
-			// in this case very simple because just one direction
-		}
+		gameBoard.get(19).get(1).setMove(true);
+		gameBoard.get(19).get(1).setBuild(false);
+		gameBoard.get(19).get(1).setDirection(Dir.LEFT);
+		
+		gameBoard.get(18).get(1).setMove(true);
+		gameBoard.get(18).get(1).setBuild(false);
+		gameBoard.get(18).get(1).setDirection(Dir.LEFT);
+		
+		gameBoard.get(17).get(1).setMove(true);
+		gameBoard.get(17).get(1).setBuild(false);
+		gameBoard.get(17).get(1).setDirection(Dir.LEFT);
+		
+		gameBoard.get(16).get(1).setMove(true);
+		gameBoard.get(16).get(1).setBuild(false);
+		gameBoard.get(16).get(1).setDirection(Dir.LEFT);
+		
+		gameBoard.get(15).get(1).setMove(true);
+		gameBoard.get(15).get(1).setBuild(false);
+		gameBoard.get(15).get(1).setDirection(Dir.DOWN);
+		
+		gameBoard.get(15).get(2).setMove(true);
+		gameBoard.get(15).get(2).setBuild(false);
+		gameBoard.get(15).get(2).setDirection(Dir.DOWN);
 
+		gameBoard.get(15).get(3).setMove(true);
+		gameBoard.get(15).get(3).setBuild(false);
+		gameBoard.get(15).get(3).setDirection(Dir.LEFT);
+		
+		gameBoard.get(14).get(3).setMove(true);
+		gameBoard.get(14).get(3).setBuild(false);
+		gameBoard.get(14).get(3).setDirection(Dir.LEFT);
+		
+		gameBoard.get(13).get(3).setMove(true);
+		gameBoard.get(13).get(3).setBuild(false);
+		gameBoard.get(13).get(3).setDirection(Dir.LEFT);
+		
+		gameBoard.get(12).get(3).setMove(true);
+		gameBoard.get(12).get(3).setBuild(false);
+		gameBoard.get(12).get(3).setDirection(Dir.DOWN);
+		
+		gameBoard.get(12).get(4).setMove(true);
+		gameBoard.get(12).get(4).setBuild(false);
+		gameBoard.get(12).get(4).setDirection(Dir.DOWN);
+		
+		gameBoard.get(12).get(5).setMove(true);
+		gameBoard.get(12).get(5).setBuild(false);
+		gameBoard.get(12).get(5).setDirection(Dir.DOWN);
+		
+		gameBoard.get(12).get(6).setMove(true);
+		gameBoard.get(12).get(6).setBuild(false);
+		gameBoard.get(12).get(6).setDirection(Dir.LEFT);
+		
+		gameBoard.get(11).get(6).setMove(true);
+		gameBoard.get(11).get(6).setBuild(false);
+		gameBoard.get(11).get(6).setDirection(Dir.LEFT);
+		
+		gameBoard.get(10).get(6).setMove(true);
+		gameBoard.get(10).get(6).setBuild(false);
+		gameBoard.get(10).get(6).setDirection(Dir.LEFT);
+		
+		gameBoard.get(9).get(6).setMove(true);
+		gameBoard.get(9).get(6).setBuild(false);
+		gameBoard.get(9).get(6).setDirection(Dir.LEFT);
+		
+		gameBoard.get(8).get(6).setMove(true);
+		gameBoard.get(8).get(6).setBuild(false);
+		gameBoard.get(8).get(6).setDirection(Dir.LEFT);
+		
+		gameBoard.get(7).get(6).setMove(true);
+		gameBoard.get(7).get(6).setBuild(false);
+		gameBoard.get(7).get(6).setDirection(Dir.DOWN);
+		
+		gameBoard.get(7).get(7).setMove(true);
+		gameBoard.get(7).get(7).setBuild(false);
+		gameBoard.get(7).get(7).setDirection(Dir.DOWN);
+		
+		gameBoard.get(7).get(8).setMove(true);
+		gameBoard.get(7).get(8).setBuild(false);
+		gameBoard.get(7).get(8).setDirection(Dir.DOWN);
+		
+		gameBoard.get(7).get(9).setMove(true);
+		gameBoard.get(7).get(9).setBuild(false);
+		gameBoard.get(7).get(9).setDirection(Dir.DOWN);
+		
+		gameBoard.get(7).get(10).setMove(true);
+		gameBoard.get(7).get(10).setBuild(false);
+		gameBoard.get(7).get(10).setDirection(Dir.LEFT);
+		
+		
+		gameBoard.get(6).get(10).setMove(true);
+		gameBoard.get(6).get(10).setBuild(false);
+		gameBoard.get(6).get(10).setDirection(Dir.LEFT);
+		
+		gameBoard.get(5).get(10).setMove(true);
+		gameBoard.get(5).get(10).setBuild(false);
+		gameBoard.get(5).get(10).setDirection(Dir.UP);
+		
+		gameBoard.get(5).get(9).setMove(true);
+		gameBoard.get(5).get(9).setBuild(false);
+		gameBoard.get(5).get(9).setDirection(Dir.UP);
+
+		gameBoard.get(5).get(8).setMove(true);
+		gameBoard.get(5).get(8).setBuild(false);
+		gameBoard.get(5).get(8).setDirection(Dir.UP);
+		
+		gameBoard.get(5).get(7).setMove(true);
+		gameBoard.get(5).get(7).setBuild(false);
+		gameBoard.get(5).get(7).setDirection(Dir.UP);
+		
+		gameBoard.get(5).get(6).setMove(true);
+		gameBoard.get(5).get(6).setBuild(false);
+		gameBoard.get(5).get(6).setDirection(Dir.UP);
+		
+		gameBoard.get(5).get(5).setMove(true);
+		gameBoard.get(5).get(5).setBuild(false);
+		gameBoard.get(5).get(5).setDirection(Dir.LEFT);
+		
+		gameBoard.get(4).get(5).setMove(true);
+		gameBoard.get(4).get(5).setBuild(false);
+		gameBoard.get(4).get(5).setDirection(Dir.LEFT);
+		
+		gameBoard.get(3).get(5).setMove(true);
+		gameBoard.get(3).get(5).setBuild(false);
+		gameBoard.get(3).get(5).setDirection(Dir.DOWN);
+		
+		gameBoard.get(3).get(6).setMove(true);
+		gameBoard.get(3).get(6).setBuild(false);
+		gameBoard.get(3).get(6).setDirection(Dir.DOWN);
+		
+		gameBoard.get(3).get(7).setMove(true);
+		gameBoard.get(3).get(7).setBuild(false);
+		gameBoard.get(3).get(7).setDirection(Dir.DOWN);
+		
+		gameBoard.get(11).get(14).setMove(true);
+		gameBoard.get(11).get(14).setBuild(false);
+		gameBoard.get(11).get(14).setDirection(Dir.UP);
+		
+		gameBoard.get(11).get(13).setMove(true);
+		gameBoard.get(11).get(13).setBuild(false);
+		gameBoard.get(11).get(13).setDirection(Dir.UP);
+		
+		gameBoard.get(11).get(12).setMove(true);
+		gameBoard.get(11).get(12).setBuild(false);
+		gameBoard.get(11).get(12).setDirection(Dir.UP);
+		
+		gameBoard.get(11).get(11).setMove(true);
+		gameBoard.get(11).get(11).setBuild(false);
+		gameBoard.get(11).get(11).setDirection(Dir.UP);
+		
+		gameBoard.get(11).get(10).setMove(true);
+		gameBoard.get(11).get(10).setBuild(false);
+		gameBoard.get(11).get(10).setDirection(Dir.LEFT);
+		
+		gameBoard.get(10).get(10).setMove(true);
+		gameBoard.get(10).get(10).setBuild(false);
+		gameBoard.get(10).get(10).setDirection(Dir.LEFT);
+		
+		gameBoard.get(9).get(10).setMove(true);
+		gameBoard.get(9).get(10).setBuild(false);
+		gameBoard.get(9).get(10).setDirection(Dir.UP);
+		
+		gameBoard.get(9).get(9).setMove(true);
+		gameBoard.get(9).get(9).setBuild(false);
+		gameBoard.get(9).get(9).setDirection(Dir.UP);
+		
+		gameBoard.get(9).get(8).setMove(true);
+		gameBoard.get(9).get(8).setBuild(false);
+		gameBoard.get(9).get(8).setDirection(Dir.RIGHT);
+		
+		gameBoard.get(10).get(8).setMove(true);
+		gameBoard.get(10).get(8).setBuild(false);
+		gameBoard.get(10).get(8).setDirection(Dir.UP);
+		
+		gameBoard.get(10).get(7).setMove(true);
+		gameBoard.get(10).get(7).setBuild(false);
+		gameBoard.get(10).get(7).setDirection(Dir.UP);
+		
+		
+		
+		
 	}
 
 	@Override
