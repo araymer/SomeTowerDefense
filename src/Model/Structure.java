@@ -126,7 +126,7 @@ public abstract class Structure {
 			tower = new TowerUpgrading(this, hp);
 			break;
 		default:
-			System.out.println("Problem Encountered while changing states.")
+			System.out.println("Problem Encountered while changing states.");
 		}
 		
 	}
