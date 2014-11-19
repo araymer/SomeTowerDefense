@@ -19,7 +19,8 @@ public class TowerWaiting implements TowerState, Observer {
 	int x, y;
 	boolean upgrade;
 	boolean signal;
-	Object attacker;
+	Attacker attacker;
+	
 	/**
 	 * 
 	 * @param theTower
@@ -39,16 +40,14 @@ public class TowerWaiting implements TowerState, Observer {
 	/**
 	 * Changes state according to attackers entering range, HP reaching
 	 * zero or less, or upgrade being initiated.
-	 * @param obs
-	 * @param atk
 	 */
-	public void waiting() {
+	private void waiting() {
 		Thread th = new Thread(new Runnable() {
 			public void run() {
 				boolean stateChange = false;
 				while(!stateChange) {
 					if(HP <= 0) {
-						tower.changeTo(TowerStates.EXPLODE, attacker, HP);
+						tower.changeTo(TowerStates.EXPLODE, null, HP);
 						stateChange = true;
 					} else if(upgrade) {
 						//TODO (Iteration 2: make towers able to upgrade
@@ -63,7 +62,7 @@ public class TowerWaiting implements TowerState, Observer {
 		th.start();
 	}
 	
-	public void update(Observable obs, Object atk) {
+	public void update(Observable obs, Attacker atk) {
 		attacker = atk;
 		signal = true;
 	}
@@ -111,12 +110,16 @@ public class TowerWaiting implements TowerState, Observer {
 
 	@Override
 	public int getCurrentHP() {
-		// TODO Auto-generated method stub
-		return 0;
+		return HP;
 	}
 
 	@Override
 	public void takeDamage(int dmg) {
+		HP -= dmg;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		
 	}
