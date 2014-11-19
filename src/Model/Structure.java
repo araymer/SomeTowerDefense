@@ -109,12 +109,13 @@ public abstract class Structure {
 	/**
 	 * Changes to a different state, called from TowersFSM classes.
 	 * @param TowerStates
+	 * @param Attacker
 	 * @param int
 	 */
-	public void changeTo(TowerStates newState, Object atk, int hp) {
+	public void changeTo(TowerStates newState, Attacker atk, int hp) {
 		switch(newState) {
 		case ATTACK:
-			tower = new TowerAttacking(this, hp);
+			tower = new TowerAttacking(this, atk, hp);
 			break;
 		case WAIT:
 			tower = new TowerWaiting(this, hp);
