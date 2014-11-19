@@ -25,27 +25,6 @@ public class MarineSentryGun extends Structure {
 		imageFileName = "topdownturretsmall.png";
 	}
 
-	@Override
-	public void shoot(Attacker a) {
-		a.takeDamage(this.getDamage());
-
-	}
-
-	@Override
-	public void takeDamage(int dmg) {
-		hitpoints -= dmg;
-	}
-
-	@Override
-	public void explode() {
-		// TODO play explode animation and remove sentry gun
-
-	}
-
-	@Override
-	public void update(Observable obs, Object atk) {
-		shoot((Attacker) atk);
-	}
 
 	@Override
 	public void draw(Graphics2D g2) {
@@ -57,8 +36,6 @@ public class MarineSentryGun extends Structure {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		
 		int width = 20;
 		int height = 20;

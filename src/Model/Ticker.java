@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * This class controls all timing in the game, all other objects 
+ * use the same instance. Singleton Pattern.
+ * @author Team Something
+ */
 public class Ticker implements Runnable {
 
 	private boolean isRunning;
@@ -11,8 +16,10 @@ public class Ticker implements Runnable {
 	private double lastRenderTime = System.nanoTime();
 	private int updateCount = 0;
 	private double now = System.nanoTime();
+	private static Ticker ticker;
 
-	public Ticker() {
+	// many objects will need to access the same timer
+	private Ticker() {
 		isRunning = true;
 		paused = false;
 	}
@@ -78,4 +85,14 @@ public class Ticker implements Runnable {
 	public void stop() {
 		isRunning = false;
 	}
+	
+	/**
+	 * Returns instance of this class.
+	 * @return Ticker
+	 */
+	public static Ticker getInstance() {
+		if(ticker == null)
+			ticker = new Ticker();
+		return ticker;
+			}
 }

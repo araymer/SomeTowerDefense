@@ -6,18 +6,25 @@ import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
 
+import TowerFSM.*;
+
 /**
- * 
+ * Super-class of all structures. The behavior of the structures are controlled by
+ * the classes in the TowerFSM package. Please note that the hitpoints represented
+ * below is the maximum and the getHP method will return the maximum, all current
+ * state information is passed between the state classes using the changeState()
+ * method and can be called using the getCurrentHP method from the TowerState
+ * interface. 
  * @author Team Something
  *
  */
-public abstract class Structure implements Observer {
+public abstract class Structure {
 
 	protected int hitpoints;
 	private int production;
-	private int range; // Range of tower (in tiles, manhattan distance)
+	private int range; // Range of tower (in tiles, Manhattan distance)
 	private int damage;
-	private int splashRadius; // tile radius (tiles in manhattan distance)
+	private int splashRadius; // tile radius (tiles in Manhattan distance)
 	private int rateOfFire; // in milliseconds
 	private int buildCost;
 	private SpecialAttack special;
@@ -31,10 +38,11 @@ public abstract class Structure implements Observer {
 	protected static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
+	protected TowerState tower;
 
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
-
+		tower = new TowerWaiting(this, hp);
 		hitpoints = hp;
 		production = prod;
 		range = rng;
@@ -59,12 +67,6 @@ public abstract class Structure implements Observer {
 		 */
 
 	}
-
-	public abstract void shoot(Attacker a);
-
-	public abstract void takeDamage(int dmg);
-
-	public abstract void explode();
 	
 	public abstract void draw(Graphics2D g2);
 
@@ -103,48 +105,30 @@ public abstract class Structure implements Observer {
 	public SpecialAttack getSpecial() {
 		return special;
 	}
-
-	public void update(Observable obs, Object atk) {
-		shoot((Attacker) atk);
-	}
-
+	
 	/**
-	 * This class is attached to attackers and defenders to determine if a
-	 * hostile unit is in range and to initiate hostile activity against them.
-	 * 
-	 * @author Team Something
-	 *
+	 * Changes to a different state, called from TowersFSM classes.
+	 * @param TowerStates
+	 * @param int
 	 */
-	private class Detector {
-		int x, y, range; // class attributes
-		Map map;
-
-		public Detector(int locX, int locY, Map theMap, int theRange) {
-			x = locX;
-			y = locY;
-			map = theMap;
-			range = theRange;
-
+	public void changeTo(TowerStates newState, Object atk, int hp) {
+		switch(newState) {
+		case ATTACK:
+			tower = new TowerAttacking(this, hp);
+			break;
+		case WAIT:
+			tower = new TowerWaiting(this, hp);
+			break;
+		case EXPLODE:
+			tower = new TowerExploding(this);
+			break;
+		case UPGRADE:
+			tower = new TowerUpgrading(this, hp);
+			break;
+		default:
+			System.out.println("Problem Encountered while changing states.")
 		}
-
-		/**
-		 * Checks if any objects that can be attacked is within range.
-		 * 
-		 * @return if something is in range and can be attacked
-		 */
-		public boolean scan() {
-			/*
-			 * for(int a = 0; a < MasterList.unitList.toArray().length; a++){
-			 * 
-			 * if(Math.abs((x - MasterList.unitList[a].toArray().length) <=
-			 * range) && (Math.abs(y - MasterList.unitList[a].toArray().length)
-			 * <= range) && MasterList.unitList[a].hostile()) <= range {
-			 * 
-			 * } }
-			 */
-			return false;
-		}
-
+		
 	}
 }
 

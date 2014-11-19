@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
 
 import javax.imageio.ImageIO;
 
@@ -19,26 +20,8 @@ public class BaseDesertUprising extends Structure {
 		//imageFileName = "Base1.png";
 	}
 
-	@Override
-	public void shoot(Attacker a) {
-		// TODO: shoot an enemy
-
-	}
-
-	@Override
-	public void takeDamage(int dmg) {
-		hitpoints -= dmg;
-
-	}
-
-	@Override
-	public void explode() {
-		// TODO This means game was lost
-
-	}
 	// TODO make the base image 2x2 tiles (40x40 pxl)
-	/*
-	@Override
+	/*@Override
 	public void draw(Graphics2D g2){
 		if(image == null){
 			File imageFile = new File(baseDir + imageFileName);

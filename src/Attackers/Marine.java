@@ -19,7 +19,7 @@ public class Marine extends Attacker {
 
 	@Override
 	public void attack(Structure s) {
-		s.takeDamage(this.getAttack());
+		//s.takeDamage(this.getAttack());
 	}
 
 	@Override
