@@ -88,6 +88,11 @@ public class TowerAttacking implements TowerState {
 						stateChange = true;
 					}
 					// wait for predefined number of ticks
+					try {
+						Thread.sleep(10); //or it will cause massive CPU usage
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} 
 				}
 			}
 		});
