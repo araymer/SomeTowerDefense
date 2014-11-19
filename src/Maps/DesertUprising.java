@@ -25,7 +25,7 @@ public class DesertUprising extends Map {
 	
 	private static int height = guiHeight/tileWidth;
 	private static int width = guiWidth/tileWidth;
-	private Tile spawnTile;
+	private Tile spawnTile1, spawnTile2;
 	private ArrayList<Tile> pathTiles;
 
 	public DesertUprising() {
@@ -61,8 +61,10 @@ public class DesertUprising extends Map {
 	@Override
 	public void setSpawnPoints() {
 		// One spawn point on opposite end of the board
-		gameBoard.get(width - 1).get(height - 1).setSpawn(true);
-		spawnTile = gameBoard.get(width-1).get(height - 1);
+		gameBoard.get(19).get(1).setSpawn(true);
+		gameBoard.get(11).get(14).setSpawn(true);
+		spawnTile1 = gameBoard.get(19).get(1);
+		spawnTile2 = gameBoard.get(11).get(14);
 
 	}
 
@@ -257,8 +259,13 @@ public class DesertUprising extends Map {
 
 	}
 	
-	public Tile getSpawnTile() {
-		return spawnTile;
+	public Tile getSpawnTile(int n) {
+		if(n == 1)
+			return spawnTile1;
+		else if(n == 2)
+			return spawnTile2;
+		
+		return null;
 	}
 	
 	/**
@@ -276,10 +283,10 @@ public class DesertUprising extends Map {
 		Tile selectedTile = gameBoard.get(selectedX).get(selectedY);
 				
 		switch (selectedStructure) {
-		case BASE:	System.out.println("trying to creating base");
+		case BASE:	System.out.println("trying to create base");
 					selectedTile.addStructure(new BaseDesertUprising(selectedX, selectedY));
 			break;
-		case SENTRYGUN:	System.out.println("trying to creating machinegun");
+		case SENTRYGUN:	System.out.println("trying to create machinegun");
 						selectedTile.addStructure(new MarineSentryGun(selectedX, selectedY));
 			break;
 		//TODO more...

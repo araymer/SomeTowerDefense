@@ -16,8 +16,8 @@ public class GameController {
 	
 	public GameController() {
 		waveCount = 5;
-		gui = new GameGUI();
-		new Thread(Ticker.getInstance());
+		gui = GameGUI.getInstance();
+		new Thread(Ticker.getInstance()).start();
 	}
 	
 	public void startWaves() {

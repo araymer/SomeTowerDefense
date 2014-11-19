@@ -25,12 +25,13 @@ public class GameGUI implements Serializable {
 	JFrame frame;
 	TilePanel tilePanel;
 	ResourcePanel resourcePanel;
+	private static GameGUI thisGUI;
 	
 
 	/**
 	 * Constructs the Tower Defense GUI
 	 */
-	public GameGUI() {
+	private GameGUI() {
 		createFrame();
 		
 		MapPanel mapPanel = MapPanel.getInstance();
@@ -75,6 +76,13 @@ public class GameGUI implements Serializable {
 	public void repaint(){
 		tilePanel.repaint();
 		resourcePanel.repaint();
+	}
+	
+	public static GameGUI getInstance() {
+		if(thisGUI == null)
+			thisGUI = new GameGUI();
+		
+		return thisGUI;
 	}
 	
 	private class PlacementListener implements MouseListener{

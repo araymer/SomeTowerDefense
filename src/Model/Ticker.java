@@ -1,6 +1,7 @@
 package Model;
 
-import View.*;
+import View.GameGUI;
+import View.TilePanel;
 
 /**
  * This class controls all timing in the game, all other objects 
@@ -11,7 +12,7 @@ public class Ticker implements Runnable {
 
 	private boolean isRunning;
 	private boolean paused;
-	private final double fps = 30.0;
+	private final double fps = 20.0;
 	private final double timeBetweenFrames = 1000000000 / fps;
 	private final int maxUpdatesBetweenRenders = 5;
 	private double lastUpdateTime = System.nanoTime();
@@ -64,17 +65,21 @@ public class Ticker implements Runnable {
 		}
 	}
 
-	private void drawGame() {
-		TilePanel.getInstance().repaint();
-		ResourcePanel.getInstance().repaint();
-		//BulletTravel.getInstance().repaint(); //uncomment after implementation
+	private void drawGame(float interpolation) {
+		//Iterate through all game objects and call their draw methods with interpolation
+		
+		GameGUI.getInstance().repaint(); //This is temporary, we'll want to replace this with 
+										//some way to feed interpolation
+										
+		
+		
 	}
 
-	private void update(float interpolation) {
+	private void update() {
 		// TODO calculate everything's new position
 		// add in information for structures and towers for
 		// position, direction and last drawn image (so it actually animates)
-		// Interpolation will go into the draw methods that are called here.
+		// TODO: Possibly incorporate this method into drawGame and deprecate?
 		
 		
 
@@ -96,5 +101,5 @@ public class Ticker implements Runnable {
 		if(ticker == null)
 			ticker = new Ticker();
 		return ticker;
-			}
+	}
 }
