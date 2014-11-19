@@ -33,7 +33,7 @@ public class TowerWaiting implements TowerState, Observer {
 		y = tower.getY();
 		upgrade = false;
 		signal = false;
-		//waiting();
+		waiting();
 	}
 	
 	/**
@@ -43,20 +43,24 @@ public class TowerWaiting implements TowerState, Observer {
 	 * @param atk
 	 */
 	public void waiting() {
-		//TODO: make thread safe
-		boolean stateChange = false;
-		while(!stateChange) {
-			if(HP <= 0) {
-				tower.changeTo(TowerStates.EXPLODE, attacker, HP);
-				stateChange = true;
-			} else if(upgrade) {
-				//TODO (Iteration 2: make towers able to upgrade
-			} else if(signal) {
-				tower.changeTo(TowerStates.ATTACK, attacker, HP);
-				stateChange = true;
+		Thread th = new Thread(new Runnable() {
+			public void run() {
+				boolean stateChange = false;
+				while(!stateChange) {
+					if(HP <= 0) {
+						tower.changeTo(TowerStates.EXPLODE, attacker, HP);
+						stateChange = true;
+					} else if(upgrade) {
+						//TODO (Iteration 2: make towers able to upgrade
+					} else if(signal) {
+						tower.changeTo(TowerStates.ATTACK, attacker, HP);
+						stateChange = true;
+					}
+					// wait for predefined number of ticks
+				}
 			}
-			// wait for predefined number of ticks
-		}
+		});
+		th.start();
 	}
 	
 	public void update(Observable obs, Object atk) {
