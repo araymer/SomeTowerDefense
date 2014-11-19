@@ -14,7 +14,7 @@ public class Marine extends Attacker {
 
 	public Marine() {
 		super(50, 10, 50, 2, 500);
-		imageFileName = "topdownmarinessmall.png";
+		imageFileName = "topdownmarines40.png";
 	}
 
 	@Override
@@ -38,19 +38,15 @@ public class Marine extends Attacker {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		int width = 20;
-		int height = 20;
-		
-		if(xIncrement  > 6){
+
+		//4 is the number of shooting frames
+		if(xIncrement  > 4){
 			xIncrement = 0;
 		}
 		
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * width, yIncrement * height, width, height);
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT, WIDTH, HEIGHT);
 		xIncrement ++;
-		g2.drawImage(tempSubImage, getLoc().getCoordinates().x * width, getLoc().getCoordinates().y * height, width, height, null);
+		g2.drawImage(tempSubImage, getLoc().getCoordinates().x * WIDTH, getLoc().getCoordinates().y * HEIGHT, WIDTH, HEIGHT, null);
 		
 	}
 
