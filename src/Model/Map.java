@@ -7,8 +7,8 @@ public abstract class Map {
 
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
-	protected Vector<Attacker> attackers;
-	protected Vector<Structure> structures;
+//	protected Vector<Attacker> attackers;
+//	protected Vector<Structure> structures;
 
 	// TODO: Should we have a master list of spawnable tiles? Would make
 	// randomizing wave spawn points easier
@@ -22,12 +22,10 @@ public abstract class Map {
 		for (int i = 0; i < width; i++) {
 			gameBoard.add(new Vector<Tile>());
 			for (int k = 0; k < height; k++) {
-				gameBoard.get(i).add(new Tile());
+				gameBoard.get(i).add(new Tile(i, k));
 			}
 		}
 		
-		structures = new Vector<Structure>();
-		attackers = new Vector<Attacker>();
 	}
 
 	public abstract void setBase();
@@ -39,5 +37,9 @@ public abstract class Map {
 	public abstract void setStartingResources();
 	
 	public abstract void createStructure(StructureType selectedStructure, Point point);
+	
+	public Vector<Vector<Tile>> getGameBoard(){
+		return gameBoard;
+	}
 
 }

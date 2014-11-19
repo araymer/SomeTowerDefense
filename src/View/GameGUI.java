@@ -1,16 +1,19 @@
 package View;
 
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * The class that organizes all the GUI elements for the tower defense game
  * 
- * @author Marcos
+ * @author Team Something
  *
  */
 public class GameGUI implements Serializable { 
@@ -18,6 +21,7 @@ public class GameGUI implements Serializable {
 	private final int FRAME_WIDTH = 800;
 	// Extra 22 for bar
 	private final int FRAME_HEIGHT = 622;
+	Container contentPane;
 	JFrame frame;
 	TilePanel tilePanel;
 	ResourcePanel resourcePanel;
@@ -28,17 +32,29 @@ public class GameGUI implements Serializable {
 	 */
 	public GameGUI() {
 		createFrame();
-
+		
 		MapPanel mapPanel = MapPanel.getInstance();
 		mapPanel.setMap("desertuprising.jpg");
+		mapPanel.setSize(frame.getSize().width, frame.getSize().height);
+		mapPanel.setLocation(0, 0);
+		frame.setContentPane(mapPanel);
+		contentPane = frame.getContentPane();
+		contentPane.setLayout(new CardLayout());
+		
 		tilePanel = TilePanel.getInstance();
 		MouseListener placementListener = new PlacementListener();
 		tilePanel.addMouseListener(placementListener);
-		// Stacking panels on top of each other
-		frame.add(mapPanel);
-		mapPanel.add(tilePanel);
+		tilePanel.setSize(frame.getSize().width, frame.getSize().height);
+		tilePanel.setLocation(0, 0);
+		tilePanel.setLayout(new CardLayout());
+		
 		resourcePanel = ResourcePanel.getInstance();
+		resourcePanel.setSize(frame.getSize().width, frame.getSize().height);
+		resourcePanel.setLocation(0, 0);
+		
+		contentPane.add(tilePanel);
 		tilePanel.add(resourcePanel);
+
 		frame.setVisible(true);
 	}
 
@@ -56,6 +72,11 @@ public class GameGUI implements Serializable {
 
 	}
 	
+	public void repaint(){
+		tilePanel.repaint();
+		resourcePanel.repaint();
+	}
+	
 	private class PlacementListener implements MouseListener{
 
 		@Override
@@ -66,21 +87,19 @@ public class GameGUI implements Serializable {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
+			//Make a new structure on click
 			System.out.println("Creating new structure at " + e.getPoint());
 			
 			tilePanel.getMap().createStructure(resourcePanel.getSelectedStructure(), e.getPoint());
 			
-			// Replace map with whatever will be used to set buildings
-			// 1st variable will be enum for the structure types
-			// The value of the enum will be dependent on which is selected on the menu
-			// createStructure will have to find which tile to place the structure depending on mouse location
+			
 			
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
+			//This is here until ticker class starts working
+			repaint();
 			
 		}
 

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 /**
  * A panel that contains a static image of the current map
  * 
- * @author Marcos
+ * @author Team Something
  *
  */
 public class MapPanel extends JPanel {

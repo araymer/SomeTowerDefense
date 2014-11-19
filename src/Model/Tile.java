@@ -1,6 +1,7 @@
 package Model;
 
 
+import java.awt.Point;
 import java.util.Vector;
 import java.util.Observable;
 
@@ -14,15 +15,16 @@ public class Tile extends Observable {
 	private Vector<Attacker> attackers;
 	private Structure tileStructure;
 	private Dir nextTile;
+	private Point coordinate;
 
-	public Tile() {
+	public Tile(int x, int y) {
 
 		spawnable = false;
 		buildable = true;
 		movable = false;
 		tileStructure = null;
 		attackers = new Vector<Attacker>();
-
+		coordinate = new Point(x, y);
 
 	}
 
@@ -79,9 +81,20 @@ public class Tile extends Observable {
 		} else{
 			System.out.println("Cannot build here");
 			return false;
-		}
-			
+		}	
 
+	}
+	
+	public Vector<Attacker> getAttackers(){
+		return attackers;
+	}
+	
+	public Structure getStructure(){
+		return tileStructure;
+	}
+	
+	public Point getCoordinates(){
+		return coordinate;
 	}
 
 }

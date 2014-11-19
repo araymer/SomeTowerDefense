@@ -1,5 +1,8 @@
 package Model;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
 //Test, let's see if git is working.
 //Test 2
 
@@ -15,6 +18,14 @@ public abstract class Attacker {
 	private Tile location; // attacker keeps track of own location
 	private int x;
 	private int y;
+	//Variables for drawing
+	protected int xIncrement;
+	protected int yIncrement;
+	protected BufferedImage bImage;
+	protected String imageFileName = "error.png";
+	protected static String baseDir = System.getProperty("user.dir")
+				+ System.getProperty("file.separator") + "imageFiles"
+				+ System.getProperty("file.separator");
 
 	// private int cost; //This is for itr2, possibly
 
@@ -25,6 +36,9 @@ public abstract class Attacker {
 		this.range = range;
 		speed = spd;
 		defenseRating = def;
+		
+		xIncrement = 0;
+		yIncrement = 0;
 		// TODO: set location: tile.getCoordinates
 
 	}
@@ -46,7 +60,7 @@ public abstract class Attacker {
 
 	// TODO: implement movement based off the direction passed from the tile
 
-	public abstract void draw();
+	public abstract void draw(Graphics2D g2);
 
 	public abstract void attack(Structure s);
 

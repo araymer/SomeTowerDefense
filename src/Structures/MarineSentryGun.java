@@ -6,7 +6,14 @@ package Structures;
  * 
  */
 
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
+
+import javax.imageio.ImageIO;
 
 import Model.Attacker;
 import Model.Structure;
@@ -15,28 +22,36 @@ public class MarineSentryGun extends Structure {
 
 	public MarineSentryGun(int x, int y) {
 		super(120, 0, 5, 11, 0, 200, 1500, x, y, null);
+		imageFileName = "topdownturretsmall.png";
 	}
 
-	@Override
-	public void shoot(Attacker a) {
-		a.takeDamage(this.getDamage());
-
-	}
 
 	@Override
-	public void takeDamage(int dmg) {
-		hitpoints -= dmg;
-	}
-
-	@Override
-	public void explode() {
-		// TODO play explode animation and remove sentry gun
-
-	}
-
-	@Override
-	public void update(Observable obs, Object atk) {
-		shoot((Attacker) atk);
+	public void draw(Graphics2D g2) {
+		if(bImage == null){
+			File imageFile = new File(baseDir + imageFileName);
+			try {
+				bImage = ImageIO.read(imageFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		int width = 20;
+		int height = 20;
+		
+		if((xIncrement * width) + width > bImage.getWidth()){
+			yIncrement ++;
+			xIncrement = 0;
+		}
+		if((yIncrement * height) + height > bImage.getHeight()){
+			//Start from beginning again
+			yIncrement = 0;
+		}
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * width, yIncrement * height, width, height);
+		xIncrement ++;
+		g2.drawImage(tempSubImage, getX() * width, getY() * height, width, height, null);
+		
 	}
 
 }
