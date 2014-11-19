@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  * @author Marcos
  *
  */
-public class GameGUI implements Serializable {
+public class GameGUI implements Serializable { 
 
 	private final int FRAME_WIDTH = 800;
 	// Extra 22 for bar
