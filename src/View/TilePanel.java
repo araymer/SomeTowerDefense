@@ -21,7 +21,7 @@ import Model.Tile;
 
 public class TilePanel extends JPanel {
 	private static TilePanel tilePanel;
-	private Map tileMap;
+	public Map tileMap;
 
 	/**
 	 * Constructs the TilePanel for use in the GameGUI

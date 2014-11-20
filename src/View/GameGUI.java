@@ -23,7 +23,7 @@ public class GameGUI implements Serializable {
 	private final int FRAME_HEIGHT = 622;
 	Container contentPane;
 	JFrame frame;
-	TilePanel tilePanel;
+	public TilePanel tilePanel;
 	ResourcePanel resourcePanel;
 	private static GameGUI thisGUI;
 	

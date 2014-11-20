@@ -41,5 +41,5 @@ public abstract class Map {
 	public Vector<Vector<Tile>> getGameBoard(){
 		return gameBoard;
 	}
-
+	
 }

@@ -96,5 +96,9 @@ public class Tile extends Observable {
 	public Point getCoordinates(){
 		return coordinate;
 	}
-
+	
+	public void getOccupied() {
+		if(!getAttackers().isEmpty())
+			System.out.println("Attacker Spawned");
+	}
 }

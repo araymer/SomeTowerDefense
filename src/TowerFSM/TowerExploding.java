@@ -10,6 +10,10 @@ import Model.Structure;
 public class TowerExploding implements TowerState {
 
 	public TowerExploding (Structure tower) {
+		int x = tower.getX();
+		int y = tower.getY();
+		
+		
 		// tower explosion animation
 	}
 	

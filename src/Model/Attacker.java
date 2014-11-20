@@ -31,7 +31,7 @@ public abstract class Attacker {
 				+ System.getProperty("file.separator");
 
 	// private int cost; //This is for itr2, possibly
-
+	Map map;
 	public Attacker(int hp, int def, int ar, int range, int spd) {
 
 		hitpoints = hp;
@@ -42,6 +42,7 @@ public abstract class Attacker {
 		
 		xIncrement = 0;
 		yIncrement = 0;
+		//map = m;
 		// TODO: set location: tile.getCoordinates
 
 	}
@@ -101,5 +102,20 @@ public abstract class Attacker {
 	public void setLoc(Tile loc) {
 		location = loc;
 	}
-
+	
+	/**
+	 * Returns x coordinate
+	 * @return int
+	 */
+	public int getX() {
+		return x;
+	}
+	
+	/**
+	 * Returns y coordinate.
+	 * @return int
+	 */
+	public int getY() {
+		return y;
+	}
 }
