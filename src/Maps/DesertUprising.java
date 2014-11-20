@@ -43,11 +43,144 @@ public class DesertUprising extends Map {
 		//Set blocked (non-buildable) tiles
 		
 		gameBoard.get(0).get(1).setBuild(false);
-		gameBoard.get(1).get(1).setBuild(false);
-		gameBoard.get(2).get(1).setBuild(false);
 		gameBoard.get(0).get(2).setBuild(false);
+		gameBoard.get(0).get(4).setBuild(false);
+		gameBoard.get(0).get(5).setBuild(false);
+		gameBoard.get(0).get(7).setBuild(false);
+		gameBoard.get(0).get(8).setBuild(false);
+		gameBoard.get(0).get(9).setBuild(false);
+		gameBoard.get(0).get(10).setBuild(false);
+		gameBoard.get(0).get(11).setBuild(false);
+		gameBoard.get(0).get(13).setBuild(false);
+		gameBoard.get(0).get(14).setBuild(false);
+		
+		gameBoard.get(1).get(1).setBuild(false);
 		gameBoard.get(1).get(2).setBuild(false);
+		gameBoard.get(1).get(3).setBuild(false);
+		gameBoard.get(1).get(7).setBuild(false);
+		gameBoard.get(1).get(8).setBuild(false);
+		gameBoard.get(1).get(9).setBuild(false);
+		gameBoard.get(1).get(10).setBuild(false);
+		gameBoard.get(1).get(13).setBuild(false);
+		gameBoard.get(1).get(14).setBuild(false);
+		
+		gameBoard.get(2).get(1).setBuild(false);
 		gameBoard.get(2).get(2).setBuild(false);
+		gameBoard.get(2).get(3).setBuild(false);
+		gameBoard.get(2).get(4).setBuild(false);
+		gameBoard.get(2).get(9).setBuild(false);
+		gameBoard.get(2).get(11).setBuild(false);
+		gameBoard.get(2).get(12).setBuild(false);
+		gameBoard.get(2).get(13).setBuild(false);
+		
+		gameBoard.get(3).get(3).setBuild(false);
+		gameBoard.get(3).get(4).setBuild(false);
+		gameBoard.get(3).get(9).setBuild(false);
+		gameBoard.get(3).get(10).setBuild(false);
+		gameBoard.get(3).get(12).setBuild(false);
+		
+		gameBoard.get(4).get(3).setBuild(false);
+		gameBoard.get(4).get(12).setBuild(false);
+		gameBoard.get(4).get(13).setBuild(false);
+		
+		gameBoard.get(5).get(0).setBuild(false);
+		gameBoard.get(5).get(1).setBuild(false);
+		gameBoard.get(5).get(3).setBuild(false);
+		gameBoard.get(5).get(4).setBuild(false);
+		
+		gameBoard.get(6).get(0).setBuild(false);
+		gameBoard.get(6).get(2).setBuild(false);
+		gameBoard.get(6).get(3).setBuild(false);
+		gameBoard.get(6).get(4).setBuild(false);
+		gameBoard.get(6).get(5).setBuild(false);
+		gameBoard.get(6).get(13).setBuild(false);
+		gameBoard.get(6).get(14).setBuild(false);
+		
+		gameBoard.get(7).get(0).setBuild(false);
+		gameBoard.get(7).get(2).setBuild(false);
+		gameBoard.get(7).get(3).setBuild(false);
+		gameBoard.get(7).get(4).setBuild(false);
+		gameBoard.get(7).get(11).setBuild(false);
+		gameBoard.get(7).get(12).setBuild(false);
+		gameBoard.get(7).get(13).setBuild(false);
+		
+		gameBoard.get(8).get(2).setBuild(false);
+		gameBoard.get(8).get(3).setBuild(false);
+		gameBoard.get(8).get(4).setBuild(false);
+		gameBoard.get(8).get(5).setBuild(false);
+		gameBoard.get(8).get(7).setBuild(false);
+		gameBoard.get(8).get(8).setBuild(false);
+		gameBoard.get(8).get(11).setBuild(false);
+		gameBoard.get(8).get(12).setBuild(false);
+		gameBoard.get(8).get(13).setBuild(false);
+		
+		gameBoard.get(9).get(3).setBuild(false);
+		gameBoard.get(9).get(4).setBuild(false);
+		gameBoard.get(9).get(7).setBuild(false);
+		gameBoard.get(9).get(14).setBuild(false);
+		
+		gameBoard.get(11).get(0).setBuild(false);
+		gameBoard.get(11).get(1).setBuild(false);
+		gameBoard.get(11).get(2).setBuild(false);
+		gameBoard.get(11).get(8).setBuild(false);
+		gameBoard.get(11).get(9).setBuild(false);
+		
+		gameBoard.get(12).get(0).setBuild(false);
+		gameBoard.get(12).get(1).setBuild(false);
+		gameBoard.get(12).get(2).setBuild(false);
+		gameBoard.get(12).get(8).setBuild(false);
+		gameBoard.get(12).get(9).setBuild(false);
+		
+		gameBoard.get(13).get(2).setBuild(false);
+		gameBoard.get(13).get(6).setBuild(false);
+		gameBoard.get(13).get(7).setBuild(false);
+		gameBoard.get(13).get(8).setBuild(false);
+		gameBoard.get(13).get(12).setBuild(false);
+		gameBoard.get(13).get(13).setBuild(false);
+		
+		gameBoard.get(14).get(8).setBuild(false);
+		gameBoard.get(14).get(9).setBuild(false);
+		
+		gameBoard.get(15).get(0).setBuild(false);
+		gameBoard.get(15).get(4).setBuild(false);
+		gameBoard.get(15).get(5).setBuild(false);
+		gameBoard.get(15).get(6).setBuild(false);
+		gameBoard.get(15).get(8).setBuild(false);
+		gameBoard.get(15).get(9).setBuild(false);
+		gameBoard.get(15).get(10).setBuild(false);
+		gameBoard.get(15).get(11).setBuild(false);
+		gameBoard.get(15).get(13).setBuild(false);
+		gameBoard.get(15).get(14).setBuild(false);
+		
+		gameBoard.get(16).get(2).setBuild(false);
+		gameBoard.get(16).get(3).setBuild(false);
+		gameBoard.get(16).get(4).setBuild(false);
+		gameBoard.get(16).get(5).setBuild(false);
+		gameBoard.get(16).get(6).setBuild(false);
+		gameBoard.get(16).get(8).setBuild(false);
+		gameBoard.get(16).get(9).setBuild(false);
+		gameBoard.get(16).get(10).setBuild(false);
+		gameBoard.get(16).get(11).setBuild(false);
+		gameBoard.get(16).get(12).setBuild(false);
+		gameBoard.get(16).get(13).setBuild(false);
+		gameBoard.get(16).get(14).setBuild(false);
+		
+		gameBoard.get(17).get(3).setBuild(false);
+		gameBoard.get(17).get(5).setBuild(false);
+		gameBoard.get(17).get(7).setBuild(false);
+		gameBoard.get(17).get(8).setBuild(false);
+		gameBoard.get(17).get(9).setBuild(false);
+		gameBoard.get(17).get(10).setBuild(false);
+		gameBoard.get(17).get(13).setBuild(false);
+		gameBoard.get(17).get(14).setBuild(false);
+		
+		gameBoard.get(18).get(7).setBuild(false);
+		gameBoard.get(18).get(9).setBuild(false);
+		gameBoard.get(18).get(10).setBuild(false);
+		gameBoard.get(18).get(13).setBuild(false);
+		
+		gameBoard.get(19).get(13).setBuild(false);
+		gameBoard.get(19).get(14).setBuild(false);
 
 	}
 
