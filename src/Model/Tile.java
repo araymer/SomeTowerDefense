@@ -1,20 +1,17 @@
 package Model;
 
-
 import java.awt.Point;
-import java.util.Vector;
 import java.util.Observable;
-
+import java.util.Vector;
 
 public class Tile extends Observable {
-
 
 	private boolean spawnable;
 	private boolean buildable;
 	private boolean movable;
 	private Vector<Attacker> attackers;
 	private Structure tileStructure;
-	private Dir nextTile;
+	private Tile nextTile;
 	private Point coordinate;
 
 	public Tile(int x, int y) {
@@ -43,11 +40,13 @@ public class Tile extends Observable {
 
 	}
 
-	public Dir getDirection() {
-		if (movable) {
-			return nextTile;
-		}
-		return null;
+	/*
+	 * public Dir getDirection() { if (movable) { return nextTile; } return
+	 * null; }
+	 */
+
+	public Tile getNextTile() {
+		return nextTile;
 	}
 
 	public void setSpawn(boolean b) {
@@ -60,45 +59,45 @@ public class Tile extends Observable {
 
 	}
 
-	public void setMove(boolean b) {
+	public void setMove(boolean b, Tile next) {
 		movable = b;
-
+		nextTile = next;
 	}
 
-	public void setDirection(Dir direction) {
-		nextTile = direction;
-	}
+	/*
+	 * public void setDirection(Dir direction) { nextTile = direction; }
+	 */
 
 	public void addAttacker(Attacker a) {
-		if(spawnable)
-		attackers.add(a);
+		if (spawnable)
+			attackers.add(a);
 	}
 
 	public boolean addStructure(Structure s) {
 		if (buildable && tileStructure == null) {
 			tileStructure = s;
 			return true;
-		} else{
+		} else {
 			System.out.println("Cannot build here");
 			return false;
-		}	
+		}
 
 	}
-	
-	public Vector<Attacker> getAttackers(){
+
+	public Vector<Attacker> getAttackers() {
 		return attackers;
 	}
-	
-	public Structure getStructure(){
+
+	public Structure getStructure() {
 		return tileStructure;
 	}
-	
-	public Point getCoordinates(){
+
+	public Point getCoordinates() {
 		return coordinate;
 	}
-	
+
 	public void getOccupied() {
-		if(!getAttackers().isEmpty())
+		if (!getAttackers().isEmpty())
 			System.out.println("Attacker Spawned");
 	}
 }

@@ -4,8 +4,9 @@ import View.GameGUI;
 import View.TilePanel;
 
 /**
- * This class controls all timing in the game, all other objects 
- * use the same instance. Singleton Pattern.
+ * This class controls all timing in the game, all other objects use the same
+ * instance. Singleton Pattern.
+ * 
  * @author Team Something
  */
 public class Ticker implements Runnable {
@@ -45,7 +46,9 @@ public class Ticker implements Runnable {
 						lastUpdateTime = now - timeBetweenFrames;
 
 					// interpolation for visually smooth movement
-					float interpolation = Math.min(1.0f, (float) ((now - lastUpdateTime) / timeBetweenFrames));
+					float interpolation = Math
+							.min(1.0f,
+									(float) ((now - lastUpdateTime) / timeBetweenFrames));
 					drawGame(interpolation);
 					lastRenderTime = now;
 
@@ -66,13 +69,13 @@ public class Ticker implements Runnable {
 	}
 
 	private void drawGame(float interpolation) {
-		//Iterate through all game objects and call their draw methods with interpolation
-		
-		GameGUI.getInstance().repaint(); //This is temporary, we'll want to replace this with 
-										//some way to feed interpolation
-										
-		
-		
+		// Iterate through all game objects and call their draw methods with
+		// interpolation
+
+		GameGUI.getInstance().repaint(); // This is temporary, we'll want to
+											// replace this with
+											// some way to feed interpolation
+
 	}
 
 	private void update() {
@@ -80,10 +83,21 @@ public class Ticker implements Runnable {
 		// add in information for structures and towers for
 		// position, direction and last drawn image (so it actually animates)
 		// TODO: Possibly incorporate this method into drawGame and deprecate?
-		
-		
 
+		/*
+		for (int i = 0; i < TilePanel.getInstance().tileMap.gameBoard.size(); i++) {
+			for (int p = 0; p < TilePanel.getInstance().tileMap.gameBoard
+					.get(i).size(); p++) {
+				for (int r = 0; r < TilePanel.getInstance().tileMap.gameBoard
+						.get(i).get(p).getAttackers().size(); r++)
+					TilePanel.getInstance().tileMap.gameBoard.get(i).get(p)
+							.getAttackers().get(r).move();
+			}
+		
+		}
+*/
 	}
+	
 
 	public void loopStart() {
 		isRunning = true;
@@ -92,13 +106,14 @@ public class Ticker implements Runnable {
 	public void loopStop() {
 		isRunning = false;
 	}
-	
+
 	/**
 	 * Returns instance of this class.
+	 * 
 	 * @return Ticker
 	 */
 	public static Ticker getInstance() {
-		if(ticker == null)
+		if (ticker == null)
 			ticker = new Ticker();
 		return ticker;
 	}
