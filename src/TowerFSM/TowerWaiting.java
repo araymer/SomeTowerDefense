@@ -181,11 +181,13 @@ public class TowerWaiting extends TowerState {
 						&& x >= 0
 						&& y < TilePanel.getInstance().tileMap.getGameBoard()
 								.get(x).size() && y >= 0) {
-					Attacker atkr = TilePanel.getInstance().tileMap
+					try { Attacker atkr = TilePanel.getInstance().tileMap
 							.getGameBoard().get(x).get(y).getAttackers().get(0);
+				
 					if (atkr != null) {
 						tower.changeTo(TowerStates.ATTACK, atkr);
 					}
+					} catch(Exception e) {};
 				}
 			}
 		}
