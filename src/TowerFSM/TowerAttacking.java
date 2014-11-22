@@ -44,7 +44,7 @@ public class TowerAttacking extends TowerState {
 	private void shoot() {
 		System.out.println("I seen tim");
 		if (inRange()) {
-			attacker.takeDamage(tower.getDamage());
+			target.takeDamage(tower.getDamage());
 		} else {
 			tower.changeTo(TowerStates.WAIT, null);
 		}
@@ -111,6 +111,7 @@ public class TowerAttacking extends TowerState {
 
 	@Override
 	public void update() {
+		System.out.println("attack update");
 		shoot();
 
 	}

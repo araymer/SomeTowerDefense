@@ -44,8 +44,7 @@ public abstract class Structure {
 	public static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
-	protected TowerState tower = new TowerWaiting(this);
-
+	protected TowerState tower;
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
 
@@ -62,6 +61,7 @@ public abstract class Structure {
 					// range
 		xIncrement = 0;
 		yIncrement = 0;
+		tower = new TowerWaiting(this);
 		// TODO: set as observer to the tiles in its range
 		// How are we doing range in diagonal directions?
 		// Will need to be able to have a reference to the map
@@ -113,6 +113,7 @@ public abstract class Structure {
 	}
 
 	public void update() {
+		//System.out.println("structure updade");
 		tower.update();
 	}
 

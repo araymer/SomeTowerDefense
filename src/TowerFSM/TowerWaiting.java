@@ -36,14 +36,15 @@ public class TowerWaiting extends TowerState {
 	// static String baseDir = System.getProperty("user.dir")
 	// + System.getProperty("file.separator") + "imageFiles"
 	// + System.getProperty("file.separator");
-
+	Thread th;
+	boolean stateChange = false;
+	
 	/**
 	 * 
 	 * @param theTower
 	 * @param hp
 	 */
 	public TowerWaiting(Structure theTower) {
-
 		super(theTower);
 		tower = theTower;
 		// HP = hp;
@@ -62,9 +63,9 @@ public class TowerWaiting extends TowerState {
 	 * less, or upgrade being initiated.
 	 */
 	private void waiting() {
-		Thread th = new Thread(new Runnable() {
+		th = new Thread(new Runnable() {
 			public void run() {
-				boolean stateChange = false;
+				
 				while (!stateChange) {
 					if (tower.hitpoints <= 0) {
 						tower.changeTo(TowerStates.EXPLODE, null);
@@ -175,7 +176,7 @@ public class TowerWaiting extends TowerState {
 		// Check for attackers
 		for (int x = tower.x - tower.range; x <= tower.x + tower.range; x++) {
 			for (int y = tower.y - tower.range; y <= tower.y + tower.range; y++) {
-				//System.out.println("checking one tile");
+				System.out.println("checking one tile");
 				// TODO Check to make sure x and y are within the map boundaries
 				if (x < TilePanel.getInstance().tileMap.getGameBoard().size()
 						&& x >= 0
@@ -186,6 +187,8 @@ public class TowerWaiting extends TowerState {
 				
 					if (atkr != null) {
 						tower.changeTo(TowerStates.ATTACK, atkr);
+						stateChange = true;
+						return;
 					}
 					} catch(Exception e) {
 						//System.out.println("update run");
