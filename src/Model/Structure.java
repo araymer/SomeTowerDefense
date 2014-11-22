@@ -112,7 +112,9 @@ public abstract class Structure {
 		return special;
 	}
 
-	public abstract void update();
+	public void update() {
+		tower.update();
+	}
 
 	/**
 	 * Changes to a different state, called from TowersFSM classes.

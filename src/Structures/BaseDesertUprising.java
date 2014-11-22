@@ -43,4 +43,10 @@ public class BaseDesertUprising extends Structure {
 
 	}
 
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+
+	}
+
 }
