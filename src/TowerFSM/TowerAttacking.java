@@ -1,5 +1,6 @@
 package TowerFSM;
 
+import java.awt.Graphics2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,7 +16,7 @@ import Model.Structure;
  * @author Team Something
  *
  */
-public class TowerAttacking implements TowerState {
+public class TowerAttacking extends TowerState {
 	int HP;
 	Structure tower;
 	Attacker target;
@@ -28,9 +29,11 @@ public class TowerAttacking implements TowerState {
 	 * @param atk
 	 * @param hp
 	 */
-	public TowerAttacking(Structure structure, Attacker atk, int hp) {
+	public TowerAttacking(Structure structure, Attacker atk) {
+		super(structure);
+		System.out.println("Tower changed to attacking state");
 		tower = structure;
-		HP = hp;
+		//HP = hp;
 		target = atk;
 		attacking();
 	}
@@ -44,7 +47,7 @@ public class TowerAttacking implements TowerState {
 		if(inRange()) {
 			// tell Attacker how much damage they have taken
 		} else {
-			tower.changeTo(TowerStates.WAIT, null, HP);
+			tower.changeTo(TowerStates.WAIT, null);
 		}
 	}
 	
@@ -79,12 +82,12 @@ public class TowerAttacking implements TowerState {
 				while(!stateChange) {
 					shoot();
 					if(HP <= 0) {
-						tower.changeTo(TowerStates.EXPLODE, null, HP);
+						tower.changeTo(TowerStates.EXPLODE, null);
 						stateChange = true;
 					} else if(upgrade) {
 						//TODO (Iteration 2: make towers able to upgrade
 					} else if(noTarget) {
-						tower.changeTo(TowerStates.WAIT, null, HP);
+						tower.changeTo(TowerStates.WAIT, null);
 						stateChange = true;
 					}
 					// wait for predefined number of ticks
@@ -97,5 +100,17 @@ public class TowerAttacking implements TowerState {
 			}
 		});
 		th.start();
+	}
+
+	@Override
+	public void draw(Graphics2D g2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 }

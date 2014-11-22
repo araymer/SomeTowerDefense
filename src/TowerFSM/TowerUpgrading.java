@@ -1,14 +1,17 @@
 package TowerFSM;
 
+import java.awt.Graphics2D;
+
 import Model.Structure;
 /**
  * Not implemented in Iteration 1
  * @author Team Something
  *
  */
-public class TowerUpgrading implements TowerState {
+public class TowerUpgrading extends TowerState {
 
-	public TowerUpgrading(Structure structure, int hp) {
+	public TowerUpgrading(Structure structure) {
+		super(structure);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -20,6 +23,18 @@ public class TowerUpgrading implements TowerState {
 
 	@Override
 	public void takeDamage(int dmg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void draw(Graphics2D g2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update() {
 		// TODO Auto-generated method stub
 		
 	}

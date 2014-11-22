@@ -106,8 +106,7 @@ public class GameGUI implements Serializable {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			//This is here until ticker class starts working
-			repaint();
+			
 			
 		}
 

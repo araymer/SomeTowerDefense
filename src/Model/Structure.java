@@ -20,32 +20,32 @@ import TowerFSM.*;
  */
 public abstract class Structure {
 
-	protected int hitpoints;
-	private int production;
-	private int range; // Range of tower (in tiles, Manhattan distance)
-	private int damage;
-	private int splashRadius; // tile radius (tiles in Manhattan distance)
-	private int rateOfFire; // in milliseconds
-	private int buildCost;
-	private SpecialAttack special;
-	private int x;
-	private int y;
+	public int hitpoints;
+	public int production;
+	public int range; // Range of tower (in tiles, Manhattan distance)
+	public int damage;
+	public int splashRadius; // tile radius (tiles in Manhattan distance)
+	public int rateOfFire; // in milliseconds
+	public int buildCost;
+	public SpecialAttack special;
+	public int x;
+	public int y;
 	
-	protected static final int HEIGHT = 40;
-	protected static final int WIDTH = 40;
+	public static final int HEIGHT = 40;
+	public static final int WIDTH = 40;
 	//Variables for drawing
-	protected int xIncrement;
-	protected int yIncrement;
-	protected BufferedImage bImage;
-	protected String imageFileName = "error.png";
-	protected static String baseDir = System.getProperty("user.dir")
+	public int xIncrement;
+	public int yIncrement;
+	public BufferedImage bImage;
+	public String imageFileName = "error.png";
+	public static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
 	protected TowerState tower;
 
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
-		tower = new TowerWaiting(this, hp);
+		
 		hitpoints = hp;
 		production = prod;
 		range = rng;
@@ -71,7 +71,9 @@ public abstract class Structure {
 
 	}
 	
-	public abstract void draw(Graphics2D g2);
+	public void draw(Graphics2D g2){
+		tower.draw(g2);
+	}
 
 	public int getHP() {
 		return hitpoints;
@@ -109,25 +111,30 @@ public abstract class Structure {
 		return special;
 	}
 	
+	public void update(){
+		System.out.println("Structure.update called");
+		tower.update();
+	}
+	
 	/**
 	 * Changes to a different state, called from TowersFSM classes.
 	 * @param TowerStates
 	 * @param Attacker
 	 * @param int
 	 */
-	public void changeTo(TowerStates newState, Attacker atk, int hp) {
+	public void changeTo(TowerStates newState, Attacker atkr) {
 		switch(newState) {
 		case ATTACK:
-			tower = new TowerAttacking(this, atk, hp);
+			tower = new TowerAttacking(this, atkr);
 			break;
 		case WAIT:
-			tower = new TowerWaiting(this, hp);
+			tower = new TowerWaiting(this);
 			break;
 		case EXPLODE:
 			tower = new TowerExploding(this);
 			break;
 		case UPGRADE:
-			tower = new TowerUpgrading(this, hp);
+			tower = new TowerUpgrading(this);
 			break;
 		default:
 			System.out.println("Problem Encountered while changing states.");
