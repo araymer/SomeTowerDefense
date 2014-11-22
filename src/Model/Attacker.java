@@ -79,6 +79,7 @@ public abstract class Attacker {
 	public abstract void die();
 
 	public void takeDamage(int dmg) {
+		System.out.println("ouch!");
 		hitpoints -= dmg;
 	}
 

@@ -42,8 +42,9 @@ public class TowerAttacking extends TowerState {
 	 * state.
 	 */
 	private void shoot() {
+		System.out.println("I seen tim");
 		if (inRange()) {
-			// tell Attacker how much damage they have taken
+			attacker.takeDamage(tower.getDamage());
 		} else {
 			tower.changeTo(TowerStates.WAIT, null);
 		}
@@ -80,7 +81,7 @@ public class TowerAttacking extends TowerState {
 			public void run() {
 				boolean stateChange = false;
 				while (!stateChange) {
-					shoot();
+					//shoot();
 					if (HP <= 0) {
 						tower.changeTo(TowerStates.EXPLODE, null);
 						stateChange = true;
@@ -110,7 +111,7 @@ public class TowerAttacking extends TowerState {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		shoot();
 
 	}
 }

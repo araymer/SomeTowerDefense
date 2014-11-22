@@ -45,7 +45,7 @@ public class TowerWaiting extends TowerState {
 	public TowerWaiting(Structure theTower) {
 
 		super(theTower);
-		// tower = theTower;
+		tower = theTower;
 		// HP = hp;
 		// range = tower.getRange();
 		// x = tower.getX();
@@ -175,7 +175,7 @@ public class TowerWaiting extends TowerState {
 		// Check for attackers
 		for (int x = tower.x - tower.range; x <= tower.x + tower.range; x++) {
 			for (int y = tower.y - tower.range; y <= tower.y + tower.range; y++) {
-				System.out.println("checking one tile");
+				//System.out.println("checking one tile");
 				// TODO Check to make sure x and y are within the map boundaries
 				if (x < TilePanel.getInstance().tileMap.getGameBoard().size()
 						&& x >= 0
@@ -187,7 +187,9 @@ public class TowerWaiting extends TowerState {
 					if (atkr != null) {
 						tower.changeTo(TowerStates.ATTACK, atkr);
 					}
-					} catch(Exception e) {};
+					} catch(Exception e) {
+						//System.out.println("update run");
+					};
 				}
 			}
 		}
