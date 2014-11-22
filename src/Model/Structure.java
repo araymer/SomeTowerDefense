@@ -1,20 +1,23 @@
-
 package Model;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.Observable;
-import java.util.Observer;
 
-import TowerFSM.*;
+import TowerFSM.TowerAttacking;
+import TowerFSM.TowerExploding;
+import TowerFSM.TowerState;
+import TowerFSM.TowerStates;
+import TowerFSM.TowerUpgrading;
+import TowerFSM.TowerWaiting;
 
 /**
- * Super-class of all structures. The behavior of the structures are controlled by
- * the classes in the TowerFSM package. Please note that the hitpoints represented
- * below is the maximum and the getHP method will return the maximum, all current
- * state information is passed between the state classes using the changeState()
- * method and can be called using the getCurrentHP method from the TowerState
- * interface. 
+ * Super-class of all structures. The behavior of the structures are controlled
+ * by the classes in the TowerFSM package. Please note that the hitpoints
+ * represented below is the maximum and the getHP method will return the
+ * maximum, all current state information is passed between the state classes
+ * using the changeState() method and can be called using the getCurrentHP
+ * method from the TowerState interface.
+ * 
  * @author Team Something
  *
  */
@@ -30,10 +33,10 @@ public abstract class Structure {
 	public SpecialAttack special;
 	public int x;
 	public int y;
-	
+
 	public static final int HEIGHT = 40;
 	public static final int WIDTH = 40;
-	//Variables for drawing
+	// Variables for drawing
 	public int xIncrement;
 	public int yIncrement;
 	public BufferedImage bImage;
@@ -41,11 +44,11 @@ public abstract class Structure {
 	public static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
-	protected TowerState tower;
+	protected TowerState tower = new TowerWaiting(this);
 
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
-		
+
 		hitpoints = hp;
 		production = prod;
 		range = rng;
@@ -63,15 +66,13 @@ public abstract class Structure {
 		// How are we doing range in diagonal directions?
 		// Will need to be able to have a reference to the map
 		/*
-		 * for (int i = 0; i < rng; i++) {
-		 *  if (does not fall off the map and is a path) 
-		 *  tile.addObserver(this);
-		 *  }
+		 * for (int i = 0; i < rng; i++) { if (does not fall off the map and is
+		 * a path) tile.addObserver(this); }
 		 */
 
 	}
-	
-	public void draw(Graphics2D g2){
+
+	public void draw(Graphics2D g2) {
 		tower.draw(g2);
 	}
 
@@ -110,20 +111,18 @@ public abstract class Structure {
 	public SpecialAttack getSpecial() {
 		return special;
 	}
-	
-	public void update(){
-		System.out.println("Structure.update called");
-		tower.update();
-	}
-	
+
+	public abstract void update();
+
 	/**
 	 * Changes to a different state, called from TowersFSM classes.
+	 * 
 	 * @param TowerStates
 	 * @param Attacker
 	 * @param int
 	 */
 	public void changeTo(TowerStates newState, Attacker atkr) {
-		switch(newState) {
+		switch (newState) {
 		case ATTACK:
 			tower = new TowerAttacking(this, atkr);
 			break;
@@ -139,7 +138,6 @@ public abstract class Structure {
 		default:
 			System.out.println("Problem Encountered while changing states.");
 		}
-		
+
 	}
 }
-
