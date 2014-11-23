@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 
 import Model.Attacker;
 import Model.Structure;
+import Model.Ticker;
 import Model.Tile;
+import View.TilePanel;
 
 public class Marine extends Attacker {
 
@@ -26,6 +28,7 @@ public class Marine extends Attacker {
 	@Override
 	public void die() {
 		// play dying animation and remove the attacker
+		isDead = true;
 
 	}
 

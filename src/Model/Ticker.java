@@ -24,11 +24,14 @@ public class Ticker implements Runnable {
 	private int updateCount = 0;
 	private double now = System.nanoTime();
 	private static Ticker ticker;
+	
+	private MasterList masterList;
 
 	// many objects will need to access the same timer
 	private Ticker() {
 		isRunning = true;
 		paused = false;
+		masterList = MasterList.getInstance();
 	}
 
 	// Only run this in another Thread!
@@ -42,7 +45,7 @@ public class Ticker implements Runnable {
 				while (now - lastUpdateTime > timeBetweenFrames
 						&& updateCount < maxUpdatesBetweenRenders) {
 
-					// update();
+					update();
 					lastUpdateTime += timeBetweenFrames;
 					updateCount++;
 
@@ -76,18 +79,18 @@ public class Ticker implements Runnable {
 		// Iterate through all game objects and call their draw methods with
 		// interpolation
 
-		Iterator<Vector<Tile>> vectorItr = TilePanel.getInstance().tileMap
-				.getGameBoard().iterator();
-		while (vectorItr.hasNext()) {
-			Vector<Tile> currVector = vectorItr.next();
-			Iterator<Tile> tileItr = currVector.iterator();
-			while (tileItr.hasNext()) {
-				Tile currTile = tileItr.next();
-				if (currTile.getStructure() != null) {
-					currTile.getStructure().update();
-				}
-			}
-		}
+//		Iterator<Vector<Tile>> vectorItr = TilePanel.getInstance().tileMap
+//				.getGameBoard().iterator();
+//		while (vectorItr.hasNext()) {
+//			Vector<Tile> currVector = vectorItr.next();
+//			Iterator<Tile> tileItr = currVector.iterator();
+//			while (tileItr.hasNext()) {
+//				Tile currTile = tileItr.next();
+//				if (currTile.getStructure() != null) {
+//					currTile.getStructure().update();
+//				}
+//			}
+//		}
 
 		GameGUI.getInstance().repaint(); // This is temporary, we'll want to
 											// replace this with
@@ -128,27 +131,103 @@ public class Ticker implements Runnable {
 		// }
 		//
 		// }
-
-		// Draw each structure and attacker from every tile
-		Iterator<Vector<Tile>> vectorItr = TilePanel.getInstance().tileMap
-				.getGameBoard().iterator();
-		while (vectorItr.hasNext()) {
-			Vector<Tile> currVector = vectorItr.next();
-			Iterator<Tile> tileItr = currVector.iterator();
-			while (tileItr.hasNext()) {
-				Tile currTile = tileItr.next();
-				if (currTile.getStructure() != null) {
-					currTile.getStructure().update();
+		try{
+			masterList.clear();
+			
+			for(Vector<Tile> vec: TilePanel.getInstance().tileMap.getGameBoard()){
+				for(Tile tile: vec){
+					if(tile.getStructure() != null){
+						if(tile.getStructure().isFinished()){
+							//Need separate list for structures
+							//masterList.addElement(currTile.getStructure());
+						}
+					}
+					for(Attacker attacker: tile.getAttackers()){
+						if(attacker.isFinished()){
+							masterList.add(attacker);
+						}
+					}
 				}
-
-				// Iterator<Attacker> attackerItr =
-				// currTile.getAttackers().iterator();
-				// while(attackerItr.hasNext()){
-				// Attacker currAttacker = attackerItr.next();
-				// currAttacker.move();
-				// }
+			}
+			//Draw each structure and attacker from every tile
+//			Iterator<Vector<Tile>> vectorItr = TilePanel.getInstance().tileMap.getGameBoard().iterator();
+//			while(vectorItr.hasNext()){
+//				Vector<Tile> currVector = vectorItr.next();
+//				Iterator<Tile> tileItr = currVector.iterator();
+//				while(tileItr.hasNext()){
+//					Tile currTile = tileItr.next();
+//					if(currTile.getStructure() != null){
+//						if(currTile.getStructure().isFinished()){
+//							//Need separate list for structures
+//							//masterList.addElement(currTile.getStructure());
+//						}
+//					}
+//					
+//					Iterator<Attacker> attackerItr = currTile.getAttackers().iterator();
+//					while(attackerItr.hasNext()){
+//						Attacker currAttacker = attackerItr.next();
+//						if(currAttacker.isFinished()){
+//							masterList.add(currAttacker);
+//						}
+//						
+//					}
+//				}
+//			}
+			
+			for(Drawable drawable: masterList){
+				//iterate through whole map and remove these
+				for(Vector<Tile> vec: TilePanel.getInstance().tileMap.getGameBoard()){
+					for(Tile tile: vec){
+						tile.getAttackers().remove(drawable);
+					}
+				}
+			}
+			
+			masterList.clear();
+		}catch(Exception e){
+			System.out.println("removing an enemy threw exception");
+		}
+		
+		for(Vector<Tile> vec: TilePanel.getInstance().tileMap.getGameBoard()){
+			for(Tile tile: vec){
+				if(tile.getStructure() != null){
+					tile.getStructure().update();
+				}
+//				for(Attacker attacker: tile.getAttackers()){
+//					attacker.update();
+//				}
 			}
 		}
+//		while(attackersToRemove.size() != 0){
+//			Attacker atkr = attackersToRemove.remove(0);
+//			Tile tile = atkr.getLoc();
+//			TilePanel.getInstance().tileMap.getGameBoard().get(tile.getCoordinates().x)
+//			.get(tile.getCoordinates().y).getAttackers().remove(atkr);
+//		}
+
+		// Draw each structure and attacker from every tile
+//		Iterator<Vector<Tile>> vectorItr = TilePanel.getInstance().tileMap
+//				.getGameBoard().iterator();
+//		while (vectorItr.hasNext()) {
+//			Vector<Tile> currVector = vectorItr.next();
+//			Iterator<Tile> tileItr = currVector.iterator();
+//			while (tileItr.hasNext()) {
+//				Tile currTile = tileItr.next();
+//				if (currTile.getStructure() != null) {
+//					currTile.getStructure().update();
+//				}
+//
+//				 Iterator<Attacker> attackerItr = currTile.getAttackers().iterator();
+//				 while(attackerItr.hasNext()){
+//					Attacker currAttacker = attackerItr.next();
+//					if(currAttacker.isDead){
+//						//attackerItr.r;
+//						//currTile.getAttackers().remove(currAttacker);
+//					}
+//					//currAttacker.move();
+//				 }
+//			}
+//		}
 	}
 
 	public void loopStart() {
@@ -169,4 +248,5 @@ public class Ticker implements Runnable {
 			ticker = new Ticker();
 		return ticker;
 	}
+	
 }

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 //Test, let's see if git is working.
 //Test 2
 
-public abstract class Attacker {
+public abstract class Attacker extends Drawable{
 
 	private int hitpoints;
 	private int attackRating;
@@ -29,6 +29,8 @@ public abstract class Attacker {
 	protected static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
+	
+	protected boolean isDead = false;
 
 	// private int cost; //This is for itr2, possibly
 	Map map;
@@ -62,6 +64,7 @@ public abstract class Attacker {
 	}
 
 	public void move() {
+		//Wont work because you can't modify a list while it's being iterated over somewhere else by repaint
 		if (location.getNextTile() == null)
 			return;
 		location.getAttackers().remove(this);
@@ -133,6 +136,14 @@ public abstract class Attacker {
 	 */
 	public int getY() {
 		return y;
+	}
+	
+	public void update(){
+		
+	}
+	
+	public boolean isFinished(){
+		return isDead;
 	}
 	
 }

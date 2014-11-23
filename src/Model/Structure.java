@@ -21,7 +21,7 @@ import TowerFSM.TowerWaiting;
  * @author Team Something
  *
  */
-public abstract class Structure {
+public abstract class Structure extends Drawable{
 
 	public int hitpoints;
 	public int production;
@@ -128,6 +128,11 @@ public abstract class Structure {
 	public void update() {
 		//System.out.println("structure updade");
 		tower.update();
+	}
+	
+	public boolean isFinished(){
+		//Not finished, lol
+		return false;
 	}
 	
 	/**

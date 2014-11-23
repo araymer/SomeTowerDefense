@@ -47,7 +47,10 @@ public class TowerAttacking extends TowerState {
 	 */
 	private void shoot() {
 		//System.out.println("I seen tim");
-		if (inRange()) {
+		if(target.isFinished()){
+			System.out.println("TowerAttacking: Enemy died, mission complete");
+			tower.changeTo(TowerStates.WAIT, null);
+		}else if (inRange()) {
 			System.out.println("TowerAttacking: target took damage");
 			target.takeDamage(tower.getDamage());
 		} else {

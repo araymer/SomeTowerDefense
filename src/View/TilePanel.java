@@ -9,7 +9,9 @@ import javax.swing.JPanel;
 
 import Maps.DesertUprising;
 import Model.Attacker;
+import Model.Drawable;
 import Model.Map;
+import Model.MasterList;
 import Model.Tile;
 
 /**
@@ -22,6 +24,7 @@ import Model.Tile;
 public class TilePanel extends JPanel {
 	private static TilePanel tilePanel;
 	public Map tileMap;
+	MasterList masterList;
 
 	/**
 	 * Constructs the TilePanel for use in the GameGUI
@@ -31,6 +34,7 @@ public class TilePanel extends JPanel {
 		this.setOpaque(false);
 		this.setVisible(true);
 		tileMap = new DesertUprising();
+		masterList = MasterList.getInstance();
 	}
 
 	public static TilePanel getInstance() {
@@ -39,30 +43,54 @@ public class TilePanel extends JPanel {
 		}
 		return tilePanel;
 	}
-
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
+//		masterList.clear();
 		//Draw each structure and attacker from every tile
-		Iterator<Vector<Tile>> vectorItr = tileMap.getGameBoard().iterator();
-		while(vectorItr.hasNext()){
-			Vector<Tile> currVector = vectorItr.next();
-			Iterator<Tile> tileItr = currVector.iterator();
-			while(tileItr.hasNext()){
-				Tile currTile = tileItr.next();
-				if(currTile.getStructure() != null){
-					currTile.getStructure().draw(g2);
+//		Iterator<Vector<Tile>> vectorItr = tileMap.getGameBoard().iterator();
+//		while(vectorItr.hasNext()){
+//			Vector<Tile> currVector = vectorItr.next();
+//			Iterator<Tile> tileItr = currVector.iterator();
+//			while(tileItr.hasNext()){
+//				Tile currTile = tileItr.next();
+//				if(currTile.getStructure() != null){
+//					currTile.getStructure().draw(g2);
+//				}
+//				
+//				Iterator<Attacker> attackerItr = currTile.getAttackers().iterator();
+//				while(attackerItr.hasNext()){
+//					Attacker currAttacker = attackerItr.next();
+//					currAttacker.draw(g2);
+//				}
+//			}
+//		}
+		try{
+		for(Vector<Tile> vec: tileMap.getGameBoard()){
+			for(Tile tile: vec){
+				if(tile.getStructure() != null){
+					tile.getStructure().draw(g2);
 				}
-				
-				Iterator<Attacker> attackerItr = currTile.getAttackers().iterator();
-				while(attackerItr.hasNext()){
-					Attacker currAttacker = attackerItr.next();
-					currAttacker.draw(g2);
+				for(Attacker attacker: tile.getAttackers()){
+					attacker.draw(g2);
 				}
 			}
 		}
+		}catch(Exception e){
+			System.out.println("repaint error");
+		}
+//		synchronized(masterList){
+//			Iterator<Drawable> itr = masterList.iterator();
+//			while(itr.hasNext()){
+//				System.out.println("drawing");
+//				itr.next().draw(g2);
+//			}
+//		}
+		
+		
 		
 	}
 	
