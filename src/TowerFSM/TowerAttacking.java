@@ -1,6 +1,11 @@
 package TowerFSM;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import Model.Attacker;
 import Model.Structure;
@@ -33,7 +38,8 @@ public class TowerAttacking extends TowerState {
 		tower = structure;
 		// HP = hp;
 		target = atk;
-		attacking();
+		//attacking();
+		tower.setToAttack();
 	}
 
 	/**
@@ -76,11 +82,36 @@ public class TowerAttacking extends TowerState {
 
 	}
 
+//	private void attacking() {
+//		Thread th = new Thread(new Runnable() {
+//			public void run() {
+//				boolean stateChange = false;
+//				while (!stateChange) {
+//					//shoot();
+//					if (HP <= 0) {
+//						tower.changeTo(TowerStates.EXPLODE, null);
+//						stateChange = true;
+//					} else if (upgrade) {
+//						// TODO (Iteration 2: make towers able to upgrade
+//					} else if (noTarget) {
+//						tower.changeTo(TowerStates.WAIT, null);
+//						stateChange = true;
+//					}
+//					// wait for predefined number of ticks
+//					try {
+//						Thread.sleep(10); // or it will cause massive CPU usage
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//		});
+//		th.start();
+//	}
+	
 	private void attacking() {
-		Thread th = new Thread(new Runnable() {
-			public void run() {
 				boolean stateChange = false;
-				while (!stateChange) {
+				if (!stateChange) {
 					//shoot();
 					if (HP <= 0) {
 						tower.changeTo(TowerStates.EXPLODE, null);
@@ -98,20 +129,42 @@ public class TowerAttacking extends TowerState {
 						e.printStackTrace();
 					}
 				}
-			}
-		});
-		th.start();
 	}
-
+	
+	//Image will stutter when too many because not static. Will work on sprites next iteration
 	@Override
 	public void draw(Graphics2D g2) {
-		// TODO Auto-generated method stub
-		// We can't be drawing in a generic class
+		if (tower.bImage == null) {
+			File imageFile = new File(Structure.baseDir + tower.imageFileName);
+			try {
+				tower.bImage = ImageIO.read(imageFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if ((tower.xIncrement * tower.WIDTH) + tower.WIDTH > tower.bImage
+				.getWidth()) {
+			tower.yIncrement++;
+			tower.xIncrement = 0;
+		}
+		if ((tower.yIncrement * tower.HEIGHT) + tower.HEIGHT > tower.bImage
+				.getHeight()) {
+			// Start from beginning again
+			tower.yIncrement = 0;
+		}
+		BufferedImage tempSubImage = tower.bImage.getSubimage(tower.xIncrement
+				* tower.WIDTH, tower.yIncrement * tower.HEIGHT, tower.WIDTH,
+				tower.HEIGHT);
+		tower.xIncrement++;
+		g2.drawImage(tempSubImage, tower.getX() * tower.WIDTH, tower.getY()
+				* tower.HEIGHT, tower.WIDTH, tower.HEIGHT, null);
 	}
 
 	@Override
 	public void update() {
 		System.out.println("attack update");
+		attacking();
 		shoot();
 
 	}

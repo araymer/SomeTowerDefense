@@ -44,6 +44,12 @@ public abstract class Structure {
 	public static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
+	
+	protected String waitImage = "error.png";
+	protected String attackImage = "error.png";
+	protected String explodeImage = "error.png";
+	protected String upgradeImage = "error.png";
+	
 	protected TowerState tower;
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
@@ -61,7 +67,8 @@ public abstract class Structure {
 					// range
 		xIncrement = 0;
 		yIncrement = 0;
-		tower = new TowerWaiting(this);
+		setImageNames();
+		this.changeTo(TowerStates.WAIT, null);
 		// TODO: set as observer to the tiles in its range
 		// How are we doing range in diagonal directions?
 		// Will need to be able to have a reference to the map
@@ -75,6 +82,8 @@ public abstract class Structure {
 	public void draw(Graphics2D g2) {
 		tower.draw(g2);
 	}
+	
+	protected abstract void setImageNames();//Set image for attack, wait, upgrade, explode
 
 	public int getHP() {
 		return hitpoints;
@@ -127,20 +136,29 @@ public abstract class Structure {
 	public void changeTo(TowerStates newState, Attacker atkr) {
 		switch (newState) {
 		case ATTACK:
+			imageFileName = attackImage;
 			tower = new TowerAttacking(this, atkr);
 			break;
 		case WAIT:
+			imageFileName = waitImage;
 			tower = new TowerWaiting(this);
 			break;
 		case EXPLODE:
+			imageFileName = explodeImage;
 			tower = new TowerExploding(this);
 			break;
 		case UPGRADE:
+			imageFileName = upgradeImage;
 			tower = new TowerUpgrading(this);
 			break;
 		default:
 			System.out.println("Problem Encountered while changing states.");
 		}
 
+	}
+
+	public void setToAttack() {
+		
+		
 	}
 }

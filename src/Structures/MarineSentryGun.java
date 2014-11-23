@@ -13,9 +13,14 @@ public class MarineSentryGun extends Structure {
 
 	public MarineSentryGun(int x, int y) {
 		super(120, 0, 5, 11, 0, 200, 1500, x, y, null);
-		bImage = null;
-		imageFileName = "topdownturret40.png";
+		setImageNames();
 		tower = new TowerWaiting(this);
+	}
+	
+	protected void setImageNames(){
+		waitImage = "topdownturret40.png";
+		attackImage = "turretFire.png";
+		//Set rest when available
 	}
 
 	// @Override

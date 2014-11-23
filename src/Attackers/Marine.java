@@ -15,7 +15,7 @@ public class Marine extends Attacker {
 
 	public Marine(Tile startingLocation) {
 		super(50, 10, 50, 2, 500, startingLocation);
-		imageFileName = "error.png";
+		imageFileName = "topdownmarines40.png";
 	}
 
 	@Override
@@ -39,19 +39,31 @@ public class Marine extends Attacker {
 			}
 		}
 
-		if ((xIncrement * WIDTH) + WIDTH > bImage.getWidth()) {
-			yIncrement++;
+//		if ((xIncrement * WIDTH) + WIDTH > bImage.getWidth()) {
+//			yIncrement++;
+//			xIncrement = 0;
+//		}
+//		if ((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()) {
+//			// Start from beginning again
+//			yIncrement = 0;
+//		}
+//		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
+//				yIncrement * HEIGHT, WIDTH, HEIGHT);
+//		xIncrement++;
+//		g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH,
+//				HEIGHT, null);
+		
+		//4 is the number of shooting frames 
+		if(xIncrement > 4){ 
 			xIncrement = 0;
-		}
-		if ((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()) {
-			// Start from beginning again
-			yIncrement = 0;
-		}
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-				yIncrement * HEIGHT, WIDTH, HEIGHT);
-		xIncrement++;
-		g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH,
-				HEIGHT, null);
+		  }
+		  
+		  BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, 
+				  yIncrement * HEIGHT, WIDTH, HEIGHT); 
+		  xIncrement ++;
+		  g2.drawImage(tempSubImage, getLoc().getCoordinates().x * WIDTH,
+		  getLoc().getCoordinates().y * HEIGHT, WIDTH, HEIGHT, null);
+		  
 
 	}
 	/*

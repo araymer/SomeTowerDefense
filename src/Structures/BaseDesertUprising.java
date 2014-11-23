@@ -13,7 +13,6 @@ public class BaseDesertUprising extends Structure {
 
 	public BaseDesertUprising(int x, int y) {
 		super(500, 0, 0, 0, 0, 0, 0, x, y, null);
-		imageFileName = "error.png";
 	}
 
 	@Override
@@ -47,6 +46,12 @@ public class BaseDesertUprising extends Structure {
 	public void update() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	protected void setImageNames() {
+		waitImage = "base40.png";
+		
 	}
 
 }

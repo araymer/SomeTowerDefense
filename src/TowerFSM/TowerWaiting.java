@@ -54,7 +54,7 @@ public class TowerWaiting extends TowerState {
 		upgrade = false;
 		signal = false;
 		// imageFileName = tower.imageFileName;
-		waiting();
+		//waiting();
 
 	}
 
@@ -62,11 +62,33 @@ public class TowerWaiting extends TowerState {
 	 * Changes state according to attackers entering range, HP reaching zero or
 	 * less, or upgrade being initiated.
 	 */
+//	private void waiting() {
+//		th = new Thread(new Runnable() {
+//			public void run() {
+//				while (!stateChange) {
+//					if (tower.hitpoints <= 0) {
+//						tower.changeTo(TowerStates.EXPLODE, null);
+//						stateChange = true;
+//					} else if (upgrade) {
+//						// TODO (Iteration 2: make towers able to upgrade
+//					} else if (signal) {
+//						tower.changeTo(TowerStates.ATTACK, attacker);
+//						stateChange = true;
+//					}
+//					 //wait for predefined number of ticks
+//					try {
+//						Thread.sleep(10); // or it will cause massive CPU usage
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//		});
+//		th.start();
+//	}
+	
 	private void waiting() {
-		th = new Thread(new Runnable() {
-			public void run() {
-				
-				while (!stateChange) {
+				if (!stateChange) {
 					if (tower.hitpoints <= 0) {
 						tower.changeTo(TowerStates.EXPLODE, null);
 						stateChange = true;
@@ -76,16 +98,7 @@ public class TowerWaiting extends TowerState {
 						tower.changeTo(TowerStates.ATTACK, attacker);
 						stateChange = true;
 					}
-					// wait for predefined number of ticks
-					try {
-						Thread.sleep(10); // or it will cause massive CPU usage
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		th.start();
+				}	
 	}
 
 	// public void update(Attacker atk) {
@@ -176,7 +189,6 @@ public class TowerWaiting extends TowerState {
 		// Check for attackers
 		for (int x = tower.x - tower.range; x <= tower.x + tower.range; x++) {
 			for (int y = tower.y - tower.range; y <= tower.y + tower.range; y++) {
-				System.out.println("checking one tile");
 				// TODO Check to make sure x and y are within the map boundaries
 				if (x < TilePanel.getInstance().tileMap.getGameBoard().size()
 						&& x >= 0
@@ -196,6 +208,8 @@ public class TowerWaiting extends TowerState {
 				}
 			}
 		}
+		
+		waiting();
 
 	}
 
