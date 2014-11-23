@@ -203,6 +203,7 @@ public class DesertUprising extends Map {
 	// This hardcodes our path tiles
 	@Override
 	public void setPath() {
+		//SPAWN 1 PATH
 		gameBoard.get(19).get(1).setMove(true, gameBoard.get(18).get(1));
 		gameBoard.get(19).get(1).setBuild(false);
 		// gameBoard.get(19).get(1).setDirection(Dir.LEFT);
@@ -330,16 +331,18 @@ public class DesertUprising extends Map {
 		gameBoard.get(3).get(6).setMove(true, gameBoard.get(3).get(7));
 		gameBoard.get(3).get(6).setBuild(false);
 		// gameBoard.get(3).get(6).setDirection(Dir.DOWN);
-
-		gameBoard.get(3).get(7).setMove(true, gameBoard.get(11).get(14));
+		
+		//LAST TILE TO BASE!!!
+		gameBoard.get(3).get(7).setMove(true, null);
 		gameBoard.get(3).get(7).setBuild(false);
 		// gameBoard.get(3).get(7).setDirection(Dir.DOWN);
-
+		
+		//SPAWN 2 PATH
 		gameBoard.get(11).get(14).setMove(true, gameBoard.get(11).get(13));
 		gameBoard.get(11).get(14).setBuild(false);
 		// gameBoard.get(11).get(14).setDirection(Dir.UP);
 
-		gameBoard.get(11).get(13).setMove(true, gameBoard.get(11).get(13));
+		gameBoard.get(11).get(13).setMove(true, gameBoard.get(11).get(12));
 		gameBoard.get(11).get(13).setBuild(false);
 		// gameBoard.get(11).get(13).setDirection(Dir.UP);
 
@@ -375,7 +378,7 @@ public class DesertUprising extends Map {
 		gameBoard.get(10).get(8).setBuild(false);
 		// gameBoard.get(10).get(8).setDirection(Dir.UP);
 
-		gameBoard.get(10).get(7).setMove(true, null);
+		gameBoard.get(10).get(7).setMove(true, gameBoard.get(10).get(6));
 		gameBoard.get(10).get(7).setBuild(false);
 		// gameBoard.get(10).get(7).setDirection(Dir.UP);
 

@@ -15,7 +15,7 @@ public abstract class Attacker extends Drawable{
 						// tile
 	private int defenseRating;
 	private int range;
-	protected Tile location; // attacker keeps track of own location
+	public Tile location; // attacker keeps track of own location
 	protected int x;
 	protected int y;
 
@@ -31,6 +31,7 @@ public abstract class Attacker extends Drawable{
 			+ System.getProperty("file.separator");
 	
 	protected boolean isDead = false;
+	public boolean needsToMove = false;
 
 	// private int cost; //This is for itr2, possibly
 	Map map;
@@ -53,18 +54,22 @@ public abstract class Attacker extends Drawable{
 
 	}
 
-	private void setY() {
+	public void setY() {
 		x = (int) location.getCoordinates().getX();
 
 	}
 
-	private void setX() {
+	public void setX() {
 		y = (int) location.getCoordinates().getY();
 
 	}
 
 	public void move() {
 		//Wont work because you can't modify a list while it's being iterated over somewhere else by repaint
+		if (location.getNextTile() != null){
+			needsToMove = true;
+		}
+		/*
 		if (location.getNextTile() == null)
 			return;
 		location.getAttackers().remove(this);
@@ -73,6 +78,7 @@ public abstract class Attacker extends Drawable{
 
 		setX();
 		setY();
+		*/
 	}
 
 	public abstract void draw(Graphics2D g2);
@@ -86,7 +92,6 @@ public abstract class Attacker extends Drawable{
 		hitpoints -= dmg;
 		
 		if(hitpoints <= 0){
-			System.out.println("Attacker: hp reached " + hitpoints + ", I died!!");
 			die();
 		}
 	}
@@ -118,6 +123,8 @@ public abstract class Attacker extends Drawable{
 
 	public void setLoc(Tile loc) {
 		location = loc;
+		setX();
+		setY();
 	}
 
 	/**

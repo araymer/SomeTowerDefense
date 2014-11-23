@@ -19,13 +19,13 @@ public class GameController {
 		waveCount = 5;
 		gui = GameGUI.getInstance();
 		new Thread(Ticker.getInstance()).start();
-		//startWaves();
+		startWaves();
 		
-		gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
-				new Marine(gui.tilePanel.tileMap.getSpawnTile(1)));
-		
-		gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
-				new Marine(gui.tilePanel.tileMap.getSpawnTile(2)));
+//		gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
+//				new Marine(gui.tilePanel.tileMap.getSpawnTile(1)));
+//		
+//		gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
+//				new Marine(gui.tilePanel.tileMap.getSpawnTile(2)));
 						
 //gui.tilePanel.tileMap
 //		.getGameBoard()
@@ -42,8 +42,28 @@ public class GameController {
 			for (int k = 0; k < spawnsPerWave[i]; k++) {
 				// start spawning enemies on a delay (probably about 1/2 a
 				// second)
-				gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
-						new Marine(gui.tilePanel.tileMap.getSpawnTile(1)));
+				if(k%2 == 0){
+					gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
+							new Marine(gui.tilePanel.tileMap.getSpawnTile(1)));
+				}else{
+					gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
+							new Marine(gui.tilePanel.tileMap.getSpawnTile(2)));
+				}
+				
+				
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			System.out.println("\n\n\n\n\n\n\n\n!!!!!!Next wave starting in 10 seconds!!!!!!");
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 

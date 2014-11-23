@@ -51,7 +51,6 @@ public class TowerAttacking extends TowerState {
 			System.out.println("TowerAttacking: Enemy died, mission complete");
 			tower.changeTo(TowerStates.WAIT, null);
 		}else if (inRange()) {
-			System.out.println("TowerAttacking: target took damage");
 			target.takeDamage(tower.getDamage());
 		} else {
 			System.out.println("TowerAttacking: Enemy went out of range, switching to wait");
@@ -66,7 +65,13 @@ public class TowerAttacking extends TowerState {
 	 */
 	private boolean inRange() {
 		// if range to target => tower.getRange(), then damage
-		return true;
+		if(Math.abs(tower.x - target.getX()) <= tower.range 
+				&& Math.abs(tower.y - target.getY()) <= tower.range){
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 
 	/**

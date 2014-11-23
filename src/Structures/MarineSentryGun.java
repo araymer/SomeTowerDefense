@@ -27,7 +27,7 @@ public class MarineSentryGun extends Structure {
 	protected static BufferedImage explodeImage;
 
 	public MarineSentryGun(int x, int y) {
-		super(120, 0, 5, 11, 0, 200, 1500, x, y, null);
+		super(120, 0, 3, 11, 0, 200, 1500, x, y, null);
 		setImages();
 		tower = new TowerWaiting(this);
 	}

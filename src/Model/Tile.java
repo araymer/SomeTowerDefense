@@ -83,6 +83,10 @@ public class Tile extends Observable {
 		}
 
 	}
+	
+	public void removeStructure(){
+		tileStructure = null;
+	}
 
 	public Vector<Attacker> getAttackers() {
 		return attackers;

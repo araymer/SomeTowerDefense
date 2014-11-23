@@ -2,14 +2,12 @@ package View;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.JPanel;
 
 import Maps.DesertUprising;
 import Model.Attacker;
-import Model.Drawable;
 import Model.Map;
 import Model.MasterList;
 import Model.Tile;
