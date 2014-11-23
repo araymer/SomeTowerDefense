@@ -1,6 +1,7 @@
 package TowerFSM;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import Model.Structure;
 
@@ -34,7 +35,22 @@ public class TowerExploding extends TowerState {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		// TODO Auto-generated method stub
+		if ((tower.xIncrement * tower.WIDTH) + tower.WIDTH > tower.bImage
+				.getWidth()) {
+			tower.yIncrement++;
+			tower.xIncrement = 0;
+		}
+		if ((tower.yIncrement * tower.HEIGHT) + tower.HEIGHT > tower.bImage
+				.getHeight()) {
+			// Start from beginning again
+			tower.yIncrement = 0;
+		}
+		BufferedImage tempSubImage = tower.bImage.getSubimage(tower.xIncrement
+				* tower.WIDTH, tower.yIncrement * tower.HEIGHT, tower.WIDTH,
+				tower.HEIGHT);
+		tower.xIncrement++;
+		g2.drawImage(tempSubImage, tower.getX() * tower.WIDTH, tower.getY()
+				* tower.HEIGHT, tower.WIDTH, tower.HEIGHT, null);
 		
 	}
 

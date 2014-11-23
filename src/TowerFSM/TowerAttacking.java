@@ -20,7 +20,7 @@ import Model.Structure;
  *
  */
 public class TowerAttacking extends TowerState {
-	int HP;
+	//int HP;
 	Structure tower;
 	Attacker target;
 	boolean upgrade;
@@ -48,8 +48,10 @@ public class TowerAttacking extends TowerState {
 	private void shoot() {
 		//System.out.println("I seen tim");
 		if (inRange()) {
+			System.out.println("TowerAttacking: target took damage");
 			target.takeDamage(tower.getDamage());
 		} else {
+			System.out.println("TowerAttacking: Enemy went out of range, switching to wait");
 			tower.changeTo(TowerStates.WAIT, null);
 		}
 	}
@@ -61,7 +63,7 @@ public class TowerAttacking extends TowerState {
 	 */
 	private boolean inRange() {
 		// if range to target => tower.getRange(), then damage
-		return false;
+		return true;
 	}
 
 	/**
@@ -71,12 +73,12 @@ public class TowerAttacking extends TowerState {
 	 */
 	@Override
 	public int getCurrentHP() {
-		return HP;
+		return tower.hitpoints;
 	}
 
 	@Override
 	public void takeDamage(int dmg) {
-		HP -= dmg;
+		tower.hitpoints -= dmg;
 
 	}
 
@@ -111,7 +113,8 @@ public class TowerAttacking extends TowerState {
 				boolean stateChange = false;
 				if (!stateChange) {
 					//shoot();
-					if (HP <= 0) {
+					if (tower.hitpoints <= 0) {
+						System.out.println("TowerAttacking: hp less than 0");
 						tower.changeTo(TowerStates.EXPLODE, null);
 						stateChange = true;
 					} else if (upgrade) {
@@ -155,8 +158,8 @@ public class TowerAttacking extends TowerState {
 
 	@Override
 	public void update() {
-		attacking();
 		shoot();
+		attacking();
 
 	}
 }

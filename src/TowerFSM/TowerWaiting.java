@@ -42,11 +42,9 @@ public class TowerWaiting extends TowerState {
 	/**
 	 * 
 	 * @param theTower
-	 * @param hp
 	 */
 	public TowerWaiting(Structure theTower) {
 		super(theTower);
-		System.out.println("changed to waiting state");
 		tower = theTower;
 		// HP = hp;
 		// range = tower.getRange();

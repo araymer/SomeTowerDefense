@@ -156,10 +156,12 @@ public abstract class Structure {
 			tower = new TowerWaiting(this);
 			break;
 		case EXPLODE:
+			System.out.println("Structure: state changed to EXPLODE");
 			bImage = getImage(newState);
 			tower = new TowerExploding(this);
 			break;
 		case UPGRADE:
+			System.out.println("Structure: state changed to UPGRADE");
 			bImage = getImage(newState);
 			tower = new TowerUpgrading(this);
 			break;
