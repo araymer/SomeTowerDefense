@@ -46,6 +46,7 @@ public class TowerWaiting extends TowerState {
 	 */
 	public TowerWaiting(Structure theTower) {
 		super(theTower);
+		System.out.println("changed to waiting state");
 		tower = theTower;
 		// HP = hp;
 		// range = tower.getRange();
@@ -107,14 +108,14 @@ public class TowerWaiting extends TowerState {
 	// }
 
 	public void draw(Graphics2D g2) {
-		if (tower.bImage == null) {
-			File imageFile = new File(Structure.baseDir + tower.imageFileName);
-			try {
-				tower.bImage = ImageIO.read(imageFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		if (tower.bImage == null) {
+//			File imageFile = new File(Structure.baseDir + tower.imageFileName);
+//			try {
+//				tower.bImage = ImageIO.read(imageFile);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 
 		if ((tower.xIncrement * tower.WIDTH) + tower.WIDTH > tower.bImage
 				.getWidth()) {

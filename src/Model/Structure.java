@@ -40,15 +40,16 @@ public abstract class Structure {
 	public int xIncrement;
 	public int yIncrement;
 	public BufferedImage bImage;
-	public String imageFileName = "error.png";
+	//public String imageFileName = "error.png";
 	public static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
 	
-	protected String waitImage = "error.png";
-	protected String attackImage = "error.png";
-	protected String explodeImage = "error.png";
-	protected String upgradeImage = "error.png";
+//	protected String waitImage = "error.png";
+//	protected String attackImage = "error.png";
+//	protected String explodeImage = "error.png";
+//	protected String upgradeImage = "error.png";
+	
 	
 	protected TowerState tower;
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
@@ -83,7 +84,10 @@ public abstract class Structure {
 		tower.draw(g2);
 	}
 	
-	protected abstract void setImageNames();//Set image for attack, wait, upgrade, explode
+	/**
+	 * create static buffered images for extended classes
+	 */
+	protected abstract void setImageNames();
 
 	public int getHP() {
 		return hitpoints;
@@ -125,6 +129,14 @@ public abstract class Structure {
 		//System.out.println("structure updade");
 		tower.update();
 	}
+	
+	/**
+	 * Returns appropriate image based on state
+	 * 
+	 * @param state
+	 * @return
+	 */
+	protected abstract BufferedImage getImage(TowerStates state);
 
 	/**
 	 * Changes to a different state, called from TowersFSM classes.
@@ -136,29 +148,24 @@ public abstract class Structure {
 	public void changeTo(TowerStates newState, Attacker atkr) {
 		switch (newState) {
 		case ATTACK:
-			imageFileName = attackImage;
+			bImage = getImage(newState);
 			tower = new TowerAttacking(this, atkr);
 			break;
 		case WAIT:
-			imageFileName = waitImage;
+			bImage = getImage(newState);
 			tower = new TowerWaiting(this);
 			break;
 		case EXPLODE:
-			imageFileName = explodeImage;
+			bImage = getImage(newState);
 			tower = new TowerExploding(this);
 			break;
 		case UPGRADE:
-			imageFileName = upgradeImage;
+			bImage = getImage(newState);
 			tower = new TowerUpgrading(this);
 			break;
 		default:
 			System.out.println("Problem Encountered while changing states.");
 		}
 
-	}
-
-	public void setToAttack() {
-		
-		
 	}
 }

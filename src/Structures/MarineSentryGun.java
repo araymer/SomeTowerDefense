@@ -6,10 +6,25 @@ package Structures;
  * 
  */
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import Model.Structure;
+import TowerFSM.TowerAttacking;
+import TowerFSM.TowerExploding;
+import TowerFSM.TowerStates;
+import TowerFSM.TowerUpgrading;
 import TowerFSM.TowerWaiting;
 
 public class MarineSentryGun extends Structure {
+	
+	protected static BufferedImage waitImage;
+	protected static BufferedImage attackImage;
+	protected static BufferedImage upgradeImage;
+	protected static BufferedImage explodeImage;
 
 	public MarineSentryGun(int x, int y) {
 		super(120, 0, 5, 11, 0, 200, 1500, x, y, null);
@@ -18,9 +33,65 @@ public class MarineSentryGun extends Structure {
 	}
 	
 	protected void setImageNames(){
-		waitImage = "topdownturret40.png";
-		attackImage = "turretFire.png";
+//		waitImage = "topdownturret40.png";
+//		attackImage = "turretFire.png";
 		//Set rest when available
+		
+		if (waitImage == null) {
+			File imageFile = new File(Structure.baseDir + "topdownturret40.png");
+			try {
+				waitImage = ImageIO.read(imageFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (attackImage == null) {
+			File imageFile = new File(Structure.baseDir + "turretFire.png");
+			try {
+				attackImage = ImageIO.read(imageFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (upgradeImage == null) {
+			File imageFile = new File(Structure.baseDir + "error.png");
+			try {
+				upgradeImage = ImageIO.read(imageFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (explodeImage == null) {
+			File imageFile = new File(Structure.baseDir + "error.png");
+			try {
+				explodeImage = ImageIO.read(imageFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	protected BufferedImage getImage(TowerStates newState) {
+		BufferedImage correctImage = null;
+		switch (newState) {
+		case ATTACK:
+			correctImage = attackImage;
+			break;
+		case WAIT:
+			correctImage = waitImage;
+			break;
+		case EXPLODE:
+			correctImage = explodeImage;
+			break;
+		case UPGRADE:
+			correctImage = upgradeImage;
+			break;
+		default:
+			System.out.println("Problem Encountered in getImage()");
+		}
+		return correctImage;
 	}
 
 	// @Override

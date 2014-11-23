@@ -38,7 +38,6 @@ public class TowerAttacking extends TowerState {
 		// HP = hp;
 		target = atk;
 		//attacking();
-		tower.setToAttack();
 	}
 
 	/**
@@ -47,7 +46,7 @@ public class TowerAttacking extends TowerState {
 	 * state.
 	 */
 	private void shoot() {
-		System.out.println("I seen tim");
+		//System.out.println("I seen tim");
 		if (inRange()) {
 			target.takeDamage(tower.getDamage());
 		} else {
@@ -127,14 +126,14 @@ public class TowerAttacking extends TowerState {
 	//TODO Will work on sprites next iteration
 	@Override
 	public void draw(Graphics2D g2) {
-		if (tower.bImage == null) {
-			File imageFile = new File(Structure.baseDir + tower.imageFileName);
-			try {
-				tower.bImage = ImageIO.read(imageFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		if (tower.bImage == null) {
+//			File imageFile = new File(Structure.baseDir + tower.imageFileName);
+//			try {
+//				tower.bImage = ImageIO.read(imageFile);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 
 		if ((tower.xIncrement * tower.WIDTH) + tower.WIDTH > tower.bImage
 				.getWidth()) {
