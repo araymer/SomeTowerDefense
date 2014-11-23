@@ -34,7 +34,6 @@ public class TowerAttacking extends TowerState {
 	 */
 	public TowerAttacking(Structure structure, Attacker atk) {
 		super(structure);
-		System.out.println("Tower changed to attacking state");
 		tower = structure;
 		// HP = hp;
 		target = atk;
@@ -122,16 +121,10 @@ public class TowerAttacking extends TowerState {
 						tower.changeTo(TowerStates.WAIT, null);
 						stateChange = true;
 					}
-					// wait for predefined number of ticks
-					try {
-						Thread.sleep(10); // or it will cause massive CPU usage
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 	}
 	
-	//Image will stutter when too many because not static. Will work on sprites next iteration
+	//TODO Will work on sprites next iteration
 	@Override
 	public void draw(Graphics2D g2) {
 		if (tower.bImage == null) {
@@ -163,7 +156,6 @@ public class TowerAttacking extends TowerState {
 
 	@Override
 	public void update() {
-		System.out.println("attack update");
 		attacking();
 		shoot();
 
