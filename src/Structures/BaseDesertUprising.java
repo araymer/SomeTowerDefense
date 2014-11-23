@@ -55,7 +55,7 @@ public class BaseDesertUprising extends Structure {
 	}
 
 	@Override
-	protected void setImageNames() {
+	protected void setImages() {
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir + "base40.png");
 			try {

@@ -68,7 +68,7 @@ public abstract class Structure {
 					// range
 		xIncrement = 0;
 		yIncrement = 0;
-		setImageNames();
+		setImages();
 		this.changeTo(TowerStates.WAIT, null);
 		// TODO: set as observer to the tiles in its range
 		// How are we doing range in diagonal directions?
@@ -87,7 +87,7 @@ public abstract class Structure {
 	/**
 	 * create static buffered images for extended classes
 	 */
-	protected abstract void setImageNames();
+	protected abstract void setImages();
 
 	public int getHP() {
 		return hitpoints;

@@ -81,6 +81,11 @@ public abstract class Attacker {
 	public void takeDamage(int dmg) {
 		System.out.println("ouch!");
 		hitpoints -= dmg;
+		
+		if(hitpoints <= 0){
+			System.out.println("Attacker: hp reached " + hitpoints + ", I died!!");
+			die();
+		}
 	}
 
 	// getters
@@ -129,4 +134,5 @@ public abstract class Attacker {
 	public int getY() {
 		return y;
 	}
+	
 }
