@@ -16,7 +16,7 @@ public class Ticker implements Runnable {
 
 	private boolean isRunning;
 	private boolean paused;
-	private final double fps = 3.0;
+	private final double fps = 30.0;
 	private final double timeBetweenFrames = 1000000000 / fps;
 	private final int maxUpdatesBetweenRenders = 5;
 	private double lastUpdateTime = System.nanoTime();
@@ -191,7 +191,7 @@ public class Ticker implements Runnable {
 					tile.getStructure().update();
 				}
 				for(Attacker attacker: tile.getAttackers()){
-					attacker.move();
+					attacker.update();
 				}
 			}
 		}

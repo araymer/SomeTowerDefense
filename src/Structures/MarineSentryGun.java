@@ -25,9 +25,17 @@ public class MarineSentryGun extends Structure {
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
 	protected static BufferedImage explodeImage;
+	
+	private static final int HITPOINTS = 120;
+	private static final int PRODUCTION = 0;
+	private static final int RANGE = 3;
+	private static final int DAMAGE = 7;
+	private static final int SPLASH = 0;
+	private static final int RATEOFFIRE = 5;//The smaller, the faster
+	private static final int COST = 1500;
 
 	public MarineSentryGun(int x, int y) {
-		super(120, 0, 3, 11, 0, 200, 1500, x, y, null);
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, null);
 		setImages();
 		tower = new TowerWaiting(this);
 	}

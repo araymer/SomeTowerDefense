@@ -28,7 +28,7 @@ public abstract class Structure extends Drawable{
 	public int range; // Range of tower (in tiles, Manhattan distance)
 	public int damage;
 	public int splashRadius; // tile radius (tiles in Manhattan distance)
-	public int rateOfFire; // in milliseconds
+	public int rateOfFire; // attack at this interval lower is faster
 	public int buildCost;
 	public SpecialAttack special;
 	public int x;

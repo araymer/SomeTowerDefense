@@ -14,9 +14,14 @@ import Model.Tile;
 import View.TilePanel;
 
 public class Marine extends Attacker {
+	private static final int HITPOINTS = 50;
+	private static final int DEFENSE = 10;
+	private static final int ATTACK_RATING = 50;
+	private static final int RANGE = 3;
+	private static final int SPEED = 18;
 
 	public Marine(Tile startingLocation) {
-		super(50, 10, 50, 2, 500, startingLocation);
+		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
 		imageFileName = "topdownmarines40.png";
 	}
 
