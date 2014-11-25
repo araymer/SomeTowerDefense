@@ -67,8 +67,12 @@ public class TowerAttacking extends TowerState {
 	 */
 	private boolean inRange() {
 		// if range to target => tower.getRange(), then damage
-		if(Math.abs(tower.x - target.getX()) <= tower.range 
-				&& Math.abs(tower.y - target.getY()) <= tower.range){
+		// SQRT((X2-X1)^2+(Y2-Y1)^2)
+		double x = Math.pow((tower.x - target.getX()), 2);
+		double y = Math.pow((tower.y - target.getY()), 2);
+		double dist = Math.sqrt(x+y);
+		double absdist = Math.abs(dist);
+		if(absdist <= tower.range){
 			return true;
 		}else{
 			return false;
