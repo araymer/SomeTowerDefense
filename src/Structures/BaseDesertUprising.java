@@ -91,6 +91,17 @@ public class BaseDesertUprising extends Structure {
 		}
 		
 	}
+	
+	@Override
+	public void takeDamage(int dmg) {
+		System.out.println("WARNING: base under attack!!");
+		hitpoints -= dmg;
+		System.out.println("Base health: " + hitpoints);
+		
+		if(hitpoints <= 0){
+			die();
+		}
+	}
 
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {
@@ -112,6 +123,12 @@ public class BaseDesertUprising extends Structure {
 			System.out.println("Problem Encountered in getImage()");
 		}
 		return correctImage;
+	}
+
+	@Override
+	public void die() {
+		System.out.println("\n\n\n\nBASE WAS DESTROYED. GAME OVER");
+		System.exit(0);
 	}
 
 }

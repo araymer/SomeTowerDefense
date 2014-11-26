@@ -30,6 +30,8 @@ public abstract class Map {
 	}
 
 	public abstract void setBase();
+	
+	public abstract Structure getBase();
 
 	public abstract void setSpawnPoints();
 

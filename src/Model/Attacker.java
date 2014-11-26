@@ -3,6 +3,8 @@ package Model;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import View.TilePanel;
+
 //Test, let's see if git is working.
 //Test 2
 
@@ -149,7 +151,12 @@ public abstract class Attacker extends Drawable{
 		if(tick % speed == 0){
 			move();
 		}
-		
+		//Shoots if at base
+		if(tick % attackRating == 0){
+			if(location.getNextTile() == null){
+				attack(TilePanel.getInstance().tileMap.getBase());
+			}
+		}
 	}
 	
 	public boolean isFinished(){

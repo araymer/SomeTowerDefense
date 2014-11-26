@@ -11,6 +11,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import Model.Map;
+import Model.Structure;
 import Model.StructureType;
 import Model.Tile;
 import Structures.BaseDesertUprising;
@@ -188,6 +189,11 @@ public class DesertUprising extends Map {
 		// For now we'll set the base in the left-middle tile (0,15)
 		gameBoard.get(2).get(6).addStructure(new BaseDesertUprising(2, 6));
 
+	}
+	
+	@Override
+	public Structure getBase(){
+		return gameBoard.get(2).get(6).getStructure();
 	}
 
 	@Override

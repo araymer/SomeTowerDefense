@@ -8,7 +8,7 @@ import View.GameGUI;
 
 public class GameController {
 	private int waveCount;
-	private int[] spawnsPerWave = { 5, 10, 15, 20, 25 };
+	private int[] spawnsPerWave = { 1, 2, 4, 6, 10 };
 	private GameGUI gui;
 
 	public static void main(String[] args) {
@@ -39,6 +39,7 @@ public class GameController {
 	public void startWaves() {
 
 		for (int i = 0; i < waveCount; i++) {
+			System.out.println("\n\n\nStarting wave " + (i + 1) + " out of " + waveCount + "\n\n");
 			for (int k = 0; k < spawnsPerWave[i]; k++) {
 				// start spawning enemies on a delay (probably about 1/2 a
 				// second)
@@ -52,15 +53,15 @@ public class GameController {
 				
 				
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			System.out.println("\n\n\n\n\n\n\n\n!!!!!!Next wave starting in 10 seconds!!!!!!");
+			//TODO Wait for all enemies to die
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

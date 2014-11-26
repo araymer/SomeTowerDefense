@@ -130,6 +130,17 @@ public abstract class Structure extends Drawable{
 		tower.update();
 	}
 	
+	public abstract void die();
+	
+	public void takeDamage(int dmg) {
+		System.out.println("beep boop!");
+		hitpoints -= dmg;
+		
+		if(hitpoints <= 0){
+			die();
+		}
+	}
+	
 	public boolean isFinished(){
 		//Not finished, lol
 		return false;
