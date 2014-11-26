@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
@@ -182,32 +183,31 @@ public class TowerWaiting extends TowerState {
 	public void takeDamage(int dmg) {
 		tower.hitpoints -= dmg;
 	}
+	
+	private void scanForAttackers(){
+		// Check for attackers
+				for (int x = tower.x - tower.range; x <= tower.x + tower.range; x++) {
+					for (int y = tower.y - tower.range; y <= tower.y + tower.range; y++) {
+						// TODO Check to make sure x and y are within the map boundaries
+						if (x < TilePanel.getInstance().tileMap.getGameBoard().size()
+								&& x >= 0
+								&& y < TilePanel.getInstance().tileMap.getGameBoard()
+										.get(x).size() && y >= 0) {
+								Vector<Attacker> atkrList = TilePanel.getInstance().tileMap
+										.getGameBoard().get(x).get(y).getAttackers();
+								if (atkrList != null && atkrList.size() > 0) {
+									tower.changeTo(TowerStates.ATTACK, atkrList.get(0));
+									stateChange = true;
+									return;
+								}
+						}
+					}
+				}
+	}
 
 	@Override
 	public void update() {
-		// Check for attackers
-		for (int x = tower.x - tower.range; x <= tower.x + tower.range; x++) {
-			for (int y = tower.y - tower.range; y <= tower.y + tower.range; y++) {
-				// TODO Check to make sure x and y are within the map boundaries
-				if (x < TilePanel.getInstance().tileMap.getGameBoard().size()
-						&& x >= 0
-						&& y < TilePanel.getInstance().tileMap.getGameBoard()
-								.get(x).size() && y >= 0) {
-					try { Attacker atkr = TilePanel.getInstance().tileMap
-							.getGameBoard().get(x).get(y).getAttackers().get(0);
-				
-					if (atkr != null) {
-						tower.changeTo(TowerStates.ATTACK, atkr);
-						stateChange = true;
-						return;
-					}
-					} catch(Exception e) {
-						//System.out.println("update run");
-					};
-				}
-			}
-		}
-		
+		scanForAttackers();
 		waiting();
 
 	}

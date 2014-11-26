@@ -43,6 +43,7 @@ public class TowerExploding extends TowerState {
 		if ((tower.yIncrement * tower.HEIGHT) + tower.HEIGHT > tower.bImage
 				.getHeight()) {
 			// Start from beginning again
+			tower.die();
 			tower.yIncrement = 0;
 		}
 		BufferedImage tempSubImage = tower.bImage.getSubimage(tower.xIncrement

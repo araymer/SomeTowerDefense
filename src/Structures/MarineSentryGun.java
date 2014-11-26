@@ -71,7 +71,7 @@ public class MarineSentryGun extends Structure {
 			}
 		}
 		if (explodeImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "explosion-sprite40.png");
 			try {
 				explodeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {

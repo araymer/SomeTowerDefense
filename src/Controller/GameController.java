@@ -36,6 +36,7 @@ public class GameController {
 //						.get(14)));
 	}
 
+	//TODO This needs to be dependent on ticker, so pausing will also pause the waves
 	public void startWaves() {
 
 		for (int i = 0; i < waveCount; i++) {
