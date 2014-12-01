@@ -20,7 +20,6 @@ import Model.Structure;
  *
  */
 public class TowerAttacking extends TowerState {
-	//int HP;
 	Structure tower;
 	Attacker target;
 	boolean upgrade;
@@ -35,9 +34,7 @@ public class TowerAttacking extends TowerState {
 	public TowerAttacking(Structure structure, Attacker atk) {
 		super(structure);
 		tower = structure;
-		// HP = hp;
 		target = atk;
-		//attacking();
 	}
 
 	/**
@@ -46,7 +43,6 @@ public class TowerAttacking extends TowerState {
 	 * state.
 	 */
 	private void shoot() {
-		//System.out.println("I seen tim");
 		if(target.isFinished()){
 			System.out.println("TowerAttacking: Enemy died, mission complete");
 			tower.changeTo(TowerStates.WAIT, null);
