@@ -11,6 +11,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import Model.Map;
+import Model.Structure;
 import Model.StructureType;
 import Model.Tile;
 import Structures.BaseDesertUprising;
@@ -22,10 +23,12 @@ public class DesertUprising extends Map {
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
 
-	private static int height = guiHeight / tileWidth;
-	private static int width = guiWidth / tileWidth;
+	private static int height = guiHeight / tileWidth;//15
+	private static int width = guiWidth / tileWidth;//20
 	private Tile spawnTile1, spawnTile2;
 	private ArrayList<Tile> pathTiles;
+	private static final int BASE_X = 3;
+	private static final int BASE_Y = 8;
 
 	public DesertUprising() {
 		super(height, width);
@@ -185,9 +188,13 @@ public class DesertUprising extends Map {
 
 	@Override
 	public void setBase() {
-		// For now we'll set the base in the left-middle tile (0,15)
-		gameBoard.get(2).get(6).addStructure(new BaseDesertUprising(2, 6));
+		gameBoard.get(BASE_X).get(BASE_Y).addStructure(new BaseDesertUprising(BASE_X, BASE_Y));
 
+	}
+	
+	@Override
+	public Structure getBase(){
+		return gameBoard.get(BASE_X).get(BASE_Y).getStructure();
 	}
 
 	@Override

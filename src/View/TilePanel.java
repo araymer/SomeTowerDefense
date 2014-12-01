@@ -2,6 +2,7 @@ package View;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ConcurrentModificationException;
 import java.util.Vector;
 
 import javax.swing.JPanel;
@@ -47,26 +48,8 @@ public class TilePanel extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
-//		masterList.clear();
-		//Draw each structure and attacker from every tile
-//		Iterator<Vector<Tile>> vectorItr = tileMap.getGameBoard().iterator();
-//		while(vectorItr.hasNext()){
-//			Vector<Tile> currVector = vectorItr.next();
-//			Iterator<Tile> tileItr = currVector.iterator();
-//			while(tileItr.hasNext()){
-//				Tile currTile = tileItr.next();
-//				if(currTile.getStructure() != null){
-//					currTile.getStructure().draw(g2);
-//				}
-//				
-//				Iterator<Attacker> attackerItr = currTile.getAttackers().iterator();
-//				while(attackerItr.hasNext()){
-//					Attacker currAttacker = attackerItr.next();
-//					currAttacker.draw(g2);
-//				}
-//			}
-//		}
 		try{
+			
 		for(Vector<Tile> vec: tileMap.getGameBoard()){
 			for(Tile tile: vec){
 				if(tile.getStructure() != null){
@@ -77,8 +60,10 @@ public class TilePanel extends JPanel {
 				}
 			}
 		}
-		}catch(Exception e){
-			System.out.println("repaint error");
+		}catch(ConcurrentModificationException e){
+			System.out.println("TilePanel: repaint error, ConcurrentModificationException\n"
+					+ "this happens when too many objects to repaint. May be aable to fix by having only\n"
+					+ "repaint scan the gameBoard and everything else uses repaint to scan and change anything");
 		}
 //		synchronized(masterList){
 //			Iterator<Drawable> itr = masterList.iterator();

@@ -28,7 +28,7 @@ public abstract class Structure extends Drawable{
 	public int range; // Range of tower (in tiles, Manhattan distance)
 	public int damage;
 	public int splashRadius; // tile radius (tiles in Manhattan distance)
-	public int rateOfFire; // in milliseconds
+	public int rateOfFire; // attack at this interval lower is faster
 	public int buildCost;
 	public SpecialAttack special;
 	public int x;
@@ -128,6 +128,13 @@ public abstract class Structure extends Drawable{
 	public void update() {
 		//System.out.println("structure updade");
 		tower.update();
+	}
+	
+	public abstract void die();
+	
+	public void takeDamage(int dmg) {
+		System.out.println("beep boop!");
+		hitpoints -= dmg;
 	}
 	
 	public boolean isFinished(){

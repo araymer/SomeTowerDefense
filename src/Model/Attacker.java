@@ -3,6 +3,8 @@ package Model;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import View.TilePanel;
+
 //Test, let's see if git is working.
 //Test 2
 
@@ -10,7 +12,8 @@ public abstract class Attacker extends Drawable{
 
 	private int hitpoints;
 	private int attackRating;
-
+	
+	//The larger the speed, the slower
 	private int speed; // The number of milliseconds it takes to cross a full
 						// tile
 	private int defenseRating;
@@ -32,6 +35,8 @@ public abstract class Attacker extends Drawable{
 	
 	protected boolean isDead = false;
 	public boolean needsToMove = false;
+	
+	private int tick;
 
 	// private int cost; //This is for itr2, possibly
 	Map map;
@@ -65,20 +70,10 @@ public abstract class Attacker extends Drawable{
 	}
 
 	public void move() {
-		//Wont work because you can't modify a list while it's being iterated over somewhere else by repaint
+		//Wont work because you can't modify a list while it's being iterated over somewhere else
 		if (location.getNextTile() != null){
 			needsToMove = true;
 		}
-		/*
-		if (location.getNextTile() == null)
-			return;
-		location.getAttackers().remove(this);
-		location.getNextTile().getAttackers().add(this);
-		location = location.getNextTile();
-
-		setX();
-		setY();
-		*/
 	}
 
 	public abstract void draw(Graphics2D g2);
@@ -146,7 +141,22 @@ public abstract class Attacker extends Drawable{
 	}
 	
 	public void update(){
-		
+		if(tick == 1000){
+			tick = 1;
+		}else{
+			tick++;
+		}
+		int framedif = 0;
+		//Moves every speed amount of ticks
+		if(tick % speed == 0){
+			move();
+		}
+		//Shoots if at base
+		if(tick % attackRating == 0){
+			if(location.getNextTile() == null){
+				attack(TilePanel.getInstance().tileMap.getBase());
+			}
+		}
 	}
 	
 	public boolean isFinished(){

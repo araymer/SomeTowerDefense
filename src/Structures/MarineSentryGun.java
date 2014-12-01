@@ -25,9 +25,17 @@ public class MarineSentryGun extends Structure {
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
 	protected static BufferedImage explodeImage;
+	
+	private static final int HITPOINTS = 120;
+	private static final int PRODUCTION = 0;
+	private static final int RANGE = 3;
+	private static final int DAMAGE = 7;
+	private static final int SPLASH = 0;
+	private static final int RATEOFFIRE = 5;//The smaller, the faster
+	private static final int COST = 1500;
 
 	public MarineSentryGun(int x, int y) {
-		super(120, 0, 3, 11, 0, 200, 1500, x, y, null);
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, null);
 		setImages();
 		tower = new TowerWaiting(this);
 	}
@@ -63,7 +71,7 @@ public class MarineSentryGun extends Structure {
 			}
 		}
 		if (explodeImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "explosion-sprite40.png");
 			try {
 				explodeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -94,31 +102,10 @@ public class MarineSentryGun extends Structure {
 		return correctImage;
 	}
 
-	// @Override
-	// public void draw(Graphics2D g2) {
-	// if(bImage == null){
-	// File imageFile = new File(baseDir + imageFileName);
-	// try {
-	// bImage = ImageIO.read(imageFile);
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// if((xIncrement * WIDTH) + WIDTH > bImage.getWidth()){
-	// yIncrement ++;
-	// xIncrement = 0;
-	// }
-	// if((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()){
-	// //Start from beginning again
-	// yIncrement = 0;
-	// }
-	// BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-	// yIncrement * HEIGHT, WIDTH, HEIGHT);
-	// xIncrement ++;
-	// g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH,
-	// HEIGHT, null);
-	//
-	// }
+	@Override
+	public void die() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

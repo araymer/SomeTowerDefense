@@ -24,6 +24,7 @@ public class TowerAttacking extends TowerState {
 	Attacker target;
 	boolean upgrade;
 	boolean noTarget;
+	private int tick;
 
 	/**
 	 * 
@@ -47,7 +48,10 @@ public class TowerAttacking extends TowerState {
 			System.out.println("TowerAttacking: Enemy died, mission complete");
 			tower.changeTo(TowerStates.WAIT, null);
 		}else if (inRange()) {
-			target.takeDamage(tower.getDamage());
+			if(tick % tower.rateOfFire == 0){
+				target.takeDamage(tower.getDamage());
+			}
+			
 		} else {
 			System.out.println("TowerAttacking: Enemy went out of range, switching to wait");
 			tower.changeTo(TowerStates.WAIT, null);
@@ -61,8 +65,12 @@ public class TowerAttacking extends TowerState {
 	 */
 	private boolean inRange() {
 		// if range to target => tower.getRange(), then damage
-		if(Math.abs(tower.x - target.getX()) <= tower.range 
-				&& Math.abs(tower.y - target.getY()) <= tower.range){
+		// SQRT((X2-X1)^2+(Y2-Y1)^2)
+		double x = Math.pow((tower.x - target.getX()), 2);
+		double y = Math.pow((tower.y - target.getY()), 2);
+		double dist = Math.sqrt(x+y);
+		double absdist = Math.abs(dist);
+		if(absdist <= tower.range){
 			return true;
 		}else{
 			return false;
@@ -86,37 +94,11 @@ public class TowerAttacking extends TowerState {
 
 	}
 
-//	private void attacking() {
-//		Thread th = new Thread(new Runnable() {
-//			public void run() {
-//				boolean stateChange = false;
-//				while (!stateChange) {
-//					//shoot();
-//					if (HP <= 0) {
-//						tower.changeTo(TowerStates.EXPLODE, null);
-//						stateChange = true;
-//					} else if (upgrade) {
-//						// TODO (Iteration 2: make towers able to upgrade
-//					} else if (noTarget) {
-//						tower.changeTo(TowerStates.WAIT, null);
-//						stateChange = true;
-//					}
-//					// wait for predefined number of ticks
-//					try {
-//						Thread.sleep(10); // or it will cause massive CPU usage
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-//		});
-//		th.start();
-//	}
 	
 	private void attacking() {
 				boolean stateChange = false;
 				if (!stateChange) {
-					//shoot();
+					shoot();
 					if (tower.hitpoints <= 0) {
 						System.out.println("TowerAttacking: hp less than 0");
 						tower.changeTo(TowerStates.EXPLODE, null);
@@ -162,7 +144,11 @@ public class TowerAttacking extends TowerState {
 
 	@Override
 	public void update() {
-		shoot();
+		if(tick == 1000){
+			tick = 1;
+		}else{
+			tick++;
+		}
 		attacking();
 
 	}

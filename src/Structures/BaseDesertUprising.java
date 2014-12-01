@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Model.Structure;
+import Model.Ticker;
 import TowerFSM.TowerStates;
 
 public class BaseDesertUprising extends Structure {
@@ -48,11 +49,6 @@ public class BaseDesertUprising extends Structure {
 //
 //	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	protected void setImages() {
@@ -82,13 +78,21 @@ public class BaseDesertUprising extends Structure {
 			}
 		}
 		if (explodeImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "explosion-sprite40.png");
 			try {
 				explodeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		
+	}
+	
+	@Override
+	public void takeDamage(int dmg) {
+		System.out.println("WARNING: base under attack!!");
+		hitpoints -= dmg;
+		System.out.println("Base health: " + hitpoints);
 		
 	}
 
@@ -112,6 +116,12 @@ public class BaseDesertUprising extends Structure {
 			System.out.println("Problem Encountered in getImage()");
 		}
 		return correctImage;
+	}
+
+	@Override
+	public void die() {
+		System.out.println("\n\n\n\nBASE WAS DESTROYED. GAME OVER");
+		Ticker.getInstance().loopStop();
 	}
 
 }

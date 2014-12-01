@@ -14,15 +14,20 @@ import Model.Tile;
 import View.TilePanel;
 
 public class Marine extends Attacker {
+	private static final int HITPOINTS = 50;
+	private static final int DEFENSE = 10;
+	private static final int ATTACK_RATING = 30;
+	private static final int RANGE = 3;
+	private static final int SPEED = 15;//The smaller, the faster
 
 	public Marine(Tile startingLocation) {
-		super(50, 10, 50, 2, 500, startingLocation);
+		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
 		imageFileName = "topdownmarines40.png";
 	}
 
 	@Override
 	public void attack(Structure s) {
-		// s.takeDamage(this.getAttack());
+		s.takeDamage(this.getAttack());
 	}
 
 	@Override
@@ -41,20 +46,6 @@ public class Marine extends Attacker {
 				e.printStackTrace();
 			}
 		}
-
-//		if ((xIncrement * WIDTH) + WIDTH > bImage.getWidth()) {
-//			yIncrement++;
-//			xIncrement = 0;
-//		}
-//		if ((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()) {
-//			// Start from beginning again
-//			yIncrement = 0;
-//		}
-//		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-//				yIncrement * HEIGHT, WIDTH, HEIGHT);
-//		xIncrement++;
-//		g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH,
-//				HEIGHT, null);
 		
 		//4 is the number of shooting frames 
 		if(xIncrement > 4){ 
