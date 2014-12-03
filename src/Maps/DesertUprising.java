@@ -23,8 +23,8 @@ public class DesertUprising extends Map {
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
 
-	private static int height = guiHeight / tileWidth;//15
-	private static int width = guiWidth / tileWidth;//20
+	private static int height = guiHeight / tileWidth;// 15
+	private static int width = guiWidth / tileWidth;// 20
 	private Tile spawnTile1, spawnTile2;
 	private ArrayList<Tile> pathTiles;
 	private static final int BASE_X = 3;
@@ -188,12 +188,13 @@ public class DesertUprising extends Map {
 
 	@Override
 	public void setBase() {
-		gameBoard.get(BASE_X).get(BASE_Y).addStructure(new BaseDesertUprising(BASE_X, BASE_Y));
+		gameBoard.get(BASE_X).get(BASE_Y)
+				.addStructure(new BaseDesertUprising(BASE_X, BASE_Y));
 
 	}
-	
+
 	@Override
-	public Structure getBase(){
+	public Structure getBase() {
 		return gameBoard.get(BASE_X).get(BASE_Y).getStructure();
 	}
 
@@ -210,7 +211,7 @@ public class DesertUprising extends Map {
 	// This hardcodes our path tiles
 	@Override
 	public void setPath() {
-		//SPAWN 1 PATH
+		// SPAWN 1 PATH
 		gameBoard.get(19).get(1).setMove(true, gameBoard.get(18).get(1));
 		gameBoard.get(19).get(1).setBuild(false);
 		// gameBoard.get(19).get(1).setDirection(Dir.LEFT);
@@ -338,13 +339,13 @@ public class DesertUprising extends Map {
 		gameBoard.get(3).get(6).setMove(true, gameBoard.get(3).get(7));
 		gameBoard.get(3).get(6).setBuild(false);
 		// gameBoard.get(3).get(6).setDirection(Dir.DOWN);
-		
-		//LAST TILE TO BASE!!!
+
+		// LAST TILE TO BASE!!!
 		gameBoard.get(3).get(7).setMove(true, null);
 		gameBoard.get(3).get(7).setBuild(false);
 		// gameBoard.get(3).get(7).setDirection(Dir.DOWN);
-		
-		//SPAWN 2 PATH
+
+		// SPAWN 2 PATH
 		gameBoard.get(11).get(14).setMove(true, gameBoard.get(11).get(13));
 		gameBoard.get(11).get(14).setBuild(false);
 		// gameBoard.get(11).get(14).setDirection(Dir.UP);

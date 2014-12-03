@@ -1,6 +1,5 @@
 package Structures;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +9,10 @@ import javax.imageio.ImageIO;
 import Model.Structure;
 import Model.Ticker;
 import TowerFSM.TowerStates;
+import View.GameGUI;
 
 public class BaseDesertUprising extends Structure {
-	
+
 	protected static BufferedImage waitImage;
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
@@ -22,33 +22,32 @@ public class BaseDesertUprising extends Structure {
 		super(500, 0, 0, 0, 0, 0, 0, x, y, null);
 	}
 
-//	@Override
-//	public void draw(Graphics2D g2) {
-//		if (bImage == null) {
-//			File imageFile = new File(baseDir + imageFileName);
-//			try {
-//				bImage = ImageIO.read(imageFile);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		if ((xIncrement * WIDTH) + WIDTH > bImage.getWidth()) {
-//			yIncrement++;
-//			xIncrement = 0;
-//		}
-//		if ((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()) {
-//			// Start from beginning again
-//			yIncrement = 0;
-//		}
-//		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-//				yIncrement * HEIGHT, WIDTH, HEIGHT);
-//		xIncrement++;
-//		g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH,
-//				HEIGHT, null);
-//
-//	}
-
+	// @Override
+	// public void draw(Graphics2D g2) {
+	// if (bImage == null) {
+	// File imageFile = new File(baseDir + imageFileName);
+	// try {
+	// bImage = ImageIO.read(imageFile);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// if ((xIncrement * WIDTH) + WIDTH > bImage.getWidth()) {
+	// yIncrement++;
+	// xIncrement = 0;
+	// }
+	// if ((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()) {
+	// // Start from beginning again
+	// yIncrement = 0;
+	// }
+	// BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
+	// yIncrement * HEIGHT, WIDTH, HEIGHT);
+	// xIncrement++;
+	// g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH,
+	// HEIGHT, null);
+	//
+	// }
 
 	@Override
 	protected void setImages() {
@@ -60,7 +59,7 @@ public class BaseDesertUprising extends Structure {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (attackImage == null) {
 			File imageFile = new File(Structure.baseDir + "error.png");
 			try {
@@ -78,22 +77,23 @@ public class BaseDesertUprising extends Structure {
 			}
 		}
 		if (explodeImage == null) {
-			File imageFile = new File(Structure.baseDir + "explosion-sprite40.png");
+			File imageFile = new File(Structure.baseDir
+					+ "explosion-sprite40.png");
 			try {
 				explodeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 	@Override
 	public void takeDamage(int dmg) {
 		System.out.println("WARNING: base under attack!!");
 		hitpoints -= dmg;
 		System.out.println("Base health: " + hitpoints);
-		
+
 	}
 
 	@Override
@@ -122,6 +122,7 @@ public class BaseDesertUprising extends Structure {
 	public void die() {
 		System.out.println("\n\n\n\nBASE WAS DESTROYED. GAME OVER");
 		Ticker.getInstance().loopStop();
+		GameGUI.getInstance().returnMenu();
 	}
 
 }
