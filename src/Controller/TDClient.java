@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.EOFException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -11,6 +12,7 @@ import javax.swing.JOptionPane;
 import View.GameGUI;
 
 import command.Command;
+import command.DisconnectCommand;
 
 
 public class TDClient {
@@ -33,8 +35,10 @@ public class TDClient {
 	public TDClient() {
 
 		// ask the user for a host, port, and user name
-		String host = JOptionPane.showInputDialog("Host address:");
-		String port = JOptionPane.showInputDialog("Host port:");
+//		String host = JOptionPane.showInputDialog("Host address:");
+//		String port = JOptionPane.showInputDialog("Host port:");
+		String host = "localhost";
+		String port = "4444";
 		username = JOptionPane.showInputDialog("User name:");
 
 		if (host == null || port == null || username == null)
@@ -51,6 +55,7 @@ public class TDClient {
 			
 			//TODO might need to make new constructor by passing in "this"
 			GUI = GameGUI.getInstance();
+			GUI.setClient(this);
 
 			// start a thread for handling server events
 			new Thread(new ServerHandler()).start();
@@ -96,15 +101,15 @@ public class TDClient {
 	 * Closes the client, disconnects it from the server, and closes all the
 	 * data streams involved.
 	 */
-//	public void closeClient() {
-//		try {
-//			toServer.writeObject(new DisconnectCommand(username));
-//			toServer.close();
-//			fromServer.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void closeClient() {
+		try {
+			toServer.writeObject(new DisconnectCommand(username));
+			toServer.close();
+			fromServer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Sends a command to the server when a new shape is drawn on the client.

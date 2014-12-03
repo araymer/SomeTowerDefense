@@ -3,12 +3,16 @@ package View;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.Serializable;
 
 import javax.swing.JFrame;
 
+import Controller.TDClient;
 import Model.Ticker;
 
 /**
@@ -27,6 +31,7 @@ public class GameGUI implements Serializable {
 	public TilePanel tilePanel;
 	ResourcePanel resourcePanel;
 	private static GameGUI thisGUI;
+	private TDClient client;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -38,6 +43,8 @@ public class GameGUI implements Serializable {
 		// createMap(0);
 
 		frame.setVisible(true);
+		
+		
 	}
 
 	void createMap(int selection) {
@@ -107,14 +114,19 @@ public class GameGUI implements Serializable {
 		frame.setContentPane(MainMenu.getInstance());
 
 	}
+	
+	public void setClient(TDClient cli){
+		client = cli;
+		// add a listener that sends a disconnect command to when closing
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent arg0) {
+				client.closeClient();
+			}
+		});
+	}
 
-	private class PlacementListener implements MouseListener {
+	private class PlacementListener extends MouseAdapter {
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
@@ -126,23 +138,7 @@ public class GameGUI implements Serializable {
 
 		}
 
-		@Override
-		public void mouseReleased(MouseEvent e) {
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
 	}
+	
 
 }

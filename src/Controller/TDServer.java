@@ -17,22 +17,30 @@ import command.UpdateClientCommand;
 
 
 public class TDServer {
-	
+	private static final int PORT_NUMBER = 4444;
 	private ServerSocket socket;
 	private int port;
-	private Vector<Vector<Tile>> masterList;
+	private Vector<Vector<Tile>> masterMap1;
+	private Vector<Vector<Tile>> masterMap2;
 	private HashMap<String, ObjectOutputStream> outputs; // map of all connected
 															// users' output
 															// streams
+	private boolean player1Connected;
+	private boolean player2Connected;
+	private String player1Name;
+	private String player2Name;
 
 	/**
 	 * Constructor for NPServer. Creates a new ServerSocket on port 4007 and
 	 * then creates a new thread to accept clients.
 	 */
 	public TDServer() {
-		port = 4007;
-		masterList = new Vector<Vector<Tile>>();
+		port = PORT_NUMBER;
+		masterMap1 = new Vector<Vector<Tile>>();
+		masterMap2 = new Vector<Vector<Tile>>();
 		outputs = new HashMap<String, ObjectOutputStream>();
+		player1Connected = false;
+		player2Connected = false;
 
 		try {
 			socket = new ServerSocket(port);
@@ -52,24 +60,36 @@ public class TDServer {
 		public void run() {
 			try {
 				while (true) {
-					// accept a new client, get output & input streams
 					Socket client = socket.accept();
-					System.out.println("Client accepted");
-					ObjectInputStream fromClient = new ObjectInputStream(
-							client.getInputStream());
-					ObjectOutputStream toClient = new ObjectOutputStream(
-							client.getOutputStream());
+					if(!(player1Connected && player2Connected)){
+						// accept a new client, get output & input streams
+						
+						System.out.println("Client accepted");
+						ObjectInputStream fromClient = new ObjectInputStream(
+								client.getInputStream());
+						ObjectOutputStream toClient = new ObjectOutputStream(
+								client.getOutputStream());
 
-					// read the client's name
-					String clientUsername = (String) fromClient.readObject();
+						// read the client's name
+						String clientUsername = (String) fromClient.readObject();
 
-					// map client name to output stream
-					outputs.put(clientUsername, toClient);
+						// map client name to output stream
+						outputs.put(clientUsername, toClient);
 
-					// spawn a thread to handle communication with this client
-					new Thread(new ClientHandler(fromClient)).start();
-
-					System.out.println("Added new client: " + clientUsername);
+						// spawn a thread to handle communication with this client
+						new Thread(new ClientHandler(fromClient)).start();
+						
+						System.out.println("Added new client" + ((player1Connected) ? "(Player2)": "(Player1)")+ ": " + clientUsername );
+						if(!player1Connected){
+							player1Connected = true;
+							player1Name = clientUsername;
+						}else{
+							player2Connected = true;
+							player2Name = clientUsername;
+						}
+					}else{
+						System.out.println("Sorry, you cannot join at this time. This game already has 2 players");
+					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -134,6 +154,15 @@ public class TDServer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(clientName.equals(player1Name)){
+			player1Connected = false;
+			player1Name = null;
+		}else{
+			player2Connected = false;
+			player2Name = null;
+		}
+		
+		
 	}
 
 	public static void main(String[] args) {

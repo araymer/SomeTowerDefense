@@ -61,9 +61,10 @@ public class TilePanel extends JPanel {
 			}
 		}
 		}catch(ConcurrentModificationException e){
-			System.out.println("TilePanel: repaint error, ConcurrentModificationException\n"
-					+ "this happens when too many objects to repaint. May be aable to fix by having only\n"
-					+ "repaint scan the gameBoard and everything else uses repaint to scan and change anything");
+			System.out.println("TilePanel: repaint error, ConcurrentModificationException\n");
+//					+ "this happens when too many objects to repaint. May be able to fix by having only\n"
+//					+ "repaint scan the gameBoard and everything else uses repaint to scan and change anything");
+			//Just have this catch do nothing if you can't really tell any changes when repainting.
 		}
 //		synchronized(masterList){
 //			Iterator<Drawable> itr = masterList.iterator();
