@@ -8,5 +8,5 @@ package Model;
  */
 public enum StructureType {
 	//Can't think of any good types
-	SENTRYGUN, LASER, RESOURCE, FREEZERAY, FLAMETHROWER, ELECTRICDISCHARGE, BASE
+	SENTRYGUN, PLASMACANNON, BASE
 }

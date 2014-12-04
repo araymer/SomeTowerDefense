@@ -15,7 +15,7 @@ import Model.Structure;
 import Model.StructureType;
 import Model.Tile;
 import Structures.BaseDesertUprising;
-import Structures.MarineSentryGun;
+import Structures.*;
 
 public class DesertUprising extends Map {
 
@@ -436,7 +436,10 @@ public class DesertUprising extends Map {
 			selectedTile
 					.addStructure(new MarineSentryGun(selectedX, selectedY));
 			break;
-		// TODO more...
+		case PLASMACANNON:
+			System.out.println("tryinng to create plasmacannon");
+			selectedTile
+					.addStructure(new PlasmaCannon(selectedX, selectedY));
 		default:
 			break;
 
