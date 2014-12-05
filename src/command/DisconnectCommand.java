@@ -1,5 +1,6 @@
 package command;
 
+import Controller.TDClient;
 import Controller.TDServer;
 
 
@@ -10,9 +11,7 @@ import Controller.TDServer;
  * 
  *
  */
-public class DisconnectCommand extends Command<TDServer>{
-	private static final long serialVersionUID = -8557424886231888586L;
-	private String clientName; // client who is disconnecting
+public class DisconnectCommand extends Command{
 	
 	/**
 	 * Creates a disconnect command for the given client
@@ -20,13 +19,19 @@ public class DisconnectCommand extends Command<TDServer>{
 	 * @param name	username of client to disconnect
 	 */
 	public DisconnectCommand(String name){
-		clientName = name;
+		super(name);
 	}
 	
+
 	@Override
-	public void execute(TDServer executeOn) {
-		// disconnect client
-		executeOn.disconnect(clientName);
+	public void serverExecute(TDServer server) {
+		server.disconnect(getSender());
+	}
+
+	@Override
+	public void clientExecute(TDClient client) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

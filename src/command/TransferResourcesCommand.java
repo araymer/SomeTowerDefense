@@ -1,5 +1,6 @@
 package command;
 
+import Controller.TDClient;
 import Controller.TDServer;
 
 /*
@@ -12,9 +13,9 @@ import Controller.TDServer;
  * Command for adding shapes to the server's list of shapes.
  *
  */
-public class AddObjectCommand extends Command<TDServer> {
+public class TransferResourcesCommand extends Command {
 	private static final long serialVersionUID = -1886523639931445319L;
-	//Shapes shapes;
+	int resources;
 
 	/**
 	 * Creates an ObjectCommand and takes in a Shape object.
@@ -22,17 +23,22 @@ public class AddObjectCommand extends Command<TDServer> {
 	 * @param receivedShapes
 	 *            - the shape object received from the client.
 	 */
-	public AddObjectCommand() {
-		//shapes = receivedShapes;
+	public TransferResourcesCommand(int resources, String username) {
+		super(username);
+		this.resources = resources;
 	}
 
 	/**
 	 * Executes the command to add the shape to the list.
 	 */
 	@Override
-	public void execute(TDServer executeOn) {
-		// TODO Auto-generated method stub
-		//executeOn.addShapes(shapes);
+	public void serverExecute(TDServer server) {
+		server.transferCommand(this);
+	}
+	
+	@Override
+	public void clientExecute(TDClient client) {
+		//client.sfjalf(this);
 	}
 
 }

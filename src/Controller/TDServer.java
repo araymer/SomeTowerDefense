@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -8,7 +9,6 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import Model.Tile;
-
 import command.Command;
 import command.DisconnectCommand;
 import command.UpdateClientCommand;
@@ -17,11 +17,11 @@ import command.UpdateClientCommand;
 
 
 public class TDServer {
-	private static final int PORT_NUMBER = 4444;
 	private ServerSocket socket;
 	private int port;
-	private Vector<Vector<Tile>> masterMap1;
-	private Vector<Vector<Tile>> masterMap2;
+	private Vector<Vector<Tile>> map1;
+	private Vector<Vector<Tile>> map2;
+	private int masterBaseHP;
 	private HashMap<String, ObjectOutputStream> outputs; // map of all connected
 															// users' output
 															// streams
@@ -35,16 +35,16 @@ public class TDServer {
 	 * then creates a new thread to accept clients.
 	 */
 	public TDServer() {
-		port = PORT_NUMBER;
-		masterMap1 = new Vector<Vector<Tile>>();
-		masterMap2 = new Vector<Vector<Tile>>();
+		port = 4444;
+		map1 = new Vector<Vector<Tile>>();
+		map2 = new Vector<Vector<Tile>>();
 		outputs = new HashMap<String, ObjectOutputStream>();
 		player1Connected = false;
 		player2Connected = false;
 
 		try {
 			socket = new ServerSocket(port);
-			System.out.println("Server up");
+			System.out.println("Server up on port " + port);
 
 			new Thread(new ClientAccepter()).start();
 
@@ -112,9 +112,9 @@ public class TDServer {
 				updateClients();
 				while (true) {
 					// read a command from the client, execute on the server
-					Command<TDServer> command = (Command<TDServer>) input
+					Command command = (Command) input
 							.readObject();
-					command.execute(TDServer.this);
+					command.serverExecute(TDServer.this);
 
 					// terminate if client is disconnecting
 					if (command instanceof DisconnectCommand) {
@@ -132,10 +132,26 @@ public class TDServer {
 //		masterList.add(shapes);
 //		updateClients();
 //	}
+	/**
+	 * Sends the command to all other clients except for itself
+	 * 
+	 * @param command  the command to be sent
+	 */
+	public void transferCommand(Command command){
+		for(String username: outputs.keySet()){
+			if(!command.getSender().equals(username)){
+				try {
+					outputs.get(username).writeObject(command);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 	private void updateClients() {
 		// make an UpdateClientCommmand, write to all connected users
-		UpdateClientCommand update = new UpdateClientCommand();
+		UpdateClientCommand update = new UpdateClientCommand("?");
 		try {
 			for (ObjectOutputStream out : outputs.values())
 				out.writeObject(update);
@@ -162,6 +178,15 @@ public class TDServer {
 			player2Name = null;
 		}
 		
+		
+	}
+	
+	public void masterHealthTakeDamage(int amountDamaged){
+		masterBaseHP -= amountDamaged;
+		shareBaseHP();
+	}
+	
+	private void shareBaseHP(){
 		
 	}
 

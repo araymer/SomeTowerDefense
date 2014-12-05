@@ -3,6 +3,7 @@ package command;
 import java.util.ArrayList;
 
 import Controller.TDClient;
+import Controller.TDServer;
 
 
 /*
@@ -15,8 +16,7 @@ import Controller.TDClient;
  * Command that updates the client canvas.
  *
  */
-public class UpdateClientCommand extends Command<TDClient> {
-	private static final long serialVersionUID = -6660866320115548448L;
+public class UpdateClientCommand extends Command {
 	//private ArrayList<Shapes> list; // the message log from the server
 
 	/**
@@ -25,14 +25,22 @@ public class UpdateClientCommand extends Command<TDClient> {
 	 * @param list
 	 *            - the list of shapes on the canvas
 	 */
-	public UpdateClientCommand() {
+	public UpdateClientCommand(String username) {
+		super(username);
 		//this.list = new ArrayList<Shapes>(list); // note: we are making a copy
 													// of the given list
 	}
 
-	public void execute(TDClient executeOn) {
-		// update the client
-		//executeOn.update(list);
+	@Override
+	public void serverExecute(TDServer server) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clientExecute(TDClient client) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -73,9 +73,9 @@ public class TDClient {
 			try {
 				while (true) {
 					// read a command from server and execute it
-					Command<TDClient> c = (Command<TDClient>) fromServer
+					Command c = (Command) fromServer
 							.readObject();
-					c.execute(TDClient.this);
+					c.clientExecute(TDClient.this);
 				}
 			} catch (SocketException e) {
 				return; // "gracefully" terminate after disconnect
