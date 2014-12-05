@@ -46,8 +46,8 @@ public abstract class Structure extends Drawable{
 			+ System.getProperty("file.separator");
 	
 	// for upgrades
-	private Structure upgradeTo;
-	private int upgradeCost;
+	protected StructureType upgradeTo;
+	protected int upgradeCost;
 	
 //	protected String waitImage = "error.png";
 //	protected String attackImage = "error.png";

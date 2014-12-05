@@ -437,7 +437,7 @@ public class DesertUprising extends Map {
 					.addStructure(new MarineSentryGun(selectedX, selectedY));
 			break;
 		case PLASMACANNON:
-			System.out.println("tryinng to create plasmacannon");
+			System.out.println("trying to create plasmacannon");
 			selectedTile
 					.addStructure(new PlasmaCannon(selectedX, selectedY));
 		default:

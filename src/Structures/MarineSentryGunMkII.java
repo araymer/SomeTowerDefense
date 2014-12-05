@@ -33,6 +33,8 @@ public class MarineSentryGunMkII extends Structure {
 	public MarineSentryGunMkII(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, null);
 		setImages();
+		upgradeTo = null;
+		upgradeCost = 0;
 		tower = new TowerWaiting(this);
 	}
 

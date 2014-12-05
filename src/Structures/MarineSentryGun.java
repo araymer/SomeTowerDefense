@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Model.Structure;
+import Model.StructureType;
 import TowerFSM.TowerAttacking;
 import TowerFSM.TowerExploding;
 import TowerFSM.TowerStates;
@@ -37,6 +38,8 @@ public class MarineSentryGun extends Structure {
 	public MarineSentryGun(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, null);
 		setImages();
+		upgradeTo = StructureType.SENTRYGUN2;
+		upgradeCost = 3000;
 		tower = new TowerWaiting(this);
 	}
 	
