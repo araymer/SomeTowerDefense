@@ -18,7 +18,7 @@ import TowerFSM.TowerWaiting;
  * @author Team Something
  *
  */
-public class HellfireCannon extends Structure {
+public class HellFireCannon extends Structure {
 	protected static BufferedImage waitImage;
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
@@ -35,7 +35,7 @@ public class HellfireCannon extends Structure {
 	/**
 	 * Constructor for Hellfire Cannon.
 	 */
-	public HellfireCannon(int x, int y) {
+	public HellFireCannon(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.BURN);
 		setImages();
 		upgradeTo = null;
