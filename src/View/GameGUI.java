@@ -108,7 +108,7 @@ public class GameGUI implements Serializable {
 		JMenuBar menuBar = new JMenuBar();
 		// JMenu file = new JMenu("File");
 		// JMenuItem
-		// TODO: GOING TO HAVE TO ADD LISTENERS TO THESE
+		// TODO: GOING TO HAVE TO ADD LISTENERS TO THESE LATER
 		JMenu game = new JMenu("Game");
 		JMenuItem load = new JMenuItem();
 		game.add(load);
