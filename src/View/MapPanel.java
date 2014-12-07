@@ -39,6 +39,7 @@ public class MapPanel extends JPanel {
 		// menu.setVisible(true);
 		// this.add(menu);
 		this.setVisible(true);
+
 	}
 
 	public void setMap(String filename) {
