@@ -13,30 +13,30 @@ import TowerFSM.TowerStates;
 import TowerFSM.TowerWaiting;
 
 /**
- * This is the upgraded version of the Chrono Tower. The target is held in a stasis field, unable to
- * move or attack
+ * This is the upgraded version of the Plasma Cannon, dealing more damage and still burning 
+ * enemies.
  * @author Team Something
  *
  */
-public class StasisTower extends Structure {
+public class HellfireCannon extends Structure {
 	protected static BufferedImage waitImage;
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
 	protected static BufferedImage explodeImage;
 	
-	private static final int HITPOINTS = 100;
+	private static final int HITPOINTS = 300;
 	private static final int PRODUCTION = 0;
 	private static final int RANGE = 4;
-	private static final int DAMAGE = 5;
+	private static final int DAMAGE = 12;
 	private static final int SPLASH = 0;
 	private static final int RATEOFFIRE = 5;//The smaller, the faster
-	private static final int COST = 2500;
+	private static final int COST = 4000;
 
 	/**
-	 * Constructor for Stasis Tower.
+	 * Constructor for Hellfire Cannon.
 	 */
-	public StasisTower(int x, int y) {
-		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.FREEZE);
+	public HellfireCannon(int x, int y) {
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.BURN);
 		setImages();
 		upgradeTo = null;
 		upgradeCost = 0;
@@ -46,7 +46,7 @@ public class StasisTower extends Structure {
 protected void setImages(){
 		
 		if (waitImage == null) {
-			File imageFile = new File(Structure.baseDir + "ChronoTower.png");
+			File imageFile = new File(Structure.baseDir + "HellfireCannon.png");
 			try {
 				waitImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
