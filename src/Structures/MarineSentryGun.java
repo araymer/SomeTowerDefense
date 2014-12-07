@@ -44,9 +44,6 @@ public class MarineSentryGun extends Structure {
 	}
 	
 	protected void setImages(){
-//		waitImage = "topdownturret40.png";
-//		attackImage = "turretFire.png";
-		//Set rest when available
 		
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir + "topdownturret40.png");

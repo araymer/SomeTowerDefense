@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import Model.SpecialAttack;
 import Model.Structure;
+import Model.StructureType;
 import TowerFSM.*;
 
 /**
@@ -31,8 +32,9 @@ public class PlasmaCannon extends Structure {
 	private static final int COST = 3000;
 
 	public PlasmaCannon(int x, int y) {
-		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, null);
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.BURN);
 		setImages();
+		upgradeTo = StructureType.HELLFIRECANNON;
 		tower = new TowerWaiting(this);
 	}
 

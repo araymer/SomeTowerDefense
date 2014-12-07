@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Model.SpecialAttack;
 import Model.Structure;
 import TowerFSM.TowerStates;
 import TowerFSM.TowerWaiting;
@@ -31,7 +32,7 @@ public class MarineSentryGunMkII extends Structure {
 	private static final int COST = 3000;
 
 	public MarineSentryGunMkII(int x, int y) {
-		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, null);
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.TWO_TARGETS);
 		setImages();
 		upgradeTo = null;
 		upgradeCost = 0;
