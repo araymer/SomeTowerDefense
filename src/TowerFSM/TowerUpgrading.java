@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import Model.Structure;
 /**
- * Not implemented in Iteration 1
+ * 
  * @author Team Something
  *
  */
