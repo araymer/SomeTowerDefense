@@ -1,4 +1,4 @@
-ackage Structures;
+package Structures;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,7 +18,7 @@ import TowerFSM.TowerWaiting;
  * @author Team Something
  *
  */
-public class ChronoTower extends Structure {
+public class StasisTower extends Structure {
 	protected static BufferedImage waitImage;
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
@@ -35,7 +35,7 @@ public class ChronoTower extends Structure {
 	/**
 	 * Constructor for Stasis Tower.
 	 */
-	public ChronoTower(int x, int y) {
+	public StasisTower(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.FREEZE);
 		setImages();
 		upgradeTo = null;
