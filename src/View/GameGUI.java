@@ -3,6 +3,9 @@ package View;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -65,6 +68,8 @@ public class GameGUI implements Serializable {
 		mapPanel.setSize(frame.getSize().width, frame.getSize().height);
 		mapPanel.setLocation(0, 0);
 		frame.setContentPane(mapPanel);
+		// frame.add(mapPanel);
+		// frame.add(ResourcePanel.getInstance(), null, -1);
 
 		contentPane = frame.getContentPane();
 		contentPane.setLayout(new CardLayout());
@@ -80,6 +85,7 @@ public class GameGUI implements Serializable {
 		// resourcePanel.setSize(frame.getSize().width, frame.getSize().height);
 		resourcePanel.setSize(200, frame.getSize().height);
 		resourcePanel.setLocation(801, 0);
+		resourcePanel.setLayout(new FlowLayout());
 
 		contentPane.add(tilePanel);
 		tilePanel.add(resourcePanel);
@@ -88,9 +94,8 @@ public class GameGUI implements Serializable {
 
 		new Thread(Ticker.getInstance()).start();
 		// GameController.getInstance().startWaves();
-		
-		
-		if(isMultiplayer){
+
+		if (isMultiplayer) {
 			client.setStartingServerHP();
 		}
 	}
@@ -110,23 +115,32 @@ public class GameGUI implements Serializable {
 
 	}
 
+	JMenuBar menuBar;
+	JMenu game;
+	JMenuItem load;
+	JCheckBox pause;
+	JMenuItem exit;
+	JMenu help;
+	JMenuItem options;
+	JMenuItem instructions;
+
 	void createMenuBar() {
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		// JMenu file = new JMenu("File");
 		// JMenuItem
 		// TODO: GOING TO HAVE TO ADD LISTENERS TO THESE LATER
-		JMenu game = new JMenu("Game");
-		JMenuItem load = new JMenuItem();
+		game = new JMenu("Game");
+		load = new JMenuItem("Load");
+		load.addActionListener(new MenuListener());
 		game.add(load);
-		JCheckBox pause = new JCheckBox();
+		pause = new JCheckBox("Pause");
 		game.add(pause);
-		JMenuItem exit = new JMenuItem();
-		// exit.setAction();
+		exit = new JMenuItem("Exit");
 		game.add(exit);
-		JMenu help = new JMenu("Help");
-		JMenuItem options = new JMenuItem();
+		help = new JMenu("Help");
+		options = new JMenuItem("Options");
 		help.add(options);
-		JMenuItem instructions = new JMenuItem();
+		instructions = new JMenuItem("How To Play");
 		help.add(instructions);
 		frame.setJMenuBar(menuBar);
 		// menuBar.add(file);
@@ -162,8 +176,8 @@ public class GameGUI implements Serializable {
 			}
 		});
 	}
-	
-	public void baseTakeDamage(int damageAmount){
+
+	public void baseTakeDamage(int damageAmount) {
 		client.baseTakeDamage(damageAmount);
 	}
 
@@ -172,13 +186,32 @@ public class GameGUI implements Serializable {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// Make a new structure on click
-			System.out.println("Creating new structure at " + e.getPoint());
+			if (e.getPoint().getX() <= 800 && e.getPoint().getY() <= 600) {
+				System.out.println("Creating new structure at " + e.getPoint());
 
-			tilePanel.getMap().createStructure(
-					resourcePanel.getSelectedStructure(), e.getPoint());
-
+				tilePanel.getMap().createStructure(
+						resourcePanel.getSelectedStructure(), e.getPoint());
+			}
 		}
 
+	}
+
+	private class MenuListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == load)
+				return;
+			if (e.getSource() == pause)
+				return;
+			if (e.getSource() == exit)
+				System.exit(0);
+			if (e.getSource() == options)
+				return;
+			if (e.getSource() == instructions)
+				return;
+
+		}
 	}
 
 }

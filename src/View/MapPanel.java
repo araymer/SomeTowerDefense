@@ -34,7 +34,7 @@ public class MapPanel extends JPanel {
 	 * 
 	 */
 	private MapPanel() {
-		this.setSize(MAP_WIDTH, MAP_HEIGHT);
+		this.setSize(1000, 622);
 		// menu.add(new JMenu("File"));
 		// menu.setVisible(true);
 		// this.add(menu);
@@ -63,6 +63,6 @@ public class MapPanel extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-		g2.drawImage(image, 0, 0, MAP_WIDTH, MAP_HEIGHT, null);
+		g2.drawImage(image, 0, 0, 800, 600, null);
 	}
 }
