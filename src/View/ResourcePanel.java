@@ -23,6 +23,7 @@ public class ResourcePanel extends JPanel {
 	 */
 	private ResourcePanel() {
 		this.setOpaque(false);
+		// this.setBackground(new Color(0, 0, 0, 0.5f));
 		this.setVisible(true);
 	}
 
@@ -40,19 +41,20 @@ public class ResourcePanel extends JPanel {
 
 		// Test to make sure panel is clear and drawn elements are on top of map
 		// picture
-		float alpha = 0.50f;
-		Color color = new Color(1, 0, 0, alpha); // Red
+		float alpha = 0.20f;
+		Color color = new Color(0, 0, 1, alpha); // Blue
 		g2.setPaint(color);
 		g2.fillRect(0, 0, 800, 30);
 	}
+
 	/**
 	 * Returns the structure that is selected in the structure selection menu
 	 * 
 	 * @return
 	 * 
 	 */
-	public StructureType getSelectedStructure(){
-		//TODO isn't complete
+	public StructureType getSelectedStructure() {
+		// TODO isn't complete
 		return StructureType.PLASMACANNON;
 	}
 }

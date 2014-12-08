@@ -152,6 +152,22 @@ public abstract class Structure extends Drawable{
 	}
 	
 	/**
+	 * Gets the StructureType that this tower upgrades to.
+	 * @return StructureType
+	 */
+	public StructureType getUpgradeTo() {
+		return upgradeTo;
+	}
+	
+	/**
+	 * Returns the cost to upgrade.
+	 * @return int
+	 */
+	public int getUpgradeCost() {
+		return upgradeCost;
+	}
+	
+	/**
 	 * Returns appropriate image based on state
 	 * 
 	 * @param state

@@ -30,7 +30,7 @@ public class MainMenu extends JPanel {
 		this.setBackground(Color.BLACK);
 
 		// set Background
-		File chosenMap = new File(baseDir + "stars.png");
+		File chosenMap = new File(baseDir + "starsedit.png");
 		try {
 			bgImage = ImageIO.read(chosenMap);
 		} catch (IOException e) {
@@ -71,6 +71,6 @@ public class MainMenu extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawImage(bgImage, 0, 0, null);
-		g.drawImage(logo, 119, 216, null);
+		g.drawImage(logo, 220, 216, null);
 	}
 }
