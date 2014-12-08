@@ -46,7 +46,7 @@ public class StasisTower extends Structure {
 protected void setImages(){
 		
 		if (waitImage == null) {
-			File imageFile = new File(Structure.baseDir + "ChronoTower.png");
+			File imageFile = new File(Structure.baseDir + "StasisTower.png");
 			try {
 				waitImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
