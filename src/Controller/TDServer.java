@@ -3,6 +3,7 @@ package Controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -50,6 +51,9 @@ public class TDServer {
 
 			new Thread(new ClientAccepter()).start();
 
+		} catch (BindException e){
+			System.out.println("Player 1 has already set up the server");
+			return;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,21 +78,26 @@ public class TDServer {
 
 						// read the client's name
 						String clientUsername = (String) fromClient.readObject();
-
-						// map client name to output stream
-						outputs.put(clientUsername, toClient);
-
-						// spawn a thread to handle communication with this client
-						new Thread(new ClientHandler(fromClient)).start();
 						
-						System.out.println("Added new client" + ((player1Connected) ? "(Player2)": "(Player1)")+ ": " + clientUsername );
-						if(!player1Connected){
-							player1Connected = true;
-							player1Name = clientUsername;
+						if(outputs.containsKey(clientUsername)){
+							System.out.println("ERROR: " + clientUsername + " is already in use. Restart to try again");
 						}else{
-							player2Connected = true;
-							player2Name = clientUsername;
+							// map client name to output stream
+							outputs.put(clientUsername, toClient);
+
+							// spawn a thread to handle communication with this client
+							new Thread(new ClientHandler(fromClient)).start();
+							
+							System.out.println("Added new client" + ((player1Connected) ? "(Player2)": "(Player1)")+ ": " + clientUsername );
+							if(!player1Connected){
+								player1Connected = true;
+								player1Name = clientUsername;
+							}else{
+								player2Connected = true;
+								player2Name = clientUsername;
+							}
 						}
+						
 					}else{
 						System.out.println("Sorry, you cannot join at this time. This game already has 2 players");
 					}

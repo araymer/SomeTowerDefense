@@ -13,6 +13,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Controller.TDClient;
+import Controller.TDServer;
+
 public class MainMenu extends JPanel {
 
 	private static MainMenu mainMenu;
@@ -30,7 +33,10 @@ public class MainMenu extends JPanel {
 		desertMap = new JButton("Desert Uprising");
 		singleplayer = new JButton("Single Player");
 		multiplayer = new JButton("Multi-Player");
-		desertMap.addActionListener(new ButtonListener());
+		ButtonListener buttonListener = new ButtonListener();
+		desertMap.addActionListener(buttonListener);
+		singleplayer.addActionListener(buttonListener);
+		multiplayer.addActionListener(buttonListener);
 		this.add(desertMap);
 		this.add(singleplayer);
 		this.add(multiplayer);
@@ -64,11 +70,15 @@ public class MainMenu extends JPanel {
 			if (e.getSource() == desertMap)
 				GameGUI.getInstance().createMap(0);
 			if (e.getSource() == singleplayer)
-				// go to singleplayer mode
-				return; // temporary
-			if (e.getSource() == multiplayer)
-				// go to multiplayer mode
-				return; // temporary
+				GameGUI.getInstance().createMap(0);
+			if (e.getSource() == multiplayer){
+				System.out.println("Multiplayer button clicked");
+				TDServer server = new TDServer();
+				TDClient client = new TDClient();
+				GameGUI.getInstance().createMap(0);
+			}
+				
+				
 		}
 	}
 
