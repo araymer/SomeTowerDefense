@@ -1,10 +1,14 @@
 package View;
 
-import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import Model.StructureType;
 
@@ -17,13 +21,55 @@ import Model.StructureType;
  */
 public class ResourcePanel extends JPanel {
 	private static ResourcePanel resourcePanel;
+	ButtonGroup radioButtons;
+	JRadioButton chronoTower;
+	JRadioButton sentryGun;
+	JRadioButton plasmaCannon;
+	JRadioButton stasisTower;
+	JFrame resourceFrame;
 
 	/**
 	 * Constructs the ResourcePanel for use in the GameGUI
 	 */
 	private ResourcePanel() {
-		this.setOpaque(false);
+		resourceFrame = new JFrame();
+		resourceFrame.setSize(200, 200);
+		resourceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		resourceFrame.setResizable(false);
+		resourceFrame.setTitle("Resources");
+		resourceFrame.setLocation(811, 0);
+		resourceFrame.setVisible(true);
+
+		this.setLayout(new FlowLayout());
+		radioButtons = new ButtonGroup();
+		chronoTower = new JRadioButton("Chrono-Tower");
+		JButton chronoTowerInfo = new JButton("Info");
+		sentryGun = new JRadioButton("Sentry Gun");
+		JButton sentryGunInfo = new JButton("Info");
+		plasmaCannon = new JRadioButton("Plasma Cannon");
+		JButton plasmaCannonInfo = new JButton("Info");
+		stasisTower = new JRadioButton("Stasis Tower");
+		JButton stasisTowerInfo = new JButton("Info");
+
+		radioButtons.add(chronoTower);
+		radioButtons.add(sentryGun);
+		radioButtons.add(plasmaCannon);
+		radioButtons.add(stasisTower);
+
+		this.add(chronoTower);
+		this.add(chronoTowerInfo);
+		this.add(sentryGun);
+		this.add(sentryGunInfo);
+		this.add(plasmaCannon);
+		this.add(plasmaCannonInfo);
+		this.add(stasisTower);
+		this.add(stasisTowerInfo);
+
+		this.setOpaque(true);
+		// this.setBackground(new Color(0, 0, 0, 0.5f));
 		this.setVisible(true);
+
+		resourceFrame.setContentPane(this);
 	}
 
 	public static ResourcePanel getInstance() {
@@ -38,21 +84,27 @@ public class ResourcePanel extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-		// Test to make sure panel is clear and drawn elements are on top of map
-		// picture
-		float alpha = 0.50f;
-		Color color = new Color(1, 0, 0, alpha); // Red
-		g2.setPaint(color);
-		g2.fillRect(0, 0, 800, 30);
+		// float alpha = 0.50f;
+		// Color color = new Color(0, 0, 1, alpha); // Blue
+		// g2.setPaint(color);
+		// g2.fillRect(0, 0, 800, 30);
 	}
+
 	/**
 	 * Returns the structure that is selected in the structure selection menu
 	 * 
 	 * @return
 	 * 
 	 */
-	public StructureType getSelectedStructure(){
-		//TODO isn't complete
-		return StructureType.SENTRYGUN;
+	public StructureType getSelectedStructure() {
+		if (radioButtons.getSelection() == chronoTower)
+			return StructureType.CHRONOTOWER;
+		if (radioButtons.getSelection() == sentryGun)
+			return StructureType.SENTRYGUN;
+		if (radioButtons.getSelection() == plasmaCannon)
+			return StructureType.PLASMACANNON;
+		if (radioButtons.getSelection() == stasisTower)
+			return StructureType.STASISTOWER;
+		return StructureType.PLASMACANNON;
 	}
 }

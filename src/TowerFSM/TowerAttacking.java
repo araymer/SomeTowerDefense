@@ -104,7 +104,8 @@ public class TowerAttacking extends TowerState {
 						tower.changeTo(TowerStates.EXPLODE, null);
 						stateChange = true;
 					} else if (upgrade) {
-						// TODO (Iteration 2: make towers able to upgrade
+						tower.changeTo(TowerStates.UPGRADE, null);
+						stateChange = true;
 					} else if (noTarget) {
 						tower.changeTo(TowerStates.WAIT, null);
 						stateChange = true;

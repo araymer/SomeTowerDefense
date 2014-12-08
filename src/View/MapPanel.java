@@ -20,6 +20,7 @@ public class MapPanel extends JPanel {
 	private final int MAP_HEIGHT = 600;
 	private static Image image;
 	private static MapPanel mapPanel;
+	// private JMenuBar menu = new JMenuBar();
 
 	private static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
@@ -33,8 +34,12 @@ public class MapPanel extends JPanel {
 	 * 
 	 */
 	private MapPanel() {
-		this.setSize(MAP_WIDTH, MAP_HEIGHT);
+		this.setSize(1000, 622);
+		// menu.add(new JMenu("File"));
+		// menu.setVisible(true);
+		// this.add(menu);
 		this.setVisible(true);
+
 	}
 
 	public void setMap(String filename) {
@@ -58,6 +63,6 @@ public class MapPanel extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-		g2.drawImage(image, 0, 0, MAP_WIDTH, MAP_HEIGHT, null);
+		g2.drawImage(image, 0, 0, 800, 600, null);
 	}
 }

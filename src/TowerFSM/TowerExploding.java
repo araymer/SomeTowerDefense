@@ -7,20 +7,20 @@ import Model.Structure;
 
 /**
  * Handles the destruction of the Tower.
+ * 
  * @author Team Something
  * 
  */
 public class TowerExploding extends TowerState {
 
-	public TowerExploding (Structure tower) {
+	public TowerExploding(Structure tower) {
 		super(tower);
-//		int x = tower.getX();
-//		int y = tower.getY();
-		
-		
+		// int x = tower.getX();
+		// int y = tower.getY();
+
 		// tower explosion animation
 	}
-	
+
 	@Override
 	public int getCurrentHP() {
 		// You are exploding, so the highest it could possibly be is:
@@ -52,13 +52,13 @@ public class TowerExploding extends TowerState {
 		tower.xIncrement++;
 		g2.drawImage(tempSubImage, tower.getX() * tower.WIDTH, tower.getY()
 				* tower.HEIGHT, tower.WIDTH, tower.HEIGHT, null);
-		
+
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		// TODO update
+
 	}
 
 }
