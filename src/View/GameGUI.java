@@ -3,7 +3,6 @@ package View;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -30,7 +29,7 @@ import Model.Ticker;
  */
 public class GameGUI implements Serializable {
 
-	private final int FRAME_WIDTH = 1000;
+	private final int FRAME_WIDTH = 800;
 	// Extra 22 for bar
 	private final int FRAME_HEIGHT = 622;
 	Container contentPane;
@@ -83,12 +82,14 @@ public class GameGUI implements Serializable {
 
 		resourcePanel = ResourcePanel.getInstance();
 		// resourcePanel.setSize(frame.getSize().width, frame.getSize().height);
-		resourcePanel.setSize(200, frame.getSize().height);
-		resourcePanel.setLocation(801, 0);
-		resourcePanel.setLayout(new FlowLayout());
+		// resourcePanel.setSize(200, frame.getSize().height);
+		// resourcePanel.setLocation(801, 0);
+		// resourcePanel.setLayout(new FlowLayout());
 
 		contentPane.add(tilePanel);
-		tilePanel.add(resourcePanel);
+		// tilePanel.add(resourcePanel);
+
+		frame.setJMenuBar(menuBar);
 
 		frame.repaint();
 
@@ -151,7 +152,7 @@ public class GameGUI implements Serializable {
 
 	public void repaint() {
 		tilePanel.repaint();
-		resourcePanel.repaint();
+		// resourcePanel.repaint();
 	}
 
 	public static GameGUI getInstance() {

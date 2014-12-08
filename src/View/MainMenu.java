@@ -71,14 +71,13 @@ public class MainMenu extends JPanel {
 				GameGUI.getInstance().createMap(0);
 			if (e.getSource() == singleplayer)
 				GameGUI.getInstance().createMap(0);
-			if (e.getSource() == multiplayer){
+			if (e.getSource() == multiplayer) {
 				System.out.println("Multiplayer button clicked");
 				TDServer server = new TDServer();
 				TDClient client = new TDClient();
 				GameGUI.getInstance().createMap(0);
 			}
-				
-				
+
 		}
 	}
 
@@ -94,6 +93,6 @@ public class MainMenu extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawImage(bgImage, 0, 0, null);
-		g.drawImage(logo, 220, 216, null);
+		g.drawImage(logo, 120, 216, null);
 	}
 }
