@@ -1,5 +1,3 @@
-//TODO: implement the controller. This is where our main method will be.
-
 package Controller;
 
 import Attackers.Marine;
@@ -63,7 +61,7 @@ public class GameController {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}
@@ -71,7 +69,7 @@ public class GameController {
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 		}

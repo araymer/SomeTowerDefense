@@ -2,31 +2,31 @@ package Model;
 
 import View.GameGUI;
 
-public abstract class Base extends Structure{
+public abstract class Base extends Structure {
 
 	public Base(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
 		super(hp, prod, rng, dmg, splash, rate, cost, x, y, sp);
-		// TODO Auto-generated constructor stub
+
 	}
-	
-	public void setHP(int newHP){
+
+	public void setHP(int newHP) {
 		hitpoints = newHP;
-		System.out.println("New base hp is: "+ hitpoints);
+		System.out.println("New base hp is: " + hitpoints);
 	}
-	
+
 	/**
 	 * Special takeDamage that damages the hp on the server if on multiplayer.
 	 */
 	@Override
 	public void takeDamage(int dmg) {
-		if(GameGUI.getInstance().isMultiplayer){
+		if (GameGUI.getInstance().isMultiplayer) {
 			GameGUI.getInstance().baseTakeDamage(dmg);
-		}else{
+		} else {
 			System.out.println("beep boop!");
 			hitpoints -= dmg;
 		}
-		
+
 	}
 
 }

@@ -8,13 +8,13 @@ import javax.imageio.ImageIO;
 
 import Model.SpecialAttack;
 import Model.Structure;
-import Model.StructureType;
 import TowerFSM.TowerStates;
 import TowerFSM.TowerWaiting;
 
 /**
- * This is the upgraded version of the Chrono Tower. The target is held in a stasis field, unable to
- * move or attack
+ * This is the upgraded version of the Chrono Tower. The target is held in a
+ * stasis field, unable to move or attack
+ * 
  * @author Team Something
  *
  */
@@ -23,28 +23,29 @@ public class StasisTower extends Structure {
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
 	protected static BufferedImage explodeImage;
-	
+
 	private static final int HITPOINTS = 100;
 	private static final int PRODUCTION = 0;
 	private static final int RANGE = 4;
 	private static final int DAMAGE = 5;
 	private static final int SPLASH = 0;
-	private static final int RATEOFFIRE = 5;//The smaller, the faster
+	private static final int RATEOFFIRE = 5;// The smaller, the faster
 	private static final int COST = 2500;
 
 	/**
 	 * Constructor for Stasis Tower.
 	 */
 	public StasisTower(int x, int y) {
-		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.FREEZE);
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
+				x, y, SpecialAttack.FREEZE);
 		setImages();
 		upgradeTo = null;
 		upgradeCost = 0;
 		tower = new TowerWaiting(this);
 	}
-	
-protected void setImages(){
-		
+
+	protected void setImages() {
+
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir + "StasisTower.png");
 			try {
@@ -53,7 +54,7 @@ protected void setImages(){
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (attackImage == null) {
 			File imageFile = new File(Structure.baseDir + "error.png");
 			try {
@@ -71,7 +72,8 @@ protected void setImages(){
 			}
 		}
 		if (explodeImage == null) {
-			File imageFile = new File(Structure.baseDir + "explosion-sprite40.png");
+			File imageFile = new File(Structure.baseDir
+					+ "explosion-sprite40.png");
 			try {
 				explodeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -104,8 +106,8 @@ protected void setImages(){
 
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
-		
+		// TODO: implement dying
+
 	}
 
 }

@@ -21,7 +21,7 @@ import TowerFSM.TowerWaiting;
  * @author Team Something
  *
  */
-public abstract class Structure extends Drawable{
+public abstract class Structure extends Drawable {
 
 	public int hitpoints;
 	public int production;
@@ -40,22 +40,22 @@ public abstract class Structure extends Drawable{
 	public int xIncrement;
 	public int yIncrement;
 	public BufferedImage bImage;
-	//public String imageFileName = "error.png";
+	// public String imageFileName = "error.png";
 	public static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
-	
+
 	// for upgrades
 	protected StructureType upgradeTo;
 	protected int upgradeCost;
-	
-//	protected String waitImage = "error.png";
-//	protected String attackImage = "error.png";
-//	protected String explodeImage = "error.png";
-//	protected String upgradeImage = "error.png";
-	
-	
+
+	// protected String waitImage = "error.png";
+	// protected String attackImage = "error.png";
+	// protected String explodeImage = "error.png";
+	// protected String upgradeImage = "error.png";
+
 	protected TowerState tower;
+
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
 
@@ -74,7 +74,6 @@ public abstract class Structure extends Drawable{
 		yIncrement = 0;
 		setImages();
 		this.changeTo(TowerStates.WAIT, null);
-		// TODO: set as observer to the tiles in its range
 		// How are we doing range in diagonal directions?
 		// Will need to be able to have a reference to the map
 		/*
@@ -87,7 +86,7 @@ public abstract class Structure extends Drawable{
 	public void draw(Graphics2D g2) {
 		tower.draw(g2);
 	}
-	
+
 	/**
 	 * create static buffered images for extended classes
 	 */
@@ -130,43 +129,43 @@ public abstract class Structure extends Drawable{
 	}
 
 	public void update() {
-		//System.out.println("structure update");
+		// System.out.println("structure update");
 		tower.update();
 	}
-	
+
 	public abstract void die();
-	
+
 	public void takeDamage(int dmg) {
 		System.out.println("beep boop!");
 		hitpoints -= dmg;
 	}
-	
-	
-	
+
 	/**
 	 * returns true if structure is destroyed
 	 */
-	public boolean isFinished(){
-		//TODO Not finished, lol
+	public boolean isFinished() {
+		// TODO Not finished, lol
 		return false;
 	}
-	
+
 	/**
 	 * Gets the StructureType that this tower upgrades to.
+	 * 
 	 * @return StructureType
 	 */
 	public StructureType getUpgradeTo() {
 		return upgradeTo;
 	}
-	
+
 	/**
 	 * Returns the cost to upgrade.
+	 * 
 	 * @return int
 	 */
 	public int getUpgradeCost() {
 		return upgradeCost;
 	}
-	
+
 	/**
 	 * Returns appropriate image based on state
 	 * 

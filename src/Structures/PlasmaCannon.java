@@ -9,11 +9,13 @@ import javax.imageio.ImageIO;
 import Model.SpecialAttack;
 import Model.Structure;
 import Model.StructureType;
-import TowerFSM.*;
+import TowerFSM.TowerStates;
+import TowerFSM.TowerWaiting;
 
 /**
- * The class for the Plasma Cannon structure, a heavy duty turret that 
+ * The class for the Plasma Cannon structure, a heavy duty turret that
  * deep-fries enemies where they stand.
+ * 
  * @author Team Something
  *
  */
@@ -22,17 +24,18 @@ public class PlasmaCannon extends Structure {
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
 	protected static BufferedImage explodeImage;
-	
+
 	private static final int HITPOINTS = 200;
 	private static final int PRODUCTION = 0;
 	private static final int RANGE = 4;
 	private static final int DAMAGE = 14;
 	private static final int SPLASH = 0;
-	private static final int RATEOFFIRE = 7;//The smaller, the faster
+	private static final int RATEOFFIRE = 7;// The smaller, the faster
 	private static final int COST = 3000;
 
 	public PlasmaCannon(int x, int y) {
-		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.BURN);
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
+				x, y, SpecialAttack.BURN);
 		setImages();
 		upgradeTo = StructureType.HELLFIRECANNON;
 		tower = new TowerWaiting(this);
@@ -48,7 +51,7 @@ public class PlasmaCannon extends Structure {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (attackImage == null) {
 			File imageFile = new File(Structure.baseDir + "error.png");
 			try {
@@ -66,7 +69,8 @@ public class PlasmaCannon extends Structure {
 			}
 		}
 		if (explodeImage == null) {
-			File imageFile = new File(Structure.baseDir + "explosion-sprite40.png");
+			File imageFile = new File(Structure.baseDir
+					+ "explosion-sprite40.png");
 			try {
 				explodeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -75,13 +79,10 @@ public class PlasmaCannon extends Structure {
 		}
 	}
 
-		
-
-
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
-		
+		// TODO: implement dying
+
 	}
 
 	@Override

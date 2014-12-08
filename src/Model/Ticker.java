@@ -24,14 +24,14 @@ public class Ticker implements Runnable {
 	private int updateCount = 0;
 	private double now = System.nanoTime();
 	private static Ticker ticker;
-	
-	//private MasterList masterList;
+
+	// private MasterList masterList;
 
 	// many objects will need to access the same timer
 	private Ticker() {
 		isRunning = true;
 		paused = false;
-		//masterList = MasterList.getInstance();
+		// masterList = MasterList.getInstance();
 	}
 
 	// Only run this in another Thread!
@@ -79,7 +79,6 @@ public class Ticker implements Runnable {
 		// Iterate through all game objects and call their draw methods with
 		// interpolation
 
-
 		GameGUI.getInstance().repaint(); // This is temporary, we'll want to
 											// replace this with
 											// some way to feed interpolation
@@ -91,7 +90,7 @@ public class Ticker implements Runnable {
 		// TODO calculate everything's new position
 		// add in information for structures and towers for
 		// position, direction and last drawn image (so it actually animates)
-		// TODO: Possibly incorporate this method into drawGame and deprecate?
+		//
 
 		// for (int i = 0; i < TilePanel.getInstance().tileMap.gameBoard.size();
 		// i++) {
@@ -119,78 +118,79 @@ public class Ticker implements Runnable {
 		// }
 		//
 		// }
-		
-		//Had to add this to avoid ConcurrentModificationException
-		//Checking if any attackers/structures need to be removed or moved
+
+		// Had to add this to avoid ConcurrentModificationException
+		// Checking if any attackers/structures need to be removed or moved
 		LinkedList<Attacker> attackerRemoveList = new LinkedList<Attacker>();
 		LinkedList<Attacker> atkrMoveList = new LinkedList<Attacker>();
 		LinkedList<Structure> structureRemoveList = new LinkedList<Structure>();
-		try{
-			
-			//Check for dead structures and attackers
-			for(Vector<Tile> vec: TilePanel.getInstance().tileMap.getGameBoard()){
-				for(Tile tile: vec){
-					if(tile.getStructure() != null){
-						if(tile.getStructure().isFinished()){
+		try {
+
+			// Check for dead structures and attackers
+			for (Vector<Tile> vec : TilePanel.getInstance().tileMap
+					.getGameBoard()) {
+				for (Tile tile : vec) {
+					if (tile.getStructure() != null) {
+						if (tile.getStructure().isFinished()) {
 							structureRemoveList.add(tile.getStructure());
 						}
 					}
-					for(Attacker attacker: tile.getAttackers()){
-						if(attacker.isFinished()){
+					for (Attacker attacker : tile.getAttackers()) {
+						if (attacker.isFinished()) {
 							attackerRemoveList.add(attacker);
-						}else if(attacker.needsToMove){
+						} else if (attacker.needsToMove) {
 							atkrMoveList.add(attacker);
 						}
 					}
 				}
 			}
-			
-			
-			//Remove dead structures and attackers
-			for(Vector<Tile> vec: TilePanel.getInstance().tileMap.getGameBoard()){
-				for(Tile tile: vec){
-					for(Attacker attacker: attackerRemoveList){
+
+			// Remove dead structures and attackers
+			for (Vector<Tile> vec : TilePanel.getInstance().tileMap
+					.getGameBoard()) {
+				for (Tile tile : vec) {
+					for (Attacker attacker : attackerRemoveList) {
 						tile.getAttackers().remove(attacker);
 					}
-					for(Structure structure: structureRemoveList){
-						if(tile.getStructure() == structure){
+					for (Structure structure : structureRemoveList) {
+						if (tile.getStructure() == structure) {
 							tile.removeStructure();
 						}
 					}
 				}
 			}
-			
-			
-			//Move attackers
-			for(Attacker attacker: atkrMoveList){
-				//iterate through whole map and remove these
-				for(Vector<Tile> vec: TilePanel.getInstance().tileMap.getGameBoard()){
-					for(Tile tile: vec){
+
+			// Move attackers
+			for (Attacker attacker : atkrMoveList) {
+				// iterate through whole map and remove these
+				for (Vector<Tile> vec : TilePanel.getInstance().tileMap
+						.getGameBoard()) {
+					for (Tile tile : vec) {
 						tile.getAttackers().remove(attacker);
 					}
 				}
-				
-//				nextTile.getAttackers().add(attacker);
-//				attacker.setLoc(nextTile);
-				
+
+				// nextTile.getAttackers().add(attacker);
+				// attacker.setLoc(nextTile);
+
 				attacker.location.getNextTile().getAttackers().add(attacker);
-				attacker.setLoc(attacker.location.getNextTile());;
+				attacker.setLoc(attacker.location.getNextTile());
+				;
 				attacker.needsToMove = false;
 			}
-			
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			System.out.println("removing an enemy threw exception");
 			e.printStackTrace();
 		}
-		
-		//Update all structures and enemies
-		for(Vector<Tile> vec: TilePanel.getInstance().tileMap.getGameBoard()){
-			for(Tile tile: vec){
-				if(tile.getStructure() != null){
+
+		// Update all structures and enemies
+		for (Vector<Tile> vec : TilePanel.getInstance().tileMap.getGameBoard()) {
+			for (Tile tile : vec) {
+				if (tile.getStructure() != null) {
 					tile.getStructure().update();
 				}
-				for(Attacker attacker: tile.getAttackers()){
+				for (Attacker attacker : tile.getAttackers()) {
 					attacker.update();
 				}
 			}
@@ -215,5 +215,5 @@ public class Ticker implements Runnable {
 			ticker = new Ticker();
 		return ticker;
 	}
-	
+
 }

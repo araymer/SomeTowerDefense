@@ -11,7 +11,6 @@ public abstract class Map {
 	// protected Vector<Attacker> attackers;
 	// protected Vector<Structure> structures;
 
-	// TODO: Should we have a master list of spawnable tiles? Would make
 	// randomizing wave spawn points easier
 
 	public Map(int h, int w) { // Default constructor sets empty board
@@ -30,7 +29,7 @@ public abstract class Map {
 	}
 
 	public abstract void setBase();
-	
+
 	public abstract Base getBase();
 
 	public abstract void setSpawnPoints();

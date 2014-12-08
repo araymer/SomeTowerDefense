@@ -14,37 +14,35 @@ import javax.imageio.ImageIO;
 
 import Model.Structure;
 import Model.StructureType;
-import TowerFSM.TowerAttacking;
-import TowerFSM.TowerExploding;
 import TowerFSM.TowerStates;
-import TowerFSM.TowerUpgrading;
 import TowerFSM.TowerWaiting;
 
 public class MarineSentryGun extends Structure {
-	
+
 	protected static BufferedImage waitImage;
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
 	protected static BufferedImage explodeImage;
-	
+
 	private static final int HITPOINTS = 120;
 	private static final int PRODUCTION = 0;
 	private static final int RANGE = 3;
 	private static final int DAMAGE = 7;
 	private static final int SPLASH = 0;
-	private static final int RATEOFFIRE = 5;//The smaller, the faster
+	private static final int RATEOFFIRE = 5;// The smaller, the faster
 	private static final int COST = 1500;
 
 	public MarineSentryGun(int x, int y) {
-		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, null);
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
+				x, y, null);
 		setImages();
 		upgradeTo = StructureType.SENTRYGUN2;
 		upgradeCost = 3000;
 		tower = new TowerWaiting(this);
 	}
-	
-	protected void setImages(){
-		
+
+	protected void setImages() {
+
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir + "topdownturret40.png");
 			try {
@@ -53,7 +51,7 @@ public class MarineSentryGun extends Structure {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (attackImage == null) {
 			File imageFile = new File(Structure.baseDir + "turretFire.png");
 			try {
@@ -71,7 +69,8 @@ public class MarineSentryGun extends Structure {
 			}
 		}
 		if (explodeImage == null) {
-			File imageFile = new File(Structure.baseDir + "explosion-sprite40.png");
+			File imageFile = new File(Structure.baseDir
+					+ "explosion-sprite40.png");
 			try {
 				explodeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -104,8 +103,8 @@ public class MarineSentryGun extends Structure {
 
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
-		
+		// TODO: implement dying
+
 	}
 
 }

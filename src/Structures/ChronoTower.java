@@ -13,9 +13,11 @@ import TowerFSM.TowerStates;
 import TowerFSM.TowerWaiting;
 
 /**
- * This Defensive structure makes up for it's weak attack and high price tag by dilating
- * time around the target, causing them to move slowly and leaving them vulnerable to to
- * the attacks of other towers for a longer period of time. Upgrades to Stasis Tower.
+ * This Defensive structure makes up for it's weak attack and high price tag by
+ * dilating time around the target, causing them to move slowly and leaving them
+ * vulnerable to to the attacks of other towers for a longer period of time.
+ * Upgrades to Stasis Tower.
+ * 
  * @author Team Something
  *
  */
@@ -24,24 +26,26 @@ public class ChronoTower extends Structure {
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
 	protected static BufferedImage explodeImage;
-	
+
 	private static final int HITPOINTS = 100;
 	private static final int PRODUCTION = 0;
 	private static final int RANGE = 4;
 	private static final int DAMAGE = 5;
 	private static final int SPLASH = 0;
-	private static final int RATEOFFIRE = 5;//The smaller, the faster
+	private static final int RATEOFFIRE = 5;// The smaller, the faster
 	private static final int COST = 2500;
 
 	public ChronoTower(int x, int y) {
-		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST, x, y, SpecialAttack.SLOW);
+		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
+				x, y, SpecialAttack.SLOW);
 		setImages();
 		upgradeTo = StructureType.STASISTOWER;
 		upgradeCost = 3500;
 		tower = new TowerWaiting(this);
 	}
-protected void setImages(){
-		
+
+	protected void setImages() {
+
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir + "ChronoTower.png");
 			try {
@@ -50,7 +54,7 @@ protected void setImages(){
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (attackImage == null) {
 			File imageFile = new File(Structure.baseDir + "error.png");
 			try {
@@ -68,7 +72,8 @@ protected void setImages(){
 			}
 		}
 		if (explodeImage == null) {
-			File imageFile = new File(Structure.baseDir + "explosion-sprite40.png");
+			File imageFile = new File(Structure.baseDir
+					+ "explosion-sprite40.png");
 			try {
 				explodeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -101,8 +106,8 @@ protected void setImages(){
 
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
-		
+		// TODO: implement dying
+
 	}
 
 }

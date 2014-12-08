@@ -3,25 +3,23 @@ package command;
 import Controller.TDClient;
 import Controller.TDServer;
 
-
-
 /**
  * This command is sent by a client that is disconnecting
  * 
  * 
  *
  */
-public class DisconnectCommand extends Command{
-	
+public class DisconnectCommand extends Command {
+
 	/**
 	 * Creates a disconnect command for the given client
 	 * 
-	 * @param name	username of client to disconnect
+	 * @param name
+	 *            username of client to disconnect
 	 */
-	public DisconnectCommand(String name){
+	public DisconnectCommand(String name) {
 		super(name);
 	}
-	
 
 	@Override
 	public void serverExecute(TDServer server) {
@@ -30,8 +28,7 @@ public class DisconnectCommand extends Command{
 
 	@Override
 	public void clientExecute(TDClient client) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

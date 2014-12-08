@@ -10,25 +10,25 @@ import java.net.SocketException;
 import javax.swing.JOptionPane;
 
 import View.GameGUI;
+
 import command.BaseTakeDamageCommand;
 import command.Command;
 import command.DisconnectCommand;
 import command.UpdateBaseCommand;
 
-
 public class TDClient {
-	
+
 	private GameController gameController;
 	private GameGUI GUI;
 	private Socket server;
 	private ObjectOutputStream toServer;
 	private ObjectInputStream fromServer;
 	String username;
-	
+
 	public static void main(String[] args) {
 		new TDClient();
 	}
-	
+
 	/**
 	 * Constructs a new TDClient and prompts the user to enter in the host
 	 * address, host port, and a user name that the client keeps track of. It
@@ -37,8 +37,8 @@ public class TDClient {
 	public TDClient() {
 
 		// ask the user for a host, port, and user name
-//		String host = JOptionPane.showInputDialog("Host address:");
-//		String port = JOptionPane.showInputDialog("Host port:");
+		// String host = JOptionPane.showInputDialog("Host address:");
+		// String port = JOptionPane.showInputDialog("Host port:");
 		String host = "localhost";
 		String port = "4444";
 		username = JOptionPane.showInputDialog("User name:");
@@ -54,7 +54,7 @@ public class TDClient {
 
 			// write out the name of this client
 			toServer.writeObject(username);
-			
+
 			gameController = GameController.getInstance();
 			GUI = GameGUI.getInstance();
 			GUI.setClient(this);
@@ -75,8 +75,7 @@ public class TDClient {
 			try {
 				while (true) {
 					// read a command from server and execute it
-					Command c = (Command) fromServer
-							.readObject();
+					Command c = (Command) fromServer.readObject();
 					c.clientExecute(TDClient.this);
 				}
 			} catch (SocketException e) {
@@ -95,9 +94,9 @@ public class TDClient {
 	 * @param list
 	 *            - the list of shapes now present on the canvas.
 	 */
-//	public void update(ArrayList<Shapes> list) {
-//		GUI.update(list);
-//	}
+	// public void update(ArrayList<Shapes> list) {
+	// GUI.update(list);
+	// }
 
 	/**
 	 * Closes the client, disconnects it from the server, and closes all the
@@ -112,22 +111,24 @@ public class TDClient {
 			e.printStackTrace();
 		}
 	}
-	
-	public void updateBaseHP(int newHP){
+
+	public void updateBaseHP(int newHP) {
 		GUI.tilePanel.tileMap.getBase().setHP(newHP);
 	}
-	
-	public void baseTakeDamage(int damageAmount){
-		BaseTakeDamageCommand dmgCommand = new BaseTakeDamageCommand(username, damageAmount);
+
+	public void baseTakeDamage(int damageAmount) {
+		BaseTakeDamageCommand dmgCommand = new BaseTakeDamageCommand(username,
+				damageAmount);
 		try {
 			toServer.writeObject(dmgCommand);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void setStartingServerHP(){
-		UpdateBaseCommand update = new UpdateBaseCommand(username, GUI.tilePanel.tileMap.getBase().getHP());
+
+	public void setStartingServerHP() {
+		UpdateBaseCommand update = new UpdateBaseCommand(username,
+				GUI.tilePanel.tileMap.getBase().getHP());
 		try {
 			toServer.writeObject(update);
 		} catch (IOException e) {
@@ -142,13 +143,13 @@ public class TDClient {
 	 *            - the shape that was drawn on the client that the server is
 	 *            being told about.
 	 */
-//	public void addObject(Shapes shapes) {
-//		AddObjectCommand addObj = new AddObjectCommand(shapes);
-//		try {
-//			toServer.writeObject(addObj);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	// public void addObject(Shapes shapes) {
+	// AddObjectCommand addObj = new AddObjectCommand(shapes);
+	// try {
+	// toServer.writeObject(addObj);
+	// } catch (IOException e) {
+	//
+	// e.printStackTrace();
+	// }
+	// }
 }
