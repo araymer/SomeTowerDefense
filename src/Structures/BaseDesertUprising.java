@@ -6,12 +6,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Model.Base;
 import Model.Structure;
 import Model.Ticker;
 import TowerFSM.TowerStates;
 import View.GameGUI;
 
-public class BaseDesertUprising extends Structure {
+public class BaseDesertUprising extends Base {
 
 	protected static BufferedImage waitImage;
 	protected static BufferedImage attackImage;
@@ -88,13 +89,13 @@ public class BaseDesertUprising extends Structure {
 
 	}
 
-	@Override
-	public void takeDamage(int dmg) {
-		System.out.println("WARNING: base under attack!!");
-		hitpoints -= dmg;
-		System.out.println("Base health: " + hitpoints);
-
-	}
+//	@Override
+//	public void takeDamage(int dmg) {
+//		System.out.println("WARNING: base under attack!!");
+//		hitpoints -= dmg;
+//		System.out.println("Base health: " + hitpoints);
+//
+//	}
 
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {

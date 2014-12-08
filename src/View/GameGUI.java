@@ -32,6 +32,7 @@ public class GameGUI implements Serializable {
 	ResourcePanel resourcePanel;
 	private static GameGUI thisGUI;
 	private TDClient client;
+	public boolean isMultiplayer = false;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -81,6 +82,11 @@ public class GameGUI implements Serializable {
 
 		new Thread(Ticker.getInstance()).start();
 		// GameController.getInstance().startWaves();
+		
+		
+		if(isMultiplayer){
+			client.setStartingServerHP();
+		}
 	}
 
 	/**
@@ -117,12 +123,17 @@ public class GameGUI implements Serializable {
 	
 	public void setClient(TDClient cli){
 		client = cli;
+		isMultiplayer = true;
 		// add a listener that sends a disconnect command to when closing
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent arg0) {
 				client.closeClient();
 			}
 		});
+	}
+	
+	public void baseTakeDamage(int damageAmount){
+		client.baseTakeDamage(damageAmount);
 	}
 
 	private class PlacementListener extends MouseAdapter {

@@ -10,13 +10,15 @@ import java.net.SocketException;
 import javax.swing.JOptionPane;
 
 import View.GameGUI;
-
+import command.BaseTakeDamageCommand;
 import command.Command;
 import command.DisconnectCommand;
+import command.UpdateBaseCommand;
 
 
 public class TDClient {
 	
+	private GameController gameController;
 	private GameGUI GUI;
 	private Socket server;
 	private ObjectOutputStream toServer;
@@ -53,7 +55,7 @@ public class TDClient {
 			// write out the name of this client
 			toServer.writeObject(username);
 			
-			//TODO might need to make new constructor by passing in "this"
+			gameController = GameController.getInstance();
 			GUI = GameGUI.getInstance();
 			GUI.setClient(this);
 
@@ -106,6 +108,28 @@ public class TDClient {
 			toServer.writeObject(new DisconnectCommand(username));
 			toServer.close();
 			fromServer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateBaseHP(int newHP){
+		GUI.tilePanel.tileMap.getBase().setHP(newHP);
+	}
+	
+	public void baseTakeDamage(int damageAmount){
+		BaseTakeDamageCommand dmgCommand = new BaseTakeDamageCommand(username, damageAmount);
+		try {
+			toServer.writeObject(dmgCommand);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setStartingServerHP(){
+		UpdateBaseCommand update = new UpdateBaseCommand(username, GUI.tilePanel.tileMap.getBase().getHP());
+		try {
+			toServer.writeObject(update);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

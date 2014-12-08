@@ -14,8 +14,7 @@ import Controller.TDServer;
  *
  */
 public class TransferResourcesCommand extends Command {
-	private static final long serialVersionUID = -1886523639931445319L;
-	int resources;
+	private int resources;
 
 	/**
 	 * Creates an ObjectCommand and takes in a Shape object.

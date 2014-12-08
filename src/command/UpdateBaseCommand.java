@@ -14,12 +14,12 @@ public class UpdateBaseCommand extends Command{
 
 	@Override
 	public void serverExecute(TDServer server) {
-		
+		server.setStartingHP(getSender(), newBaseHP);
 	}
 
 	@Override
 	public void clientExecute(TDClient client) {
-		//client.updateBase(newBaseHP);
+		client.updateBaseHP(newBaseHP);
 		
 	}
 

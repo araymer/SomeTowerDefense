@@ -11,6 +11,7 @@ import java.util.Vector;
 import Model.Tile;
 import command.Command;
 import command.DisconnectCommand;
+import command.UpdateBaseCommand;
 import command.UpdateClientCommand;
 
 
@@ -21,7 +22,7 @@ public class TDServer {
 	private int port;
 	private Vector<Vector<Tile>> map1;
 	private Vector<Vector<Tile>> map2;
-	private int masterBaseHP;
+	private int masterBaseHP = 0;
 	private HashMap<String, ObjectOutputStream> outputs; // map of all connected
 															// users' output
 															// streams
@@ -29,6 +30,7 @@ public class TDServer {
 	private boolean player2Connected;
 	private String player1Name;
 	private String player2Name;
+	private boolean hpIsSet;
 
 	/**
 	 * Constructor for NPServer. Creates a new ServerSocket on port 4007 and
@@ -177,7 +179,9 @@ public class TDServer {
 			player2Connected = false;
 			player2Name = null;
 		}
-		
+		if(!player1Connected && !player2Connected){
+			hpIsSet = false;
+		}
 		
 	}
 	
@@ -187,11 +191,28 @@ public class TDServer {
 	}
 	
 	private void shareBaseHP(){
-		
+		// make a command, write to all connected users
+		UpdateBaseCommand update = new UpdateBaseCommand(null, masterBaseHP);
+		try {
+			for (ObjectOutputStream out : outputs.values())
+				out.writeObject(update);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public static void main(String[] args) {
 		new TDServer();
+	}
+
+	public void setStartingHP(String username, int newBaseHP) {
+		if(!hpIsSet){
+			masterBaseHP = newBaseHP;
+			System.out.println(username + " set starting server baseHP to " + masterBaseHP);
+			hpIsSet = true;
+		}
+		
 	}
 
 }

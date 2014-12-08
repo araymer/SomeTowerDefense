@@ -10,11 +10,11 @@ package Maps;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import Model.Base;
 import Model.Map;
 import Model.Structure;
 import Model.StructureType;
 import Model.Tile;
-import Structures.BaseDesertUprising;
 import Structures.*;
 
 public class DesertUprising extends Map {
@@ -194,8 +194,8 @@ public class DesertUprising extends Map {
 	}
 
 	@Override
-	public Structure getBase() {
-		return gameBoard.get(BASE_X).get(BASE_Y).getStructure();
+	public Base getBase() {
+		return (Base)gameBoard.get(BASE_X).get(BASE_Y).getStructure();
 	}
 
 	@Override

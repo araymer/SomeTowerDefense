@@ -130,7 +130,7 @@ public abstract class Structure extends Drawable{
 	}
 
 	public void update() {
-		//System.out.println("structure updade");
+		//System.out.println("structure update");
 		tower.update();
 	}
 	
@@ -141,8 +141,13 @@ public abstract class Structure extends Drawable{
 		hitpoints -= dmg;
 	}
 	
+	
+	
+	/**
+	 * returns true if structure is destroyed
+	 */
 	public boolean isFinished(){
-		//Not finished, lol
+		//TODO Not finished, lol
 		return false;
 	}
 	
