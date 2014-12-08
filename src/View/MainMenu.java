@@ -21,12 +21,19 @@ public class MainMenu extends JPanel {
 	private static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
+	JButton desertMap;
+	JButton singleplayer;
+	JButton multiplayer;
 
 	private MainMenu() {
 
-		JButton desertMap = new JButton("Desert Uprising");
+		desertMap = new JButton("Desert Uprising");
+		singleplayer = new JButton("Single Player");
+		multiplayer = new JButton("Multi-Player");
 		desertMap.addActionListener(new ButtonListener());
 		this.add(desertMap);
+		this.add(singleplayer);
+		this.add(multiplayer);
 		this.setBackground(Color.BLACK);
 
 		// set Background
@@ -54,8 +61,14 @@ public class MainMenu extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			GameGUI.getInstance().createMap(0);
-
+			if (e.getSource() == desertMap)
+				GameGUI.getInstance().createMap(0);
+			if (e.getSource() == singleplayer)
+				// go to singleplayer mode
+				return; // temporary
+			if (e.getSource() == multiplayer)
+				// go to multiplayer mode
+				return; // temporary
 		}
 	}
 
