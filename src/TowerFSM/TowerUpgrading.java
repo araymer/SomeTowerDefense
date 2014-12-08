@@ -11,6 +11,7 @@ import Model.Structure;
  */
 public class TowerUpgrading extends TowerState {
 	Structure tower;
+	private int tick;
 
 	public TowerUpgrading(Structure structure) {
 		super(structure);
@@ -41,9 +42,12 @@ public class TowerUpgrading extends TowerState {
 		
 	}
 
+	/**
+	 * Updates the upgrade for a set number of ticks.
+	 */
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		tick = 0;
 		
 	}
 
