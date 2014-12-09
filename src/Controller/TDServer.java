@@ -11,9 +11,10 @@ import java.util.Vector;
 
 import Model.Tile;
 import command.Command;
+import command.CreateGameCommand;
 import command.DisconnectCommand;
 import command.UpdateBaseCommand;
-import command.UpdateClientCommand;
+import command.UpdateMiniMapCommand;
 
 
 
@@ -96,6 +97,10 @@ public class TDServer {
 								player2Connected = true;
 								player2Name = clientUsername;
 							}
+							//Start game if both connected
+							if(player1Connected && player2Connected){
+								startGame();
+							}
 						}
 						
 					}else{
@@ -139,10 +144,6 @@ public class TDServer {
 		}
 	}
 
-//	public void addShapes(Shapes shapes) {
-//		masterList.add(shapes);
-//		updateClients();
-//	}
 	/**
 	 * Sends the command to all other clients except for itself
 	 * 
@@ -162,7 +163,7 @@ public class TDServer {
 
 	private void updateClients() {
 		// make an UpdateClientCommmand, write to all connected users
-		UpdateClientCommand update = new UpdateClientCommand("?");
+		UpdateMiniMapCommand update = new UpdateMiniMapCommand("?");
 		try {
 			for (ObjectOutputStream out : outputs.values())
 				out.writeObject(update);
@@ -211,9 +212,6 @@ public class TDServer {
 
 	}
 
-	public static void main(String[] args) {
-		new TDServer();
-	}
 
 	public void setStartingHP(String username, int newBaseHP) {
 		if(!hpIsSet){
@@ -222,6 +220,16 @@ public class TDServer {
 			hpIsSet = true;
 		}
 		
+	}
+	
+	public void startGame(){
+		CreateGameCommand cmd = new CreateGameCommand(null);
+		try {
+			for (ObjectOutputStream out : outputs.values())
+				out.writeObject(cmd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
