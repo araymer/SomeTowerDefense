@@ -35,6 +35,7 @@ import Model.Ticker;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class GameGUI implements Serializable {
 
 	private final int FRAME_WIDTH = 800;
@@ -56,9 +57,6 @@ public class GameGUI implements Serializable {
 		createFrame();
 		createMenuBar();
 		frame.setContentPane(MainMenu.getInstance());
-
-		// createMap(0);
-
 		frame.setVisible(true);
 
 	}
@@ -76,8 +74,6 @@ public class GameGUI implements Serializable {
 		mapPanel.setSize(frame.getSize().width, frame.getSize().height);
 		mapPanel.setLocation(0, 0);
 		frame.setContentPane(mapPanel);
-		// frame.add(mapPanel);
-		// frame.add(ResourcePanel.getInstance(), null, -1);
 
 		contentPane = frame.getContentPane();
 		contentPane.setLayout(new CardLayout());
@@ -90,10 +86,6 @@ public class GameGUI implements Serializable {
 		tilePanel.setLayout(new CardLayout());
 
 		resourcePanel = ResourcePanel.getInstance();
-		// resourcePanel.setSize(frame.getSize().width, frame.getSize().height);
-		// resourcePanel.setSize(200, frame.getSize().height);
-		// resourcePanel.setLocation(801, 0);
-		// resourcePanel.setLayout(new FlowLayout());
 
 		contentPane.add(tilePanel);
 		// tilePanel.add(resourcePanel);

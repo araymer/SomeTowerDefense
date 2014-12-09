@@ -50,11 +50,6 @@ public abstract class Structure extends Drawable {
 	protected StructureType upgradeTo;
 	protected int upgradeCost;
 
-	// protected String waitImage = "error.png";
-	// protected String attackImage = "error.png";
-	// protected String explodeImage = "error.png";
-	// protected String upgradeImage = "error.png";
-
 	protected TowerState tower;
 
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
@@ -75,13 +70,6 @@ public abstract class Structure extends Drawable {
 		yIncrement = 0;
 		setImages();
 		this.changeTo(TowerStates.WAIT, null);
-		// How are we doing range in diagonal directions?
-		// Will need to be able to have a reference to the map
-		/*
-		 * for (int i = 0; i < rng; i++) { if (does not fall off the map and is
-		 * a path) tile.addObserver(this); }
-		 */
-
 	}
 
 	public void draw(Graphics2D g2) {

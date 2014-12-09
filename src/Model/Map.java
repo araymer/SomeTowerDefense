@@ -14,9 +14,6 @@ public abstract class Map {
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
 
-	// protected Vector<Attacker> attackers;
-	// protected Vector<Structure> structures;
-
 	// randomizing wave spawn points easier
 
 	public Map(int h, int w) { // Default constructor sets empty board
@@ -46,7 +43,7 @@ public abstract class Map {
 	 */
 
 	public void createStructure(StructureType selectedStructure, Point point) {
-		// TODO Calculate the tile that was clicked
+		// Calculate the tile that was clicked
 		int selectedX = point.x / getTileWidth();
 		int selectedY = point.y / getTileWidth();
 

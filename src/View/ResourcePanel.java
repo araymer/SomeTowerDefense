@@ -2,7 +2,6 @@ package View;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +20,7 @@ import Model.StructureType;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class ResourcePanel extends JPanel implements ActionListener {
 	private static ResourcePanel resourcePanel;
 	ButtonGroup radioButtons;
@@ -85,7 +85,6 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		upgrade.addActionListener(this);
 
 		this.setOpaque(true);
-		// this.setBackground(new Color(0, 0, 0, 0.5f));
 		this.setVisible(true);
 
 		resourceFrame.setContentPane(this);
@@ -101,12 +100,6 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-
-		// float alpha = 0.50f;
-		// Color color = new Color(0, 0, 1, alpha); // Blue
-		// g2.setPaint(color);
-		// g2.fillRect(0, 0, 800, 30);
 	}
 
 	/**
@@ -117,19 +110,6 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	 */
 	public StructureType getSelectedStructure() {
 		return selected;
-		
-		/*
-		if (radioButtons.getSelection() == chronoTower)
-			return StructureType.CHRONOTOWER;
-		if (radioButtons.getSelection() == sentryGun)
-			return StructureType.SENTRYGUN;
-		if (radioButtons.getSelection() == plasmaCannon)
-			return StructureType.PLASMACANNON;
-		if (radioButtons.getSelection() == stasisTower)
-			return StructureType.STASISTOWER;
-		System.out.println("No selection recorded");
-		return StructureType.SENTRYGUN;
-		*/
 	}
 	
 	public void actionPerformed(ActionEvent e) {

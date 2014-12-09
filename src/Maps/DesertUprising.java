@@ -7,13 +7,10 @@
 
 package Maps;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import Model.Base;
 import Model.Map;
-import Model.Structure;
-import Model.StructureType;
 import Model.Tile;
 import Structures.*;
 
@@ -26,13 +23,12 @@ public class DesertUprising extends Map {
 	private static int height = guiHeight / getTileWidth();// 15
 	private static int width = guiWidth / getTileWidth();// 20
 	private Tile spawnTile1, spawnTile2;
-	private ArrayList<Tile> pathTiles;
 	private static final int BASE_X = 3;
 	private static final int BASE_Y = 8;
 
 	public DesertUprising() {
 		super(height, width);
-		pathTiles = new ArrayList<Tile>();
+		new ArrayList<Tile>();
 		setPath();
 		setBase();
 		setSpawnPoints();
