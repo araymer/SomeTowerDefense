@@ -3,6 +3,8 @@ package View;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -19,19 +21,21 @@ import Model.StructureType;
  * @author Team Something
  *
  */
-public class ResourcePanel extends JPanel {
+public class ResourcePanel extends JPanel implements ActionListener {
 	private static ResourcePanel resourcePanel;
 	ButtonGroup radioButtons;
 	JRadioButton chronoTower;
 	JRadioButton sentryGun;
 	JRadioButton plasmaCannon;
-	JRadioButton stasisTower;
+	JRadioButton upgrade;
 	JFrame resourceFrame;
+	StructureType selected;
 
 	/**
 	 * Constructs the ResourcePanel for use in the GameGUI
 	 */
 	private ResourcePanel() {
+		selected = StructureType.SENTRYGUN;
 		resourceFrame = new JFrame();
 		resourceFrame.setSize(200, 200);
 		resourceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,19 +46,28 @@ public class ResourcePanel extends JPanel {
 
 		this.setLayout(new FlowLayout());
 		radioButtons = new ButtonGroup();
+		
 		chronoTower = new JRadioButton("Chrono-Tower");
 		JButton chronoTowerInfo = new JButton("Info");
+		chronoTower.setActionCommand("ChronoTower");
+		
 		sentryGun = new JRadioButton("Sentry Gun");
 		JButton sentryGunInfo = new JButton("Info");
+		sentryGun.setActionCommand("SentryGun");
+		sentryGun.setSelected(true);
+		
 		plasmaCannon = new JRadioButton("Plasma Cannon");
 		JButton plasmaCannonInfo = new JButton("Info");
-		stasisTower = new JRadioButton("Stasis Tower");
-		JButton stasisTowerInfo = new JButton("Info");
+		plasmaCannon.setActionCommand("PlasmaGun");
+		
+		upgrade = new JRadioButton("Upgrade");
+		JButton upgradeInfo = new JButton("Info");
+		upgrade.setActionCommand("Upgrade");
 
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
 		radioButtons.add(plasmaCannon);
-		radioButtons.add(stasisTower);
+		radioButtons.add(upgrade);
 
 		this.add(chronoTower);
 		this.add(chronoTowerInfo);
@@ -62,8 +75,14 @@ public class ResourcePanel extends JPanel {
 		this.add(sentryGunInfo);
 		this.add(plasmaCannon);
 		this.add(plasmaCannonInfo);
-		this.add(stasisTower);
-		this.add(stasisTowerInfo);
+		this.add(upgrade);
+		this.add(upgradeInfo);
+		
+		//add action listeners
+		chronoTower.addActionListener(this);
+		sentryGun.addActionListener(this);
+		plasmaCannon.addActionListener(this);
+		upgrade.addActionListener(this);
 
 		this.setOpaque(true);
 		// this.setBackground(new Color(0, 0, 0, 0.5f));
@@ -93,10 +112,13 @@ public class ResourcePanel extends JPanel {
 	/**
 	 * Returns the structure that is selected in the structure selection menu
 	 * 
-	 * @return
+	 * @return StructureType - the new selection
 	 * 
 	 */
 	public StructureType getSelectedStructure() {
+		return selected;
+		
+		/*
 		if (radioButtons.getSelection() == chronoTower)
 			return StructureType.CHRONOTOWER;
 		if (radioButtons.getSelection() == sentryGun)
@@ -105,6 +127,32 @@ public class ResourcePanel extends JPanel {
 			return StructureType.PLASMACANNON;
 		if (radioButtons.getSelection() == stasisTower)
 			return StructureType.STASISTOWER;
-		return StructureType.PLASMACANNON;
+		System.out.println("No selection recorded");
+		return StructureType.SENTRYGUN;
+		*/
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		String newSelection = e.getActionCommand();
+		
+		switch(newSelection) {
+			case "SentryGun":
+				selected = StructureType.SENTRYGUN;
+				break;
+			case "ChronoTower":
+				selected = StructureType.CHRONOTOWER;
+				break;
+			case "PlasmaGun":
+				selected = StructureType.PLASMACANNON;
+				break;
+			case "Upgrade":
+				selected = StructureType.UPGRADE;
+				System.out.println("upgrade mode");
+				break;
+			default:
+				System.out.println("No selection recorded");
+				break;
+				
+		}
 	}
 }

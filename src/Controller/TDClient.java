@@ -10,7 +10,6 @@ import java.net.SocketException;
 import javax.swing.JOptionPane;
 
 import View.GameGUI;
-
 import command.BaseTakeDamageCommand;
 import command.Command;
 import command.DisconnectCommand;
@@ -25,9 +24,6 @@ public class TDClient {
 	private ObjectInputStream fromServer;
 	String username;
 
-	public static void main(String[] args) {
-		new TDClient();
-	}
 
 	/**
 	 * Constructs a new TDClient and prompts the user to enter in the host
@@ -136,20 +132,7 @@ public class TDClient {
 		}
 	}
 
-	/**
-	 * Sends a command to the server when a new shape is drawn on the client.
-	 * 
-	 * @param shapes
-	 *            - the shape that was drawn on the client that the server is
-	 *            being told about.
-	 */
-	// public void addObject(Shapes shapes) {
-	// AddObjectCommand addObj = new AddObjectCommand(shapes);
-	// try {
-	// toServer.writeObject(addObj);
-	// } catch (IOException e) {
-	//
-	// e.printStackTrace();
-	// }
-	// }
+	public void startMultiplayerGame(){
+		GUI.startMultiplayerGame();
+	}
 }

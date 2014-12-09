@@ -39,6 +39,7 @@ public class GameGUI implements Serializable {
 	private static GameGUI thisGUI;
 	private TDClient client;
 	public boolean isMultiplayer = false;
+	public int mapSelection;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -180,6 +181,12 @@ public class GameGUI implements Serializable {
 
 	public void baseTakeDamage(int damageAmount) {
 		client.baseTakeDamage(damageAmount);
+	}
+	
+	public void startMultiplayerGame(){
+		//TODO
+		createMap(mapSelection);
+		MainMenu.getInstance().resetLogo();
 	}
 
 	private class PlacementListener extends MouseAdapter {
