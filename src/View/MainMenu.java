@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -27,6 +28,7 @@ public class MainMenu extends JPanel {
 	JButton desertMap;
 	JButton singleplayer;
 	JButton multiplayer;
+	
 
 	private MainMenu() {
 
@@ -60,7 +62,17 @@ public class MainMenu extends JPanel {
 
 		repaint();
 		this.setVisible(true);
-
+		
+	}
+	
+	public void resetLogo(){
+		File logoImage = new File(baseDir + "logo.png");
+		try {
+			logo = ImageIO.read(logoImage);
+		} catch (IOException exc) {
+			exc.printStackTrace();
+		}
+		mainMenu.repaint();
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -72,10 +84,21 @@ public class MainMenu extends JPanel {
 			if (e.getSource() == singleplayer)
 				GameGUI.getInstance().createMap(0);
 			if (e.getSource() == multiplayer) {
+				
 				System.out.println("Multiplayer button clicked");
 				TDServer server = new TDServer();
 				TDClient client = new TDClient();
-				GameGUI.getInstance().createMap(0);
+				//Have different map selection based on picked map
+				GameGUI.getInstance().mapSelection = 0;
+				
+				File logoImage = new File(baseDir + "waiting.png");
+				try {
+					logo = ImageIO.read(logoImage);
+				} catch (IOException exc) {
+					exc.printStackTrace();
+				}
+				mainMenu.repaint();
+				
 			}
 
 		}
