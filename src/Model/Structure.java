@@ -23,6 +23,7 @@ import TowerFSM.TowerWaiting;
  */
 public abstract class Structure extends Drawable {
 
+	public String name;
 	public int hitpoints;
 	public int production;
 	public int range; // Range of tower (in tiles, Manhattan distance)
@@ -205,5 +206,9 @@ public abstract class Structure extends Drawable {
 			System.out.println("Problem Encountered while changing states.");
 		}
 
+	}
+
+	public String getName() {
+		return name;
 	}
 }

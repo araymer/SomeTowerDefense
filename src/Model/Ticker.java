@@ -37,38 +37,40 @@ public class Ticker implements Runnable {
 	// Only run this in another Thread!
 	@Override
 	public void run() {
-		while (isRunning) {
-			now = System.nanoTime();
-			updateCount = 0;
+		while (true) {
+			while (isRunning) {
+				now = System.nanoTime();
+				updateCount = 0;
 
-			if (!paused) {
-				while (now - lastUpdateTime > timeBetweenFrames
-						&& updateCount < maxUpdatesBetweenRenders) {
+				if (!paused) {
+					while (now - lastUpdateTime > timeBetweenFrames
+							&& updateCount < maxUpdatesBetweenRenders) {
 
-					update();
-					lastUpdateTime += timeBetweenFrames;
-					updateCount++;
+						update();
+						lastUpdateTime += timeBetweenFrames;
+						updateCount++;
 
-					if (now - lastUpdateTime > timeBetweenFrames)
-						lastUpdateTime = now - timeBetweenFrames;
+						if (now - lastUpdateTime > timeBetweenFrames)
+							lastUpdateTime = now - timeBetweenFrames;
 
-					// interpolation for visually smooth movement
-					float interpolation = Math
-							.min(1.0f,
-									(float) ((now - lastUpdateTime) / timeBetweenFrames));
-					drawGame(interpolation);
-					lastRenderTime = now;
+						// interpolation for visually smooth movement
+						float interpolation = Math
+								.min(1.0f,
+										(float) ((now - lastUpdateTime) / timeBetweenFrames));
+						drawGame(interpolation);
+						lastRenderTime = now;
 
-					// Can add thread.yield to prevent CPU hogging
-					while (now - lastUpdateTime < timeBetweenFrames) {
-						Thread.yield();
+						// Can add thread.yield to prevent CPU hogging
+						while (now - lastUpdateTime < timeBetweenFrames) {
+							Thread.yield();
 
-						try {
-							Thread.sleep(1);
-						} catch (Exception e) {
+							try {
+								Thread.sleep(1);
+							} catch (Exception e) {
+							}
+
+							now = System.nanoTime();
 						}
-
-						now = System.nanoTime();
 					}
 				}
 			}

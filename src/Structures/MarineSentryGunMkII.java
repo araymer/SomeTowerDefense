@@ -40,6 +40,7 @@ public class MarineSentryGunMkII extends Structure {
 		upgradeTo = null;
 		upgradeCost = 0;
 		tower = new TowerWaiting(this);
+		name = "Sentry Gun MkII";
 	}
 
 	@Override

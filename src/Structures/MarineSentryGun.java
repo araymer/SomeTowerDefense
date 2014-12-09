@@ -39,6 +39,7 @@ public class MarineSentryGun extends Structure {
 		upgradeTo = StructureType.SENTRYGUN2;
 		upgradeCost = 3000;
 		tower = new TowerWaiting(this);
+		name = "Sentry Gun";
 	}
 
 	protected void setImages() {

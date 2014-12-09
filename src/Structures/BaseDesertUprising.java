@@ -21,6 +21,7 @@ public class BaseDesertUprising extends Base {
 
 	public BaseDesertUprising(int x, int y) {
 		super(500, 0, 0, 0, 0, 0, 0, x, y, null);
+		name = "Desert Uprising Base";
 	}
 
 	// @Override
@@ -89,13 +90,13 @@ public class BaseDesertUprising extends Base {
 
 	}
 
-//	@Override
-//	public void takeDamage(int dmg) {
-//		System.out.println("WARNING: base under attack!!");
-//		hitpoints -= dmg;
-//		System.out.println("Base health: " + hitpoints);
-//
-//	}
+	// @Override
+	// public void takeDamage(int dmg) {
+	// System.out.println("WARNING: base under attack!!");
+	// hitpoints -= dmg;
+	// System.out.println("Base health: " + hitpoints);
+	//
+	// }
 
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {

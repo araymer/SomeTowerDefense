@@ -3,6 +3,7 @@ package View;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -10,15 +11,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.Serializable;
+import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import Controller.TDClient;
+import Model.Attacker;
+import Model.Structure;
 import Model.Ticker;
 
 /**
@@ -182,9 +190,9 @@ public class GameGUI implements Serializable {
 	public void baseTakeDamage(int damageAmount) {
 		client.baseTakeDamage(damageAmount);
 	}
-	
-	public void startMultiplayerGame(){
-		//TODO
+
+	public void startMultiplayerGame() {
+		// TODO
 		createMap(mapSelection);
 		MainMenu.getInstance().resetLogo();
 	}
@@ -199,9 +207,66 @@ public class GameGUI implements Serializable {
 
 				tilePanel.getMap().createStructure(
 						resourcePanel.getSelectedStructure(), e.getPoint());
+
+			}
+
+			// Aaaaaand allows to get attacker info
+			Vector<Attacker> attackers = tilePanel.getMap().getGameBoard()
+					.get((int) Math.round(e.getPoint().getX()) / 40)
+					.get((int) Math.round(e.getPoint().getY()) / 40)
+					.getAttackers();
+			if (attackers.size() != 0) {
+				Ticker.getInstance().loopStop();
+				JFrame enemyInfoFrame = new JFrame();
+				enemyInfoFrame.setResizable(false);
+				enemyInfoFrame.addWindowListener(new ExitListener());
+				enemyInfoFrame.setSize(100, 200);
+				JPanel enemyInfoPanel = new JPanel();
+				enemyInfoPanel.setLayout(new GridLayout(4, 1));
+				enemyInfoPanel.add(new JLabel("Name: "
+						+ attackers.get(0).getName()));
+				enemyInfoPanel
+						.add(new JLabel("HP: " + attackers.get(0).getHP()));
+				enemyInfoPanel.add(new JLabel("Attack: "
+						+ attackers.get(0).getAttack()));
+				enemyInfoPanel.setVisible(true);
+				enemyInfoFrame.setContentPane(enemyInfoPanel);
+				enemyInfoFrame.setVisible(true);
+			}
+
+			// Aaaaaaand Structure info :P
+			Structure structure;
+			JButton upgrade = new JButton("Upgrade");
+			upgrade.addActionListener(new ButtonListener());
+			if (tilePanel.getMap().getGameBoard()
+					.get((int) Math.round(e.getPoint().getX()) / 40)
+					.get((int) Math.round(e.getPoint().getY()) / 40)
+					.getStructure() != null) {
+				structure = tilePanel.getMap().getGameBoard()
+						.get((int) Math.round(e.getPoint().getX()) / 40)
+						.get((int) Math.round(e.getPoint().getY()) / 40)
+						.getStructure();
+
+				Ticker.getInstance().loopStop();
+				JFrame structureInfoFrame = new JFrame();
+				structureInfoFrame.setResizable(false);
+				structureInfoFrame.addWindowListener(new ExitListener());
+				structureInfoFrame.setSize(100, 200);
+				JPanel structureInfoPanel = new JPanel();
+				structureInfoPanel.setLayout(new GridLayout(5, 1));
+				structureInfoPanel.add(new JLabel("Name: "
+						+ structure.getName()));
+				structureInfoPanel.add(new JLabel("HP: " + structure.getHP()));
+				structureInfoPanel.add(new JLabel("Damage: "
+						+ structure.getDamage()));
+				structureInfoPanel.add(new JLabel("Rate of Fire: "
+						+ structure.getROF() + " shots per second"));
+				structureInfoPanel.add(upgrade);
+				structureInfoPanel.setVisible(true);
+				structureInfoFrame.setContentPane(structureInfoPanel);
+				structureInfoFrame.setVisible(true);
 			}
 		}
-
 	}
 
 	private class MenuListener implements ActionListener {
@@ -220,6 +285,60 @@ public class GameGUI implements Serializable {
 				return;
 
 		}
+	}
+
+	private class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO: Upgrade Structure
+		}
+
+	}
+
+	private class ExitListener implements WindowListener {
+
+		@Override
+		public void windowActivated(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowClosed(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowClosing(WindowEvent e) {
+			Ticker.getInstance().loopStart();
+		}
+
+		@Override
+		public void windowDeactivated(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowDeiconified(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowIconified(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void windowOpened(WindowEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
 }

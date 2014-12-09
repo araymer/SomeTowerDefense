@@ -42,6 +42,7 @@ public class ChronoTower extends Structure {
 		upgradeTo = StructureType.STASISTOWER;
 		upgradeCost = 3500;
 		tower = new TowerWaiting(this);
+		name = "Chrono Tower";
 	}
 
 	protected void setImages() {
