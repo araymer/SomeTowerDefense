@@ -27,7 +27,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	JRadioButton chronoTower;
 	JRadioButton sentryGun;
 	JRadioButton plasmaCannon;
-	JRadioButton stasisTower;
+	JRadioButton upgrade;
 	JFrame resourceFrame;
 	StructureType selected;
 
@@ -60,13 +60,14 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		JButton plasmaCannonInfo = new JButton("Info");
 		plasmaCannon.setActionCommand("PlasmaGun");
 		
-		//stasisTower = new JRadioButton("Stasis Tower");
-		//JButton stasisTowerInfo = new JButton("Info");
+		upgrade = new JRadioButton("Upgrade");
+		JButton upgradeInfo = new JButton("Info");
+		upgrade.setActionCommand("Upgrade");
 
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
 		radioButtons.add(plasmaCannon);
-		//radioButtons.add(stasisTower);
+		radioButtons.add(upgrade);
 
 		this.add(chronoTower);
 		this.add(chronoTowerInfo);
@@ -74,13 +75,14 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		this.add(sentryGunInfo);
 		this.add(plasmaCannon);
 		this.add(plasmaCannonInfo);
-		//this.add(stasisTower);
-		//this.add(stasisTowerInfo);
+		this.add(upgrade);
+		this.add(upgradeInfo);
 		
 		//add action listeners
 		chronoTower.addActionListener(this);
 		sentryGun.addActionListener(this);
 		plasmaCannon.addActionListener(this);
+		upgrade.addActionListener(this);
 
 		this.setOpaque(true);
 		// this.setBackground(new Color(0, 0, 0, 0.5f));
@@ -110,7 +112,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	/**
 	 * Returns the structure that is selected in the structure selection menu
 	 * 
-	 * @return
+	 * @return StructureType - the new selection
 	 * 
 	 */
 	public StructureType getSelectedStructure() {
@@ -143,8 +145,12 @@ public class ResourcePanel extends JPanel implements ActionListener {
 			case "PlasmaGun":
 				selected = StructureType.PLASMACANNON;
 				break;
+			case "Upgrade":
+				selected = StructureType.UPGRADE;
+				System.out.println("upgrade mode");
+				break;
 			default:
-				System.out.println("No selection");
+				System.out.println("No selection recorded");
 				break;
 				
 		}

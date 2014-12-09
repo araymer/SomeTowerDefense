@@ -19,12 +19,12 @@ import Structures.*;
 
 public class DesertUprising extends Map {
 
-	private static int tileWidth = 40;
+	
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
 
-	private static int height = guiHeight / tileWidth;// 15
-	private static int width = guiWidth / tileWidth;// 20
+	private static int height = guiHeight / getTileWidth();// 15
+	private static int width = guiWidth / getTileWidth();// 20
 	private Tile spawnTile1, spawnTile2;
 	private ArrayList<Tile> pathTiles;
 	private static final int BASE_X = 3;
@@ -408,48 +408,6 @@ public class DesertUprising extends Map {
 		return null;
 	}
 
-	/**
-	 * Calculates the correct tile to place structure given the mouse position
-	 * on the GameGUI
-	 * 
-	 * @param selectedStructure
-	 *            The type of structure to be created
-	 * @param point
-	 *            The position on the panel where the user clicked
-	 */
-
-	public void createStructure(StructureType selectedStructure, Point point) {
-		// TODO Calculate the tile that was clicked
-		int selectedX = point.x / tileWidth;
-		int selectedY = point.y / tileWidth;
-
-		Tile selectedTile = gameBoard.get(selectedX).get(selectedY);
-
-		switch (selectedStructure) {
-		case BASE:
-			System.out.println("trying to create base");
-			selectedTile.addStructure(new BaseDesertUprising(selectedX,
-					selectedY));
-			break;
-		case SENTRYGUN:
-			System.out.println("trying to create machinegun");
-			selectedTile
-					.addStructure(new MarineSentryGun(selectedX, selectedY));
-			break;
-		case PLASMACANNON:
-			System.out.println("trying to create plasmacannon");
-			selectedTile
-					.addStructure(new PlasmaCannon(selectedX, selectedY));
-			break;
-		case CHRONOTOWER:
-			System.out.println("trying to create chronotower");
-			selectedTile
-					.addStructure(new ChronoTower(selectedX, selectedY));
-			break;
-		default:
-			break;
-
-		}
-	}
+	
 
 }
