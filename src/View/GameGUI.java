@@ -50,6 +50,7 @@ public class GameGUI implements Serializable {
 	private TDClient client;
 	public boolean isMultiplayer = false;
 	public int mapSelection;
+	Structure structure;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -99,6 +100,8 @@ public class GameGUI implements Serializable {
 
 		contentPane.add(tilePanel);
 		// tilePanel.add(resourcePanel);
+		// TODO: Make the menu stay...
+		createMenuBar();
 		frame.setJMenuBar(menuBar);
 		frame.repaint();
 
@@ -241,7 +244,7 @@ public class GameGUI implements Serializable {
 			}
 
 			// Aaaaaaand Structure info :P
-			Structure structure;
+
 			JButton upgrade = new JButton("Upgrade");
 			upgrade.addActionListener(new ButtonListener());
 			if (tilePanel.getMap().getGameBoard()
@@ -335,6 +338,7 @@ public class GameGUI implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO: Upgrade Structure
+			structure.upgrade();
 		}
 
 	}
