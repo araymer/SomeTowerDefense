@@ -3,6 +3,7 @@ package View;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import Controller.TDClient;
 import Model.Attacker;
@@ -97,9 +99,7 @@ public class GameGUI implements Serializable {
 
 		contentPane.add(tilePanel);
 		// tilePanel.add(resourcePanel);
-
 		frame.setJMenuBar(menuBar);
-
 		frame.repaint();
 
 		new Thread(Ticker.getInstance()).start();
@@ -136,21 +136,27 @@ public class GameGUI implements Serializable {
 
 	void createMenuBar() {
 		menuBar = new JMenuBar();
-		// JMenu file = new JMenu("File");
-		// JMenuItem
-		// TODO: GOING TO HAVE TO ADD LISTENERS TO THESE LATER
 		game = new JMenu("Game");
 		load = new JMenuItem("Load");
 		load.addActionListener(new MenuListener());
+		load.setActionCommand("load");
 		game.add(load);
 		pause = new JCheckBox("Pause");
+		pause.addActionListener(new MenuListener());
+		pause.setActionCommand("pause");
 		game.add(pause);
 		exit = new JMenuItem("Exit");
+		exit.addActionListener(new MenuListener());
+		exit.setActionCommand("exit");
 		game.add(exit);
 		help = new JMenu("Help");
 		options = new JMenuItem("Options");
+		options.addActionListener(new MenuListener());
+		options.setActionCommand("options");
 		help.add(options);
 		instructions = new JMenuItem("How To Play");
+		instructions.addActionListener(new MenuListener());
+		instructions.setActionCommand("instructions");
 		help.add(instructions);
 		frame.setJMenuBar(menuBar);
 		// menuBar.add(file);
@@ -273,16 +279,53 @@ public class GameGUI implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == load)
-				return;
-			if (e.getSource() == pause)
-				return;
-			if (e.getSource() == exit)
+			switch (e.getActionCommand()) {
+			case "load":
+				// TODO: implement loading
+				break;
+			case "pause":
+				if (Ticker.getInstance().running())
+					Ticker.getInstance().loopStop();
+				Ticker.getInstance().loopStart();
+				break;
+			case "exit":
 				System.exit(0);
-			if (e.getSource() == options)
-				return;
-			if (e.getSource() == instructions)
-				return;
+				break;
+			case "options":
+				// TODO: implement any game options
+				break;
+			case "instructions":
+				JFrame instr = new JFrame();
+				instr = new JFrame();
+				instr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				instr.setSize(200, 600);
+				instr.setResizable(false);
+				instr.setTitle("Instructions");
+
+				String howtoInstructions = "How to:\n\n"
+						+ "This is a Tower Defense Game, where you will protect your home base by building"
+						+ " towers that will defend against waves of enemies!\n\n"
+						+ "Getting started:\n To play, simply select"
+						+ " the single player or multiplayer game mode. Once in the game, you will be"
+						+ " able to select the map you wish to play on.\n\n"
+						+ "Gameplay:\nIn the game, you'll be able to select the type of tower you wish to"
+						+ " build on the resource window on the right. Selecting a type of tower and clicking"
+						+ " on an eligible spot will build a tower there. Click on any of your towers, your base"
+						+ " or even enemies to view information about them, upgrade your towers, or heal your base.";
+
+				JPanel instrPanel = new JPanel();
+				instrPanel.setLayout(new FlowLayout());
+				JTextArea howto = new JTextArea(howtoInstructions);
+				howto.setSize(200, 600);
+				howto.setEditable(false);
+				howto.setBackground(Color.WHITE);
+				howto.setLineWrap(true);
+				instrPanel.add(howto);
+				instrPanel.setVisible(true);
+				instr.setContentPane(instrPanel);
+				instr.setVisible(true);
+				break;
+			}
 
 		}
 	}
