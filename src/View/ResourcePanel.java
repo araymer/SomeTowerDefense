@@ -110,20 +110,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	 */
 	public StructureType getSelectedStructure() {
 		return selected;
-<<<<<<< HEAD
-=======
 
-		/*
-		 * if (radioButtons.getSelection() == chronoTower) return
-		 * StructureType.CHRONOTOWER; if (radioButtons.getSelection() ==
-		 * sentryGun) return StructureType.SENTRYGUN; if
-		 * (radioButtons.getSelection() == plasmaCannon) return
-		 * StructureType.PLASMACANNON; if (radioButtons.getSelection() ==
-		 * stasisTower) return StructureType.STASISTOWER;
-		 * System.out.println("No selection recorded"); return
-		 * StructureType.SENTRYGUN;
-		 */
->>>>>>> branch 'master' of https://github.com/araymer/SomeTowerDefense.git
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -140,7 +127,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 			selected = StructureType.PLASMACANNON;
 			break;
 		case "Upgrade":
-			selected = StructureType.STASISTOWER;
+			selected = StructureType.UPGRADE;
 			break;
 		default:
 			System.out.println("No selection recorded");

@@ -62,31 +62,6 @@ public class TowerWaiting extends TowerState {
 	 * Changes state according to attackers entering range, HP reaching zero or
 	 * less, or upgrade being initiated.
 	 */
-//	private void waiting() {
-//		th = new Thread(new Runnable() {
-//			public void run() {
-//				while (!stateChange) {
-//					if (tower.hitpoints <= 0) {
-//						tower.changeTo(TowerStates.EXPLODE, null);
-//						stateChange = true;
-//					} else if (upgrade) {
-//						// TODO (Iteration 2: make towers able to upgrade
-//					} else if (signal) {
-//						tower.changeTo(TowerStates.ATTACK, attacker);
-//						stateChange = true;
-//					}
-//					 //wait for predefined number of ticks
-//					try {
-//						Thread.sleep(10); // or it will cause massive CPU usage
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-//		});
-//		th.start();
-//	}
-	
 	private void waiting() {
 				if (!stateChange) {
 					if (tower.hitpoints <= 0) {

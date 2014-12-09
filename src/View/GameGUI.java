@@ -330,7 +330,6 @@ public class GameGUI implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO: Upgrade Structure
-			structure.upgrade();
 		}
 
 	}
