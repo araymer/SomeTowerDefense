@@ -207,6 +207,10 @@ public class Ticker implements Runnable {
 		isRunning = false;
 	}
 
+	public boolean running() {
+		return isRunning;
+	}
+
 	/**
 	 * Returns instance of this class.
 	 * 

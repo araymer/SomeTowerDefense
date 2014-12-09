@@ -46,20 +46,20 @@ public class ResourcePanel extends JPanel implements ActionListener {
 
 		this.setLayout(new FlowLayout());
 		radioButtons = new ButtonGroup();
-		
+
 		chronoTower = new JRadioButton("Chrono-Tower");
 		JButton chronoTowerInfo = new JButton("Info");
 		chronoTower.setActionCommand("ChronoTower");
-		
+
 		sentryGun = new JRadioButton("Sentry Gun");
 		JButton sentryGunInfo = new JButton("Info");
 		sentryGun.setActionCommand("SentryGun");
 		sentryGun.setSelected(true);
-		
+
 		plasmaCannon = new JRadioButton("Plasma Cannon");
 		JButton plasmaCannonInfo = new JButton("Info");
 		plasmaCannon.setActionCommand("PlasmaGun");
-		
+
 		upgrade = new JRadioButton("Upgrade");
 		JButton upgradeInfo = new JButton("Info");
 		upgrade.setActionCommand("Upgrade");
@@ -77,8 +77,8 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		this.add(plasmaCannonInfo);
 		this.add(upgrade);
 		this.add(upgradeInfo);
-		
-		//add action listeners
+
+		// add action listeners
 		chronoTower.addActionListener(this);
 		sentryGun.addActionListener(this);
 		plasmaCannon.addActionListener(this);
@@ -110,29 +110,42 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	 */
 	public StructureType getSelectedStructure() {
 		return selected;
+<<<<<<< HEAD
+=======
+
+		/*
+		 * if (radioButtons.getSelection() == chronoTower) return
+		 * StructureType.CHRONOTOWER; if (radioButtons.getSelection() ==
+		 * sentryGun) return StructureType.SENTRYGUN; if
+		 * (radioButtons.getSelection() == plasmaCannon) return
+		 * StructureType.PLASMACANNON; if (radioButtons.getSelection() ==
+		 * stasisTower) return StructureType.STASISTOWER;
+		 * System.out.println("No selection recorded"); return
+		 * StructureType.SENTRYGUN;
+		 */
+>>>>>>> branch 'master' of https://github.com/araymer/SomeTowerDefense.git
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		String newSelection = e.getActionCommand();
-		
-		switch(newSelection) {
-			case "SentryGun":
-				selected = StructureType.SENTRYGUN;
-				break;
-			case "ChronoTower":
-				selected = StructureType.CHRONOTOWER;
-				break;
-			case "PlasmaGun":
-				selected = StructureType.PLASMACANNON;
-				break;
-			case "Upgrade":
-				selected = StructureType.UPGRADE;
-				System.out.println("upgrade mode");
-				break;
-			default:
-				System.out.println("No selection recorded");
-				break;
-				
+
+		switch (newSelection) {
+		case "SentryGun":
+			selected = StructureType.SENTRYGUN;
+			break;
+		case "ChronoTower":
+			selected = StructureType.CHRONOTOWER;
+			break;
+		case "PlasmaGun":
+			selected = StructureType.PLASMACANNON;
+			break;
+		case "Upgrade":
+			selected = StructureType.STASISTOWER;
+			break;
+		default:
+			System.out.println("No selection recorded");
+			break;
+
 		}
 	}
 }

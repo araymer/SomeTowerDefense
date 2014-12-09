@@ -199,4 +199,9 @@ public abstract class Structure extends Drawable {
 	public String getName() {
 		return name;
 	}
+
+	public void upgrade() {
+		// TODO: set upgradability???
+
+	}
 }

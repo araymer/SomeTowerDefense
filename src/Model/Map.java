@@ -7,9 +7,10 @@ import Structures.BaseDesertUprising;
 import Structures.ChronoTower;
 import Structures.MarineSentryGun;
 import Structures.PlasmaCannon;
+import Structures.StasisTower;
 
 public abstract class Map {
-	
+
 	private static int tileWidth = 40;
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
@@ -30,7 +31,6 @@ public abstract class Map {
 		}
 
 	}
-	
 
 	/**
 	 * Calculates the correct tile to place structure given the mouse position
@@ -62,14 +62,15 @@ public abstract class Map {
 			break;
 		case PLASMACANNON:
 			System.out.println("trying to create plasmacannon");
-			selectedTile
-					.addStructure(new PlasmaCannon(selectedX, selectedY));
+			selectedTile.addStructure(new PlasmaCannon(selectedX, selectedY));
 			break;
 		case CHRONOTOWER:
 			System.out.println("trying to create chronotower");
-			selectedTile
-					.addStructure(new ChronoTower(selectedX, selectedY));
+			selectedTile.addStructure(new ChronoTower(selectedX, selectedY));
 			break;
+		case STASISTOWER:
+			System.out.println("trying to create stasistower");
+			selectedTile.addStructure(new StasisTower(selectedX, selectedY));
 		case UPGRADE:
 			System.out.println("Trying to upgrade (TODO)");
 			break;
@@ -89,8 +90,8 @@ public abstract class Map {
 
 	public abstract void setStartingResources();
 
-	//public abstract void createStructure(StructureType selectedStructure,
-			//Point point);
+	// public abstract void createStructure(StructureType selectedStructure,
+	// Point point);
 
 	public Vector<Vector<Tile>> getGameBoard() {
 		return gameBoard;
@@ -98,11 +99,9 @@ public abstract class Map {
 
 	public abstract Tile getSpawnTile(int n);
 
-
 	public static int getTileWidth() {
 		return tileWidth;
 	}
-
 
 	public static void setTileWidth(int tileWidth) {
 		Map.tileWidth = tileWidth;
