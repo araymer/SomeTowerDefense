@@ -440,6 +440,12 @@ public class DesertUprising extends Map {
 			System.out.println("trying to create plasmacannon");
 			selectedTile
 					.addStructure(new PlasmaCannon(selectedX, selectedY));
+			break;
+		case CHRONOTOWER:
+			System.out.println("trying to create chronotower");
+			selectedTile
+					.addStructure(new ChronoTower(selectedX, selectedY));
+			break;
 		default:
 			break;
 
