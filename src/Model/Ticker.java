@@ -200,10 +200,12 @@ public class Ticker implements Runnable {
 	}
 
 	public void loopStart() {
+		System.out.println("Resuming loop");
 		isRunning = true;
 	}
 
 	public void loopStop() {
+		System.out.println("Stopping loop");
 		isRunning = false;
 	}
 
