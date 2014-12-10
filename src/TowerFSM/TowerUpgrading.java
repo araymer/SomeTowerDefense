@@ -2,8 +2,10 @@ package TowerFSM;
 
 import java.awt.Graphics2D;
 
-import Model.*;
-import Structures.*;
+import Model.Structure;
+import Structures.MarineSentryGunMkII;
+import Structures.PlasmaCannon;
+import Structures.StasisTower;
 
 /**
  * This class controls the behavior of the tower while it is in the process of
@@ -51,16 +53,16 @@ public class TowerUpgrading extends TowerState {
 	 */
 	@Override
 	public void update() {
-		if(tower.getUpgradeTo() == null) {
+		if (tower.getUpgradeTo() == null) {
 			System.out.println("no upgrades available");
 		} else {
-			switch(tower.getUpgradeTo()) {
+			switch (tower.getUpgradeTo()) {
 			case SENTRYGUN:
 				tower = new MarineSentryGunMkII(tower.x, tower.y);
 				tower.changeTo(TowerStates.WAIT, null);
 				break;
 			case PLASMACANNON:
-				tower = new HellfireCannon(tower.x, tower.y);
+				tower = new PlasmaCannon(tower.x, tower.y);
 				tower.changeTo(TowerStates.WAIT, null);
 				break;
 			case CHRONOTOWER:
@@ -71,7 +73,7 @@ public class TowerUpgrading extends TowerState {
 				System.out.println("ERROR in update method TowerUpgrading");
 			}
 		}
-			
+
 		tick = 0;
 
 	}
