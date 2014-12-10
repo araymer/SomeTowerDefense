@@ -42,6 +42,7 @@ public class StasisTower extends Structure {
 		upgradeTo = null;
 		upgradeCost = 0;
 		tower = new TowerWaiting(this);
+		name = "Stasis Tower";
 	}
 
 	protected void setImages() {

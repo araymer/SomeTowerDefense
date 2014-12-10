@@ -1,30 +1,26 @@
 package command;
 
-import java.util.Vector;
-
 import Controller.TDClient;
 import Controller.TDServer;
-import Model.Tile;
 
-public class UpdateMiniMapCommand extends Command{
-	
-	Vector<Vector<Tile>> gameMap;
+public class UpdateChatCommand extends Command{
+	String text;
 
-	public UpdateMiniMapCommand(String username, Vector<Vector<Tile>> mapUpdate) {
+	public UpdateChatCommand(String username, String txt) {
 		super(username);
-		gameMap = mapUpdate;
+		text = txt;
 	}
 
 	@Override
 	public void serverExecute(TDServer server) {
 		// TODO Auto-generated method stub
-		//server
+		//server.addToChat(text);
 	}
 
 	@Override
 	public void clientExecute(TDClient client) {
 		// TODO Auto-generated method stub
-		//client
+		//client.updateChat(text);
 	}
 
 }

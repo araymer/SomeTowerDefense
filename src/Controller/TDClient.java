@@ -17,6 +17,7 @@ import command.UpdateBaseCommand;
 
 public class TDClient {
 
+	@SuppressWarnings("unused")
 	private GameController gameController;
 	private GameGUI GUI;
 	private Socket server;
@@ -90,9 +91,6 @@ public class TDClient {
 	 * @param list
 	 *            - the list of shapes now present on the canvas.
 	 */
-	// public void update(ArrayList<Shapes> list) {
-	// GUI.update(list);
-	// }
 
 	/**
 	 * Closes the client, disconnects it from the server, and closes all the

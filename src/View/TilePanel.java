@@ -21,6 +21,7 @@ import Model.Tile;
  *
  */
 
+@SuppressWarnings("serial")
 public class TilePanel extends JPanel {
 	private static TilePanel tilePanel;
 	public Map tileMap;
@@ -30,7 +31,6 @@ public class TilePanel extends JPanel {
 	 * Constructs the TilePanel for use in the GameGUI
 	 */
 	private TilePanel() {
-		// this.setPreferredSize(new Dimension(WIDTH, HEIGHT)); already set
 		this.setOpaque(false);
 		this.setVisible(true);
 		tileMap = new DesertUprising(); // TODO:needs to work with any map

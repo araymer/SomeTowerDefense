@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,21 +24,20 @@ public class MainMenu extends JPanel {
 	private static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
-	JButton desertMap;
+	// JButton desertMap;
 	JButton singleplayer;
 	JButton multiplayer;
-	
 
 	private MainMenu() {
 
-		desertMap = new JButton("Desert Uprising");
+		// desertMap = new JButton("Desert Uprising");
 		singleplayer = new JButton("Single Player");
 		multiplayer = new JButton("Multi-Player");
 		ButtonListener buttonListener = new ButtonListener();
-		desertMap.addActionListener(buttonListener);
+		// desertMap.addActionListener(buttonListener);
 		singleplayer.addActionListener(buttonListener);
 		multiplayer.addActionListener(buttonListener);
-		this.add(desertMap);
+		// this.add(desertMap);
 		this.add(singleplayer);
 		this.add(multiplayer);
 		this.setBackground(Color.BLACK);
@@ -62,10 +60,10 @@ public class MainMenu extends JPanel {
 
 		repaint();
 		this.setVisible(true);
-		
+
 	}
-	
-	public void resetLogo(){
+
+	public void resetLogo() {
 		File logoImage = new File(baseDir + "logo.png");
 		try {
 			logo = ImageIO.read(logoImage);
@@ -79,18 +77,18 @@ public class MainMenu extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == desertMap)
-				GameGUI.getInstance().createMap(0);
+			// if (e.getSource() == desertMap)
+			// GameGUI.getInstance().createMap(0);
 			if (e.getSource() == singleplayer)
 				GameGUI.getInstance().createMap(0);
 			if (e.getSource() == multiplayer) {
-				
+
 				System.out.println("Multiplayer button clicked");
 				TDServer server = new TDServer();
 				TDClient client = new TDClient();
-				//Have different map selection based on picked map
+				// Have different map selection based on picked map
 				GameGUI.getInstance().mapSelection = 0;
-				
+
 				File logoImage = new File(baseDir + "waiting.png");
 				try {
 					logo = ImageIO.read(logoImage);
@@ -98,7 +96,7 @@ public class MainMenu extends JPanel {
 					exc.printStackTrace();
 				}
 				mainMenu.repaint();
-				
+
 			}
 
 		}

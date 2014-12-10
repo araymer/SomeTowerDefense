@@ -22,22 +22,6 @@ public class GameController {
 	public GameController() {
 		waveCount = 5;
 		gui = GameGUI.getInstance();
-
-		// startWaves();
-
-		// gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
-		// new Marine(gui.tilePanel.tileMap.getSpawnTile(1)));
-		//
-		// gui.tilePanel.tileMap.getSpawnTile(1).addAttacker(
-		// new Marine(gui.tilePanel.tileMap.getSpawnTile(2)));
-
-		// gui.tilePanel.tileMap
-		// .getGameBoard()
-		// .get(11)
-		// .get(14)
-		// .addAttacker(
-		// new Marine(gui.tilePanel.tileMap.getGameBoard().get(11)
-		// .get(14)));
 	}
 
 	// TODO This needs to be dependent on ticker, so pausing will also pause the

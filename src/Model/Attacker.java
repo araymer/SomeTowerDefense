@@ -8,12 +8,13 @@ import View.TilePanel;
 //Test, let's see if git is working.
 //Test 2
 
-public abstract class Attacker extends Drawable{
+public abstract class Attacker extends Drawable {
 
+	protected String name;
 	private int hitpoints;
 	private int attackRating;
-	
-	//The larger the speed, the slower
+
+	// The larger the speed, the slower
 	private int speed; // The number of milliseconds it takes to cross a full
 						// tile
 	private int defenseRating;
@@ -32,10 +33,10 @@ public abstract class Attacker extends Drawable{
 	protected static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
 			+ System.getProperty("file.separator");
-	
+
 	protected boolean isDead = false;
 	public boolean needsToMove = false;
-	
+
 	private int tick;
 
 	// private int cost; //This is for itr2, possibly
@@ -70,8 +71,9 @@ public abstract class Attacker extends Drawable{
 	}
 
 	public void move() {
-		//Wont work because you can't modify a list while it's being iterated over somewhere else
-		if (location.getNextTile() != null){
+		// Wont work because you can't modify a list while it's being iterated
+		// over somewhere else
+		if (location.getNextTile() != null) {
 			needsToMove = true;
 		}
 	}
@@ -85,13 +87,17 @@ public abstract class Attacker extends Drawable{
 	public void takeDamage(int dmg) {
 		System.out.println("ouch!");
 		hitpoints -= dmg;
-		
-		if(hitpoints <= 0){
+
+		if (hitpoints <= 0) {
 			die();
 		}
 	}
 
 	// getters
+	public String getName() {
+		return name;
+	}
+
 	public int getHP() {
 		return hitpoints;
 	}
@@ -139,28 +145,28 @@ public abstract class Attacker extends Drawable{
 	public int getY() {
 		return y;
 	}
-	
-	public void update(){
-		if(tick == 1000){
+
+	public void update() {
+		if (tick == 1000) {
 			tick = 1;
-		}else{
+		} else {
 			tick++;
 		}
 		int framedif = 0;
-		//Moves every speed amount of ticks
-		if(tick % speed == 0){
+		// Moves every speed amount of ticks
+		if (tick % speed == 0) {
 			move();
 		}
-		//Shoots if at base
-		if(tick % attackRating == 0){
-			if(location.getNextTile() == null){
+		// Shoots if at base
+		if (tick % attackRating == 0) {
+			if (location.getNextTile() == null) {
 				attack(TilePanel.getInstance().tileMap.getBase());
 			}
 		}
 	}
-	
-	public boolean isFinished(){
+
+	public boolean isFinished() {
 		return isDead;
 	}
-	
+
 }

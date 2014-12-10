@@ -17,8 +17,6 @@ import command.UpdateBaseCommand;
 import command.UpdateMiniMapCommand;
 
 
-
-
 public class TDServer {
 	private ServerSocket socket;
 	private int port;
@@ -163,7 +161,7 @@ public class TDServer {
 
 	private void updateClients() {
 		// make an UpdateClientCommmand, write to all connected users
-		UpdateMiniMapCommand update = new UpdateMiniMapCommand("?");
+		UpdateMiniMapCommand update = new UpdateMiniMapCommand(null, null);
 		try {
 			for (ObjectOutputStream out : outputs.values())
 				out.writeObject(update);
@@ -211,7 +209,6 @@ public class TDServer {
 		}
 
 	}
-
 
 	public void setStartingHP(String username, int newBaseHP) {
 		if(!hpIsSet){

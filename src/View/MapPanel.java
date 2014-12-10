@@ -15,9 +15,10 @@ import javax.swing.JPanel;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class MapPanel extends JPanel {
+	@SuppressWarnings("unused")
 	private final int MAP_WIDTH = 800;
-	private final int MAP_HEIGHT = 600;
 	private static Image image;
 	private static MapPanel mapPanel;
 	// private JMenuBar menu = new JMenuBar();
@@ -35,10 +36,6 @@ public class MapPanel extends JPanel {
 	 */
 	private MapPanel() {
 		this.setSize(1000, 622);
-		// menu.add(new JMenu("File"));
-		// menu.setVisible(true);
-		// this.add(menu);
-		this.setVisible(true);
 
 	}
 

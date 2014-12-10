@@ -39,6 +39,7 @@ public class PlasmaCannon extends Structure {
 		setImages();
 		upgradeTo = StructureType.HELLFIRECANNON;
 		tower = new TowerWaiting(this);
+		name = "Plasma Cannon";
 	}
 
 	@Override
