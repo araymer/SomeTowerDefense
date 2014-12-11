@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Model.Attacker;
+import Model.SpecialAttack;
 import Model.Structure;
 
 /**
@@ -57,6 +58,15 @@ public class TowerAttacking extends TowerState {
 		} else {
 			System.out.println("TowerAttacking: Enemy went out of range, switching to wait");
 			tower.changeTo(TowerStates.WAIT, null);
+		}
+		
+		// if the tower has TWO_TARGETS special attack, it see if there is more than one
+		// enemy on the same tile, and attacks the second one
+		if(tower.getSpecial() == SpecialAttack.TWO_TARGETS) {
+			target.location.getAttackers().trimToSize();
+			if(target.location.getAttackers().size() > 1) {
+				target.location.getAttackers().get(1).takeDamage(tower.getDamage());
+			}
 		}
 	}
 

@@ -14,8 +14,8 @@ import TowerFSM.TowerWaiting;
 
 /**
  * The upgraded version of the Sentry Gun. It can track and attack two separate
- * targets simultaneously. Should not be buildable on it's own, must be an
- * upgrade to the sentry gun.
+ * targets on the same tile simultaneously. Should not be buildable on it's own, 
+ * must be an upgrade to the sentry gun.
  * 
  * @author Team Something
  *
