@@ -45,7 +45,7 @@ public class TowerAttacking extends TowerState {
 	 * state.
 	 */
 	private void shoot() {
-		//System.out.println("I seen tim");
+		//System.out.println("I seen him");
 		if(target.isFinished()){
 			System.out.println("TowerAttacking: Enemy died, mission complete");
 			tower.changeTo(TowerStates.WAIT, null);
@@ -115,7 +115,7 @@ public class TowerAttacking extends TowerState {
 				}
 	}
 	
-	//TODO Will work on sprites next iteration
+	//TODO Will work on spites next iteration
 	@Override
 	public void draw(Graphics2D g2) {
 //		if (tower.bImage == null) {

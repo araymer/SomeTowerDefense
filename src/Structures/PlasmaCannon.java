@@ -62,7 +62,7 @@ public class PlasmaCannon extends Structure {
 			}
 		}
 		if (upgradeImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "PlasmaCannon.png");
 			try {
 				upgradeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
