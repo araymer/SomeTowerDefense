@@ -71,6 +71,8 @@ public abstract class Map {
 		case UPGRADE:
 			System.out.println("trying to upgrade");
 			StructureType upgrade = selectedTile.getStructure().getUpgradeTo();
+			if(upgrade == null)
+				upgrade = StructureType.NONE;
 			switch(upgrade) {
 				case SENTRYGUN2:
 					selectedTile.removeStructure();
