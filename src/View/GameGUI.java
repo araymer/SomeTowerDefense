@@ -237,8 +237,8 @@ public class GameGUI implements Serializable {
 
 			// Aaaaaaand Structure info :P
 
-			JButton upgrade = new JButton("Upgrade");
-			upgrade.addActionListener(new ButtonListener());
+			//JButton upgrade = new JButton("Upgrade");
+			//upgrade.addActionListener(new ButtonListener());
 			if (tilePanel.getMap().getGameBoard()
 					.get((int) Math.round(e.getPoint().getX()) / 40)
 					.get((int) Math.round(e.getPoint().getY()) / 40)
@@ -248,11 +248,12 @@ public class GameGUI implements Serializable {
 						.get((int) Math.round(e.getPoint().getY()) / 40)
 						.getStructure();
 
-				Ticker.getInstance().loopStop();
+				//Ticker.getInstance().loopStop();
 				JFrame structureInfoFrame = new JFrame();
 				structureInfoFrame.setResizable(false);
 				structureInfoFrame.addWindowListener(new ExitListener());
 				structureInfoFrame.setSize(100, 200);
+				structureInfoFrame.setLocation(811,300);
 				JPanel structureInfoPanel = new JPanel();
 				structureInfoPanel.setLayout(new GridLayout(5, 1));
 				structureInfoPanel.add(new JLabel("Name: "
@@ -262,7 +263,7 @@ public class GameGUI implements Serializable {
 						+ structure.getDamage()));
 				structureInfoPanel.add(new JLabel("Rate of Fire: "
 						+ structure.getROF() + " shots per second"));
-				structureInfoPanel.add(upgrade);
+				//structureInfoPanel.add(upgrade);
 				structureInfoPanel.setVisible(true);
 				structureInfoFrame.setContentPane(structureInfoPanel);
 				structureInfoFrame.setVisible(true);
@@ -329,7 +330,7 @@ public class GameGUI implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO: Upgrade Structure
+			// empty
 		}
 
 	}

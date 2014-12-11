@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import Model.SpecialAttack;
 import Model.Structure;
+import Model.StructureType;
 import TowerFSM.TowerStates;
 import TowerFSM.TowerWaiting;
 
@@ -37,7 +38,7 @@ public class MarineSentryGunMkII extends Structure {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
 				x, y, SpecialAttack.TWO_TARGETS);
 		setImages();
-		upgradeTo = null;
+		upgradeTo = StructureType.NONE;
 		upgradeCost = 0;
 		tower = new TowerWaiting(this);
 		name = "Sentry Gun MkII";
