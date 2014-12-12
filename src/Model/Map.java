@@ -4,10 +4,7 @@ import java.awt.Point;
 import java.util.Vector;
 
 import Structures.BaseDesertUprising;
-import Structures.ChronoTower;
-import Structures.MarineSentryGun;
-import Structures.PlasmaCannon;
-import Structures.StasisTower;
+import Structures.*;
 
 public abstract class Map {
 
@@ -72,7 +69,27 @@ public abstract class Map {
 			System.out.println("trying to create stasistower");
 			selectedTile.addStructure(new StasisTower(selectedX, selectedY));
 		case UPGRADE:
-			System.out.println("Trying to upgrade (TODO)");
+			System.out.println("trying to upgrade");
+			StructureType upgrade = selectedTile.getStructure().getUpgradeTo();
+			if(upgrade == null)
+				upgrade = StructureType.NONE;
+			switch(upgrade) {
+				case SENTRYGUN2:
+					selectedTile.removeStructure();
+					selectedTile.addStructure(new MarineSentryGunMkII(selectedX, selectedY));
+					break;
+				case HELLFIRECANNON:
+					selectedTile.removeStructure();
+					selectedTile.addStructure(new HellfireCannon(selectedX, selectedY));
+					break;
+				case STASISTOWER:
+					selectedTile.removeStructure();
+					selectedTile.addStructure(new StasisTower(selectedX, selectedY));
+					break;
+				default:
+					System.out.println("No upgrades available");
+					
+			}
 			break;
 		default:
 			System.out.println("Error in createStructure method");

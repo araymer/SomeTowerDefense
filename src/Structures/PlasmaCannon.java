@@ -54,7 +54,7 @@ public class PlasmaCannon extends Structure {
 		}
 
 		if (attackImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "PlasmaCannonFire.png");
 			try {
 				attackImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -62,7 +62,7 @@ public class PlasmaCannon extends Structure {
 			}
 		}
 		if (upgradeImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "PlasmaCannon.png");
 			try {
 				upgradeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {

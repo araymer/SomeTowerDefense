@@ -8,13 +8,14 @@ import javax.imageio.ImageIO;
 
 import Model.SpecialAttack;
 import Model.Structure;
+import Model.StructureType;
 import TowerFSM.TowerStates;
 import TowerFSM.TowerWaiting;
 
 /**
  * The upgraded version of the Sentry Gun. It can track and attack two separate
- * targets simultaneously. Should not be buildable on it's own, must be an
- * upgrade to the sentry gun.
+ * targets on the same tile simultaneously. Should not be buildable on it's own, 
+ * must be an upgrade to the sentry gun.
  * 
  * @author Team Something
  *
@@ -37,7 +38,7 @@ public class MarineSentryGunMkII extends Structure {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
 				x, y, SpecialAttack.TWO_TARGETS);
 		setImages();
-		upgradeTo = null;
+		upgradeTo = StructureType.NONE;
 		upgradeCost = 0;
 		tower = new TowerWaiting(this);
 		name = "Sentry Gun MkII";
@@ -56,7 +57,7 @@ public class MarineSentryGunMkII extends Structure {
 		}
 
 		if (attackImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "MarineSentryGunMkIIFire.png");
 			try {
 				attackImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -64,7 +65,7 @@ public class MarineSentryGunMkII extends Structure {
 			}
 		}
 		if (upgradeImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "MarineSentryGunMkII.png");
 			try {
 				upgradeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {

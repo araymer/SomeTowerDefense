@@ -13,13 +13,13 @@ import TowerFSM.TowerStates;
 import TowerFSM.TowerWaiting;
 
 /**
- * This is the upgraded version of the Chrono Tower. The target is held in a
- * stasis field, unable to move or attack
+ * This is the upgraded version of the Hellfire Cannon, dealing more damage,
+ * with the burning...
  * 
  * @author Team Something
  *
  */
-public class StasisTower extends Structure {
+public class HellfireCannon extends Structure {
 	protected static BufferedImage waitImage;
 	protected static BufferedImage attackImage;
 	protected static BufferedImage upgradeImage;
@@ -34,22 +34,22 @@ public class StasisTower extends Structure {
 	private static final int COST = 2500;
 
 	/**
-	 * Constructor for Stasis Tower.
+	 * Constructor for Hell Fire Cannon.
 	 */
-	public StasisTower(int x, int y) {
+	public HellfireCannon(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
 				x, y, SpecialAttack.FREEZE);
 		setImages();
 		upgradeTo = StructureType.NONE;
 		upgradeCost = 0;
 		tower = new TowerWaiting(this);
-		name = "Stasis Tower";
+		name = "Hellfire Cannon";
 	}
 
 	protected void setImages() {
 
 		if (waitImage == null) {
-			File imageFile = new File(Structure.baseDir + "StasisTower.png");
+			File imageFile = new File(Structure.baseDir + "HellFireCannon.png");
 			try {
 				waitImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -58,7 +58,7 @@ public class StasisTower extends Structure {
 		}
 
 		if (attackImage == null) {
-			File imageFile = new File(Structure.baseDir + "StasisTowerAttack.png");
+			File imageFile = new File(Structure.baseDir + "HellFireCannonFire.png");
 			try {
 				attackImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
@@ -66,7 +66,7 @@ public class StasisTower extends Structure {
 			}
 		}
 		if (upgradeImage == null) {
-			File imageFile = new File(Structure.baseDir + "StasisTower.png");
+			File imageFile = new File(Structure.baseDir + "HellFireCannon.png");
 			try {
 				upgradeImage = ImageIO.read(imageFile);
 			} catch (IOException e) {

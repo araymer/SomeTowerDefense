@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Model.Attacker;
+import Model.SpecialAttack;
 import Model.Structure;
 
 /**
@@ -44,6 +45,8 @@ public class TowerAttacking extends TowerState {
 	 * state.
 	 */
 	private void shoot() {
+
+		//System.out.println("I seen him");
 		if(target.isFinished()){
 			System.out.println("TowerAttacking: Enemy died, mission complete");
 			tower.changeTo(TowerStates.WAIT, null);
@@ -55,6 +58,15 @@ public class TowerAttacking extends TowerState {
 		} else {
 			System.out.println("TowerAttacking: Enemy went out of range, switching to wait");
 			tower.changeTo(TowerStates.WAIT, null);
+		}
+		
+		// if the tower has TWO_TARGETS special attack, it see if there is more than one
+		// enemy on the same tile, and attacks the second one
+		if(tower.getSpecial() == SpecialAttack.TWO_TARGETS) {
+			target.location.getAttackers().trimToSize();
+			if(target.location.getAttackers().size() > 1) {
+				target.location.getAttackers().get(1).takeDamage(tower.getDamage());
+			}
 		}
 	}
 
@@ -113,7 +125,7 @@ public class TowerAttacking extends TowerState {
 				}
 	}
 	
-	//TODO Will work on sprites next iteration
+	//TODO Will work on spites next iteration
 	@Override
 	public void draw(Graphics2D g2) {
 //		if (tower.bImage == null) {

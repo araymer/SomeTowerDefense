@@ -6,10 +6,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
 import View.GameGUI;
+import command.AddMessageCommand;
 import command.BaseTakeDamageCommand;
 import command.Command;
 import command.DisconnectCommand;
@@ -132,5 +135,22 @@ public class TDClient {
 
 	public void startMultiplayerGame(){
 		GUI.startMultiplayerGame();
+	}
+	
+	public void addMessage(String message){
+		try{
+			toServer.writeObject(new AddMessageCommand(username, message));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Sets the new chat in the ChatPanel
+	 * 
+	 * @param text  -the new updated text
+	 */
+	public void updateChat(List<String> text) {
+		GUI.multiFrame.chatPanel.update(text);
 	}
 }

@@ -3,13 +3,14 @@ package TowerFSM;
 import java.awt.Graphics2D;
 
 import Model.Structure;
-import Structures.MarineSentryGunMkII;
-import Structures.PlasmaCannon;
-import Structures.StasisTower;
+import Structures.*;
+//TODO: decide if we need to keep this class
 
 /**
  * This class controls the behavior of the tower while it is in the process of
  * upgrading. Note: towers take X2 damage while upgrading.
+ * 
+ * CURRENTLY UNUSED, UPGRADES HANDLED IN: Map class
  * 
  * @author Team Something
  *
@@ -58,11 +59,13 @@ public class TowerUpgrading extends TowerState {
 		} else {
 			switch (tower.getUpgradeTo()) {
 			case SENTRYGUN:
+				System.out.println("attempting to upgrade");
+				
 				tower = new MarineSentryGunMkII(tower.x, tower.y);
 				tower.changeTo(TowerStates.WAIT, null);
 				break;
 			case PLASMACANNON:
-				tower = new PlasmaCannon(tower.x, tower.y);
+				tower = new HellfireCannon(tower.x, tower.y);
 				tower.changeTo(TowerStates.WAIT, null);
 				break;
 			case CHRONOTOWER:
@@ -73,7 +76,9 @@ public class TowerUpgrading extends TowerState {
 				System.out.println("ERROR in update method TowerUpgrading");
 			}
 		}
-
+		
+		
+		
 		tick = 0;
 
 	}

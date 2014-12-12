@@ -1,26 +1,28 @@
 package command;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
+
 import Controller.TDClient;
 import Controller.TDServer;
 
 public class UpdateChatCommand extends Command{
-	String text;
+	private List<String> text;
 
-	public UpdateChatCommand(String username, String txt) {
+	public UpdateChatCommand(String username, List<String> txt) {
 		super(username);
-		text = txt;
+		text = new LinkedList<String>(txt); // note: we are making a copy of the given list
 	}
 
 	@Override
 	public void serverExecute(TDServer server) {
-		// TODO Auto-generated method stub
-		//server.addToChat(text);
+		
 	}
 
 	@Override
 	public void clientExecute(TDClient client) {
-		// TODO Auto-generated method stub
-		//client.updateChat(text);
+		client.updateChat(text);
 	}
 
 }
