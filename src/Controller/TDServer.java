@@ -7,6 +7,7 @@ import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 
 import Model.Tile;
@@ -14,6 +15,7 @@ import command.Command;
 import command.CreateGameCommand;
 import command.DisconnectCommand;
 import command.UpdateBaseCommand;
+import command.UpdateChatCommand;
 import command.UpdateMiniMapCommand;
 
 
@@ -31,6 +33,8 @@ public class TDServer {
 	private String player1Name;
 	private String player2Name;
 	private boolean hpIsSet;
+	
+	private List<String> messages;
 
 	/**
 	 * Constructor for NPServer. Creates a new ServerSocket on port 4007 and
@@ -40,6 +44,7 @@ public class TDServer {
 		port = 4444;
 		map1 = new Vector<Vector<Tile>>();
 		map2 = new Vector<Vector<Tile>>();
+		messages = new Vector<String>();
 		outputs = new HashMap<String, ObjectOutputStream>();
 		player1Connected = false;
 		player2Connected = false;
@@ -227,6 +232,23 @@ public class TDServer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void addToChat(String message) {
+		messages.add(message);
+		updateChats();
+	}
+
+	private void updateChats() {
+		UpdateChatCommand update = new UpdateChatCommand(null, messages);
+		System.out.println("TDServer: messages are " + messages);
+		try{
+			for (ObjectOutputStream out : outputs.values())
+				out.writeObject(update);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}		
 	}
 
 }

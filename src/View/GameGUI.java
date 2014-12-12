@@ -47,6 +47,7 @@ public class GameGUI implements Serializable {
 	JFrame frame;
 	public TilePanel tilePanel;
 	ResourcePanel resourcePanel;
+	public MultiplayerFrame multiFrame;
 	private static GameGUI thisGUI;
 	private TDClient client;
 	public boolean isMultiplayer = false;
@@ -99,9 +100,11 @@ public class GameGUI implements Serializable {
 
 		new Thread(Ticker.getInstance()).start();
 		// GameController.getInstance().startWaves();
-
+		
+		
 		if (isMultiplayer) {
 			client.setStartingServerHP();
+			multiFrame = new MultiplayerFrame();
 		}
 	}
 
@@ -186,6 +189,10 @@ public class GameGUI implements Serializable {
 				client.closeClient();
 			}
 		});
+	}
+	
+	public TDClient getClient(){
+		return client;
 	}
 
 	public void baseTakeDamage(int damageAmount) {
