@@ -241,7 +241,6 @@ public class TDServer {
 
 	private void updateChats() {
 		UpdateChatCommand update = new UpdateChatCommand(null, messages);
-		System.out.println("TDServer: messages are " + messages);
 		try{
 			for (ObjectOutputStream out : outputs.values())
 				out.writeObject(update);

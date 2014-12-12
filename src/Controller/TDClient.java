@@ -151,7 +151,6 @@ public class TDClient {
 	 * @param text  -the new updated text
 	 */
 	public void updateChat(List<String> text) {
-		System.out.println("TDClient: " + text);
 		GUI.multiFrame.chatPanel.update(text);
 	}
 }

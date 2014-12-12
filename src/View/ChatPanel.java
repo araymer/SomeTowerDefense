@@ -93,14 +93,11 @@ public class ChatPanel extends JPanel{
 	 * @param messages	the current chat log
 	 */
 	public void update(List<String> messages) {
-		System.out.println("this is the vector recieved " + messages);
 		String s = "";
 		for (String message: messages)
 			s = s + message + "\n";
 		
 		textArea.setText(s);
-		System.out.println("chatbox should say:");
-		System.out.println(s);
 		textArea.setCaretPosition(s.length());
 		repaint();
 	}

@@ -13,8 +13,6 @@ public class UpdateChatCommand extends Command{
 	public UpdateChatCommand(String username, List<String> txt) {
 		super(username);
 		text = new LinkedList<String>(txt); // note: we are making a copy of the given list
-		System.out.println("UpdateCHatCmmd: text :" + text);
-		System.out.println("UpdateCHatCmmd: txt :" + txt);
 	}
 
 	@Override
@@ -24,7 +22,6 @@ public class UpdateChatCommand extends Command{
 
 	@Override
 	public void clientExecute(TDClient client) {
-		System.out.println("UpdateChatCommand: text sending to client is " + text);
 		client.updateChat(text);
 	}
 
