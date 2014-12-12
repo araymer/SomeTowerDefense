@@ -57,7 +57,7 @@ public class ChronoTower extends Structure {
 		}
 
 		if (attackImage == null) {
-			File imageFile = new File(Structure.baseDir + "error.png");
+			File imageFile = new File(Structure.baseDir + "ChronoTowerFire.png");
 			try {
 				attackImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
