@@ -2,6 +2,7 @@ package Model;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import TowerFSM.TowerAttacking;
 import TowerFSM.TowerExploding;
@@ -21,7 +22,7 @@ import TowerFSM.TowerWaiting;
  * @author Team Something
  *
  */
-public abstract class Structure extends Drawable {
+public abstract class Structure extends Drawable implements Serializable {
 
 	public String name;
 	public int hitpoints;

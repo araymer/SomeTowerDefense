@@ -1,8 +1,10 @@
 package Model;
 
+import java.io.Serializable;
+
 import View.GameGUI;
 
-public abstract class Base extends Structure {
+public abstract class Base extends Structure implements Serializable {
 
 	public Base(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {

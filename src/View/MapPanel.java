@@ -35,7 +35,7 @@ public class MapPanel extends JPanel {
 	 * 
 	 */
 	private MapPanel() {
-		this.setSize(1000, 622);
+		this.setSize(800, 622);
 
 	}
 

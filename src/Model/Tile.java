@@ -1,10 +1,11 @@
 package Model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Vector;
 
-public class Tile extends Observable {
+public class Tile extends Observable implements Serializable {
 
 	private boolean spawnable;
 	private boolean buildable;
@@ -83,8 +84,8 @@ public class Tile extends Observable {
 		}
 
 	}
-	
-	public void removeStructure(){
+
+	public void removeStructure() {
 		tileStructure = null;
 	}
 
