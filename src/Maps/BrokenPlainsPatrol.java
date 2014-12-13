@@ -236,7 +236,17 @@ public class BrokenPlainsPatrol extends Map {
 
 	@Override
 	public Tile getSpawnTile(int n) {
-		return spawnTile1;
+		switch(n) {
+			case 1:
+				return spawnTile1;
+			case 2:
+				return spawnTile2;
+			case 3:
+				return spawnTile3;
+			default:
+				System.out.println("Error in getSpawnTile method");
+				return null;
+		}
 		
 	}
 }
