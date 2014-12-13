@@ -33,7 +33,7 @@ public class BrokenPlainsPatrol extends Map {
 	}
 
 	private void setTiles() {
-		// TODO Auto-generated method stub
+		// TODO: last on priority list
 		
 	}
 
