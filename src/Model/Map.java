@@ -1,12 +1,18 @@
 package Model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.Vector;
 
 import Structures.BaseDesertUprising;
-import Structures.*;
+import Structures.ChronoTower;
+import Structures.HellfireCannon;
+import Structures.MarineSentryGun;
+import Structures.MarineSentryGunMkII;
+import Structures.PlasmaCannon;
+import Structures.StasisTower;
 
-public abstract class Map {
+public abstract class Map implements Serializable {
 
 	private static int tileWidth = 40;
 	protected Vector<Vector<Tile>> gameBoard;
@@ -71,24 +77,27 @@ public abstract class Map {
 		case UPGRADE:
 			System.out.println("trying to upgrade");
 			StructureType upgrade = selectedTile.getStructure().getUpgradeTo();
-			if(upgrade == null)
+			if (upgrade == null)
 				upgrade = StructureType.NONE;
-			switch(upgrade) {
-				case SENTRYGUN2:
-					selectedTile.removeStructure();
-					selectedTile.addStructure(new MarineSentryGunMkII(selectedX, selectedY));
-					break;
-				case HELLFIRECANNON:
-					selectedTile.removeStructure();
-					selectedTile.addStructure(new HellfireCannon(selectedX, selectedY));
-					break;
-				case STASISTOWER:
-					selectedTile.removeStructure();
-					selectedTile.addStructure(new StasisTower(selectedX, selectedY));
-					break;
-				default:
-					System.out.println("No upgrades available");
-					
+			switch (upgrade) {
+			case SENTRYGUN2:
+				selectedTile.removeStructure();
+				selectedTile.addStructure(new MarineSentryGunMkII(selectedX,
+						selectedY));
+				break;
+			case HELLFIRECANNON:
+				selectedTile.removeStructure();
+				selectedTile.addStructure(new HellfireCannon(selectedX,
+						selectedY));
+				break;
+			case STASISTOWER:
+				selectedTile.removeStructure();
+				selectedTile
+						.addStructure(new StasisTower(selectedX, selectedY));
+				break;
+			default:
+				System.out.println("No upgrades available");
+
 			}
 			break;
 		default:

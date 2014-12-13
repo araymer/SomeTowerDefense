@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+import Model.Tile;
 import View.GameGUI;
 import command.AddMessageCommand;
 import command.BaseTakeDamageCommand;
@@ -152,5 +153,11 @@ public class TDClient {
 	 */
 	public void updateChat(List<String> text) {
 		GUI.multiFrame.chatPanel.update(text);
+	}
+
+	public void updateMiniMap(Vector<Vector<Tile>> gameMap) {
+		// TODO Auto-generated method stub
+		System.out.println("TDClient: updating mini map: " + gameMap);
+		//GUI.multiFrame.miniPanel.
 	}
 }
