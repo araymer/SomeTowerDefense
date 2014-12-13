@@ -67,7 +67,7 @@ public class GameGUI implements Serializable {
 		createMenuBar();
 		frame.setContentPane(MainMenu.getInstance());
 		frame.setVisible(true);
-		new MultiplayerFrame();
+		
 	}
 
 	void createMap(int selection) {
