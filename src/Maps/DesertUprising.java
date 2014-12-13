@@ -19,6 +19,7 @@ import Structures.*;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class DesertUprising extends Map {
 
 	
