@@ -39,6 +39,7 @@ public class Ticker implements Runnable {
 	public void run() {
 		while (true) {
 			while (isRunning) {
+				
 				now = System.nanoTime();
 				updateCount = 0;
 

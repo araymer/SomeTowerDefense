@@ -208,6 +208,11 @@ public class GameGUI implements Serializable {
 		menuBar.add(help);
 		menuBar.setVisible(true);
 	}
+	
+	public void newTilePanel() {
+		tilePanel = TilePanel.getInstance();
+	}
+	
 
 	public void repaint() {
 		// menuBar.repaint();

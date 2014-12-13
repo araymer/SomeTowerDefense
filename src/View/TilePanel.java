@@ -26,7 +26,6 @@ import Model.Tile;
 public class TilePanel extends JPanel implements Serializable {
 	private static TilePanel tilePanel;
 	public Map tileMap;
-	MasterList masterList;
 
 	/**
 	 * Constructs the TilePanel for use in the GameGUI
@@ -34,8 +33,7 @@ public class TilePanel extends JPanel implements Serializable {
 	private TilePanel() {
 		this.setOpaque(false);
 		this.setVisible(true);
-		tileMap = new DesertUprising(); // TODO:needs to work with any map
-		masterList = MasterList.getInstance();
+		tileMap = DesertUprising.getInstance();
 		tileMap.getSpawnTile(1)
 				.addAttacker(new Marine(tileMap.getSpawnTile(1)));
 	}
@@ -47,6 +45,12 @@ public class TilePanel extends JPanel implements Serializable {
 		return tilePanel;
 	}
 
+	public void setMap(Map m) {
+		tileMap = m;
+		tilePanel = new TilePanel();
+	}
+	
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

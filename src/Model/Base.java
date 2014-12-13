@@ -2,6 +2,9 @@ package Model;
 
 import java.io.Serializable;
 
+import Model.SpecialAttack;
+import Model.Structure;
+import Model.StructureType;
 import View.GameGUI;
 
 public abstract class Base extends Structure implements Serializable {

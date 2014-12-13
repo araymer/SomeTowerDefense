@@ -29,7 +29,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	JRadioButton sentryGun;
 	JRadioButton plasmaCannon;
 	JRadioButton upgrade;
-	JFrame resourceFrame;
+	public JFrame resourceFrame;
 	StructureType selected;
 	JButton chronoTowerInfo;
 	JButton sentryGunInfo;
@@ -86,7 +86,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		this.add(plasmaCannon);
 		this.add(plasmaCannonInfo);
 		this.add(upgrade);
-		// this.add(upgradeInfo);
+	
 
 		// add action listeners
 		chronoTower.addActionListener(this);
@@ -186,5 +186,10 @@ public class ResourcePanel extends JPanel implements ActionListener {
 			structureInfoFrame.setContentPane(structureInfoPanel);
 			structureInfoFrame.setVisible(true);
 		}
+	}
+
+	public void reinit() {
+		resourcePanel = new ResourcePanel();
+		
 	}
 }
