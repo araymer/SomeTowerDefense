@@ -246,7 +246,6 @@ public class GameGUI implements Serializable {
 	}
 
 	public void startMultiplayerGame() {
-		// TODO
 		createMap(mapSelection);
 		MainMenu.getInstance().resetLogo();
 	}

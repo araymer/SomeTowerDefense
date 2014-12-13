@@ -74,13 +74,6 @@ public class TilePanel extends JPanel implements Serializable {
 			// Just have this catch do nothing if you can't really tell any
 			// changes when repainting.
 		}
-		// synchronized(masterList){
-		// Iterator<Drawable> itr = masterList.iterator();
-		// while(itr.hasNext()){
-		// System.out.println("drawing");
-		// itr.next().draw(g2);
-		// }
-		// }
 
 	}
 

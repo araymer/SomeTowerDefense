@@ -12,19 +12,17 @@ public class UpdateMiniMapCommand extends Command{
 
 	public UpdateMiniMapCommand(String username, Vector<Vector<Tile>> mapUpdate) {
 		super(username);
-		gameMap = mapUpdate;
+		gameMap = new Vector<Vector<Tile>>(mapUpdate);
 	}
 
 	@Override
 	public void serverExecute(TDServer server) {
-		// TODO Auto-generated method stub
-		//server
+		server.transferCommand(this);
 	}
 
 	@Override
 	public void clientExecute(TDClient client) {
-		// TODO Auto-generated method stub
-		//client
+		client.updateMiniMap(gameMap);
 	}
 
 }
