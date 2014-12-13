@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import Model.Base;
 import Model.Structure;
@@ -124,6 +126,10 @@ public class BaseDesertUprising extends Base {
 	public void die() {
 		System.out.println("\n\n\n\nBASE WAS DESTROYED. GAME OVER");
 		Ticker.getInstance().loopStop();
+		JFrame gameOver = new JFrame();
+		gameOver.setSize(200, 100);
+		gameOver.add(new JLabel("BASE WAS DESTROYED. GAME OVER."));
+		gameOver.setVisible(true);
 		GameGUI.getInstance().returnMenu();
 	}
 

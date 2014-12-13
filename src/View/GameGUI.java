@@ -83,6 +83,7 @@ public class GameGUI implements Serializable {
 		mapPanel.setSize(frame.getSize().width, frame.getSize().height);
 		mapPanel.setLocation(0, 0);
 		frame.setContentPane(mapPanel);
+		frame.setJMenuBar(menuBar);
 
 		contentPane = frame.getContentPane();
 		contentPane.setLayout(new CardLayout());
@@ -97,11 +98,8 @@ public class GameGUI implements Serializable {
 		resourcePanel = ResourcePanel.getInstance();
 
 		contentPane.add(tilePanel);
-		// tilePanel.add(resourcePanel);
-		// TODO: Make the menu stay...
-		// createMenuBar();
-		frame.setJMenuBar(menuBar);
-		frame.repaint();
+		// frame.setJMenuBar(menuBar);
+		// frame.repaint();
 
 		new Thread(Ticker.getInstance()).start();
 		// GameController.getInstance().startWaves();
@@ -118,6 +116,7 @@ public class GameGUI implements Serializable {
 		mapPanel.setSize(frame.getSize().width, frame.getSize().height);
 		mapPanel.setLocation(0, 0);
 		frame.setContentPane(mapPanel);
+		frame.setJMenuBar(menuBar);
 
 		contentPane = frame.getContentPane();
 		contentPane.setLayout(new CardLayout());
@@ -132,11 +131,8 @@ public class GameGUI implements Serializable {
 		resourcePanel = ResourcePanel.getInstance();
 
 		contentPane.add(tilePanel);
-		// tilePanel.add(resourcePanel);
-		// TODO: Make the menu stay...
-		// createMenuBar();
-		frame.setJMenuBar(menuBar);
-		frame.repaint();
+
+		// frame.repaint();
 
 		new Thread(Ticker.getInstance()).start();
 		// GameController.getInstance().startWaves();
@@ -202,7 +198,6 @@ public class GameGUI implements Serializable {
 		instructions.addActionListener(new MenuListener());
 		instructions.setActionCommand("instructions");
 		help.add(instructions);
-		frame.setJMenuBar(menuBar);
 		// menuBar.add(file);
 		menuBar.add(game);
 		menuBar.add(help);
@@ -210,7 +205,9 @@ public class GameGUI implements Serializable {
 	}
 
 	public void repaint() {
+		// menuBar.repaint();
 		tilePanel.repaint();
+		// frame.setJMenuBar(menuBar);
 		// resourcePanel.repaint();
 	}
 
@@ -223,7 +220,7 @@ public class GameGUI implements Serializable {
 
 	public void returnMenu() {
 		frame.setContentPane(MainMenu.getInstance());
-
+		frame.setJMenuBar(menuBar);
 	}
 
 	public void setClient(TDClient cli) {
