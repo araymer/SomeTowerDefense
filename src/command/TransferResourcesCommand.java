@@ -22,7 +22,7 @@ public class TransferResourcesCommand extends Command {
 	 * @param receivedShapes
 	 *            - the shape object received from the client.
 	 */
-	public TransferResourcesCommand(int resources, String username) {
+	public TransferResourcesCommand(String username, int resources) {
 		super(username);
 		this.resources = resources;
 	}
@@ -37,7 +37,7 @@ public class TransferResourcesCommand extends Command {
 	
 	@Override
 	public void clientExecute(TDClient client) {
-		//client.sfjalf(this);
+		client.receiveResources(resources);
 	}
 
 }

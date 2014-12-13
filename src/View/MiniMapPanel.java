@@ -25,8 +25,12 @@ public class MiniMapPanel extends JPanel{
 	private Vector<Vector<Tile>> otherGameMap;
 	private static final int MINI_MAP_HEIGHT = 150;
 	private static final int MINI_MAP_WIDTH = 200;
+	private MultiplayerInfoPanel infoPanel;
+	private int enemyNum;
+	
 	
 	public MiniMapPanel(){
+		infoPanel = new MultiplayerInfoPanel();
 		this.setBackground(Color.ORANGE);
 		this.setLayout(new BorderLayout());
 //		info = new JTextArea();
@@ -36,12 +40,14 @@ public class MiniMapPanel extends JPanel{
 //		//info.setLocation(87, 225);
 //		info.setPreferredSize(new Dimension(MINI_MAP_WIDTH, 65));
 //		info.setText("Other player's info:\nResources available: 700\nEnemies killed: 5");
+		this.add(infoPanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 	}
 	
-	public void updateMap(Vector<Vector<Tile>> gameMap){
+	public void updateMap(Vector<Vector<Tile>> gameMap, int totalResources, int enemiesKilled){
 		otherGameMap = gameMap;
 		repaint();
+		infoPanel.updateInfo(totalResources, enemiesKilled, enemyNum);
 	}
 	
 	@Override

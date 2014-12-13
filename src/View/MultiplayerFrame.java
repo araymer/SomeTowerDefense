@@ -12,7 +12,7 @@ public class MultiplayerFrame extends JFrame{
 	private static final int FRAME_WIDTH = 200;
 	public ChatPanel chatPanel;
 	public MiniMapPanel miniPanel;
-	public MultiplayerInfoPanel infoPanel;
+	//public MultiplayerInfoPanel infoPanel;
 	
 	public MultiplayerFrame(){
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -23,10 +23,10 @@ public class MultiplayerFrame extends JFrame{
 		
 		chatPanel = new ChatPanel();
 		miniPanel = new MiniMapPanel();
-		infoPanel = new MultiplayerInfoPanel();
+		//infoPanel = new MultiplayerInfoPanel();
 		this.add(miniPanel);
 		this.add(chatPanel);
-		miniPanel.add(infoPanel, BorderLayout.SOUTH);
+		//miniPanel.add(infoPanel, BorderLayout.SOUTH);
 		
 		
 		this.setVisible(true);

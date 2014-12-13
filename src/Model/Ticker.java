@@ -199,7 +199,7 @@ public class Ticker implements Runnable {
 		//Update other players minimap
 		if(GameGUI.getInstance().isMultiplayer){
 			//TODO
-			GameGUI.getInstance().getClient().updateMiniMap(new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard()));
+			//GameGUI.getInstance().getClient().updateMiniMap(new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard()));
 		}
 	}
 
