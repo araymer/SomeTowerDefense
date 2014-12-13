@@ -41,22 +41,23 @@ public class ChatPanel extends JPanel{
 		
 		/* Setup the GUI */
 		this.setLayout(new BorderLayout());
-		this.setSize(new Dimension(300, 300));
+		//this.setSize(new Dimension(300, 300));
 		this.setLocation(0, 400);
-		this.setPreferredSize(new Dimension(300, 300));
+		//this.setPreferredSize(new Dimension(300, 300));
 		this.setBackground(Color.BLACK);
 		
 		// create gui components
 		textField = new JTextField();
-		JButton enterButton = new JButton("Send");
+		JButton enterButton = new JButton("Chat");
 		
-		textField.setPreferredSize(new Dimension(225, 40));
+		textField.setPreferredSize(new Dimension(125, 40));
 		enterButton.setPreferredSize(new Dimension(50, 40));
 		
 		// add button and field to a lower panel
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.add(textField);
 		bottomPanel.add(enterButton);
+		textField.setText("insert message");
 		
 		// add text area and lower panel
 		this.add(new JScrollPane(textArea), BorderLayout.CENTER);

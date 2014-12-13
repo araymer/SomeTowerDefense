@@ -67,7 +67,7 @@ public class GameGUI implements Serializable {
 		createMenuBar();
 		frame.setContentPane(MainMenu.getInstance());
 		frame.setVisible(true);
-
+		
 	}
 
 	void createMap(int selection) {
@@ -102,14 +102,16 @@ public class GameGUI implements Serializable {
 		// createMenuBar();
 		frame.setJMenuBar(menuBar);
 		frame.repaint();
-
-		new Thread(Ticker.getInstance()).start();
-		// GameController.getInstance().startWaves();
-
+		
 		if (isMultiplayer) {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
 		}
+
+		new Thread(Ticker.getInstance()).start();
+		// GameController.getInstance().startWaves();
+
+		
 	}
 
 	void loadMap(TilePanel tiles, MapPanel map) {

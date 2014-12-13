@@ -156,8 +156,7 @@ public class TDClient {
 	}
 
 	public void updateMiniMap(Vector<Vector<Tile>> gameMap) {
-		// TODO Auto-generated method stub
 		System.out.println("TDClient: updating mini map: " + gameMap);
-		//GUI.multiFrame.miniPanel.
+		GUI.multiFrame.miniPanel.updateMap(gameMap);
 	}
 }
