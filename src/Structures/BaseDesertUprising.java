@@ -14,6 +14,7 @@ import Model.Ticker;
 import TowerFSM.TowerStates;
 import View.GameGUI;
 
+@SuppressWarnings("serial")
 public class BaseDesertUprising extends Base {
 
 	protected static BufferedImage waitImage;
