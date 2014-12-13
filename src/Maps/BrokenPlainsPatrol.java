@@ -134,7 +134,7 @@ public class BrokenPlainsPatrol extends Map {
 		gameBoard.get(9).get(6).setBuild(false);
 		
 		// spawn3 to path spawn2/3 intersection @ 9,6
-		gameBoard.get(8).get(14).setMove(true, gameBoard.get(8).get(13)); // heading north
+		gameBoard.get(8).get(14).setMove(true, gameBoard.get(8).get(13)); // head north 
 		gameBoard.get(8).get(13).setBuild(false);
 		
 		gameBoard.get(8).get(13).setMove(true, gameBoard.get(8).get(12));
@@ -161,7 +161,7 @@ public class BrokenPlainsPatrol extends Map {
 		gameBoard.get(10).get(8).setMove(true, gameBoard.get(9).get(7)); //turn east
 		gameBoard.get(9).get(7).setBuild(false);
 		
-		gameBoard.get(9).get(7).setMove(true, gameBoard.get(9).get(6)); //turn north
+		gameBoard.get(9).get(7).setMove(true, gameBoard.get(9).get(6));
 		gameBoard.get(9).get(6).setBuild(false);
 		
 		// gap between 9,6 and 14,10
@@ -187,10 +187,45 @@ public class BrokenPlainsPatrol extends Map {
 		gameBoard.get(12).get(10).setBuild(false);
 		
 		gameBoard.get(12).get(10).setMove(true, gameBoard.get(13).get(10)); // turn west
-		gameBoard.get(12).get(10).setBuild(false);
+		gameBoard.get(13).get(10).setBuild(false);
 		
-		gameBoard.get(12).get(10).setMove(true, gameBoard.get(12).get(11)); 
-		gameBoard.get(12).get(11).setBuild(false);
+		gameBoard.get(12).get(10).setMove(true, gameBoard.get(13).get(10)); 
+		gameBoard.get(13).get(10).setBuild(false);
+		
+		gameBoard.get(13).get(10).setMove(true,  gameBoard.get(14).get(10));
+		gameBoard.get(14).get(10).setBuild(false);
+		
+		// final approach 
+		gameBoard.get(14).get(10).setMove(true, gameBoard.get(14).get(9));
+		gameBoard.get(14).get(9).setBuild(false);
+		
+		gameBoard.get(14).get(9).setMove(true, gameBoard.get(14).get(8));
+		gameBoard.get(14).get(8).setBuild(false);
+		
+		gameBoard.get(14).get(8).setMove(true, gameBoard.get(14).get(7));
+		gameBoard.get(14).get(7).setBuild(false);
+		
+		gameBoard.get(14).get(7).setMove(true, gameBoard.get(14).get(6));
+		gameBoard.get(14).get(6).setBuild(false);
+		
+		gameBoard.get(14).get(6).setMove(true, gameBoard.get(14).get(5));
+		gameBoard.get(14).get(5).setBuild(false);
+		
+		gameBoard.get(14).get(5).setMove(true, gameBoard.get(15).get(5)); // turn west
+		gameBoard.get(15).get(5).setBuild(true);
+		
+		gameBoard.get(15).get(5).setMove(true, gameBoard.get(16).get(5));
+		gameBoard.get(16).get(5).setBuild(true);
+		
+		gameBoard.get(16).get(5).setMove(true, gameBoard.get(16).get(6)); // turn south
+		gameBoard.get(16).get(6).setBuild(true);
+		
+		gameBoard.get(16).get(6).setMove(true, gameBoard.get(16).get(7)); // turn south
+		gameBoard.get(16).get(7).setBuild(true);
+		
+		// last tile to base
+		gameBoard.get(16).get(7).setMove(true, null);
+		gameBoard.get(16).get(7).setBuild(false);
 	}
 
 	@Override
@@ -201,7 +236,7 @@ public class BrokenPlainsPatrol extends Map {
 
 	@Override
 	public Tile getSpawnTile(int n) {
-		// TODO Auto-generated method stub
-		return null;
+		return spawnTile1;
+		
 	}
 }
