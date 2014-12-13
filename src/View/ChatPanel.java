@@ -85,7 +85,6 @@ public class ChatPanel extends JPanel{
 			textField.setText("");
 		}
 	}
-	int i = 0;
 	
 	/**
 	 * Updates the chat log. Called by UpdateClientCommands

@@ -12,6 +12,7 @@ import Structures.*;
 
 import javax.swing.JOptionPane;
 
+import Model.Ticker;
 import Model.Tile;
 import View.GameGUI;
 
@@ -19,7 +20,9 @@ import command.AddMessageCommand;
 import command.BaseTakeDamageCommand;
 import command.Command;
 import command.DisconnectCommand;
+import command.TransferResourcesCommand;
 import command.UpdateBaseCommand;
+import command.UpdateMiniMapCommand;
 
 public class TDClient {
 
@@ -156,9 +159,58 @@ public class TDClient {
 	public void updateChat(List<String> text) {
 		GUI.multiFrame.chatPanel.update(text);
 	}
-
-	public void updateMiniMap(Vector<Vector<Tile>> gameMap) {
-		System.out.println("TDClient: updating mini map: " + gameMap);
-		GUI.multiFrame.miniPanel.updateMap(gameMap);
+	
+	/**
+	 * Updates the minimap on this client
+	 * 
+	 * @param gameMap
+	 */
+	public void updateMiniMap(Vector<Vector<Tile>> gameMap, int totalResources, int enemiesKilled) {
+		GUI.multiFrame.miniPanel.updateMap(gameMap, totalResources, enemiesKilled);
+	}
+	
+	/**
+	 * Sends info for minimap to other player
+	 */
+	public void sendMiniMap(Vector<Vector<Tile>> gameMap){
+		//TODO get actual resource number
+		int totalResources = 9999999;
+		int enemiesKilled = Ticker.getInstance().numOfAttackersDead;
+		try{
+			toServer.writeObject(new UpdateMiniMapCommand(username, gameMap, totalResources, enemiesKilled));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Adds the resources given to this clients resources
+	 * 
+	 * @param resources -the amount of resources received
+	 */
+	public void receiveResources(int resources) {
+		// TODO increment total resources amount by amount given
+		
+	}
+	
+	/**
+	 * Sends your resources to the other player
+	 * 
+	 * @param amount
+	 */
+	public void sendCurrency(int amount) {
+		
+		if(amount > 0){
+			// TODO Decrement your resources
+			
+			try{
+				toServer.writeObject(new TransferResourcesCommand(username, amount));
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("TDClient: error, can only send positive resources");
+		}
+		
 	}
 }

@@ -31,6 +31,7 @@ public class BaseDesertUprising extends Base {
 	public BaseDesertUprising(int x, int y) {
 		super(500, 0, 0, 0, 0, 0, 0, x, y, null);
 		name = "Desert Uprising Base";
+		price = 0;
 	}
 
 

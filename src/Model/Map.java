@@ -74,6 +74,7 @@ public abstract class Map implements Serializable {
 		case STASISTOWER:
 			System.out.println("trying to create stasistower");
 			selectedTile.addStructure(new StasisTower(selectedX, selectedY));
+			break;
 		case UPGRADE:
 			System.out.println("trying to upgrade");
 			StructureType upgrade = selectedTile.getStructure().getUpgradeTo();

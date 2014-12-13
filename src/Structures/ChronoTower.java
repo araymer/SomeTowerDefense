@@ -43,6 +43,7 @@ public class ChronoTower extends Structure {
 		upgradeCost = 3500;
 		tower = new TowerWaiting(this);
 		name = "Chrono Tower";
+		price = 50;
 	}
 
 	protected void setImages() {

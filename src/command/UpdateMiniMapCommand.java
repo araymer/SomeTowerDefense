@@ -8,11 +8,16 @@ import Model.Tile;
 
 public class UpdateMiniMapCommand extends Command{
 	
-	Vector<Vector<Tile>> gameMap;
+	private Vector<Vector<Tile>> gameMap;
+	private int totalResources;
+	private int enemiesKilled;
+	
 
-	public UpdateMiniMapCommand(String username, Vector<Vector<Tile>> mapUpdate) {
+	public UpdateMiniMapCommand(String username, Vector<Vector<Tile>> mapUpdate, int resources, int numKilled) {
 		super(username);
 		gameMap = new Vector<Vector<Tile>>(mapUpdate);
+		totalResources = resources;
+		enemiesKilled = numKilled;
 	}
 
 	@Override
@@ -22,7 +27,7 @@ public class UpdateMiniMapCommand extends Command{
 
 	@Override
 	public void clientExecute(TDClient client) {
-		client.updateMiniMap(gameMap);
+		client.updateMiniMap(gameMap, totalResources, enemiesKilled);
 	}
 
 }

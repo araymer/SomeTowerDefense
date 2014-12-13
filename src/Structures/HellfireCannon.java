@@ -44,6 +44,7 @@ public class HellfireCannon extends Structure {
 		upgradeCost = 0;
 		tower = new TowerWaiting(this);
 		name = "Hellfire Cannon";
+		price = 50;
 	}
 
 	protected void setImages() {
@@ -58,7 +59,8 @@ public class HellfireCannon extends Structure {
 		}
 
 		if (attackImage == null) {
-			File imageFile = new File(Structure.baseDir + "HellFireCannonFire.png");
+			File imageFile = new File(Structure.baseDir
+					+ "HellFireCannonFire.png");
 			try {
 				attackImage = ImageIO.read(imageFile);
 			} catch (IOException e) {

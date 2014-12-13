@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -12,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import Model.Player;
 import Model.StructureType;
 
 /**
@@ -22,7 +25,7 @@ import Model.StructureType;
  *
  */
 @SuppressWarnings("serial")
-public class ResourcePanel extends JPanel implements ActionListener {
+public class ResourcePanel extends JPanel implements ActionListener, Observer {
 	private static ResourcePanel resourcePanel;
 	ButtonGroup radioButtons;
 	JRadioButton chronoTower;
@@ -34,6 +37,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	JButton chronoTowerInfo;
 	JButton sentryGunInfo;
 	JButton plasmaCannonInfo;
+	JLabel money;
 
 	/**
 	 * Constructs the ResourcePanel for use in the GameGUI
@@ -74,6 +78,8 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		// JButton upgradeInfo = new JButton("Info");
 		upgrade.setActionCommand("Upgrade");
 
+		money = new JLabel("Funds: " + Player.getInstance().getMoney());
+
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
 		radioButtons.add(plasmaCannon);
@@ -86,6 +92,8 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		this.add(plasmaCannon);
 		this.add(plasmaCannonInfo);
 		this.add(upgrade);
+
+		this.add(money);
 	
 
 		// add action listeners
@@ -105,6 +113,11 @@ public class ResourcePanel extends JPanel implements ActionListener {
 			resourcePanel = new ResourcePanel();
 		}
 		return resourcePanel;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		money.setText("Funds: " + ((Player) arg0).getMoney());
 	}
 
 	@Override
