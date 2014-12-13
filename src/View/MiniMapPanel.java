@@ -60,6 +60,7 @@ public class MiniMapPanel extends JPanel{
 		g2.fillRect(0, 0, MINI_MAP_WIDTH, MINI_MAP_HEIGHT);
 		
 		if(otherGameMap != null){
+			enemyNum = 0;
 			int width = otherGameMap.size();
 			int height = otherGameMap.get(0).size();
 			int tileHeight = MINI_MAP_HEIGHT/height;
@@ -87,11 +88,11 @@ public class MiniMapPanel extends JPanel{
 							//Draw enemies in red
 							g2.setColor(Color.RED);
 							g2.fillOval(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
+							enemyNum += curr.getAttackers().size();
 						}
 					}
 				}
 			}
 		}
-		//setInfo();
 	}
 }

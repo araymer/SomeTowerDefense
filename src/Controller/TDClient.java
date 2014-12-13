@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+import Model.Ticker;
 import Model.Tile;
 import View.GameGUI;
 import command.AddMessageCommand;
@@ -19,6 +20,7 @@ import command.Command;
 import command.DisconnectCommand;
 import command.TransferResourcesCommand;
 import command.UpdateBaseCommand;
+import command.UpdateMiniMapCommand;
 
 public class TDClient {
 
@@ -155,10 +157,28 @@ public class TDClient {
 	public void updateChat(List<String> text) {
 		GUI.multiFrame.chatPanel.update(text);
 	}
-
-	public void updateMiniMap(Vector<Vector<Tile>> gameMap, int totalResources, int enemiesKilled) {
 	
+	/**
+	 * Updates the minimap on this client
+	 * 
+	 * @param gameMap
+	 */
+	public void updateMiniMap(Vector<Vector<Tile>> gameMap, int totalResources, int enemiesKilled) {
 		GUI.multiFrame.miniPanel.updateMap(gameMap, totalResources, enemiesKilled);
+	}
+	
+	/**
+	 * Sends info for minimap to other player
+	 */
+	public void sendMiniMap(Vector<Vector<Tile>> gameMap){
+		//TODO get actual resource number
+		int totalResources = 9999999;
+		int enemiesKilled = Ticker.getInstance().numOfAttackersDead;
+		try{
+			toServer.writeObject(new UpdateMiniMapCommand(username, gameMap, totalResources, enemiesKilled));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -187,7 +207,7 @@ public class TDClient {
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println("TDClient: cannot send negative resources");
+			System.out.println("TDClient: error, can only send positive resources");
 		}
 		
 	}
