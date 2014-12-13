@@ -40,6 +40,7 @@ public class PlasmaCannon extends Structure {
 		upgradeTo = StructureType.HELLFIRECANNON;
 		tower = new TowerWaiting(this);
 		name = "Plasma Cannon";
+		price = 50;
 	}
 
 	@Override
@@ -54,7 +55,8 @@ public class PlasmaCannon extends Structure {
 		}
 
 		if (attackImage == null) {
-			File imageFile = new File(Structure.baseDir + "PlasmaCannonFire.png");
+			File imageFile = new File(Structure.baseDir
+					+ "PlasmaCannonFire.png");
 			try {
 				attackImage = ImageIO.read(imageFile);
 			} catch (IOException e) {

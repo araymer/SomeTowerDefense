@@ -35,6 +35,7 @@ public abstract class Structure extends Drawable implements Serializable {
 	public SpecialAttack special;
 	public int x;
 	public int y;
+	public int price;
 
 	public static final int HEIGHT = 40;
 	public static final int WIDTH = 40;
@@ -200,4 +201,9 @@ public abstract class Structure extends Drawable implements Serializable {
 	public String getName() {
 		return name;
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
 }

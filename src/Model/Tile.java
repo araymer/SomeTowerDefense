@@ -76,6 +76,10 @@ public class Tile extends Observable implements Serializable {
 
 	public boolean addStructure(Structure s) {
 		if (buildable && tileStructure == null) {
+			if (!Player.getInstance().subtractMoney(s.getPrice())) {
+				System.out.println("Insufficient Funds!");
+				return false;
+			}
 			tileStructure = s;
 			return true;
 		} else {

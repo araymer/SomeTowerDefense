@@ -44,6 +44,7 @@ public class StasisTower extends Structure {
 		upgradeCost = 0;
 		tower = new TowerWaiting(this);
 		name = "Stasis Tower";
+		price = 50;
 	}
 
 	protected void setImages() {
@@ -58,7 +59,8 @@ public class StasisTower extends Structure {
 		}
 
 		if (attackImage == null) {
-			File imageFile = new File(Structure.baseDir + "StasisTowerAttack.png");
+			File imageFile = new File(Structure.baseDir
+					+ "StasisTowerAttack.png");
 			try {
 				attackImage = ImageIO.read(imageFile);
 			} catch (IOException e) {
