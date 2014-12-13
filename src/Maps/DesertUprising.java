@@ -14,6 +14,11 @@ import Model.Map;
 import Model.Tile;
 import Structures.*;
 
+/**
+ * The DesertUprising game map.
+ * @author Team Something
+ *
+ */
 public class DesertUprising extends Map {
 
 	
