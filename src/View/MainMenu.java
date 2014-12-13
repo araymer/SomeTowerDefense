@@ -95,7 +95,7 @@ public class MainMenu extends JPanel {
 				} catch (IOException exc) {
 					exc.printStackTrace();
 				}
-				multiplayer.setVisible(false);
+				//multiplayer.setVisible(false);
 				mainMenu.repaint();
 
 			}

@@ -88,8 +88,6 @@ public class Ticker implements Runnable {
 	}
 
 	private void update() {
-		// TODO FIX THIS
-		// TODO calculate everything's new position
 		// add in information for structures and towers for
 		// position, direction and last drawn image (so it actually animates)
 		//
@@ -196,6 +194,12 @@ public class Ticker implements Runnable {
 					attacker.update();
 				}
 			}
+		}
+		
+		//Update other players minimap
+		if(GameGUI.getInstance().isMultiplayer){
+			//TODO
+			GameGUI.getInstance().getClient().updateMiniMap(new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard()));
 		}
 	}
 

@@ -2,6 +2,7 @@ package View;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.ConcurrentModificationException;
 import java.util.Vector;
 
@@ -22,7 +23,7 @@ import Model.Tile;
  */
 
 @SuppressWarnings("serial")
-public class TilePanel extends JPanel {
+public class TilePanel extends JPanel implements Serializable {
 	private static TilePanel tilePanel;
 	public Map tileMap;
 	MasterList masterList;
@@ -73,13 +74,6 @@ public class TilePanel extends JPanel {
 			// Just have this catch do nothing if you can't really tell any
 			// changes when repainting.
 		}
-		// synchronized(masterList){
-		// Iterator<Drawable> itr = masterList.iterator();
-		// while(itr.hasNext()){
-		// System.out.println("drawing");
-		// itr.next().draw(g2);
-		// }
-		// }
 
 	}
 

@@ -128,7 +128,6 @@ public class TDServer {
 
 		public void run() {
 			try {
-				updateClients();
 				while (true) {
 					// read a command from the client, execute on the server
 					Command command = (Command) input
@@ -153,24 +152,13 @@ public class TDServer {
 	 * @param command  the command to be sent
 	 */
 	public void transferCommand(Command command){
-		for(String username: outputs.keySet()){
-			if(!command.getSender().equals(username)){
-				try {
-					outputs.get(username).writeObject(command);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	private void updateClients() {
-		// make an UpdateClientCommmand, write to all connected users
-		UpdateMiniMapCommand update = new UpdateMiniMapCommand(null, null);
 		try {
-			for (ObjectOutputStream out : outputs.values())
-				out.writeObject(update);
-		} catch (Exception e) {
+			if(command.getSender().equals(player1Name)){
+				outputs.get(player1Name).writeObject(command);
+			}else{
+				outputs.get(player2Name).writeObject(command);
+			}
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

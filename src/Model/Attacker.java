@@ -2,13 +2,14 @@ package Model;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import View.TilePanel;
 
 //Test, let's see if git is working.
 //Test 2
 
-public abstract class Attacker extends Drawable {
+public abstract class Attacker extends Drawable implements Serializable {
 
 	protected String name;
 	private int hitpoints;
