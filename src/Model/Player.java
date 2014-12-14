@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import View.ResourcePanel;
 
+
 public class Player implements Serializable {
 
 	private static Player player;
@@ -13,6 +14,7 @@ public class Player implements Serializable {
 
 	private Player() {
 		money = 500;
+
 		updateCost();
 	}
 
@@ -35,6 +37,7 @@ public class Player implements Serializable {
 		if (money - subtract < 0)
 			return false;
 		money -= subtract;
+
 		updateCost();
 		return true;
 	}

@@ -83,7 +83,7 @@ public class Tile extends Observable implements Serializable {
 				return false;
 			}
 			tileStructure = s;
-			GameGUI.getInstance().saveData();
+		//	GameGUI.getInstance().saveData();
 			return true;
 		} else {
 			System.out.println("Cannot build here");

@@ -127,12 +127,7 @@ public class BaseDesertUprising extends Base {
 
 		public void actionPerformed(ActionEvent e) {
 
-			/*
-			 * TilePanel.getInstance().setMap( ((DesertUprising)
-			 * DesertUprising.getInstance()).reInit());
-			 * ResourcePanel.getInstance().resourceFrame.dispose();
-			 * ResourcePanel.getInstance().reinit();
-			 */
+
 
 			frame = GameGUI.getInstance().frame;
 			TilePanel tilePanel = TilePanel.getInstance();
@@ -149,7 +144,6 @@ public class BaseDesertUprising extends Base {
 
 			GameGUI.getInstance().newTilePanel();
 			Ticker.getInstance().loopStart();
-			// new Thread(Ticker.getInstance()).start();
 
 			gameOver.dispose();
 
