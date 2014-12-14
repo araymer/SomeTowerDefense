@@ -12,13 +12,14 @@ import Model.Attacker;
 import Model.Player;
 import Model.Structure;
 import Model.Tile;
+import View.TilePanel;
 
 public class Marine extends Attacker {
 	private static final int HITPOINTS = 50;
 	private static final int DEFENSE = 10;
-	private static final int ATTACK_RATING = 530;
+	private static final int ATTACK_RATING = 30;
 	private static final int RANGE = 3;
-	private static final int SPEED = 15;// The smaller, the faster
+	private static final int SPEED = 25;// The smaller, the faster
 	int count = 0;
 	double pixels = 0;
 
@@ -87,40 +88,56 @@ public class Marine extends Attacker {
 	}
 
 	private double offset(String s) {
-		if(getLoc().nextTile != null){
-			if (getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0
-					&& s.equals("x"))
-				return pixels;
-			else if (getLoc().getCoordinates().x
-					- getLoc().nextTile.getCoordinates().x > 0
-					&& s.equals("x"))
-				return -pixels;
-			else if (getLoc().getCoordinates().y
-					- getLoc().nextTile.getCoordinates().y < 0
-					&& s.equals("y"))
-				return pixels;
-			else if (getLoc().getCoordinates().y
-					- getLoc().nextTile.getCoordinates().y > 0
-					&& s.equals("y"))
-				return -pixels;
+		if(getLoc().nextTile != null) {
+		if (getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0
+				&& s.equals("x"))
+			return pixels;
+		else if (getLoc().getCoordinates().x
+				- getLoc().nextTile.getCoordinates().x > 0
+				&& s.equals("x"))
+			return -pixels;
+		else if (getLoc().getCoordinates().y
+				- getLoc().nextTile.getCoordinates().y < 0
+				&& s.equals("y"))
+			return pixels;
+		else if (getLoc().getCoordinates().y
+				- getLoc().nextTile.getCoordinates().y > 0
+				&& s.equals("y"))
+			return -pixels;
 		}
-		
+
 
 		return 0;
 
 	}
 
 	private double checkTransform() {
-		if(getLoc().nextTile != null){
-			if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
-				return (Math.PI);
-			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0)
-				return (-Math.PI/2);
-			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
-				return (Math.PI/2);
-		}
-		
+		if(getLoc().nextTile != null) {
+
+		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
+			return (Math.PI);
+		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0)
+			return (-Math.PI/2);
+		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
+			return (Math.PI/2);
+
+		else
+
 			return 0.;
+		}
+		else {
+			
+			if(getLoc().getCoordinates().x - TilePanel.getInstance().tileMap.getBaseX() > 0)
+				return (Math.PI);
+			else if(getLoc().getCoordinates().y - TilePanel.getInstance().tileMap.getBaseY() > 0)
+				return (-Math.PI/2);
+			else if(getLoc().getCoordinates().y - TilePanel.getInstance().tileMap.getBaseY() < 0)
+				return (Math.PI/2);
+
+			else
+				return 0.;
+			
+		}
 	}
 	
 	public void resetPixels(){

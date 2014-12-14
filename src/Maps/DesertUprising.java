@@ -58,6 +58,16 @@ public class DesertUprising extends Map {
 	public static void setMap(Map map){
 		theMap = map;
 	}
+	
+	@Override
+	public int getBaseX() {
+		return BASE_X;
+	}
+
+	@Override
+	public int getBaseY() {
+		return BASE_Y;
+	}
 
 	private void setTiles() {
 		// Set blocked (non-buildable) tiles

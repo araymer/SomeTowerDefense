@@ -42,7 +42,7 @@ public class GameGUI implements Serializable {
 
 	private final int FRAME_WIDTH = 1100;
 	// Extra 22 for bar
-	private final int FRAME_HEIGHT = 644;
+	private final int FRAME_HEIGHT = 670;
 	public JFrame frame;
 	public TilePanel tilePanel;
 	private JPanel gamePanel;

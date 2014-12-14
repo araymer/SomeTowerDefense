@@ -121,6 +121,11 @@ public abstract class Map implements Serializable {
 	public abstract void setBase();
 
 	public abstract Base getBase();
+	
+	public abstract int getBaseX();
+	
+	public abstract int getBaseY();
+
 
 	public abstract void setSpawnPoints();
 
