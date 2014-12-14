@@ -27,7 +27,7 @@ public class UpdateMiniMapCommand extends Command{
 
 	@Override
 	public void clientExecute(TDClient client) {
-		client.updateMiniMap(gameMap, totalResources, enemiesKilled);
+		client.updateMiniMap(new Vector<Vector<Tile>>(gameMap), totalResources, enemiesKilled);
 	}
 
 }
