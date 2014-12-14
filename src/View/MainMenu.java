@@ -35,6 +35,7 @@ public class MainMenu extends JPanel {
 	JButton plainsButton;
 	JButton desertButton;
 	JLabel chooseLabel;
+	int mapSelected;
 
 	private MainMenu() {
 
@@ -51,6 +52,10 @@ public class MainMenu extends JPanel {
 		// desertMap.addActionListener(buttonListener);
 		singleplayer.addActionListener(buttonListener);
 		multiplayer.addActionListener(buttonListener);
+		load.addActionListener(buttonListener);
+		beachButton.addActionListener(buttonListener);
+		plainsButton.addActionListener(buttonListener);
+		desertButton.addActionListener(buttonListener);
 		// this.add(desertMap);
 		JPanel startPanel = new JPanel();
 		startPanel.add(singleplayer);
@@ -107,14 +112,13 @@ public class MainMenu extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == singleplayer)
-				GameGUI.getInstance().createMap(1);
+				GameGUI.getInstance().createMap(mapSelected);
 			if (e.getSource() == multiplayer) {
-
 				System.out.println("Multiplayer button clicked");
 				TDServer server = new TDServer();
 				TDClient client = new TDClient();
 				// TODO Have different map selection based on picked map
-				GameGUI.getInstance().mapSelection = 0;
+				GameGUI.getInstance().mapSelection = mapSelected;
 
 				File logoImage = new File(baseDir + "waiting.png");
 				try {
@@ -124,8 +128,20 @@ public class MainMenu extends JPanel {
 				}
 				// multiplayer.setVisible(false);
 				mainMenu.repaint();
-
 			}
+			if (e.getSource() == load){
+				
+			}
+			if (e.getSource() == beachButton){
+				mapSelected = 2;
+			}
+			if (e.getSource() == plainsButton){
+				mapSelected = 1;
+			}
+			if (e.getSource() == desertButton){
+				mapSelected = 0;
+			}
+
 		}
 	}
 
