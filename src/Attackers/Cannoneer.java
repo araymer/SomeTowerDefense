@@ -117,9 +117,7 @@ public class Cannoneer extends Attacker {
 	
 	@Override
 	public void setLoc(Tile loc) {
-		location = loc;
-		setX();
-		setY();
+		super.setLoc(loc);
 		resetPixels();
 	}
 	/*
