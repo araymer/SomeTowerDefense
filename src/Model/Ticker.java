@@ -25,6 +25,10 @@ public class Ticker implements Runnable {
 	private double now = System.nanoTime();
 	private static Ticker ticker;
 	public int numOfAttackersDead = 0;
+	
+	private LinkedList<Attacker> attackerRemoveList = new LinkedList<Attacker>();
+	private LinkedList<Attacker> atkrMoveList = new LinkedList<Attacker>();
+	private LinkedList<Structure> structureRemoveList = new LinkedList<Structure>();
 
 	// many objects will need to access the same timer
 	private Ticker() {
@@ -86,9 +90,7 @@ public class Ticker implements Runnable {
 
 	}
 
-	private LinkedList<Attacker> attackerRemoveList = new LinkedList<Attacker>();
-	private LinkedList<Attacker> atkrMoveList = new LinkedList<Attacker>();
-	private LinkedList<Structure> structureRemoveList = new LinkedList<Structure>();
+	
 	private void update() {
 		// add in information for structures and towers for
 		// position, direction and last drawn image (so it actually animates)
@@ -203,8 +205,7 @@ public class Ticker implements Runnable {
 		numOfAttackersDead += attackerRemoveList.size();
 		//Update other players minimap
 		if(GameGUI.getInstance().isMultiplayer){
-			//TODO finish
-			GameGUI.getInstance().getClient().updateMiniMap(new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard()), 9999999, numOfAttackersDead);
+			GameGUI.getInstance().getClient().sendMiniMap();
 		}
 	}
 

@@ -11,9 +11,11 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+import Model.Player;
 import Model.Ticker;
 import Model.Tile;
 import View.GameGUI;
+import View.TilePanel;
 import command.AddMessageCommand;
 import command.BaseTakeDamageCommand;
 import command.Command;
@@ -31,6 +33,7 @@ public class TDClient {
 	private ObjectOutputStream toServer;
 	private ObjectInputStream fromServer;
 	String username;
+	private int miniMapTick;
 
 
 	/**
@@ -167,18 +170,25 @@ public class TDClient {
 		GUI.multiFrame.miniPanel.updateMap(gameMap, totalResources, enemiesKilled);
 	}
 	
+	
 	/**
 	 * Sends info for minimap to other player
 	 */
-	public void sendMiniMap(Vector<Vector<Tile>> gameMap){
-		//TODO get actual resource number
-		int totalResources = 9999999;
-		int enemiesKilled = Ticker.getInstance().numOfAttackersDead;
-		try{
-			toServer.writeObject(new UpdateMiniMapCommand(username, gameMap, totalResources, enemiesKilled));
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+	public void sendMiniMap(){
+		//Only update 3 times a second
+//		if(miniMapTick % 10 == 0){
+//			miniMapTick = 0;
+//			//TODO gameMap needs to be serializable first for this to work!!
+//			Vector<Vector<Tile>> gameMap = new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard());
+//			int totalResources = Player.getInstance().getMoney();
+//			int enemiesKilled = Ticker.getInstance().numOfAttackersDead;
+//			try{
+//				toServer.writeObject(new UpdateMiniMapCommand(username, gameMap, totalResources, enemiesKilled));
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			}
+//		}
+		miniMapTick ++;
 	}
 	
 	/**
@@ -187,8 +197,7 @@ public class TDClient {
 	 * @param resources -the amount of resources received
 	 */
 	public void receiveResources(int resources) {
-		// TODO increment total resources amount by amount given
-		
+		Player.getInstance().addMoney(resources);
 	}
 	
 	/**
@@ -199,12 +208,14 @@ public class TDClient {
 	public void sendCurrency(int amount) {
 		
 		if(amount > 0){
-			// TODO Decrement your resources
-			
-			try{
-				toServer.writeObject(new TransferResourcesCommand(username, amount));
-			}catch(Exception e){
-				e.printStackTrace();
+			if(Player.getInstance().subtractMoney(amount)){
+				try{
+					toServer.writeObject(new TransferResourcesCommand(username, amount));
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}else{
+				System.out.println("TDClient: you don't have that much to give");
 			}
 		}else{
 			System.out.println("TDClient: error, can only send positive resources");
