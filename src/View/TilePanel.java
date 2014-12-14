@@ -12,6 +12,7 @@ import Attackers.Marine;
 import Maps.DesertUprising;
 import Model.Attacker;
 import Model.Map;
+import Model.Player;
 import Model.Tile;
 
 /**
@@ -39,6 +40,7 @@ public class TilePanel extends JPanel implements Serializable {
 
 	public void reset() {
 		tileMap = DesertUprising.getInstance().reInit();
+		Player.getInstance().reset();
 		tilePanel = new TilePanel();
 	}
 

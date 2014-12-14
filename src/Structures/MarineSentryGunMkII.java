@@ -46,7 +46,7 @@ public class MarineSentryGunMkII extends Structure {
 	}
 
 	@Override
-	protected void setImages() {
+	public void setImages() {
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir
 					+ "MarineSentryGunMkII.png");
