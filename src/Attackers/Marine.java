@@ -106,6 +106,7 @@ public class Marine extends Attacker {
 			return -pixels;
 		}
 
+
 		return 0;
 
 	}
@@ -121,6 +122,7 @@ public class Marine extends Attacker {
 			return (Math.PI/2);
 
 		else
+
 			return 0.;
 		}
 		else {

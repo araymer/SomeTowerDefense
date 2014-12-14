@@ -12,11 +12,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Model.SpecialAttack;
 import Model.Structure;
 import Model.StructureType;
 import TowerFSM.TowerStates;
 import TowerFSM.TowerWaiting;
 
+@SuppressWarnings("serial")
 public class MarineSentryGun extends Structure {
 
 	protected static BufferedImage waitImage;
@@ -34,7 +36,7 @@ public class MarineSentryGun extends Structure {
 
 	public MarineSentryGun(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
-				x, y, null);
+				x, y, SpecialAttack.NONE);
 		setImages();
 		upgradeTo = StructureType.SENTRYGUN2;
 		upgradeCost = 3000;
@@ -42,7 +44,8 @@ public class MarineSentryGun extends Structure {
 		name = "Sentry Gun";
 		price = 50;
 	}
-
+	
+	@Override
 	public void setImages() {
 
 		if (waitImage == null) {

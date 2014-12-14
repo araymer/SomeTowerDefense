@@ -13,7 +13,6 @@ import Structures.BaseDesertUprising;
  *
  */
 public class BrokenPlainsPatrol extends Map {
-	public static final String mapImageName = "BrokenPlainsPatrol.jpg";
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
 
@@ -26,6 +25,7 @@ public class BrokenPlainsPatrol extends Map {
 
 	private BrokenPlainsPatrol() {
 		super(height, width);
+		mapImageName = "BrokenPlainsPatrol.jpg";
 		new ArrayList<Tile>();
 		setPath();
 		setBase();
@@ -369,5 +369,11 @@ public class BrokenPlainsPatrol extends Map {
 	@Override
 	public int getBaseY() {
 		return BASE_Y;
+
+	}
+	@Override
+	public Map reInit() {
+		brokenPlains = new BrokenPlainsPatrol();
+		return brokenPlains;
 	}
 }

@@ -84,14 +84,10 @@ public class TowerWaiting extends TowerState implements Serializable{
 	// }
 
 	public void draw(Graphics2D g2) {
-//		if (tower.bImage == null) {
-//			File imageFile = new File(Structure.baseDir + tower.imageFileName);
-//			try {
-//				tower.bImage = ImageIO.read(imageFile);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
+		if (tower.bImage == null) {
+			tower.setImages();
+			tower.refreshBImage(TowerStates.WAIT);
+		}
 
 		if ((tower.xIncrement * tower.WIDTH) + tower.WIDTH > tower.bImage
 				.getWidth()) {

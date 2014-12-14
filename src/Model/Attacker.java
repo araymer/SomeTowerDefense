@@ -39,6 +39,8 @@ public abstract class Attacker extends Drawable implements Serializable {
 	private int tick;
 
 	Map map;
+	
+	protected SpecialAttack effect;
 
 	public Attacker(int hp, int def, int ar, int range, int spd,
 			Tile startingLocation) {
@@ -48,13 +50,15 @@ public abstract class Attacker extends Drawable implements Serializable {
 		this.range = range;
 		speed = spd;
 		defenseRating = def;
-
+		effect = SpecialAttack.NONE;
+		
 		xIncrement = 0;
 		yIncrement = 0;
 
 		location = startingLocation;
 		setX();
 		setY();
+		
 
 	}
 
@@ -82,8 +86,28 @@ public abstract class Attacker extends Drawable implements Serializable {
 
 	public abstract void die();
 
-	public void takeDamage(int dmg) {
+	public void takeDamage(int dmg, SpecialAttack special) {
 		System.out.println("ouch!");
+		switch(special) {
+			case NONE: // do nothing
+			case TWO_TARGETS:
+				break;
+			case FREEZE:
+				effect = SpecialAttack.FREEZE;
+				speed = 0;
+				break;
+			case SLOW:
+				if(effect == SpecialAttack.NONE || effect == SpecialAttack.BURN) {
+					speed /= 2;
+					effect = SpecialAttack.SLOW;
+				}
+				break;
+			case BURN:
+				effect = SpecialAttack.BURN;
+				break;
+			default:
+				System.out.println("error in attacker.takeDamage method");
+		}
 		hitpoints -= dmg;
 
 		if (hitpoints <= 0) {
@@ -152,8 +176,10 @@ public abstract class Attacker extends Drawable implements Serializable {
 		}
 		int framedif = 0;
 		// Moves every speed amount of ticks
-		if (tick % speed == 0) {
-			move();
+		if(speed != 0) {
+			if (tick % speed == 0) {
+				move();
+			}
 		}
 		// Shoots if at base
 		if (tick % attackRating == 0) {
@@ -161,6 +187,9 @@ public abstract class Attacker extends Drawable implements Serializable {
 				attack(TilePanel.getInstance().tileMap.getBase());
 			}
 		}
+		// takes damage if effected by BURN
+		if(effect == SpecialAttack.BURN)
+			takeDamage(10, SpecialAttack.NONE);
 	}
 
 	public boolean isFinished() {

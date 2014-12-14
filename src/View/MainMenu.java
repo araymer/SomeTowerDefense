@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controller.GameController;
 import Controller.TDClient;
 import Controller.TDServer;
 
@@ -136,7 +137,7 @@ public class MainMenu extends JPanel {
 				mainMenu.repaint();
 			}
 			if (e.getSource() == load){
-				
+				GameController.getInstance().loadData();
 			}
 			if (e.getSource() == beachButton){
 

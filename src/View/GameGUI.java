@@ -26,9 +26,10 @@ import javax.swing.JTextArea;
 import Controller.GameController;
 import Controller.TDClient;
 import Model.Attacker;
+import Model.Map;
+import Model.Player;
 import Model.Structure;
 import Model.Ticker;
-import Model.Tile;
 
 /**
  * The class that organizes all the GUI elements for the tower defense game
@@ -55,6 +56,7 @@ public class GameGUI implements Serializable {
 	private CardLayout cards;
 	Structure structure;
 	public JFrame resourceFrame;
+	private int currentMap;
 	public double interpolation;
 
 	/**
@@ -84,14 +86,9 @@ public class GameGUI implements Serializable {
 
 	}
 
-	// This is if we want single player and multi player screens for prettiness
-	/*
-	 * public void setMenu(int i) { gamePanel.add(MainMenu.getInstance(),
-	 * "Main"); CardLayout c1 = (CardLayout) gamePanel.getLayout();
-	 * c1.show(gamePanel, "Main"); }
-	 */
 	void createMap(int selection) {
 
+		currentMap = selection;
 		switch (selection) {
 		case 0:
 			MapPanel.getInstance().setMap("desertuprising.jpg");
@@ -101,10 +98,6 @@ public class GameGUI implements Serializable {
 			break;
 		case 2:
 			MapPanel.getInstance().setMap("BeachBetrayal.jpg");
-			break;
-		case 3:
-			MapPanel.getInstance().setMap("desertuprising.jpg");
-			isMultiplayer = true;
 			break;
 		}
 
@@ -144,10 +137,11 @@ public class GameGUI implements Serializable {
 		new Thread(Ticker.getInstance()).start();
 
 	}
-	
-	public void loadMap(String map, Vector<Vector<Tile>> gameMap){
+
+	public void createLoadedMap(Map map) {
+		MapPanel.getInstance().setMap(map.mapImageName);
+		Player.getInstance().setMoney(map.playerMoney.getMoney());
 		tilePanel = TilePanel.getInstance();
-		//tilePanel.setMap(gameMap);
 
 		MouseListener placementListener = new PlacementListener();
 
@@ -178,8 +172,11 @@ public class GameGUI implements Serializable {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
 		}
+		tilePanel.setMap(map);
+		Player.getInstance().setMoney(map.playerMoney.getMoney());
 
 		new Thread(Ticker.getInstance()).start();
+		System.out.println("GameGUI: finished loading");
 	}
 
 	/**
@@ -216,13 +213,10 @@ public class GameGUI implements Serializable {
 	void createMenuBar() {
 		menuBar = new JMenuBar();
 		game = new JMenu("Game");
-		/*
-		 * restart = new JMenuItem("Restart");
-		 * restart.addActionListener(newMenuListener());
-		 * restart.setActionCommand("restart"); game.add(restart); main = new
-		 * JMenuItem("Return to Menu"); main.addActionListener(new
-		 * MenuListener()); main.setActionCommand("main"); game.add(main);
-		 */
+		restart = new JMenuItem("Restart");
+		restart.addActionListener(new MenuListener());
+		restart.setActionCommand("restart");
+		game.add(restart);
 		save = new JMenuItem("Save");
 		save.addActionListener(new MenuListener());
 		save.setActionCommand("save");
@@ -235,6 +229,10 @@ public class GameGUI implements Serializable {
 		pause.addActionListener(new MenuListener());
 		pause.setActionCommand("pause");
 		game.add(pause);
+		main = new JMenuItem("Return to Menu");
+		main.addActionListener(new MenuListener());
+		main.setActionCommand("main");
+		game.add(main);
 		exit = new JMenuItem("Exit");
 		exit.addActionListener(new MenuListener());
 		exit.setActionCommand("exit");
@@ -248,16 +246,9 @@ public class GameGUI implements Serializable {
 		instructions.addActionListener(new MenuListener());
 		instructions.setActionCommand("instructions");
 		help.add(instructions);
-		// menuBar.add(file);
 		menuBar.add(game);
 		menuBar.add(help);
 		menuBar.setVisible(true);
-		resetMenuBar();
-	}
-
-	public void resetMenuBar() {
-		frame.setJMenuBar(menuBar);
-
 	}
 
 	public void newTilePanel() {
@@ -278,8 +269,17 @@ public class GameGUI implements Serializable {
 	}
 
 	public void returnMenu() {
-		frame.setContentPane(MainMenu.getInstance());
-		frame.setJMenuBar(menuBar);
+		// TODO: fix
+		tilePanel = tilePanel.reset();
+		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
+	}
+
+	private void restartMap() {
+
+		tilePanel.reset();
+		tilePanel = TilePanel.getInstance();
+		tilePanel.setMap(currentMap);
+
 	}
 
 	public void setClient(TDClient cli) {
@@ -366,10 +366,10 @@ public class GameGUI implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand()) {
 			case "main":
-				GameController.getInstance().returnToMain();
+				returnMenu();
 				break;
 			case "restart":
-				GameController.getInstance().restartMap();
+				restartMap();
 				break;
 			case "load":
 				GameController.getInstance().loadData();
