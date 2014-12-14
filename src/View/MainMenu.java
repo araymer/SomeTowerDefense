@@ -75,7 +75,7 @@ public class MainMenu extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == singleplayer)
-				GameGUI.getInstance().createMap(1);
+				GameGUI.getInstance().createMap(0);
 			if (e.getSource() == multiplayer) {
 			}
 

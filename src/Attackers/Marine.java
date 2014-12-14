@@ -105,6 +105,17 @@ public class Marine extends Attacker {
 		else
 			return 0.;
 	}
+	
+	public void resetPixels(){
+		pixels = 0;
+	}
+	
+	@Override
+	public void setLoc(Tile loc) {
+		super.setLoc(loc);
+		resetPixels();
+	}
+	
 	/*
 	 * 
 	 * //4 is the number of shooting frames if(xIncrement > 4){ xIncrement = 0;

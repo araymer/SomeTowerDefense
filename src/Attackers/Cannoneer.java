@@ -73,10 +73,10 @@ public class Cannoneer extends Attacker {
 		
 		count++;
 		
-		// variable "at" will help us manipulate sprites
+		// AffineTransform will help us manipulate sprites
 		AffineTransform at = new AffineTransform();
 		//calculate offset per tick
-		at.translate(offset("x"), offset("y"));
+		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"), getLoc().getCoordinates().y * HEIGHT + offset("y"));
 		//calculate direction they should be facing
 		at.rotate(checkTransform(), tempSubImage.getWidth()/2, tempSubImage.getHeight()/2);
 
@@ -127,17 +127,6 @@ public class Cannoneer extends Attacker {
 		super.setLoc(loc);
 		resetPixels();
 	}
-	/*
-	 * 
-	 * //4 is the number of shooting frames if(xIncrement > 4){ xIncrement = 0;
-	 * }
-	 * 
-	 * BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-	 * yIncrement * HEIGHT, WIDTH, HEIGHT); xIncrement ++;
-	 * g2.drawImage(tempSubImage, getLoc().getCoordinates().x * WIDTH,
-	 * getLoc().getCoordinates().y * HEIGHT, WIDTH, HEIGHT, null);
-	 * 
-	 * }
-	 */
+
 
 }
