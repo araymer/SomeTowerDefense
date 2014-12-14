@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.Serializable;
 import java.util.Vector;
 
@@ -126,49 +125,8 @@ public class GameGUI implements Serializable {
 		}
 
 		new Thread(Ticker.getInstance()).start();
-		// GameController.getInstance().startWaves();
 
 	}
-
-	// void loadMap(TilePanel tiles, MapPanel map) {
-	// mapPanel = map;
-	// for (int i = 0; i < TilePanel.getInstance().getMap().getGameBoard()
-	// .size(); i++) {
-	// for (int p = 0; p < TilePanel.getInstance().getMap().getGameBoard()
-	// .get(i).size(); p++) {
-	// if (TilePanel.getInstance().getMap().getGameBoard().get(i)
-	// .get(p) != null) {
-	// TilePanel.getInstance().getMap().getGameBoard().get(i)
-	// .get(p).getStructure().setImages();
-	// }
-	// }
-	// }
-	//
-	// mapPanel.setSize(frame.getSize().width, frame.getSize().height);
-	// mapPanel.setLocation(0, 0);
-	// frame.setContentPane(mapPanel);
-	// frame.setJMenuBar(menuBar);
-	//
-	// contentPane = frame.getContentPane();
-	// contentPane.setLayout(new CardLayout());
-	//
-	// tilePanel = tiles;
-	// MouseListener placementListener = new PlacementListener();
-	// tilePanel.addMouseListener(placementListener);
-	// tilePanel.setSize(frame.getSize().width, frame.getSize().height);
-	// tilePanel.setLocation(0, 0);
-	// tilePanel.setLayout(new CardLayout());
-	//
-	// resourcePanel = ResourcePanel.getInstance();
-	//
-	// contentPane.add(tilePanel);
-	//
-	// // frame.repaint();
-	//
-	// new Thread(Ticker.getInstance()).start();
-	// // GameController.getInstance().startWaves();
-	//
-	// }
 
 	/**
 	 * Creates and sets the JFrame
@@ -299,71 +257,40 @@ public class GameGUI implements Serializable {
 			}
 
 			// Aaaaaand allows to get attacker info
-			Vector<Attacker> attackers = tilePanel.getMap().getGameBoard()
-					.get((int) Math.round(e.getPoint().getX()) / 40)
-					.get((int) Math.round(e.getPoint().getY()) / 40)
-					.getAttackers();
-			if (attackers.size() != 0) {
-				// Ticker.getInstance().loopStop();
-				// JFrame enemyInfoFrame = new JFrame();
-				// enemyInfoFrame.setResizable(false);
-				// enemyInfoFrame.addWindowListener(new ExitListener());
-				// enemyInfoFrame.setSize(100, 200);
-				// JPanel enemyInfoPanel = new JPanel();
-				// enemyInfoPanel.setLayout(new GridLayout(4, 1));
-				// enemyInfoPanel.add(new JLabel("Name: "
-				// + attackers.get(0).getName()));
-				// enemyInfoPanel
-				// .add(new JLabel("HP: " + attackers.get(0).getHP()));
-				// enemyInfoPanel.add(new JLabel("Attack: "
-				// + attackers.get(0).getAttack()));
-				// enemyInfoPanel.setVisible(true);
-				// enemyInfoFrame.setContentPane(enemyInfoPanel);
-				// enemyInfoFrame.setVisible(true);
-				String info = "Name: " + attackers.get(0).getName() + "\nHP: "
-						+ attackers.get(0).getHP() + "\nAttack: "
-						+ attackers.get(0).getAttack();
-				ResourcePanel.updateInfo(info);
+			try {
+				Vector<Attacker> attackers = tilePanel.getMap().getGameBoard()
+						.get((int) Math.round(e.getPoint().getX()) / 40)
+						.get((int) Math.round(e.getPoint().getY()) / 40)
+						.getAttackers();
+				if (attackers.size() != 0) {
+					String info = "<html>Name: " + attackers.get(0).getName()
+							+ "<br>HP: " + attackers.get(0).getHP()
+							+ "<br>Attack: " + attackers.get(0).getAttack()
+							+ "</html>";
+					ResourcePanel.updateInfo(info);
+				}
+			} catch (Exception exception) {
+
 			}
 
 			// Aaaaaaand Structure info :P
-
-			// JButton upgrade = new JButton("Upgrade");
-			// upgrade.addActionListener(new ButtonListener());
-			if (tilePanel.getMap().getGameBoard()
-					.get((int) Math.round(e.getPoint().getX()) / 40)
-					.get((int) Math.round(e.getPoint().getY()) / 40)
-					.getStructure() != null) {
-				structure = tilePanel.getMap().getGameBoard()
+			try {
+				if (tilePanel.getMap().getGameBoard()
 						.get((int) Math.round(e.getPoint().getX()) / 40)
 						.get((int) Math.round(e.getPoint().getY()) / 40)
-						.getStructure();
+						.getStructure() != null) {
+					structure = tilePanel.getMap().getGameBoard()
+							.get((int) Math.round(e.getPoint().getX()) / 40)
+							.get((int) Math.round(e.getPoint().getY()) / 40)
+							.getStructure();
+					String info = "<html>Name: " + structure.getName()
+							+ "<br>HP: " + structure.getHP() + "<br>Damage: "
+							+ structure.getDamage() + "<br>Rate of Fire: "
+							+ structure.getROF() + " shots per second</html>";
+					ResourcePanel.updateInfo(info);
 
-				// Ticker.getInstance().loopStop();
-				/*
-				 * JFrame structureInfoFrame = new JFrame();
-				 * structureInfoFrame.setResizable(false);
-				 * structureInfoFrame.addWindowListener(new ExitListener());
-				 * structureInfoFrame.setSize(100, 200);
-				 * structureInfoFrame.setLocation(811, 300); JPanel
-				 * structureInfoPanel = new JPanel();
-				 * structureInfoPanel.setLayout(new GridLayout(5, 1));
-				 * structureInfoPanel.add(new JLabel("Name: " +
-				 * structure.getName())); structureInfoPanel.add(new
-				 * JLabel("HP: " + structure.getHP()));
-				 * structureInfoPanel.add(new JLabel("Damage: " +
-				 * structure.getDamage())); structureInfoPanel.add(new
-				 * JLabel("Rate of Fire: " + structure.getROF() +
-				 * " shots per second")); // structureInfoPanel.add(upgrade);
-				 * structureInfoPanel.setVisible(true);
-				 * structureInfoFrame.setContentPane(structureInfoPanel);
-				 * structureInfoFrame.setVisible(true);
-				 */
-				String info = "Name: " + structure.getName() + "\nHP: "
-						+ structure.getHP() + "\nDamage: "
-						+ structure.getDamage() + "\nRate of Fire: "
-						+ structure.getROF() + " shots per second";
-				ResourcePanel.updateInfo(info);
+				}
+			} catch (Exception exception) {
 
 			}
 		}
@@ -427,61 +354,6 @@ public class GameGUI implements Serializable {
 			}
 
 		}
-	}
-
-	private class ButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// empty
-		}
-
-	}
-
-	private class ExitListener implements WindowListener {
-
-		@Override
-		public void windowActivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void windowClosed(WindowEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void windowClosing(WindowEvent e) {
-			if (!Ticker.getInstance().running())
-				Ticker.getInstance().loopStart();
-		}
-
-		@Override
-		public void windowDeactivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void windowDeiconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void windowIconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void windowOpened(WindowEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
 	}
 
 }

@@ -43,15 +43,8 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	 */
 	private ResourcePanel() {
 		selected = StructureType.SENTRYGUN;
-		// resourceFrame = new JFrame();
-		// resourceFrame.setSize(200, 200);
-		// resourceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// resourceFrame.setResizable(false);
-		// resourceFrame.setTitle("Resources");
-		// resourceFrame.setLocation(811, 0);
-		// resourceFrame.setVisible(true);
 
-		this.setLayout(new GridLayout(15, 1));
+		this.setLayout(new GridLayout(6, 2));
 		this.setPreferredSize(new Dimension(200, 600));
 		radioButtons = new ButtonGroup();
 
@@ -75,14 +68,12 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		plasmaCannon.setActionCommand("PlasmaGun");
 
 		upgrade = new JRadioButton("Upgrade");
-		// JButton upgradeInfo = new JButton("Info");
 		upgrade.setActionCommand("Upgrade");
 
 		money = new JLabel("Funds: 500");
 
-		info = new JLabel("\n\n\n\n\n");
-		info.setSize(15, 50);
-		// info.setEditable(false);
+		info = new JLabel("");
+		info.setSize(15, 20);
 
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
@@ -185,27 +176,34 @@ public class ResourcePanel extends JPanel implements ActionListener {
 				structureROF = "5";
 				structureCost = "100";
 				structureDamage = "5";
+				infoSetter();
 				break;
 			case "sentry":
+				structureName = "Sentry Gun";
+				structureHP = "100";
+				structureROF = "5";
+				structureCost = "100";
+				structureDamage = "5";
+				infoSetter();
 				break;
 			case "plasma":
+				structureName = "Plasma Cannon";
+				structureHP = "100";
+				structureROF = "5";
+				structureCost = "100";
+				structureDamage = "5";
+				infoSetter();
 				break;
 			}
-			JFrame structureInfoFrame = new JFrame();
-			structureInfoFrame.setResizable(false);
-			structureInfoFrame.setSize(100, 200);
-			structureInfoFrame.setLocation(811, 250);
-			JPanel structureInfoPanel = new JPanel();
-			structureInfoPanel.setLayout(new GridLayout(5, 1));
-			structureInfoPanel.add(new JLabel("Name: " + structureName));
-			structureInfoPanel.add(new JLabel("HP: " + structureHP));
-			structureInfoPanel.add(new JLabel("Damage: " + structureDamage));
-			structureInfoPanel.add(new JLabel("Rate of Fire: " + structureROF
-					+ " shots per second"));
-			structureInfoPanel.add(new JLabel("Cost: " + structureCost));
-			structureInfoPanel.setVisible(true);
-			structureInfoFrame.setContentPane(structureInfoPanel);
-			structureInfoFrame.setVisible(true);
+
+		}
+
+		public void infoSetter() {
+			String info = "<html>Name: " + structureName + "<br>HP: "
+					+ structureHP + "<br>Damage: " + structureDamage
+					+ "<br>Rate of Fire: " + structureROF + " shots per second"
+					+ "<br>Cost: " + structureCost + "</html>";
+			ResourcePanel.updateInfo(info);
 		}
 	}
 
