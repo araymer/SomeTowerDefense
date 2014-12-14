@@ -37,16 +37,19 @@ public class MainMenu extends JPanel {
 	JButton plainsButton;
 	JButton desertButton;
 	JLabel chooseLabel;
+
 	BufferedImage map;
+	int mapSelected;
+
 
 	private MainMenu() {
-		
+
 		this.setLayout(new BorderLayout());
 		// desertMap = new JButton("Desert Uprising");
 		singleplayer = new JButton("Single Player");
 		multiplayer = new JButton("Multi-Player");
 		load = new JButton("Load Last Game");
-		beachButton  = new JButton("Beach Betrayal");
+		beachButton = new JButton("Beach Betrayal");
 		plainsButton = new JButton("Broken Plains Patrol");
 		desertButton = new JButton("Desert Uprising");
 		chooseLabel = new JLabel("Choose A Map First Then Select Single/Multiplayer");
@@ -65,10 +68,10 @@ public class MainMenu extends JPanel {
 		startPanel.add(load);
 		startPanel.setBackground(Color.BLACK);
 		this.add(startPanel, BorderLayout.NORTH);
-		
+
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new GridLayout(1,2));
-		
+		bottomPanel.setLayout(new GridLayout(1, 2));
+
 		JPanel mapChoosePanel = new JPanel();
 		mapChoosePanel.add(beachButton);
 		mapChoosePanel.add(plainsButton);
@@ -114,14 +117,14 @@ public class MainMenu extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == singleplayer)
+				GameGUI.getInstance().createMap(mapSelected);
 
-				GameGUI.getInstance().createMap(1);
 			if (e.getSource() == multiplayer) {
 				System.out.println("Multiplayer button clicked");
 				TDServer server = new TDServer();
 				TDClient client = new TDClient();
 				// TODO Have different map selection based on picked map
-				GameGUI.getInstance().mapSelection = 0;
+				GameGUI.getInstance().mapSelection = mapSelected;
 
 				File logoImage = new File(baseDir + "waiting.png");
 				try {
@@ -136,6 +139,7 @@ public class MainMenu extends JPanel {
 				
 			}
 			if (e.getSource() == beachButton){
+
 				try {
 					map = ImageIO.read(new File("imageFiles/BeachBetrayal.jpg"));
 				} catch (IOException e1) {
@@ -143,8 +147,10 @@ public class MainMenu extends JPanel {
 					e1.printStackTrace();
 				}
 				repaint();
+
 			}
 			if (e.getSource() == plainsButton){
+
 				try {
 					map = ImageIO.read(new File("imageFiles/BrokenPlainsPatrol.jpg"));
 				} catch (IOException e1) {
@@ -152,6 +158,7 @@ public class MainMenu extends JPanel {
 					e1.printStackTrace();
 				}
 				repaint();
+
 			}
 			if (e.getSource() == desertButton){
 				try {
@@ -161,6 +168,7 @@ public class MainMenu extends JPanel {
 					e1.printStackTrace();
 				}
 				repaint();
+
 			}
 
 		}

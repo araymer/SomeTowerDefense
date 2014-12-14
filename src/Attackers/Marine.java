@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Model.Attacker;
+import Model.Player;
 import Model.Structure;
 import Model.Tile;
 
@@ -25,6 +26,7 @@ public class Marine extends Attacker {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
 		name = "Marine";
 		imageFileName = "topdownmarines40.png";
+		value = 10;
 	}
 
 	@Override
@@ -36,6 +38,7 @@ public class Marine extends Attacker {
 	public void die() {
 		// play dying animation and remove the attacker
 		isDead = true;
+		Player.getInstance().addMoney(value);
 
 	}
 
@@ -58,6 +61,7 @@ public class Marine extends Attacker {
 		//This calculates the amount of offset to animate between tiles (40px/SPEED = 2.6667px per tick)
 		if(pixels < 40-(40/SPEED) && getLoc() != null)
 			pixels += (double)40./SPEED;
+
 		else
 			pixels = 0;
 	
@@ -65,36 +69,44 @@ public class Marine extends Attacker {
 		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT, WIDTH, HEIGHT);
 		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
 		if(count%5 == 0)
+
 			xIncrement++;
-		
+
 		count++;
 		// variable "at" will help us manipulate sprites
 		AffineTransform at = new AffineTransform();
-		//calculate offset per tick
-		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"), getLoc().getCoordinates().y * HEIGHT + offset("y"));
-		//calculate direction they should be facing
-		at.rotate(checkTransform(), tempSubImage.getWidth()/2, tempSubImage.getHeight()/2);
+		// calculate offset per tick
+		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"),
+				getLoc().getCoordinates().y * HEIGHT + offset("y"));
+		// calculate direction they should be facing
+		at.rotate(checkTransform(), tempSubImage.getWidth() / 2,
+				tempSubImage.getHeight() / 2);
 
-		
 		g2.drawImage(tempSubImage, at, null);
 
+	}
+
+	private double offset(String s) {
+		if (getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0
+				&& s.equals("x"))
+			return pixels;
+		else if (getLoc().getCoordinates().x
+				- getLoc().nextTile.getCoordinates().x > 0
+				&& s.equals("x"))
+			return -pixels;
+		else if (getLoc().getCoordinates().y
+				- getLoc().nextTile.getCoordinates().y < 0
+				&& s.equals("y"))
+			return pixels;
+		else if (getLoc().getCoordinates().y
+				- getLoc().nextTile.getCoordinates().y > 0
+				&& s.equals("y"))
+			return -pixels;
+
+		return 0;
 
 	}
-	
-	private double offset(String s) {
-		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0 && s.equals("x"))
-			return pixels;
-		else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0 && s.equals("x"))
-			return -pixels;
-		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0 && s.equals("y"))
-			return pixels;
-		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0 && s.equals("y"))
-			return -pixels;
-		
-		return 0;
-	
-	}
-	
+
 	private double checkTransform() {
 		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
 			return (Math.PI);
@@ -102,6 +114,7 @@ public class Marine extends Attacker {
 			return (-Math.PI/2);
 		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
 			return (Math.PI/2);
+
 		else
 			return 0.;
 	}

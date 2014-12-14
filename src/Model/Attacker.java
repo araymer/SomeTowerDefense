@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 import View.TilePanel;
 
-
 public abstract class Attacker extends Drawable implements Serializable {
 
 	protected String name;
 	private int hitpoints;
 	private int attackRating;
+	protected int value;
 
 	// The larger the speed, the slower
 	private int speed; // The number of milliseconds it takes to cross a full
