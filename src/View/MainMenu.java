@@ -86,7 +86,7 @@ public class MainMenu extends JPanel {
 				System.out.println("Multiplayer button clicked");
 				TDServer server = new TDServer();
 				TDClient client = new TDClient();
-				//TODO Have different map selection based on picked map
+				// TODO Have different map selection based on picked map
 				GameGUI.getInstance().mapSelection = 0;
 
 				File logoImage = new File(baseDir + "waiting.png");
@@ -95,7 +95,7 @@ public class MainMenu extends JPanel {
 				} catch (IOException exc) {
 					exc.printStackTrace();
 				}
-				//multiplayer.setVisible(false);
+				// multiplayer.setVisible(false);
 				mainMenu.repaint();
 
 			}
@@ -115,6 +115,6 @@ public class MainMenu extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawImage(bgImage, 0, 0, null);
-		g.drawImage(logo, 120, 216, null);
+		g.drawImage(logo, 260, 216, null);
 	}
 }

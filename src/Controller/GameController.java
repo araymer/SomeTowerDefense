@@ -1,7 +1,18 @@
 package Controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import Attackers.Marine;
 import View.GameGUI;
+import View.MapPanel;
+import View.TilePanel;
 
 public class GameController {
 	private int waveCount;
@@ -59,6 +70,62 @@ public class GameController {
 			}
 		}
 
+	}
+
+	FileInputStream inStream;
+	ObjectInputStream inObject;
+
+	@SuppressWarnings("unchecked")
+	public boolean loadData() {
+
+		try {
+			// load map
+			inStream = new FileInputStream(new File("map.dat"));
+			inObject = new ObjectInputStream(inStream);
+			MapPanel.getInstance().setMap(inObject.readObject().toString());
+			inObject.close();
+			// load tiles
+			inStream = new FileInputStream(new File("tiles.dat"));
+			inObject = new ObjectInputStream(inStream);
+			// change our tile panel = (TilePanel) inObject.readObject();
+			inObject.close();
+			// loadMap(tilePanel, MapPanel.getInstance());
+			System.out.println("Load successful");
+		} catch (Exception e) {
+			JFrame cantLoad = new JFrame();
+			JLabel loadError = new JLabel("Could not load");
+			cantLoad.add(loadError);
+			cantLoad.setSize(100, 100);
+			cantLoad.setVisible(true);
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public void saveData() {
+		FileOutputStream outStream;
+		ObjectOutputStream outObject;
+		try {
+			// save map
+			outStream = new FileOutputStream(new File("map.dat"));
+			outObject = new ObjectOutputStream(outStream);
+			outObject.writeObject(MapPanel.getInstance());
+			outObject.close();
+			// save tiles
+			outStream = new FileOutputStream(new File("tiles.dat"));
+			outObject = new ObjectOutputStream(outStream);
+			outObject.writeObject(TilePanel.getInstance());
+			outObject.close();
+			System.out.println("Save successful");
+		} catch (Exception e) {
+			JFrame cantSave = new JFrame();
+			JLabel saveError = new JLabel("Error saving game");
+			cantSave.add(saveError);
+			cantSave.setSize(100, 100);
+			cantSave.setVisible(true);
+			e.printStackTrace();
+		}
 	}
 
 }
