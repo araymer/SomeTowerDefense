@@ -17,7 +17,7 @@ public class MultiplayerInfoPanel extends JPanel{
 	private JButton sendButton;
 	
 	public MultiplayerInfoPanel(){
-		info = new JTextArea("Other player's info:\nResources available: 700\nEnemies killed: 5\nEnemies on map 3");
+		info = new JTextArea("Other player's info:");
 		textField = new JTextField("0");
 		sendButton = new JButton("Send Resources");
 		info.setEditable(false);
@@ -59,10 +59,17 @@ public class MultiplayerInfoPanel extends JPanel{
 			
 		}
 	}
-
+	
+	/**
+	 * Refreshes the information about other player
+	 * 
+	 * @param totalResources
+	 * @param enemiesKilled
+	 * @param enemyNum
+	 */
 	public void updateInfo(int totalResources, int enemiesKilled, int enemyNum) {
 		info.setText("Other player's info:\nResources available: " + totalResources 
-				+ "\nEnemies killed: " + enemiesKilled + "\nEnemies on map "+ enemyNum);
+				+ "\nEnemies killed: " + enemiesKilled + "\nEnemies on map: "+ enemyNum);
 	}
 
 }
