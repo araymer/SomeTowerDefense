@@ -86,7 +86,7 @@ public class GameGUI implements Serializable {
 
 		switch (selection) {
 		case 0:
-			MapPanel.getInstance().setMap("desertuprising.jpg");
+			MapPanel.getInstance().setMap("BrokenPlainsPatrol.jpg");
 			// case 1:
 			// MapPanel.getInstance().setMap("BrokenPlainsPatrol.jpg");
 
