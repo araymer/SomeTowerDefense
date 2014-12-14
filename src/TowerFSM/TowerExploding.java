@@ -36,6 +36,11 @@ public class TowerExploding extends TowerState implements Serializable{
 
 	@Override
 	public void draw(Graphics2D g2) {
+		if (tower.bImage == null) {
+			tower.setImages();
+			tower.refreshBImage(TowerStates.EXPLODE);
+		}
+		
 		if ((tower.xIncrement * tower.WIDTH) + tower.WIDTH > tower.bImage
 				.getWidth()) {
 			tower.yIncrement++;

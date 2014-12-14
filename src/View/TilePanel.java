@@ -84,7 +84,11 @@ public class TilePanel extends JPanel implements Serializable {
 	}
 
 	public void setMap(Map m) {
+		if(m.mapImageName.equals("desertuprising.jpg")){
+			DesertUprising.setMap(m);
+		}
 		tileMap = m;
+		tileMap.setGameBoard(m.getGameBoard());
 		tilePanel = new TilePanel();
 	}
 
@@ -92,29 +96,31 @@ public class TilePanel extends JPanel implements Serializable {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-
-		try {
-
-			for (Vector<Tile> vec : tileMap.getGameBoard()) {
-				for (Tile tile : vec) {
-					if (tile.getStructure() != null) {
-						tile.getStructure().draw(g2);
-					}
-					for (Attacker attacker : tile.getAttackers()) {
-						attacker.draw(g2);
+		if( tileMap != null && tileMap.getGameBoard() != null){
+			try {
+				
+				for (Vector<Tile> vec : tileMap.getGameBoard()) {
+					for (Tile tile : vec) {
+						if (tile.getStructure() != null) {
+							tile.getStructure().draw(g2);
+						}
+						for (Attacker attacker : tile.getAttackers()) {
+							attacker.draw(g2);
+						}
 					}
 				}
+			} catch (ConcurrentModificationException e) {
+				System.out
+						.println("TilePanel: repaint error, ConcurrentModificationException\n");
+				// +
+				// "this happens when too many objects to repaint. May be able to fix by having only\n"
+				// +
+				// "repaint scan the gameBoard and everything else uses repaint to scan and change anything");
+				// Just have this catch do nothing if you can't really tell any
+				// changes when repainting.
 			}
-		} catch (ConcurrentModificationException e) {
-			System.out
-					.println("TilePanel: repaint error, ConcurrentModificationException\n");
-			// +
-			// "this happens when too many objects to repaint. May be able to fix by having only\n"
-			// +
-			// "repaint scan the gameBoard and everything else uses repaint to scan and change anything");
-			// Just have this catch do nothing if you can't really tell any
-			// changes when repainting.
 		}
+		
 
 	}
 

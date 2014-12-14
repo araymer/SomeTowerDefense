@@ -164,7 +164,10 @@ public abstract class Structure extends Drawable implements Serializable {
 	 * @return
 	 */
 	protected abstract BufferedImage getImage(TowerStates state);
-
+	
+	public void refreshBImage(TowerStates state){
+		bImage = getImage(state);
+	}
 	/**
 	 * Changes to a different state, called from TowersFSM classes.
 	 * 

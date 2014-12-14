@@ -54,6 +54,10 @@ public class DesertUprising extends Map {
 		theMap = new DesertUprising();
 		return theMap;
 	}
+	
+	public static void setMap(Map map){
+		theMap = map;
+	}
 
 	private void setTiles() {
 		// Set blocked (non-buildable) tiles
