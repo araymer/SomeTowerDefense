@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.CardLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,8 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Attackers.Marine;
+import Model.Ticker;
 import Model.Tile;
 import View.GameGUI;
+import View.MainMenu;
 import View.MapPanel;
 import View.TilePanel;
 
@@ -143,4 +146,30 @@ public class GameController {
 		}
 	}
 
+	JFrame frame;
+
+	public void restartMap() {
+		frame = GameGUI.getInstance().frame;
+		TilePanel tilePanel = TilePanel.getInstance();
+
+		frame.remove(tilePanel);
+		tilePanel.reset();
+		tilePanel = TilePanel.getInstance();
+
+		frame.add(tilePanel);
+
+		tilePanel.setSize(frame.getSize().width, frame.getSize().height);
+		tilePanel.setLocation(0, 0);
+		tilePanel.setLayout(new CardLayout());
+
+		GameGUI.getInstance().newTilePanel();
+		Ticker.getInstance().loopStart();
+
+	}
+
+	public void returnToMain() {
+		frame = GameGUI.getInstance().frame;
+		frame.setContentPane(MainMenu.getInstance());
+		GameGUI.getInstance().resetMenuBar();
+	}
 }

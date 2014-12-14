@@ -86,14 +86,19 @@ public class GameGUI implements Serializable {
 
 		switch (selection) {
 		case 0:
+			MapPanel.getInstance().setMap("desertuprising.jpg");
+			break;
+		case 1:
 			MapPanel.getInstance().setMap("BrokenPlainsPatrol.jpg");
-			// case 1:
-			// MapPanel.getInstance().setMap("BrokenPlainsPatrol.jpg");
-
+			break;
+		case 2:
+			MapPanel.getInstance().setMap("BeachBetrayal.jpg");
 			break;
 		}
 
 		tilePanel = TilePanel.getInstance();
+		tilePanel.setMap(selection);
+
 		MouseListener placementListener = new PlacementListener();
 
 		tilePanel.setSize(800, 600);
@@ -151,6 +156,8 @@ public class GameGUI implements Serializable {
 	JMenu game;
 	JMenuItem load;
 	JMenuItem save;
+	JMenuItem restart;
+	JMenuItem main;
 	JCheckBox pause;
 	JMenuItem exit;
 	JMenu help;
@@ -160,6 +167,13 @@ public class GameGUI implements Serializable {
 	void createMenuBar() {
 		menuBar = new JMenuBar();
 		game = new JMenu("Game");
+		/*
+		 * restart = new JMenuItem("Restart");
+		 * restart.addActionListener(newMenuListener());
+		 * restart.setActionCommand("restart"); game.add(restart); main = new
+		 * JMenuItem("Return to Menu"); main.addActionListener(new
+		 * MenuListener()); main.setActionCommand("main"); game.add(main);
+		 */
 		save = new JMenuItem("Save");
 		save.addActionListener(new MenuListener());
 		save.setActionCommand("save");
@@ -301,6 +315,12 @@ public class GameGUI implements Serializable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand()) {
+			case "main":
+				GameController.getInstance().returnToMain();
+				break;
+			case "restart":
+				GameController.getInstance().restartMap();
+				break;
 			case "load":
 				GameController.getInstance().loadData();
 				break;
