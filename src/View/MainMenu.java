@@ -1,8 +1,10 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +13,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Controller.TDClient;
+import Controller.TDServer;
 
 public class MainMenu extends JPanel {
 
@@ -24,19 +30,49 @@ public class MainMenu extends JPanel {
 	// JButton desertMap;
 	JButton singleplayer;
 	JButton multiplayer;
+	JButton load;
+	JButton beachButton;
+	JButton plainsButton;
+	JButton desertButton;
+	JLabel chooseLabel;
 
 	private MainMenu() {
-
+		
+		this.setLayout(new BorderLayout());
 		// desertMap = new JButton("Desert Uprising");
 		singleplayer = new JButton("Single Player");
 		multiplayer = new JButton("Multi-Player");
+		load = new JButton("Load Last Game");
+		beachButton  = new JButton("Beach Betrayal");
+		plainsButton = new JButton("Broken Plains Patrol");
+		desertButton = new JButton("Desert Uprising");
+		chooseLabel = new JLabel("Choose A Map First");
 		ButtonListener buttonListener = new ButtonListener();
 		// desertMap.addActionListener(buttonListener);
 		singleplayer.addActionListener(buttonListener);
 		multiplayer.addActionListener(buttonListener);
+		load.addActionListener(buttonListener);
+		beachButton.addActionListener(buttonListener);
+		plainsButton.addActionListener(buttonListener);
+		desertButton.addActionListener(buttonListener);
 		// this.add(desertMap);
-		this.add(singleplayer);
-		this.add(multiplayer);
+		JPanel startPanel = new JPanel();
+		startPanel.add(singleplayer);
+		startPanel.add(multiplayer);
+		startPanel.add(load);
+		startPanel.setBackground(Color.BLACK);
+		this.add(startPanel, BorderLayout.NORTH);
+		
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new GridLayout(1,2));
+		
+		JPanel mapChoosePanel = new JPanel();
+		mapChoosePanel.add(beachButton);
+		mapChoosePanel.add(plainsButton);
+		mapChoosePanel.add(desertButton);
+		bottomPanel.add(chooseLabel);
+		bottomPanel.add(mapChoosePanel);
+		this.add(bottomPanel, BorderLayout.SOUTH);
 		this.setBackground(Color.BLACK);
 
 		// set Background
@@ -75,8 +111,35 @@ public class MainMenu extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == singleplayer)
-				GameGUI.getInstance().createMap(0);
+
+				GameGUI.getInstance().createMap(1);
 			if (e.getSource() == multiplayer) {
+				System.out.println("Multiplayer button clicked");
+				TDServer server = new TDServer();
+				TDClient client = new TDClient();
+				// TODO Have different map selection based on picked map
+				GameGUI.getInstance().mapSelection = 0;
+
+				File logoImage = new File(baseDir + "waiting.png");
+				try {
+					logo = ImageIO.read(logoImage);
+				} catch (IOException exc) {
+					exc.printStackTrace();
+				}
+				// multiplayer.setVisible(false);
+				mainMenu.repaint();
+			}
+			if (e.getSource() == load){
+				
+			}
+			if (e.getSource() == beachButton){
+
+			}
+			if (e.getSource() == plainsButton){
+
+			}
+			if (e.getSource() == desertButton){
+
 			}
 
 		}

@@ -83,6 +83,12 @@ public class GameGUI implements Serializable {
 
 	}
 
+	// This is if we want single player and multi player screens for prettiness
+	/*
+	 * public void setMenu(int i) { gamePanel.add(MainMenu.getInstance(),
+	 * "Main"); CardLayout c1 = (CardLayout) gamePanel.getLayout();
+	 * c1.show(gamePanel, "Main"); }
+	 */
 	void createMap(int selection) {
 
 		switch (selection) {
@@ -94,6 +100,10 @@ public class GameGUI implements Serializable {
 			break;
 		case 2:
 			MapPanel.getInstance().setMap("BeachBetrayal.jpg");
+			break;
+		case 3:
+			MapPanel.getInstance().setMap("desertuprising.jpg");
+			isMultiplayer = true;
 			break;
 		}
 
