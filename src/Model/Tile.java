@@ -14,7 +14,7 @@ public class Tile extends Observable implements Serializable {
 	private boolean movable;
 	private Vector<Attacker> attackers;
 	private Structure tileStructure;
-	private Tile nextTile;
+	public Tile nextTile;
 	private Point coordinate;
 
 	public Tile(int x, int y) {

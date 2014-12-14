@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-import Attackers.Marine;
+import Attackers.Cannoneer;
 import Maps.DesertUprising;
 import Model.Attacker;
 import Model.Map;
@@ -35,7 +35,7 @@ public class TilePanel extends JPanel implements Serializable {
 		this.setVisible(true);
 		tileMap = DesertUprising.getInstance();
 		tileMap.getSpawnTile(1)
-				.addAttacker(new Marine(tileMap.getSpawnTile(1)));
+				.addAttacker(new Cannoneer(tileMap.getSpawnTile(1)));
 	}
 
 	public void reset() {
