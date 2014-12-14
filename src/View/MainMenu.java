@@ -16,9 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Controller.TDClient;
-import Controller.TDServer;
-
 public class MainMenu extends JPanel {
 
 	private static MainMenu mainMenu;
@@ -106,27 +103,9 @@ public class MainMenu extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// if (e.getSource() == desertMap)
-			// GameGUI.getInstance().createMap(0);
 			if (e.getSource() == singleplayer)
-				GameGUI.getInstance().createMap(0);
+				GameGUI.getInstance().createMap(1);
 			if (e.getSource() == multiplayer) {
-
-				System.out.println("Multiplayer button clicked");
-				TDServer server = new TDServer();
-				TDClient client = new TDClient();
-				// TODO Have different map selection based on picked map
-				GameGUI.getInstance().mapSelection = 0;
-
-				File logoImage = new File(baseDir + "waiting.png");
-				try {
-					logo = ImageIO.read(logoImage);
-				} catch (IOException exc) {
-					exc.printStackTrace();
-				}
-				// multiplayer.setVisible(false);
-				mainMenu.repaint();
-
 			}
 
 		}
