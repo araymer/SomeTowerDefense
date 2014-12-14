@@ -272,7 +272,7 @@ public class GameGUI implements Serializable {
 	}
 
 	public void returnMenu() {
-		// TODO: reset to main menu
+		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
 	}
 
 	private void restartMap() {
