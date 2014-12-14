@@ -32,7 +32,7 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 	JRadioButton sentryGun;
 	JRadioButton plasmaCannon;
 	JRadioButton upgrade;
-	JFrame resourceFrame;
+	public JFrame resourceFrame;
 	StructureType selected;
 	JButton chronoTowerInfo;
 	JButton sentryGunInfo;
@@ -92,8 +92,9 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 		this.add(plasmaCannon);
 		this.add(plasmaCannonInfo);
 		this.add(upgrade);
+
 		this.add(money);
-		// this.add(upgradeInfo);
+	
 
 		// add action listeners
 		chronoTower.addActionListener(this);
@@ -200,4 +201,8 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 		}
 	}
 
+	public void reinit() {
+		resourcePanel = new ResourcePanel();
+		
+	}
 }

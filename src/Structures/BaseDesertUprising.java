@@ -1,10 +1,15 @@
 package Structures;
 
+import java.awt.CardLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -13,6 +18,7 @@ import Model.Structure;
 import Model.Ticker;
 import TowerFSM.TowerStates;
 import View.GameGUI;
+import View.TilePanel;
 
 @SuppressWarnings("serial")
 public class BaseDesertUprising extends Base {
@@ -27,33 +33,6 @@ public class BaseDesertUprising extends Base {
 		name = "Desert Uprising Base";
 		price = 0;
 	}
-
-	// @Override
-	// public void draw(Graphics2D g2) {
-	// if (bImage == null) {
-	// File imageFile = new File(baseDir + imageFileName);
-	// try {
-	// bImage = ImageIO.read(imageFile);
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// if ((xIncrement * WIDTH) + WIDTH > bImage.getWidth()) {
-	// yIncrement++;
-	// xIncrement = 0;
-	// }
-	// if ((yIncrement * HEIGHT) + HEIGHT > bImage.getHeight()) {
-	// // Start from beginning again
-	// yIncrement = 0;
-	// }
-	// BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-	// yIncrement * HEIGHT, WIDTH, HEIGHT);
-	// xIncrement++;
-	// g2.drawImage(tempSubImage, getX() * WIDTH, getY() * HEIGHT, WIDTH,
-	// HEIGHT, null);
-	//
-	// }
 
 	@Override
 	protected void setImages() {
@@ -94,14 +73,6 @@ public class BaseDesertUprising extends Base {
 
 	}
 
-	// @Override
-	// public void takeDamage(int dmg) {
-	// System.out.println("WARNING: base under attack!!");
-	// hitpoints -= dmg;
-	// System.out.println("Base health: " + hitpoints);
-	//
-	// }
-
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {
 		BufferedImage correctImage = null;
@@ -124,15 +95,60 @@ public class BaseDesertUprising extends Base {
 		return correctImage;
 	}
 
+	JFrame gameOver;
+
 	@Override
 	public void die() {
+		JButton restart = new JButton("Restart Level");
 		System.out.println("\n\n\n\nBASE WAS DESTROYED. GAME OVER");
 		Ticker.getInstance().loopStop();
-		JFrame gameOver = new JFrame();
-		gameOver.setSize(200, 100);
+		gameOver = new JFrame();
+		gameOver.setLayout(new GridLayout(2, 1));
+		gameOver.setLocation(100, 100);
+		gameOver.setSize(400, 200);
 		gameOver.add(new JLabel("BASE WAS DESTROYED. GAME OVER."));
+		restart.addActionListener(new RestartListener());
+		gameOver.add(restart);
 		gameOver.setVisible(true);
-		GameGUI.getInstance().returnMenu();
+		TilePanel.getInstance().getMap().getGameBoard().get(getX()).get(getY())
+				.removeStructure();
+		// TilePanel.getInstance().reset();
+		// GameGUI.getInstance().frame.setContentPane(TilePanel.getInstance());
+
+	}
+
+	private class RestartListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+
+			/*
+			 * TilePanel.getInstance().setMap( ((DesertUprising)
+			 * DesertUprising.getInstance()).reInit());
+			 * ResourcePanel.getInstance().resourceFrame.dispose();
+			 * ResourcePanel.getInstance().reinit();
+			 */
+
+			JFrame frame = GameGUI.getInstance().frame;
+			TilePanel tilePanel = TilePanel.getInstance();
+
+			frame.remove(tilePanel);
+			tilePanel.reset();
+			tilePanel = TilePanel.getInstance();
+
+			frame.add(tilePanel);
+
+			tilePanel.setSize(frame.getSize().width, frame.getSize().height);
+			tilePanel.setLocation(0, 0);
+			tilePanel.setLayout(new CardLayout());
+
+			GameGUI.getInstance().newTilePanel();
+			Ticker.getInstance().loopStart();
+			// new Thread(Ticker.getInstance()).start();
+
+			gameOver.dispose();
+
+		}
+
 	}
 
 }

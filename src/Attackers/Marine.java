@@ -14,7 +14,7 @@ import Model.Tile;
 public class Marine extends Attacker {
 	private static final int HITPOINTS = 50;
 	private static final int DEFENSE = 10;
-	private static final int ATTACK_RATING = 30;
+	private static final int ATTACK_RATING = 530;
 	private static final int RANGE = 3;
 	private static final int SPEED = 15;// The smaller, the faster
 

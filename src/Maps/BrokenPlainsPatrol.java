@@ -28,7 +28,6 @@ public class BrokenPlainsPatrol extends Map {
 		setPath();
 		setBase();
 		setSpawnPoints();
-		setStartingResources();
 		setTiles();
 	}
 
@@ -228,11 +227,7 @@ public class BrokenPlainsPatrol extends Map {
 		gameBoard.get(16).get(7).setBuild(false);
 	}
 
-	@Override
-	public void setStartingResources() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public Tile getSpawnTile(int n) {

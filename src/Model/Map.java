@@ -115,10 +115,6 @@ public abstract class Map implements Serializable {
 
 	public abstract void setPath();
 
-	public abstract void setStartingResources();
-
-	// public abstract void createStructure(StructureType selectedStructure,
-	// Point point);
 
 	public Vector<Vector<Tile>> getGameBoard() {
 		return gameBoard;

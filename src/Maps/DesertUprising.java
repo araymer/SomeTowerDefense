@@ -12,17 +12,18 @@ import java.util.ArrayList;
 import Model.Base;
 import Model.Map;
 import Model.Tile;
-import Structures.*;
+import Structures.BaseDesertUprising;
 
 /**
  * The DesertUprising game map.
+ * 
  * @author Team Something
  *
  */
 @SuppressWarnings("serial")
 public class DesertUprising extends Map {
 
-	
+	private static Map theMap;
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
 
@@ -32,14 +33,26 @@ public class DesertUprising extends Map {
 	private static final int BASE_X = 3;
 	private static final int BASE_Y = 8;
 
-	public DesertUprising() {
+	private DesertUprising() {
 		super(height, width);
 		new ArrayList<Tile>();
 		setPath();
 		setBase();
 		setSpawnPoints();
-		setStartingResources();
 		setTiles();
+
+	}
+
+	public static DesertUprising getInstance() {
+		if (theMap == null)
+			theMap = new DesertUprising();
+		return (DesertUprising) theMap;
+
+	}
+
+	public Map reInit() {
+		theMap = new DesertUprising();
+		return theMap;
 
 	}
 
@@ -197,7 +210,7 @@ public class DesertUprising extends Map {
 
 	@Override
 	public Base getBase() {
-		return (Base)gameBoard.get(BASE_X).get(BASE_Y).getStructure();
+		return (Base) gameBoard.get(BASE_X).get(BASE_Y).getStructure();
 	}
 
 	@Override
@@ -395,12 +408,6 @@ public class DesertUprising extends Map {
 	}
 
 	@Override
-	public void setStartingResources() {
-		// TODO set starting resources for the player
-
-	}
-
-	@Override
 	public Tile getSpawnTile(int n) {
 		if (n == 1)
 			return spawnTile1;
@@ -409,7 +416,5 @@ public class DesertUprising extends Map {
 
 		return null;
 	}
-
-	
 
 }

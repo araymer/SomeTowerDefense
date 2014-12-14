@@ -6,8 +6,6 @@ import java.io.Serializable;
 
 import View.TilePanel;
 
-//Test, let's see if git is working.
-//Test 2
 
 public abstract class Attacker extends Drawable implements Serializable {
 
@@ -40,7 +38,6 @@ public abstract class Attacker extends Drawable implements Serializable {
 
 	private int tick;
 
-	// private int cost; //This is for itr2, possibly
 	Map map;
 
 	public Attacker(int hp, int def, int ar, int range, int spd,

@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
 import java.util.Vector;
+import Structures.*;
 
 import javax.swing.JOptionPane;
 
@@ -16,6 +17,7 @@ import Model.Ticker;
 import Model.Tile;
 import View.GameGUI;
 import View.TilePanel;
+
 import command.AddMessageCommand;
 import command.BaseTakeDamageCommand;
 import command.Command;

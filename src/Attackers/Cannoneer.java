@@ -11,16 +11,16 @@ import Model.Attacker;
 import Model.Structure;
 import Model.Tile;
 
-public class Scout extends Attacker {
-	private static final int HITPOINTS = 20;
+public class Cannoneer extends Attacker {
+	private static final int HITPOINTS = 500;
 	private static final int DEFENSE = 10;
-	private static final int ATTACK_RATING = 30;
-	private static final int RANGE = 5;
-	private static final int SPEED = 5;// The smaller, the faster
+	private static final int ATTACK_RATING = 50;
+	private static final int RANGE = 3;
+	private static final int SPEED = 50;// The smaller, the faster
 
-	public Scout(Tile startingLocation) {
+	public Cannoneer(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
-		name = "Scout";
+		name = "Cannoneer";
 		imageFileName = "Attackers.png";
 	}
 
