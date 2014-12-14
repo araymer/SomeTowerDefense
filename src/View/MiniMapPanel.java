@@ -48,7 +48,6 @@ public class MiniMapPanel extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
-		System.out.println("MiniMap Repaint");
 		int amountOfEnemies = 0;
 		g2.setColor(Color.GRAY);
 		g2.fillRect(0, 0, MINI_MAP_WIDTH, MINI_MAP_HEIGHT);

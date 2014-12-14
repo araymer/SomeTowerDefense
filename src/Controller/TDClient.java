@@ -171,7 +171,7 @@ public class TDClient {
 	 * @param gameMap
 	 */
 	public void updateMiniMap(Vector<Vector<Tile>> gameMap, int totalResources, int enemiesKilled) {
-		//System.out.println("updateMiniMap: received " + gameMap);
+		System.out.println(username + "updateMiniMap: received ");
 		GUI.multiFrame.miniPanel.updateMap(gameMap, totalResources, enemiesKilled);
 	}
 	
@@ -180,22 +180,24 @@ public class TDClient {
 	 * Sends info for minimap to other player
 	 */
 	public void sendMiniMap(){
+		miniMapTick ++;
 		//Only update 3 times a second
-//		if(miniMapTick % 10 == 0){
-//			
-//			miniMapTick = 0;
-			//TODO gameMap needs to be serializable first for this to work!!
-			//Vector<Vector<Tile>> gameMap = new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard());
+		if(miniMapTick == 30){
+			
+			miniMapTick = 0;
+			
+			Vector<Vector<Tile>> gameMap = new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard());
 			int totalResources = playerMoney.getMoney();
 			int enemiesKilled = Ticker.getInstance().numOfAttackersDead;
-			//System.out.println("sendMiniMap: sending " + totalResources);
+			System.out.println(username + " sendMiniMap: sending " + totalResources);
+			//updateMiniMap(gameMap, totalResources, enemiesKilled);
 			try{
-				toServer.writeObject(new UpdateMiniMapCommand(username, TilePanel.getInstance().tileMap.getGameBoard(), totalResources, enemiesKilled));
+				toServer.writeObject(new UpdateMiniMapCommand(username, gameMap, totalResources, enemiesKilled));
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-//		}
-//		miniMapTick ++;
+		}
+		
 	}
 	
 	/**
