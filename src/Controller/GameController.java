@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Attackers.Marine;
+import Model.Map;
+import Model.Ticker;
 import Model.Tile;
 import View.GameGUI;
 import View.MapPanel;
@@ -87,23 +89,22 @@ public class GameController {
 //			MapPanel.getInstance().setMap((String) inObject.readObject());
 //			inObject.close();
 			// load tiles
-			inStream = new FileInputStream(new File("tiles.dat"));
+			inStream = new FileInputStream(new File("map.dat"));
 			inObject = new ObjectInputStream(inStream);
-			TilePanel.getInstance().getMap()
-					.setGameBoard((Vector<Vector<Tile>>) inObject.readObject());
+			Map loadedMap = (Map) inObject.readObject();
 			inObject.close();
-			for (int i = 0; i < TilePanel.getInstance().getMap().getGameBoard()
-					.size(); i++) {
-				for (int p = 0; p < TilePanel.getInstance().getMap()
-						.getGameBoard().get(i).size(); p++) {
-					if (TilePanel.getInstance().getMap().getGameBoard().get(i)
-							.get(p) != null) {
-						TilePanel.getInstance().getMap().getGameBoard().get(i)
-								.get(p).getStructure().setImages();
-					}
-				}
-			}
-			// loadMap(tilePanel, MapPanel.getInstance());
+//			for (int i = 0; i < TilePanel.getInstance().getMap().getGameBoard()
+//					.size(); i++) {
+//				for (int p = 0; p < TilePanel.getInstance().getMap()
+//						.getGameBoard().get(i).size(); p++) {
+//					if (TilePanel.getInstance().getMap().getGameBoard().get(i)
+//							.get(p) != null) {
+//						TilePanel.getInstance().getMap().getGameBoard().get(i)
+//								.get(p).getStructure().setImages();
+//					}
+//				}
+//			}
+			gui.createLoadedMap(loadedMap);
 			System.out.println("Load successful");
 		} catch (Exception e) {
 			JFrame cantLoad = new JFrame();

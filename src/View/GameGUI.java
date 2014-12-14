@@ -27,6 +27,7 @@ import Controller.GameController;
 import Controller.TDClient;
 import Model.Attacker;
 import Model.Map;
+import Model.Player;
 import Model.Structure;
 import Model.Ticker;
 
@@ -137,9 +138,13 @@ public class GameGUI implements Serializable {
 
 	}
 
-	public void loadMap(Map map) {
+	public void createLoadedMap(Map map) {
 		MapPanel.getInstance().setMap(map.mapImageName);
+		Player.getInstance().setMoney(map.playerMoney.getMoney());
+
 		tilePanel = TilePanel.getInstance();
+		tilePanel.setMap(map);
+
 		MouseListener placementListener = new PlacementListener();
 
 		tilePanel.setSize(800, 600);

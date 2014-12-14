@@ -87,35 +87,39 @@ public class Marine extends Attacker {
 	}
 
 	private double offset(String s) {
-		if (getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0
-				&& s.equals("x"))
-			return pixels;
-		else if (getLoc().getCoordinates().x
-				- getLoc().nextTile.getCoordinates().x > 0
-				&& s.equals("x"))
-			return -pixels;
-		else if (getLoc().getCoordinates().y
-				- getLoc().nextTile.getCoordinates().y < 0
-				&& s.equals("y"))
-			return pixels;
-		else if (getLoc().getCoordinates().y
-				- getLoc().nextTile.getCoordinates().y > 0
-				&& s.equals("y"))
-			return -pixels;
+		if(getLoc().nextTile != null){
+			if (getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0
+					&& s.equals("x"))
+				return pixels;
+			else if (getLoc().getCoordinates().x
+					- getLoc().nextTile.getCoordinates().x > 0
+					&& s.equals("x"))
+				return -pixels;
+			else if (getLoc().getCoordinates().y
+					- getLoc().nextTile.getCoordinates().y < 0
+					&& s.equals("y"))
+				return pixels;
+			else if (getLoc().getCoordinates().y
+					- getLoc().nextTile.getCoordinates().y > 0
+					&& s.equals("y"))
+				return -pixels;
+		}
+		
 
 		return 0;
 
 	}
 
 	private double checkTransform() {
-		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
-			return (Math.PI);
-		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0)
-			return (-Math.PI/2);
-		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
-			return (Math.PI/2);
-
-		else
+		if(getLoc().nextTile != null){
+			if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
+				return (Math.PI);
+			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0)
+				return (-Math.PI/2);
+			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
+				return (Math.PI/2);
+		}
+		
 			return 0.;
 	}
 	
