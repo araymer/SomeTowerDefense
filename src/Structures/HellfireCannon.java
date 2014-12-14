@@ -47,7 +47,7 @@ public class HellfireCannon extends Structure {
 		price = 50;
 	}
 
-	protected void setImages() {
+	public void setImages() {
 
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir + "HellFireCannon.png");

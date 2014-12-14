@@ -48,4 +48,9 @@ public class Player implements Serializable {
 		updateCost();
 	}
 
+	public void reset() {
+		player = new Player();
+
+	}
+
 }

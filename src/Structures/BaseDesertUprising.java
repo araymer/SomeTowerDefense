@@ -18,6 +18,7 @@ import Model.Structure;
 import Model.Ticker;
 import TowerFSM.TowerStates;
 import View.GameGUI;
+import View.MainMenu;
 import View.TilePanel;
 
 @SuppressWarnings("serial")
@@ -35,7 +36,7 @@ public class BaseDesertUprising extends Base {
 	}
 
 	@Override
-	protected void setImages() {
+	public void setImages() {
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir + "base40.png");
 			try {
@@ -103,12 +104,15 @@ public class BaseDesertUprising extends Base {
 		System.out.println("\n\n\n\nBASE WAS DESTROYED. GAME OVER");
 		Ticker.getInstance().loopStop();
 		gameOver = new JFrame();
-		gameOver.setLayout(new GridLayout(2, 1));
+		gameOver.setLayout(new GridLayout(3, 1));
 		gameOver.setLocation(100, 100);
 		gameOver.setSize(400, 200);
 		gameOver.add(new JLabel("BASE WAS DESTROYED. GAME OVER."));
 		restart.addActionListener(new RestartListener());
 		gameOver.add(restart);
+		JButton mainMenu = new JButton("Return to Main Menu");
+		mainMenu.addActionListener(new ReturnListener());
+		gameOver.add(mainMenu);
 		gameOver.setVisible(true);
 		TilePanel.getInstance().getMap().getGameBoard().get(getX()).get(getY())
 				.removeStructure();
@@ -116,6 +120,8 @@ public class BaseDesertUprising extends Base {
 		// GameGUI.getInstance().frame.setContentPane(TilePanel.getInstance());
 
 	}
+
+	JFrame frame;
 
 	private class RestartListener implements ActionListener {
 
@@ -128,7 +134,7 @@ public class BaseDesertUprising extends Base {
 			 * ResourcePanel.getInstance().reinit();
 			 */
 
-			JFrame frame = GameGUI.getInstance().frame;
+			frame = GameGUI.getInstance().frame;
 			TilePanel tilePanel = TilePanel.getInstance();
 
 			frame.remove(tilePanel);
@@ -147,6 +153,17 @@ public class BaseDesertUprising extends Base {
 
 			gameOver.dispose();
 
+		}
+
+	}
+
+	private class ReturnListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			frame = GameGUI.getInstance().frame;
+			frame.setContentPane(MainMenu.getInstance());
+			gameOver.dispose();
 		}
 
 	}

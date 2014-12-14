@@ -117,6 +117,17 @@ public class GameGUI implements Serializable {
 
 	void loadMap(TilePanel tiles, MapPanel map) {
 		mapPanel = map;
+		for (int i = 0; i < TilePanel.getInstance().getMap().getGameBoard()
+				.size(); i++) {
+			for (int p = 0; p < TilePanel.getInstance().getMap().getGameBoard()
+					.get(i).size(); p++) {
+				if (TilePanel.getInstance().getMap().getGameBoard().get(i)
+						.get(p) != null) {
+					TilePanel.getInstance().getMap().getGameBoard().get(i)
+							.get(p).getStructure().setImages();
+				}
+			}
+		}
 
 		mapPanel.setSize(frame.getSize().width, frame.getSize().height);
 		mapPanel.setLocation(0, 0);
@@ -469,6 +480,7 @@ public class GameGUI implements Serializable {
 			cantLoad.add(loadError);
 			cantLoad.setSize(100, 100);
 			cantLoad.setVisible(true);
+			e.printStackTrace();
 			return false;
 		}
 		return true;

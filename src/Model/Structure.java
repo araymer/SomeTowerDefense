@@ -81,7 +81,7 @@ public abstract class Structure extends Drawable implements Serializable {
 	/**
 	 * create static buffered images for extended classes
 	 */
-	protected abstract void setImages();
+	public abstract void setImages();
 
 	public int getHP() {
 		return hitpoints;
