@@ -19,7 +19,7 @@ public class Cannoneer extends Attacker {
 	private static final int ATTACK_RATING = 50;
 	private static final int RANGE = 3;
 	private static final int SPEED = 50;// The smaller, the faster
-	double pixels = 1000/SPEED/40;
+	double pixels = .8/50;
 
 	public Cannoneer(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
@@ -59,7 +59,7 @@ public class Cannoneer extends Attacker {
 		if(pixels < 40)
 			pixels += pixels;
 		else
-			pixels = 1000/SPEED/40;
+			pixels = .8/50;
 		
 		
 		System.out.println(pixels);
