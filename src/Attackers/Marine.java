@@ -50,19 +50,19 @@ public class Marine extends Attacker {
 		}
 
 		// 4 is the number of shooting frames
-		if (xIncrement > 3) {
+		if (xIncrement > 2) {
 			xIncrement = 0;
 		}
 		
 		
-		//This calculates the amount of offset to animate between tiles (40px/SPEED = 0.8px per tick)
-		if(pixels < 39.2 && getLoc() != null)
+		//This calculates the amount of offset to animate between tiles (40px/SPEED = 2.6667px per tick)
+		if(pixels < 40-(40/SPEED) && getLoc() != null)
 			pixels += (double)40./SPEED;
 		else
 			pixels = 0;
 	
 		
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT, WIDTH, HEIGHT);
 		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
 		if(count%5 == 0)
 			xIncrement++;
@@ -96,12 +96,12 @@ public class Marine extends Attacker {
 	}
 	
 	private double checkTransform() {
-		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0)
-			return (Math.PI/2);
-		else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
+		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
+			return (Math.PI);
+		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0)
 			return (-Math.PI/2);
 		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
-			return (Math.PI);
+			return (Math.PI/2);
 		else
 			return 0.;
 	}

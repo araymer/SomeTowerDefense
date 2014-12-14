@@ -60,9 +60,9 @@ public class Ticker implements Runnable {
 							lastUpdateTime = now - timeBetweenFrames;
 
 						// interpolation for visually smooth movement
-						float interpolation = Math
+						double interpolation = Math
 								.min(1.0f,
-										(float) ((now - lastUpdateTime) / timeBetweenFrames));
+										(double) ((now - lastUpdateTime) / timeBetweenFrames));
 						drawGame(interpolation);
 						lastRenderTime = now;
 
@@ -84,11 +84,13 @@ public class Ticker implements Runnable {
 		}
 	}
 
-	private void drawGame(float interpolation) {
+	private void drawGame(double interpolation) {
 		// Iterate through all game objects and call their draw methods with
 		// interpolation
-
-		GameGUI.getInstance().repaint(); // This is temporary, we'll want to
+		
+		
+		
+		GameGUI.getInstance().repaint(interpolation); // This is temporary, we'll want to
 											// replace this with
 											// some way to feed interpolation
 
