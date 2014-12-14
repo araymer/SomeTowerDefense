@@ -157,6 +157,7 @@ public class BaseDesertUprising extends Base {
 		public void actionPerformed(ActionEvent arg0) {
 			frame = GameGUI.getInstance().frame;
 			frame.setContentPane(MainMenu.getInstance());
+			GameGUI.getInstance().resetMenuBar();
 			gameOver.dispose();
 		}
 

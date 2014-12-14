@@ -17,7 +17,6 @@ public abstract class Map implements Serializable {
 	private static int tileWidth = 40;
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
-	
 
 	// randomizing wave spawn points easier
 
@@ -78,36 +77,35 @@ public abstract class Map implements Serializable {
 		case UPGRADE:
 			System.out.println("trying to upgrade");
 			try {
-			StructureType upgrade = selectedTile.getStructure().getUpgradeTo();
-			
-			if (upgrade == null)
-				upgrade = StructureType.NONE;
-			switch (upgrade) {
-			case SENTRYGUN2:
-				selectedTile.removeStructure();
-				selectedTile.addStructure(new MarineSentryGunMkII(selectedX,
-						selectedY));
-				break;
-			case HELLFIRECANNON:
-				selectedTile.removeStructure();
-				selectedTile.addStructure(new HellfireCannon(selectedX,
-						selectedY));
-				break;
-			case STASISTOWER:
-				selectedTile.removeStructure();
-				selectedTile
-						.addStructure(new StasisTower(selectedX, selectedY));
-				break;
-			default:
-				System.out.println("No upgrades available");
-				
-				}
-			} catch(Exception e) {
-				
-		}
+				StructureType upgrade = selectedTile.getStructure()
+						.getUpgradeTo();
 
-			
-		
+				if (upgrade == null)
+					upgrade = StructureType.NONE;
+				switch (upgrade) {
+				case SENTRYGUN2:
+					selectedTile.removeStructure();
+					selectedTile.addStructure(new MarineSentryGunMkII(
+							selectedX, selectedY));
+					break;
+				case HELLFIRECANNON:
+					selectedTile.removeStructure();
+					selectedTile.addStructure(new HellfireCannon(selectedX,
+							selectedY));
+					break;
+				case STASISTOWER:
+					selectedTile.removeStructure();
+					selectedTile.addStructure(new StasisTower(selectedX,
+							selectedY));
+					break;
+				default:
+					System.out.println("No upgrades available");
+
+				}
+			} catch (Exception e) {
+
+			}
+
 			break;
 		default:
 			System.out.println("Error in createStructure method");
@@ -123,9 +121,12 @@ public abstract class Map implements Serializable {
 
 	public abstract void setPath();
 
-
 	public Vector<Vector<Tile>> getGameBoard() {
 		return gameBoard;
+	}
+
+	public void setGameBoard(Vector<Vector<Tile>> board) {
+		gameBoard = board;
 	}
 
 	public abstract Tile getSpawnTile(int n);

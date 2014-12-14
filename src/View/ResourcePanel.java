@@ -36,22 +36,23 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	JButton sentryGunInfo;
 	JButton plasmaCannonInfo;
 	JLabel money;
+	static JLabel info;
 
 	/**
 	 * Constructs the ResourcePanel for use in the GameGUI
 	 */
 	private ResourcePanel() {
 		selected = StructureType.SENTRYGUN;
-//		resourceFrame = new JFrame();
-//		resourceFrame.setSize(200, 200);
-//		resourceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		resourceFrame.setResizable(false);
-//		resourceFrame.setTitle("Resources");
-//		resourceFrame.setLocation(811, 0);
-//		resourceFrame.setVisible(true);
+		// resourceFrame = new JFrame();
+		// resourceFrame.setSize(200, 200);
+		// resourceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// resourceFrame.setResizable(false);
+		// resourceFrame.setTitle("Resources");
+		// resourceFrame.setLocation(811, 0);
+		// resourceFrame.setVisible(true);
 
-		this.setLayout(new GridLayout(8, 1));
-		this.setPreferredSize(new Dimension(200,600));
+		this.setLayout(new GridLayout(15, 1));
+		this.setPreferredSize(new Dimension(200, 600));
 		radioButtons = new ButtonGroup();
 
 		chronoTower = new JRadioButton("Chrono-Tower");
@@ -77,8 +78,11 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		// JButton upgradeInfo = new JButton("Info");
 		upgrade.setActionCommand("Upgrade");
 
-
 		money = new JLabel("Funds: 500");
+
+		info = new JLabel("\n\n\n\n\n");
+		info.setSize(15, 50);
+		// info.setEditable(false);
 
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
@@ -94,6 +98,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		this.add(upgrade);
 
 		this.add(money);
+		this.add(info);
 
 		// add action listeners
 		chronoTower.addActionListener(this);
@@ -104,7 +109,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		this.setOpaque(true);
 		this.setVisible(true);
 
-//		resourceFrame.setContentPane(this);
+		// resourceFrame.setContentPane(this);
 	}
 
 	public static ResourcePanel getInstance() {
@@ -117,8 +122,10 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	public void updateMoney(int arg1) {
 		System.out.println("Receiving new money amount");
 		money.setText("Funds: " + arg1);
-		// validate();
-		// repaint();
+	}
+
+	public static void updateInfo(String string) {
+		info.setText(string);
 	}
 
 	@Override
@@ -170,7 +177,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO: get actual values, got lazy
+			// TODO: Finish getting this info
 			switch (e.getActionCommand()) {
 			case "chrono":
 				structureName = "Chrono-Tower";
