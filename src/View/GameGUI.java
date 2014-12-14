@@ -152,10 +152,6 @@ public class GameGUI implements Serializable {
 		new Thread(Ticker.getInstance()).start();
 		// GameController.getInstance().startWaves();
 
-		if (isMultiplayer) {
-			client.setStartingServerHP();
-			multiFrame = new MultiplayerFrame();
-		}
 	}
 
 	/**

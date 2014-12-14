@@ -154,9 +154,9 @@ public class TDServer {
 	public void transferCommand(Command command){
 		try {
 			if(command.getSender().equals(player1Name)){
-				outputs.get(player1Name).writeObject(command);
-			}else{
 				outputs.get(player2Name).writeObject(command);
+			}else{
+				outputs.get(player1Name).writeObject(command);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
