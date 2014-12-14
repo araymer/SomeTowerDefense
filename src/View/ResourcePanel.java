@@ -94,7 +94,6 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 		this.add(upgrade);
 
 		this.add(money);
-	
 
 		// add action listeners
 		chronoTower.addActionListener(this);
@@ -117,7 +116,7 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		money.setText("Funds: " + ((Player) arg0).getMoney());
+		money.setText("Funds: " + arg1);
 	}
 
 	@Override
@@ -203,6 +202,6 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 
 	public void reinit() {
 		resourcePanel = new ResourcePanel();
-		
+
 	}
 }

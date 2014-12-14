@@ -58,6 +58,7 @@ public class GameGUI implements Serializable {
 	public boolean isMultiplayer = false;
 	public int mapSelection;
 	Structure structure;
+	public JFrame resourceFrame;
 
 	/**
 	 * Constructs the Tower Defense GUI
