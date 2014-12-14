@@ -28,6 +28,7 @@ import Controller.TDClient;
 import Model.Attacker;
 import Model.Structure;
 import Model.Ticker;
+import Model.Tile;
 
 /**
  * The class that organizes all the GUI elements for the tower defense game
@@ -142,6 +143,43 @@ public class GameGUI implements Serializable {
 
 		new Thread(Ticker.getInstance()).start();
 
+	}
+	
+	public void loadMap(String map, Vector<Vector<Tile>> gameMap){
+		tilePanel = TilePanel.getInstance();
+		//tilePanel.setMap(gameMap);
+
+		MouseListener placementListener = new PlacementListener();
+
+		tilePanel.setSize(800, 600);
+
+		tilePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+
+		playPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+		playPanel.setPreferredSize(new Dimension(1080, 600));
+
+		MapPanel.getInstance().setPreferredSize(new Dimension(800, 600));
+
+		mapOverlay.setPreferredSize(new Dimension(800, 600));
+		mapOverlay.add(MapPanel.getInstance(), -1);
+		mapOverlay.add(TilePanel.getInstance(), 0);
+
+		playPanel.add(mapOverlay);
+		tilePanel.addMouseListener(placementListener);
+		playPanel.add(ResourcePanel.getInstance());
+
+		gamePanel.add(playPanel, "Play");
+
+		CardLayout c1 = (CardLayout) gamePanel.getLayout();
+
+		c1.show(gamePanel, "Play");
+
+		if (isMultiplayer) {
+			client.setStartingServerHP();
+			multiFrame = new MultiplayerFrame();
+		}
+
+		new Thread(Ticker.getInstance()).start();
 	}
 
 	/**
