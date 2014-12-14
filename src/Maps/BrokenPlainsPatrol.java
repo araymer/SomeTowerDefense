@@ -13,6 +13,7 @@ import Structures.BaseDesertUprising;
  *
  */
 public class BrokenPlainsPatrol extends Map {
+	public static final String mapImageName = "BrokenPlainsPatrol.jpg";
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
 

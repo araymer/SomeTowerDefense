@@ -22,7 +22,7 @@ import Structures.BaseDesertUprising;
  */
 @SuppressWarnings("serial")
 public class DesertUprising extends Map {
-
+	public static final String mapImageName = "desertuprising.jpg";
 	private static Map theMap;
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
