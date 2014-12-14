@@ -24,6 +24,7 @@ public class Ticker implements Runnable {
 	private int updateCount = 0;
 	private double now = System.nanoTime();
 	private static Ticker ticker;
+	private int tickCount;
 	public int numOfAttackersDead = 0;
 	
 	private LinkedList<Attacker> attackerRemoveList = new LinkedList<Attacker>();
@@ -34,6 +35,7 @@ public class Ticker implements Runnable {
 	private Ticker() {
 		isRunning = true;
 		paused = false;
+		tickCount = 0;
 		// masterList = MasterList.getInstance();
 	}
 
@@ -74,6 +76,7 @@ public class Ticker implements Runnable {
 							}
 
 							now = System.nanoTime();
+							tickCount++;
 						}
 					}
 				}
@@ -91,6 +94,9 @@ public class Ticker implements Runnable {
 
 	}
 
+	public int getTicks() {
+		return tickCount;
+	}
 	
 	private void update() {
 		// add in information for structures and towers for
