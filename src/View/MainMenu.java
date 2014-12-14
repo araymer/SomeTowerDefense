@@ -186,11 +186,11 @@ public class MainMenu extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		AffineTransform at = new AffineTransform();
-		at.scale(0.75, 0.75);
-		at.translate(getWidth()/2-200, getHeight()/2-150);
+		at.scale(0.5, 0.5);
+		at.translate(getWidth()/2+150, getHeight()/2+200);
 		
 		g.drawImage(bgImage, 0, 0, null);
-		g.drawImage(logo, 266, getHeight()/2, null);
+		g.drawImage(logo, 266, 100, null);
 		g2.drawImage(map, at, null);
 	}
 }
