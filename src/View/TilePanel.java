@@ -12,7 +12,6 @@ import Attackers.Marine;
 import Maps.DesertUprising;
 import Model.Attacker;
 import Model.Map;
-import Model.MasterList;
 import Model.Tile;
 
 /**
@@ -38,6 +37,11 @@ public class TilePanel extends JPanel implements Serializable {
 				.addAttacker(new Marine(tileMap.getSpawnTile(1)));
 	}
 
+	public void reset() {
+		tileMap = DesertUprising.getInstance().reInit();
+		tilePanel = new TilePanel();
+	}
+
 	public static TilePanel getInstance() {
 		if (tilePanel == null) {
 			tilePanel = new TilePanel();
@@ -49,8 +53,7 @@ public class TilePanel extends JPanel implements Serializable {
 		tileMap = m;
 		tilePanel = new TilePanel();
 	}
-	
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -84,4 +87,5 @@ public class TilePanel extends JPanel implements Serializable {
 	public Map getMap() {
 		return tileMap;
 	}
+
 }

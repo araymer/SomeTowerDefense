@@ -7,7 +7,6 @@
 
 package Maps;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import Model.Base;
@@ -17,6 +16,7 @@ import Structures.BaseDesertUprising;
 
 /**
  * The DesertUprising game map.
+ * 
  * @author Team Something
  *
  */
@@ -42,18 +42,18 @@ public class DesertUprising extends Map {
 		setTiles();
 
 	}
-	
-	public static Map getInstance() {
-		if(theMap == null)
+
+	public static DesertUprising getInstance() {
+		if (theMap == null)
 			theMap = new DesertUprising();
-		return theMap;
-	
+		return (DesertUprising) theMap;
+
 	}
-	
+
 	public Map reInit() {
 		theMap = new DesertUprising();
 		return theMap;
-		
+
 	}
 
 	private void setTiles() {
@@ -210,9 +210,8 @@ public class DesertUprising extends Map {
 
 	@Override
 	public Base getBase() {
-		return (Base)gameBoard.get(BASE_X).get(BASE_Y).getStructure();
+		return (Base) gameBoard.get(BASE_X).get(BASE_Y).getStructure();
 	}
-
 
 	@Override
 	public void setSpawnPoints() {
@@ -408,7 +407,6 @@ public class DesertUprising extends Map {
 
 	}
 
-
 	@Override
 	public Tile getSpawnTile(int n) {
 		if (n == 1)
@@ -418,7 +416,5 @@ public class DesertUprising extends Map {
 
 		return null;
 	}
-
-	
 
 }

@@ -48,7 +48,7 @@ public class GameGUI implements Serializable {
 	// Extra 22 for bar
 	private final int FRAME_HEIGHT = 622;
 	Container contentPane;
-	JFrame frame;
+	public JFrame frame;
 	public TilePanel tilePanel;
 	public MapPanel mapPanel;
 	ResourcePanel resourcePanel;
@@ -67,7 +67,7 @@ public class GameGUI implements Serializable {
 		createMenuBar();
 		frame.setContentPane(MainMenu.getInstance());
 		frame.setVisible(true);
-		
+
 	}
 
 	void createMap(int selection) {
@@ -103,7 +103,7 @@ public class GameGUI implements Serializable {
 		// createMenuBar();
 		frame.setJMenuBar(menuBar);
 		frame.repaint();
-		
+
 		if (isMultiplayer) {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
@@ -112,7 +112,6 @@ public class GameGUI implements Serializable {
 		new Thread(Ticker.getInstance()).start();
 		// GameController.getInstance().startWaves();
 
-		
 	}
 
 	void loadMap(TilePanel tiles, MapPanel map) {
@@ -208,11 +207,10 @@ public class GameGUI implements Serializable {
 		menuBar.add(help);
 		menuBar.setVisible(true);
 	}
-	
+
 	public void newTilePanel() {
 		tilePanel = TilePanel.getInstance();
 	}
-	
 
 	public void repaint() {
 		// menuBar.repaint();
