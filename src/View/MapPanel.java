@@ -21,6 +21,7 @@ public class MapPanel extends JPanel {
 	private final int MAP_WIDTH = 800;
 	private static Image image;
 	private static MapPanel mapPanel;
+	private String fileName;
 	// private JMenuBar menu = new JMenuBar();
 
 	private static String baseDir = System.getProperty("user.dir")
@@ -40,12 +41,21 @@ public class MapPanel extends JPanel {
 	}
 
 	public void setMap(String filename) {
+		setFileName(fileName);
 		File chosenMap = new File(baseDir + filename);
 		try {
 			image = ImageIO.read(chosenMap);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public static MapPanel getInstance() {

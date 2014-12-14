@@ -4,7 +4,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -18,7 +17,6 @@ import java.util.Vector;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -194,7 +192,7 @@ public class GameGUI implements Serializable {
 	JMenuBar menuBar;
 	JMenu game;
 	JMenuItem load;
-	// JMenuItem save;
+	JMenuItem save;
 	JCheckBox pause;
 	JMenuItem exit;
 	JMenu help;
@@ -204,10 +202,10 @@ public class GameGUI implements Serializable {
 	void createMenuBar() {
 		menuBar = new JMenuBar();
 		game = new JMenu("Game");
-		// save = new JMenuItem("Save");
-		// save.addActionListener(new MenuListener());
-		// save.setActionCommand("save");
-		// game.add(save);
+		save = new JMenuItem("Save");
+		save.addActionListener(new MenuListener());
+		save.setActionCommand("save");
+		game.add(save);
 		load = new JMenuItem("Load");
 		load.addActionListener(new MenuListener());
 		load.setActionCommand("load");
@@ -306,22 +304,26 @@ public class GameGUI implements Serializable {
 					.get((int) Math.round(e.getPoint().getY()) / 40)
 					.getAttackers();
 			if (attackers.size() != 0) {
-				Ticker.getInstance().loopStop();
-				JFrame enemyInfoFrame = new JFrame();
-				enemyInfoFrame.setResizable(false);
-				enemyInfoFrame.addWindowListener(new ExitListener());
-				enemyInfoFrame.setSize(100, 200);
-				JPanel enemyInfoPanel = new JPanel();
-				enemyInfoPanel.setLayout(new GridLayout(4, 1));
-				enemyInfoPanel.add(new JLabel("Name: "
-						+ attackers.get(0).getName()));
-				enemyInfoPanel
-						.add(new JLabel("HP: " + attackers.get(0).getHP()));
-				enemyInfoPanel.add(new JLabel("Attack: "
-						+ attackers.get(0).getAttack()));
-				enemyInfoPanel.setVisible(true);
-				enemyInfoFrame.setContentPane(enemyInfoPanel);
-				enemyInfoFrame.setVisible(true);
+				// Ticker.getInstance().loopStop();
+				// JFrame enemyInfoFrame = new JFrame();
+				// enemyInfoFrame.setResizable(false);
+				// enemyInfoFrame.addWindowListener(new ExitListener());
+				// enemyInfoFrame.setSize(100, 200);
+				// JPanel enemyInfoPanel = new JPanel();
+				// enemyInfoPanel.setLayout(new GridLayout(4, 1));
+				// enemyInfoPanel.add(new JLabel("Name: "
+				// + attackers.get(0).getName()));
+				// enemyInfoPanel
+				// .add(new JLabel("HP: " + attackers.get(0).getHP()));
+				// enemyInfoPanel.add(new JLabel("Attack: "
+				// + attackers.get(0).getAttack()));
+				// enemyInfoPanel.setVisible(true);
+				// enemyInfoFrame.setContentPane(enemyInfoPanel);
+				// enemyInfoFrame.setVisible(true);
+				String info = "Name: " + attackers.get(0).getName() + "\nHP: "
+						+ attackers.get(0).getHP() + "\nAttack: "
+						+ attackers.get(0).getAttack();
+				ResourcePanel.updateInfo(info);
 			}
 
 			// Aaaaaaand Structure info :P
@@ -338,24 +340,31 @@ public class GameGUI implements Serializable {
 						.getStructure();
 
 				// Ticker.getInstance().loopStop();
-				JFrame structureInfoFrame = new JFrame();
-				structureInfoFrame.setResizable(false);
-				structureInfoFrame.addWindowListener(new ExitListener());
-				structureInfoFrame.setSize(100, 200);
-				structureInfoFrame.setLocation(811, 300);
-				JPanel structureInfoPanel = new JPanel();
-				structureInfoPanel.setLayout(new GridLayout(5, 1));
-				structureInfoPanel.add(new JLabel("Name: "
-						+ structure.getName()));
-				structureInfoPanel.add(new JLabel("HP: " + structure.getHP()));
-				structureInfoPanel.add(new JLabel("Damage: "
-						+ structure.getDamage()));
-				structureInfoPanel.add(new JLabel("Rate of Fire: "
-						+ structure.getROF() + " shots per second"));
-				// structureInfoPanel.add(upgrade);
-				structureInfoPanel.setVisible(true);
-				structureInfoFrame.setContentPane(structureInfoPanel);
-				structureInfoFrame.setVisible(true);
+				/*
+				 * JFrame structureInfoFrame = new JFrame();
+				 * structureInfoFrame.setResizable(false);
+				 * structureInfoFrame.addWindowListener(new ExitListener());
+				 * structureInfoFrame.setSize(100, 200);
+				 * structureInfoFrame.setLocation(811, 300); JPanel
+				 * structureInfoPanel = new JPanel();
+				 * structureInfoPanel.setLayout(new GridLayout(5, 1));
+				 * structureInfoPanel.add(new JLabel("Name: " +
+				 * structure.getName())); structureInfoPanel.add(new
+				 * JLabel("HP: " + structure.getHP()));
+				 * structureInfoPanel.add(new JLabel("Damage: " +
+				 * structure.getDamage())); structureInfoPanel.add(new
+				 * JLabel("Rate of Fire: " + structure.getROF() +
+				 * " shots per second")); // structureInfoPanel.add(upgrade);
+				 * structureInfoPanel.setVisible(true);
+				 * structureInfoFrame.setContentPane(structureInfoPanel);
+				 * structureInfoFrame.setVisible(true);
+				 */
+				String info = "Name: " + structure.getName() + "\nHP: "
+						+ structure.getHP() + "\nDamage: "
+						+ structure.getDamage() + "\nRate of Fire: "
+						+ structure.getROF() + " shots per second";
+				ResourcePanel.updateInfo(info);
+
 			}
 		}
 	}
@@ -368,9 +377,11 @@ public class GameGUI implements Serializable {
 			case "load":
 				GameController.getInstance().loadData();
 				break;
-			/*
-			 * case "save": // saveData(); break;
-			 */
+
+			case "save":
+				GameController.getInstance().saveData();
+				break;
+
 			case "pause":
 				if (Ticker.getInstance().running())
 					Ticker.getInstance().loopStop();

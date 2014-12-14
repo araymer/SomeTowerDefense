@@ -5,11 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Attackers.Marine;
+import Model.Tile;
 import View.GameGUI;
 import View.MapPanel;
 import View.TilePanel;
@@ -82,13 +84,25 @@ public class GameController {
 			// load map
 			inStream = new FileInputStream(new File("map.dat"));
 			inObject = new ObjectInputStream(inStream);
-			MapPanel.getInstance().setMap(inObject.readObject().toString());
+			MapPanel.getInstance().setMap((String) inObject.readObject());
 			inObject.close();
 			// load tiles
 			inStream = new FileInputStream(new File("tiles.dat"));
 			inObject = new ObjectInputStream(inStream);
-			// change our tile panel = (TilePanel) inObject.readObject();
+			TilePanel.getInstance().getMap()
+					.setGameBoard((Vector<Vector<Tile>>) inObject.readObject());
 			inObject.close();
+			for (int i = 0; i < TilePanel.getInstance().getMap().getGameBoard()
+					.size(); i++) {
+				for (int p = 0; p < TilePanel.getInstance().getMap()
+						.getGameBoard().get(i).size(); p++) {
+					if (TilePanel.getInstance().getMap().getGameBoard().get(i)
+							.get(p) != null) {
+						TilePanel.getInstance().getMap().getGameBoard().get(i)
+								.get(p).getStructure().setImages();
+					}
+				}
+			}
 			// loadMap(tilePanel, MapPanel.getInstance());
 			System.out.println("Load successful");
 		} catch (Exception e) {
@@ -110,12 +124,13 @@ public class GameController {
 			// save map
 			outStream = new FileOutputStream(new File("map.dat"));
 			outObject = new ObjectOutputStream(outStream);
-			outObject.writeObject(MapPanel.getInstance());
+			outObject.writeObject(MapPanel.getInstance().getFileName());
 			outObject.close();
 			// save tiles
 			outStream = new FileOutputStream(new File("tiles.dat"));
 			outObject = new ObjectOutputStream(outStream);
-			outObject.writeObject(TilePanel.getInstance());
+			outObject.writeObject(TilePanel.getInstance().getMap()
+					.getGameBoard());
 			outObject.close();
 			System.out.println("Save successful");
 		} catch (Exception e) {
