@@ -360,4 +360,14 @@ public class BrokenPlainsPatrol extends Map {
 		}
 
 	}
+	
+	@Override
+	public int getBaseX() {
+		return BASE_X;
+	}
+
+	@Override
+	public int getBaseY() {
+		return BASE_Y;
+	}
 }

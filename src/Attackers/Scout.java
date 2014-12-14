@@ -12,24 +12,25 @@ import Model.Attacker;
 import Model.Player;
 import Model.Structure;
 import Model.Tile;
-import View.GameGUI;
 import View.TilePanel;
 
-public class Cannoneer extends Attacker {
-	private static final int HITPOINTS = 500;
+public class Scout extends Attacker {
+	private static final int HITPOINTS = 150;
 	private static final int DEFENSE = 10;
-	private static final int ATTACK_RATING = 50;
-	private static final int RANGE = 3;
-	private static final int SPEED = 50;// The smaller, the faster
+	private static final int ATTACK_RATING = 10;
+	private static final int RANGE = 1;
+	private static final int SPEED = 15;// The smaller, the faster
 	double pixels = 0;
 	int count = 0;
 	BufferedImage tempSubImage;
+	boolean firing;
+	int frames;
 
-	public Cannoneer(Tile startingLocation) {
+	public Scout(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
-		name = "Cannoneer";
+		name = "Sergeant";
 		imageFileName = "Attackers.png";
-		value = 20;
+		value = 15;
 	}
 
 	@Override
@@ -42,6 +43,8 @@ public class Cannoneer extends Attacker {
 		// play dying animation and remove the attacker
 		isDead = true;
 		Player.getInstance().addMoney(value);
+		System.out.println("SCOUT DEAD");
+
 	}
 
 	public void draw(Graphics2D g2) {
@@ -53,8 +56,12 @@ public class Cannoneer extends Attacker {
 				e.printStackTrace();
 			}
 		}
+		if(firing)
+			frames = 2;
+		else
+			frames = 3;
 
-		if (xIncrement > 3) {
+		if (xIncrement > frames) {
 			xIncrement = 0;
 		}
 		
@@ -66,12 +73,13 @@ public class Cannoneer extends Attacker {
 		else
 			resetPixels();
 	
-		if(getLoc().nextTile != null)
-			 tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
-		else
-			 tempSubImage = bImage.getSubimage(xIncrement * (WIDTH*3), yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
-
 		
+		if(getLoc().nextTile != null) {
+			firing = true;
+			tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 120, WIDTH, HEIGHT);
+		}
+		else
+			 tempSubImage = bImage.getSubimage(xIncrement * (WIDTH*3), yIncrement * HEIGHT + 80, WIDTH, HEIGHT*2);
 		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
 		if(count%4 == 0)
 
@@ -104,10 +112,12 @@ public class Cannoneer extends Attacker {
 					- getLoc().nextTile.getCoordinates().x > 0
 					&& s.equals("x"))
 				return -pixels;
+			
 			else if (getLoc().getCoordinates().y
 					- getLoc().nextTile.getCoordinates().y < 0
 					&& s.equals("y"))
 				return pixels;
+			
 			else if (getLoc().getCoordinates().y
 					- getLoc().nextTile.getCoordinates().y > 0
 					&& s.equals("y"))
@@ -146,6 +156,7 @@ public class Cannoneer extends Attacker {
 		}
 	}
 	
+	
 	public void resetPixels() {
 		pixels = 0;
 	}
@@ -156,5 +167,6 @@ public class Cannoneer extends Attacker {
 		resetPixels();
 	}
 
+	
 
 }
