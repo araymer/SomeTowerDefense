@@ -17,6 +17,8 @@ public abstract class Map implements Serializable {
 	private static int tileWidth = 40;
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
+	public Player playerMoney = Player.getInstance();
+	public String mapImageName;
 
 	// randomizing wave spawn points easier
 

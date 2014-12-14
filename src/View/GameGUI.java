@@ -26,6 +26,7 @@ import javax.swing.JTextArea;
 import Controller.GameController;
 import Controller.TDClient;
 import Model.Attacker;
+import Model.Map;
 import Model.Structure;
 import Model.Ticker;
 import Model.Tile;
@@ -145,7 +146,8 @@ public class GameGUI implements Serializable {
 
 	}
 	
-	public void loadMap(String map, Vector<Vector<Tile>> gameMap){
+	public void loadMap(Map map){
+		MapPanel.getInstance().setMap(map.mapImageName);
 		tilePanel = TilePanel.getInstance();
 		//tilePanel.setMap(gameMap);
 
