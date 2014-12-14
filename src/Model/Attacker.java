@@ -27,7 +27,7 @@ public abstract class Attacker extends Drawable implements Serializable {
 	// Variables for drawing
 	protected int xIncrement;
 	protected int yIncrement;
-	protected BufferedImage bImage;
+	protected transient BufferedImage bImage;
 	protected String imageFileName = "error.png";
 	protected static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
@@ -20,7 +21,7 @@ import Model.Structure;
  * @author Team Something
  *
  */
-public class TowerAttacking extends TowerState {
+public class TowerAttacking extends TowerState implements Serializable{
 	Structure tower;
 	Attacker target;
 	boolean upgrade;

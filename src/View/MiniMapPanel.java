@@ -94,5 +94,6 @@ public class MiniMapPanel extends JPanel{
 				}
 			}
 		}
+		otherGameMap = null;
 	}
 }
