@@ -327,18 +327,18 @@ public class BrokenPlainsPatrol extends Map {
 
 		gameBoard.get(14).get(5).setMove(true, gameBoard.get(15).get(5)); // turn
 																			// east
-		gameBoard.get(14).get(5).setBuild(true);
+		gameBoard.get(14).get(5).setBuild(false);
 
 		gameBoard.get(15).get(5).setMove(true, gameBoard.get(16).get(5));
-		gameBoard.get(15).get(5).setBuild(true);
+		gameBoard.get(15).get(5).setBuild(false);
 
 		gameBoard.get(16).get(5).setMove(true, gameBoard.get(16).get(6)); // turn
 																			// south
-		gameBoard.get(16).get(5).setBuild(true);
+		gameBoard.get(16).get(5).setBuild(false);
 
 		gameBoard.get(16).get(6).setMove(true, gameBoard.get(16).get(7)); // turn
 																			// south
-		gameBoard.get(16).get(6).setBuild(true);
+		gameBoard.get(16).get(6).setBuild(false);
 
 		// last tile to base
 		gameBoard.get(16).get(7).setMove(true, null);
