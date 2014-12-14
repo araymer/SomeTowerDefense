@@ -1,5 +1,7 @@
 package Structures;
 
+import java.awt.CardLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -11,13 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import Maps.DesertUprising;
 import Model.Base;
 import Model.Structure;
 import Model.Ticker;
 import TowerFSM.TowerStates;
 import View.GameGUI;
-import View.ResourcePanel;
 import View.TilePanel;
 
 @SuppressWarnings("serial")
@@ -33,7 +33,6 @@ public class BaseDesertUprising extends Base {
 		name = "Desert Uprising Base";
 		price = 0;
 	}
-
 
 	@Override
 	protected void setImages() {
@@ -74,7 +73,6 @@ public class BaseDesertUprising extends Base {
 
 	}
 
-
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {
 		BufferedImage correctImage = null;
@@ -97,36 +95,60 @@ public class BaseDesertUprising extends Base {
 		return correctImage;
 	}
 
+	JFrame gameOver;
+
 	@Override
 	public void die() {
 		JButton restart = new JButton("Restart Level");
 		System.out.println("\n\n\n\nBASE WAS DESTROYED. GAME OVER");
 		Ticker.getInstance().loopStop();
-		JFrame gameOver = new JFrame();
-		gameOver.setLocation(100,100);
+		gameOver = new JFrame();
+		gameOver.setLayout(new GridLayout(2, 1));
+		gameOver.setLocation(100, 100);
 		gameOver.setSize(400, 200);
 		gameOver.add(new JLabel("BASE WAS DESTROYED. GAME OVER."));
 		restart.addActionListener(new RestartListener());
 		gameOver.add(restart);
 		gameOver.setVisible(true);
-		
-		
-		
+		TilePanel.getInstance().getMap().getGameBoard().get(getX()).get(getY())
+				.removeStructure();
+		// TilePanel.getInstance().reset();
+		// GameGUI.getInstance().frame.setContentPane(TilePanel.getInstance());
+
 	}
-	
+
 	private class RestartListener implements ActionListener {
 
-		
 		public void actionPerformed(ActionEvent e) {
-			
-			TilePanel.getInstance().setMap(((DesertUprising) DesertUprising.getInstance()).reInit());
-			ResourcePanel.getInstance().resourceFrame.dispose();
-			ResourcePanel.getInstance().reinit();
-			
+
+			/*
+			 * TilePanel.getInstance().setMap( ((DesertUprising)
+			 * DesertUprising.getInstance()).reInit());
+			 * ResourcePanel.getInstance().resourceFrame.dispose();
+			 * ResourcePanel.getInstance().reinit();
+			 */
+
+			JFrame frame = GameGUI.getInstance().frame;
+			TilePanel tilePanel = TilePanel.getInstance();
+
+			frame.remove(tilePanel);
+			tilePanel.reset();
+			tilePanel = TilePanel.getInstance();
+
+			frame.add(tilePanel);
+
+			tilePanel.setSize(frame.getSize().width, frame.getSize().height);
+			tilePanel.setLocation(0, 0);
+			tilePanel.setLayout(new CardLayout());
+
+			GameGUI.getInstance().newTilePanel();
 			Ticker.getInstance().loopStart();
-		
+			// new Thread(Ticker.getInstance()).start();
+
+			gameOver.dispose();
+
 		}
-		
+
 	}
 
 }
