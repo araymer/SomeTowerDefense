@@ -128,6 +128,7 @@ public class Ticker implements Runnable {
 		atkrMoveList.clear();
 		structureRemoveList.clear();
 		
+		
 		try {
 
 			// Check for dead structures and attackers
@@ -175,9 +176,7 @@ public class Ticker implements Runnable {
 					}
 				}
 
-				// nextTile.getAttackers().add(attacker);
-				// attacker.setLoc(nextTile);
-
+				
 				attacker.location.getNextTile().getAttackers().add(attacker);
 				attacker.setLoc(attacker.location.getNextTile());
 				;

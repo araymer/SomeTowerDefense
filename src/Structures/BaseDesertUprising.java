@@ -122,6 +122,7 @@ public class BaseDesertUprising extends Base {
 			TilePanel.getInstance().setMap(((DesertUprising) DesertUprising.getInstance()).reInit());
 			ResourcePanel.getInstance().resourceFrame.dispose();
 			ResourcePanel.getInstance().reinit();
+			GameGUI.getInstance().reInit();
 			
 			Ticker.getInstance().loopStart();
 		

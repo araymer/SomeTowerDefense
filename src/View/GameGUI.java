@@ -506,4 +506,9 @@ public class GameGUI implements Serializable {
 		}
 	}
 
+	public void reInit() {
+		
+		createMap(0);
+	}
+
 }
