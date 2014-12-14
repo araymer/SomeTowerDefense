@@ -37,6 +37,8 @@ public abstract class Map implements Serializable {
 		playerMoney.setMoney(500);
 	}
 
+	public abstract Map reInit();
+
 	/**
 	 * Calculates the correct tile to place structure given the mouse position
 	 * on the GameGUI
@@ -141,5 +143,4 @@ public abstract class Map implements Serializable {
 	public static void setTileWidth(int tileWidth) {
 		Map.tileWidth = tileWidth;
 	}
-
 }
