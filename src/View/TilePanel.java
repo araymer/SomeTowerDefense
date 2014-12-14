@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.JPanel;
 
 import Attackers.Cannoneer;
+import Maps.BeachBetrayal;
 import Maps.BrokenPlainsPatrol;
 import Maps.DesertUprising;
 import Model.Attacker;
@@ -40,8 +41,33 @@ public class TilePanel extends JPanel implements Serializable {
 				new Cannoneer(tileMap.getSpawnTile(1)));
 		tileMap.getSpawnTile(1).addAttacker(
 				new Cannoneer(tileMap.getSpawnTile(1)));
+
 		// tileMap.getSpawnTile(1)
 		// .addAttacker(new Marine(tileMap.getSpawnTile(1)));
+	}
+
+	public void setMap(int selection) {
+		switch (selection) {
+		case 0:
+			tileMap = DesertUprising.getInstance();
+			setSpawn();
+			break;
+		case 1:
+			tileMap = BrokenPlainsPatrol.getInstance();
+			setSpawn();
+			break;
+		case 2:
+			tileMap = BeachBetrayal.getInstance();
+			setSpawn();
+			break;
+		}
+	}
+
+	private void setSpawn() {
+		tileMap.getSpawnTile(1).addAttacker(
+				new Cannoneer(tileMap.getSpawnTile(1)));
+		tileMap.getSpawnTile(1).addAttacker(
+				new Cannoneer(tileMap.getSpawnTile(1)));
 	}
 
 	public void reset() {
