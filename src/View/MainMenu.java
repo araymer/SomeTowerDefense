@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -35,7 +37,10 @@ public class MainMenu extends JPanel {
 	JButton plainsButton;
 	JButton desertButton;
 	JLabel chooseLabel;
+
+	BufferedImage map;
 	int mapSelected;
+
 
 	private MainMenu() {
 
@@ -47,7 +52,7 @@ public class MainMenu extends JPanel {
 		beachButton = new JButton("Beach Betrayal");
 		plainsButton = new JButton("Broken Plains Patrol");
 		desertButton = new JButton("Desert Uprising");
-		chooseLabel = new JLabel("Choose A Map First");
+		chooseLabel = new JLabel("Choose A Map First Then Select Single/Multiplayer");
 		ButtonListener buttonListener = new ButtonListener();
 		// desertMap.addActionListener(buttonListener);
 		singleplayer.addActionListener(buttonListener);
@@ -113,6 +118,7 @@ public class MainMenu extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == singleplayer)
 				GameGUI.getInstance().createMap(mapSelected);
+
 			if (e.getSource() == multiplayer) {
 				System.out.println("Multiplayer button clicked");
 				TDServer server = new TDServer();
@@ -133,13 +139,36 @@ public class MainMenu extends JPanel {
 				
 			}
 			if (e.getSource() == beachButton){
-				mapSelected = 2;
+
+				try {
+					map = ImageIO.read(new File("imageFiles/BeachBetrayal.jpg"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				repaint();
+
 			}
 			if (e.getSource() == plainsButton){
-				mapSelected = 1;
+
+				try {
+					map = ImageIO.read(new File("imageFiles/BrokenPlainsPatrol.jpg"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				repaint();
+
 			}
 			if (e.getSource() == desertButton){
-				mapSelected = 0;
+				try {
+					map = ImageIO.read(new File("imageFiles/DesertUprising.jpg"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				repaint();
+
 			}
 
 		}
@@ -156,7 +185,12 @@ public class MainMenu extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+		AffineTransform at = new AffineTransform();
+		at.scale(0.75, 0.75);
+		at.translate(getWidth()/2-200, getHeight()/2-150);
+		
 		g.drawImage(bgImage, 0, 0, null);
-		g.drawImage(logo, 260, 216, null);
+		g.drawImage(logo, 266, getHeight()/2, null);
+		g2.drawImage(map, at, null);
 	}
 }

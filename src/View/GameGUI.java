@@ -55,6 +55,7 @@ public class GameGUI implements Serializable {
 	private CardLayout cards;
 	Structure structure;
 	public JFrame resourceFrame;
+	public double interpolation;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -264,7 +265,8 @@ public class GameGUI implements Serializable {
 		tilePanel.addMouseListener(new PlacementListener());
 	}
 
-	public void repaint() {
+	public void repaint(double inter) {
+		interpolation = inter;
 		tilePanel.repaint();
 	}
 
