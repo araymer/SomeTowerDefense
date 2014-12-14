@@ -2,6 +2,7 @@ package Attackers;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +11,6 @@ import javax.imageio.ImageIO;
 
 import Model.Attacker;
 import Model.Structure;
-import Model.Ticker;
 import Model.Tile;
 
 public class Cannoneer extends Attacker {
@@ -19,7 +19,8 @@ public class Cannoneer extends Attacker {
 	private static final int ATTACK_RATING = 50;
 	private static final int RANGE = 3;
 	private static final int SPEED = 50;// The smaller, the faster
-	double pixels = .8/50;
+	double pixels = 0;
+	int count = 0;
 
 	public Cannoneer(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
@@ -55,22 +56,27 @@ public class Cannoneer extends Attacker {
 		}
 		
 		
-		
-		if(pixels < 40)
-			pixels += pixels;
+		//This calculates the amount of offset to animate between tiles (40px/SPEED = 0.8px per tick)
+		if(pixels < 39.2 && getLoc() != null)
+			pixels += (double)40./SPEED;
 		else
-			pixels = .8/50;
+			pixels = 0;
+	
 		
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
+		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
+		if(count%5 == 0)
+			xIncrement++;
 		
-		System.out.println(pixels);
-		
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-				yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
-		xIncrement++;
+		count++;
+		// variable "at" will help us manipulate sprites
 		AffineTransform at = new AffineTransform();
-		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"),
-				getLoc().getCoordinates().y * HEIGHT + offset("y"));
-		at.rotate(checkTransform());
+		//calculate offset per tick
+		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"), getLoc().getCoordinates().y * HEIGHT + offset("y"));
+		//calculate direction they should be facing
+		at.rotate(checkTransform(), tempSubImage.getWidth()/2, tempSubImage.getHeight()/2);
+
+		
 		g2.drawImage(tempSubImage, at, null);
 
 

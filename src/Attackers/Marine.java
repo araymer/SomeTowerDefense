@@ -1,6 +1,7 @@
 package Attackers;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,8 @@ public class Marine extends Attacker {
 	private static final int ATTACK_RATING = 530;
 	private static final int RANGE = 3;
 	private static final int SPEED = 15;// The smaller, the faster
+	int count = 0;
+	double pixels = 0;
 
 	public Marine(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
@@ -47,16 +50,60 @@ public class Marine extends Attacker {
 		}
 
 		// 4 is the number of shooting frames
-		if (xIncrement > 4) {
+		if (xIncrement > 3) {
 			xIncrement = 0;
 		}
+		
+		
+		//This calculates the amount of offset to animate between tiles (40px/SPEED = 0.8px per tick)
+		if(pixels < 39.2 && getLoc() != null)
+			pixels += (double)40./SPEED;
+		else
+			pixels = 0;
+	
+		
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
+		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
+		if(count%5 == 0)
+			xIncrement++;
+		
+		count++;
+		// variable "at" will help us manipulate sprites
+		AffineTransform at = new AffineTransform();
+		//calculate offset per tick
+		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"), getLoc().getCoordinates().y * HEIGHT + offset("y"));
+		//calculate direction they should be facing
+		at.rotate(checkTransform(), tempSubImage.getWidth()/2, tempSubImage.getHeight()/2);
 
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-				yIncrement * HEIGHT, WIDTH, HEIGHT);
-		xIncrement++;
-		g2.drawImage(tempSubImage, getLoc().getCoordinates().x * WIDTH,
-				getLoc().getCoordinates().y * HEIGHT, WIDTH, HEIGHT, null);
+		
+		g2.drawImage(tempSubImage, at, null);
 
+
+	}
+	
+	private double offset(String s) {
+		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0 && s.equals("x"))
+			return pixels;
+		else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0 && s.equals("x"))
+			return -pixels;
+		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0 && s.equals("y"))
+			return pixels;
+		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0 && s.equals("y"))
+			return -pixels;
+		
+		return 0;
+	
+	}
+	
+	private double checkTransform() {
+		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0)
+			return (Math.PI/2);
+		else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
+			return (-Math.PI/2);
+		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
+			return (Math.PI);
+		else
+			return 0.;
 	}
 	/*
 	 * 
