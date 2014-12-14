@@ -147,7 +147,7 @@ public class MainMenu extends JPanel {
 					e1.printStackTrace();
 				}
 				repaint();
-
+				mapSelected = 2;
 			}
 			if (e.getSource() == plainsButton){
 
@@ -158,7 +158,7 @@ public class MainMenu extends JPanel {
 					e1.printStackTrace();
 				}
 				repaint();
-
+				mapSelected = 1;
 			}
 			if (e.getSource() == desertButton){
 				try {
@@ -168,7 +168,7 @@ public class MainMenu extends JPanel {
 					e1.printStackTrace();
 				}
 				repaint();
-
+				mapSelected = 0;
 			}
 
 		}

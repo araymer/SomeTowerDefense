@@ -20,10 +20,8 @@ public class Cannoneer extends Attacker {
 	private static final int ATTACK_RATING = 50;
 	private static final int RANGE = 3;
 	private static final int SPEED = 50;// The smaller, the faster
-	double lastX, lastY, drawX, drawY;
 	double pixels = 0;
 	int count = 0;
-	double interp;
 
 	public Cannoneer(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
@@ -45,7 +43,6 @@ public class Cannoneer extends Attacker {
 	}
 
 	public void draw(Graphics2D g2) {
-		interp = GameGUI.getInstance().interpolation;
 		if (bImage == null) {
 			File imageFile = new File(baseDir + imageFileName);
 			try {
