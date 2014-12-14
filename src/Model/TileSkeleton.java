@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Class created to easily pass tile information over the network to minimap
  * 
- * @author Marcos
+ * @author Team Something
  *
  */
 

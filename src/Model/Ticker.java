@@ -98,6 +98,9 @@ public class Ticker implements Runnable {
 		return tickCount;
 	}
 	
+	/**
+	 * Updates each attacker and structure and removes or moves them if needed
+	 */
 	private void update() {
 		// add in information for structures and towers for
 		// position, direction and last drawn image (so it actually animates)

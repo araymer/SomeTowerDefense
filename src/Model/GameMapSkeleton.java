@@ -6,7 +6,7 @@ import java.util.Vector;
 /**
  * Class made to be able to easily send gameMap information over the network to the minimap
  * 
- * @author Marcos
+ * @author Team Something
  *
  */
 public class GameMapSkeleton implements Serializable{
