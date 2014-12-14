@@ -24,6 +24,8 @@ public class Cannoneer extends Attacker {
 	double pixels = 0;
 	int count = 0;
 	BufferedImage tempSubImage;
+	int frames;
+	boolean firing;
 
 	public Cannoneer(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
@@ -53,8 +55,13 @@ public class Cannoneer extends Attacker {
 				e.printStackTrace();
 			}
 		}
+		
+		if(firing)
+			frames = 2;
+		else
+			frames = 3;
 
-		if (xIncrement > 3) {
+		if (xIncrement > frames) {
 			xIncrement = 0;
 		}
 		
@@ -68,12 +75,15 @@ public class Cannoneer extends Attacker {
 	
 		if(getLoc().nextTile != null)
 			 tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
-		else
+		else {
+			firing = true;
 			 tempSubImage = bImage.getSubimage(xIncrement * (WIDTH*3), yIncrement * HEIGHT, WIDTH, HEIGHT*2);
+			 
+		}
 
 		
 		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
-		if(count%4 == 0)
+		if(count%6 == 0)
 
 			xIncrement++;
 

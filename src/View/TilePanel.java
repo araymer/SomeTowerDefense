@@ -61,11 +61,11 @@ public class TilePanel extends JPanel implements Serializable {
 		tileMap.getSpawnTile(1).addAttacker(
 				new Cannoneer(tileMap.getSpawnTile(1)));
 		
-//		 tileMap.getSpawnTile(1).addAttacker(
-//				new Scout(tileMap.getSpawnTile(1)));
-//
-//		 tileMap.getSpawnTile(1)
-//		 .addAttacker(new Marine(tileMap.getSpawnTile(1)));
+		 tileMap.getSpawnTile(1).addAttacker(
+				new Scout(tileMap.getSpawnTile(1)));
+
+		 tileMap.getSpawnTile(1)
+		 .addAttacker(new Marine(tileMap.getSpawnTile(1)));
 	}
 
 	private void setSpawn() {
