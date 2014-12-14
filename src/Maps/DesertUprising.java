@@ -53,7 +53,6 @@ public class DesertUprising extends Map {
 	public Map reInit() {
 		theMap = new DesertUprising();
 		return theMap;
-
 	}
 
 	private void setTiles() {

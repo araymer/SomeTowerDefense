@@ -359,4 +359,10 @@ public class BrokenPlainsPatrol extends Map {
 		}
 
 	}
+
+	@Override
+	public Map reInit() {
+		brokenPlains = new BrokenPlainsPatrol();
+		return brokenPlains;
+	}
 }

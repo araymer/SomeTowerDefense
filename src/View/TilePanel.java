@@ -65,9 +65,8 @@ public class TilePanel extends JPanel implements Serializable {
 	}
 
 	public void reset() {
-		tileMap = DesertUprising.getInstance().reInit();
 		Player.getInstance().reset();
-		tilePanel = new TilePanel();
+		tileMap = tileMap.reInit();
 	}
 
 	public static TilePanel getInstance() {
