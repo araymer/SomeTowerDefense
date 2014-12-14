@@ -22,7 +22,6 @@ import Structures.BaseDesertUprising;
  */
 @SuppressWarnings("serial")
 public class DesertUprising extends Map {
-
 	private static Map theMap;
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
@@ -35,6 +34,7 @@ public class DesertUprising extends Map {
 
 	private DesertUprising() {
 		super(height, width);
+		mapImageName = "desertuprising.jpg";
 		new ArrayList<Tile>();
 		setPath();
 		setBase();
@@ -53,7 +53,6 @@ public class DesertUprising extends Map {
 	public Map reInit() {
 		theMap = new DesertUprising();
 		return theMap;
-
 	}
 
 	private void setTiles() {

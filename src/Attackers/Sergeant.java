@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Model.Attacker;
+import Model.Player;
 import Model.Structure;
 import Model.Tile;
 
@@ -22,6 +23,7 @@ public class Sergeant extends Attacker {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
 		name = "Sergeant";
 		imageFileName = "Attackers.png";
+		value = 15;
 	}
 
 	@Override
@@ -33,6 +35,7 @@ public class Sergeant extends Attacker {
 	public void die() {
 		// play dying animation and remove the attacker
 		isDead = true;
+		Player.getInstance().addMoney(value);
 
 	}
 

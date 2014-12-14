@@ -16,7 +16,6 @@ import Structures.BaseDesertUprising;
  */
 @SuppressWarnings("serial")
 public class BeachBetrayal extends Map {
-
 	private static Map theMap;
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
@@ -29,6 +28,7 @@ public class BeachBetrayal extends Map {
 
 	private BeachBetrayal() {
 		super(height, width);
+		mapImageName = "BeachBetrayal.jpg";
 		new ArrayList<Tile>();
 		setPath();
 		setBase();

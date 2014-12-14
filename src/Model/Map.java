@@ -17,6 +17,8 @@ public abstract class Map implements Serializable {
 	private static int tileWidth = 40;
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
+	public Player playerMoney = Player.getInstance();
+	public String mapImageName;
 
 	// randomizing wave spawn points easier
 
@@ -33,6 +35,8 @@ public abstract class Map implements Serializable {
 			}
 		}
 	}
+
+	public abstract Map reInit();
 
 	/**
 	 * Calculates the correct tile to place structure given the mouse position
@@ -138,5 +142,4 @@ public abstract class Map implements Serializable {
 	public static void setTileWidth(int tileWidth) {
 		Map.tileWidth = tileWidth;
 	}
-
 }

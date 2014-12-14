@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.JPanel;
 
 import Attackers.Cannoneer;
+import Attackers.Marine;
 import Maps.BeachBetrayal;
 import Maps.BrokenPlainsPatrol;
 import Maps.DesertUprising;
@@ -36,8 +37,14 @@ public class TilePanel extends JPanel implements Serializable {
 		this.setOpaque(false);
 		this.setVisible(true);
 
-		// tileMap.getSpawnTile(1)
-		// .addAttacker(new Marine(tileMap.getSpawnTile(1)));
+		tileMap = DesertUprising.getInstance();
+		tileMap.getSpawnTile(1).addAttacker(
+				new Cannoneer(tileMap.getSpawnTile(1)));
+		tileMap.getSpawnTile(1).addAttacker(
+				new Cannoneer(tileMap.getSpawnTile(1)));
+
+		 tileMap.getSpawnTile(1)
+		 .addAttacker(new Marine(tileMap.getSpawnTile(1)));
 	}
 
 	public void setMap(int selection) {
@@ -65,9 +72,8 @@ public class TilePanel extends JPanel implements Serializable {
 	}
 
 	public void reset() {
-		tileMap = DesertUprising.getInstance().reInit();
 		Player.getInstance().reset();
-		tilePanel = new TilePanel();
+		tileMap = tileMap.reInit();
 	}
 
 	public static TilePanel getInstance() {

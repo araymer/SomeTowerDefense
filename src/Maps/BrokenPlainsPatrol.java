@@ -25,6 +25,7 @@ public class BrokenPlainsPatrol extends Map {
 
 	private BrokenPlainsPatrol() {
 		super(height, width);
+		mapImageName = "BrokenPlainsPatrol.jpg";
 		new ArrayList<Tile>();
 		setPath();
 		setBase();
@@ -358,5 +359,11 @@ public class BrokenPlainsPatrol extends Map {
 			return null;
 		}
 
+	}
+
+	@Override
+	public Map reInit() {
+		brokenPlains = new BrokenPlainsPatrol();
+		return brokenPlains;
 	}
 }
