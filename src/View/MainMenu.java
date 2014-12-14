@@ -37,13 +37,13 @@ public class MainMenu extends JPanel {
 	JLabel chooseLabel;
 
 	private MainMenu() {
-		
+
 		this.setLayout(new BorderLayout());
 		// desertMap = new JButton("Desert Uprising");
 		singleplayer = new JButton("Single Player");
 		multiplayer = new JButton("Multi-Player");
 		load = new JButton("Load Last Game");
-		beachButton  = new JButton("Beach Betrayal");
+		beachButton = new JButton("Beach Betrayal");
 		plainsButton = new JButton("Broken Plains Patrol");
 		desertButton = new JButton("Desert Uprising");
 		chooseLabel = new JLabel("Choose A Map First");
@@ -58,10 +58,10 @@ public class MainMenu extends JPanel {
 		startPanel.add(load);
 		startPanel.setBackground(Color.BLACK);
 		this.add(startPanel, BorderLayout.NORTH);
-		
+
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new GridLayout(1,2));
-		
+		bottomPanel.setLayout(new GridLayout(1, 2));
+
 		JPanel mapChoosePanel = new JPanel();
 		mapChoosePanel.add(beachButton);
 		mapChoosePanel.add(plainsButton);
