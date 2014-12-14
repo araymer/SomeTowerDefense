@@ -1,25 +1,14 @@
 package Structures;
 
-import java.awt.CardLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import Model.Base;
 import Model.Structure;
-import Model.Ticker;
 import TowerFSM.TowerStates;
-import View.GameGUI;
-import View.MainMenu;
-import View.TilePanel;
 
 @SuppressWarnings("serial")
 public class BaseDesertUprising extends Base {
@@ -95,72 +84,4 @@ public class BaseDesertUprising extends Base {
 		}
 		return correctImage;
 	}
-
-	JFrame gameOver;
-
-	@Override
-	public void die() {
-		JButton restart = new JButton("Restart Level");
-		System.out.println("\n\n\n\nBASE WAS DESTROYED. GAME OVER");
-		Ticker.getInstance().loopStop();
-		gameOver = new JFrame();
-		gameOver.setLayout(new GridLayout(3, 1));
-		gameOver.setLocation(100, 100);
-		gameOver.setSize(400, 200);
-		gameOver.add(new JLabel("BASE WAS DESTROYED. GAME OVER."));
-		restart.addActionListener(new RestartListener());
-		gameOver.add(restart);
-		JButton mainMenu = new JButton("Return to Main Menu");
-		mainMenu.addActionListener(new ReturnListener());
-		gameOver.add(mainMenu);
-		gameOver.setVisible(true);
-		TilePanel.getInstance().getMap().getGameBoard().get(getX()).get(getY())
-				.removeStructure();
-		// TilePanel.getInstance().reset();
-		// GameGUI.getInstance().frame.setContentPane(TilePanel.getInstance());
-
-	}
-
-	JFrame frame;
-
-	private class RestartListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-
-
-
-			frame = GameGUI.getInstance().frame;
-			TilePanel tilePanel = TilePanel.getInstance();
-
-			frame.remove(tilePanel);
-			tilePanel.reset();
-			tilePanel = TilePanel.getInstance();
-
-			frame.add(tilePanel);
-
-			tilePanel.setSize(frame.getSize().width, frame.getSize().height);
-			tilePanel.setLocation(0, 0);
-			tilePanel.setLayout(new CardLayout());
-
-			GameGUI.getInstance().newTilePanel();
-			Ticker.getInstance().loopStart();
-
-			gameOver.dispose();
-
-		}
-
-	}
-
-	private class ReturnListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			frame = GameGUI.getInstance().frame;
-			frame.setContentPane(MainMenu.getInstance());
-			GameGUI.getInstance().resetMenuBar();
-			gameOver.dispose();
-		}
-
-	}
-
 }
