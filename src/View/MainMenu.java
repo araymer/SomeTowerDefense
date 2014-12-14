@@ -48,6 +48,10 @@ public class MainMenu extends JPanel {
 		// desertMap.addActionListener(buttonListener);
 		singleplayer.addActionListener(buttonListener);
 		multiplayer.addActionListener(buttonListener);
+		load.addActionListener(buttonListener);
+		beachButton.addActionListener(buttonListener);
+		plainsButton.addActionListener(buttonListener);
+		desertButton.addActionListener(buttonListener);
 		// this.add(desertMap);
 		JPanel startPanel = new JPanel();
 		startPanel.add(singleplayer);
@@ -106,6 +110,19 @@ public class MainMenu extends JPanel {
 			if (e.getSource() == singleplayer)
 				GameGUI.getInstance().createMap(1);
 			if (e.getSource() == multiplayer) {
+				
+			}
+			if (e.getSource() == load){
+				
+			}
+			if (e.getSource() == beachButton){
+
+			}
+			if (e.getSource() == plainsButton){
+
+			}
+			if (e.getSource() == desertButton){
+
 			}
 
 		}
