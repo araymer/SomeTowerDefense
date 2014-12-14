@@ -60,7 +60,7 @@ public class Cannoneer extends Attacker {
 		if(pixels < 39.2 && getLoc() != null)
 			pixels += (double)40./SPEED;
 		else
-			pixels = 0;
+			resetPixels();
 	
 		
 		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
@@ -83,28 +83,44 @@ public class Cannoneer extends Attacker {
 	}
 	
 	private double offset(String s) {
-		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0 && s.equals("x"))
-			return pixels;
-		else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0 && s.equals("x"))
-			return -pixels;
-		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0 && s.equals("y"))
-			return pixels;
-		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0 && s.equals("y"))
-			return -pixels;
+		if(getLoc().nextTile != null){
+			if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0 && s.equals("x"))
+				return pixels;
+			else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0 && s.equals("x"))
+				return -pixels;
+			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0 && s.equals("y"))
+				return pixels;
+			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0 && s.equals("y"))
+				return -pixels;
+		}
 		
 		return 0;
 	
 	}
 	
 	private double checkTransform() {
-		if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0)
-			return (Math.PI/2);
-		else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
-			return (-Math.PI/2);
-		else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
-			return (Math.PI);
-		else
-			return 0.;
+		if(getLoc().nextTile != null){
+			if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0)
+				return (Math.PI/2);
+			else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
+				return (-Math.PI/2);
+			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
+				return (Math.PI);
+		}
+
+		return 0.;
+	}
+	
+	public void resetPixels(){
+		pixels = 0;
+	}
+	
+	@Override
+	public void setLoc(Tile loc) {
+		location = loc;
+		setX();
+		setY();
+		resetPixels();
 	}
 	/*
 	 * 
