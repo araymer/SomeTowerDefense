@@ -26,6 +26,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import Controller.GameController;
 import Controller.TDClient;
 import Model.Attacker;
 import Model.Structure;
@@ -193,7 +194,7 @@ public class GameGUI implements Serializable {
 	JMenuBar menuBar;
 	JMenu game;
 	JMenuItem load;
-	JMenuItem save;
+	// JMenuItem save;
 	JCheckBox pause;
 	JMenuItem exit;
 	JMenu help;
@@ -203,10 +204,10 @@ public class GameGUI implements Serializable {
 	void createMenuBar() {
 		menuBar = new JMenuBar();
 		game = new JMenu("Game");
-		save = new JMenuItem("Save");
-		save.addActionListener(new MenuListener());
-		save.setActionCommand("save");
-		game.add(save);
+		// save = new JMenuItem("Save");
+		// save.addActionListener(new MenuListener());
+		// save.setActionCommand("save");
+		// game.add(save);
 		load = new JMenuItem("Load");
 		load.addActionListener(new MenuListener());
 		load.setActionCommand("load");
@@ -365,11 +366,11 @@ public class GameGUI implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand()) {
 			case "load":
-				// loadData();
+				GameController.getInstance().loadData();
 				break;
-			case "save":
-				// saveData();
-				break;
+			/*
+			 * case "save": // saveData(); break;
+			 */
 			case "pause":
 				if (Ticker.getInstance().running())
 					Ticker.getInstance().loopStop();
@@ -471,125 +472,5 @@ public class GameGUI implements Serializable {
 		}
 
 	}
-
-	// TODO: I don't know a good place to put this >.>.....
-	/**
-	 * This method attempts to load account data from "./accounts.dat"
-	 * 
-	 * @return true if successful, false otherwise
-	 */
-	// @SuppressWarnings("unchecked")
-	// public boolean loadData() {
-	// FileInputStream inStream;
-	// ObjectInputStream inObject;
-	//
-	// try {
-	// // load map
-	// inStream = new FileInputStream(new File("map.dat"));
-	// inObject = new ObjectInputStream(inStream);
-	// MapPanel.getInstance().setMap(inObject.readObject().toString());
-	// inObject.close();
-	// // load tiles
-	// inStream = new FileInputStream(new File("tiles.dat"));
-	// inObject = new ObjectInputStream(inStream);
-	// tilePanel = (TilePanel) inObject.readObject();
-	// inObject.close();
-	// loadMap(tilePanel, MapPanel.getInstance());
-	// System.out.println("Load successful");
-	// } catch (Exception e) {
-	// JFrame cantLoad = new JFrame();
-	// JLabel loadError = new JLabel("Could not load");
-	// cantLoad.add(loadError);
-	// cantLoad.setSize(100, 100);
-	// cantLoad.setVisible(true);
-	// return false;
-	// }
-	// return true;
-	// }
-	//
-	// /**
-	// * This method attempts to save the account map in "./accounts.dat"
-	// */
-	// public void saveData() {
-	// FileOutputStream outStream;
-	// ObjectOutputStream outObject;
-	// try {
-	// // save map
-	// outStream = new FileOutputStream(new File("map.dat"));
-	// outObject = new ObjectOutputStream(outStream);
-	// outObject.writeObject(MapPanel.getInstance());
-	// outObject.close();
-	// // save tiles
-	// outStream = new FileOutputStream(new File("tiles.dat"));
-	// outObject = new ObjectOutputStream(outStream);
-	// outObject.writeObject(tilePanel);
-	// outObject.close();
-	// System.out.println("Save successful");
-	// } catch (Exception e) {
-	// JFrame cantSave = new JFrame();
-	// JLabel saveError = new JLabel("Error saving game");
-	// cantSave.add(saveError);
-	// cantSave.setSize(100, 100);
-	// cantSave.setVisible(true);
-	// e.printStackTrace();
-	// }
-	// }
-
-	// public void reInit() {
-	//
-	// createMap(0);
-	//
-	// try {
-	// // load map
-	// inStream = new FileInputStream(new File("map.dat"));
-	// inObject = new ObjectInputStream(inStream);
-	// mapPanel = (MapPanel) inObject.readObject();
-	// inObject.close();
-	// // load tiles
-	// inStream = new FileInputStream(new File("tiles.dat"));
-	// inObject = new ObjectInputStream(inStream);
-	// tilePanel = (TilePanel) inObject.readObject();
-	// inObject.close();
-	// loadMap(tilePanel, mapPanel);
-	// System.out.println("Load successful");
-	// } catch (Exception e) {
-	// JFrame cantLoad = new JFrame();
-	// JLabel loadError = new JLabel("Could not load");
-	// cantLoad.add(loadError);
-	// cantLoad.setSize(100, 100);
-	// cantLoad.setVisible(true);
-	// e.printStackTrace();
-	// return false;
-	// }
-	// return true;
-	// }
-	//
-	// /**
-	// * This method attempts to save the account map in "./accounts.dat"
-	// */
-	// public void saveData() {
-	// FileOutputStream outStream;
-	// ObjectOutputStream outObject;
-	// try {
-	// // save map
-	// outStream = new FileOutputStream(new File("map.dat"));
-	// outObject = new ObjectOutputStream(outStream);
-	// outObject.writeObject(mapPanel);
-	// outObject.close();
-	// // save tiles
-	// outStream = new FileOutputStream(new File("tiles.dat"));
-	// outObject = new ObjectOutputStream(outStream);
-	// outObject.writeObject(tilePanel);
-	// outObject.close();
-	// System.out.println("Save successful");
-	// } catch (Exception e) {
-	// JFrame cantSave = new JFrame();
-	// JLabel saveError = new JLabel("Error saving game");
-	// cantSave.add(saveError);
-	// cantSave.setSize(100, 100);
-	// cantSave.setVisible(true);
-	// e.printStackTrace();
-	// }
-	// }
 
 }
