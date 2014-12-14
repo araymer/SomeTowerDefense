@@ -44,7 +44,8 @@ public class MarineSentryGun extends Structure {
 		name = "Sentry Gun";
 		price = 50;
 	}
-
+	
+	@Override
 	public void setImages() {
 
 		if (waitImage == null) {

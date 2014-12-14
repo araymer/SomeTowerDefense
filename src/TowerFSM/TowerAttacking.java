@@ -130,14 +130,10 @@ public class TowerAttacking extends TowerState implements Serializable{
 	//TODO Will work on spites next iteration
 	@Override
 	public void draw(Graphics2D g2) {
-//		if (tower.bImage == null) {
-//			File imageFile = new File(Structure.baseDir + tower.imageFileName);
-//			try {
-//				tower.bImage = ImageIO.read(imageFile);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
+		if (tower.bImage == null) {
+			tower.setImages();
+			tower.refreshBImage(TowerStates.ATTACK);
+		}
 
 		if ((tower.xIncrement * tower.WIDTH) + tower.WIDTH > tower.bImage
 				.getWidth()) {

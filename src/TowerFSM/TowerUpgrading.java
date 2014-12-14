@@ -46,7 +46,10 @@ public class TowerUpgrading extends TowerState implements Serializable{
 
 	@Override
 	public void draw(Graphics2D g2) {
-		// TODO: implement draw
+		if (tower.bImage == null) {
+			tower.setImages();
+			tower.refreshBImage(TowerStates.UPGRADE);
+		}
 
 	}
 

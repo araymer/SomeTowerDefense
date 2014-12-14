@@ -104,6 +104,9 @@ public class GameController {
 //					}
 //				}
 //			}
+			System.out.println("Map info:");
+			System.out.println("Money was " + loadedMap.playerMoney.getMoney());
+			System.out.println("Map was " + loadedMap.mapImageName);
 			gui.createLoadedMap(loadedMap);
 			System.out.println("Load successful");
 		} catch (Exception e) {

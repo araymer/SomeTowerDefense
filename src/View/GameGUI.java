@@ -141,9 +141,7 @@ public class GameGUI implements Serializable {
 	public void createLoadedMap(Map map) {
 		MapPanel.getInstance().setMap(map.mapImageName);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
-
 		tilePanel = TilePanel.getInstance();
-		tilePanel.setMap(map);
 
 		MouseListener placementListener = new PlacementListener();
 
@@ -174,8 +172,11 @@ public class GameGUI implements Serializable {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
 		}
+		tilePanel.setMap(map);
+		Player.getInstance().setMoney(map.playerMoney.getMoney());
 
 		new Thread(Ticker.getInstance()).start();
+		System.out.println("GameGUI: finished loading");
 	}
 
 	/**
