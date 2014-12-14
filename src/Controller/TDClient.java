@@ -35,6 +35,7 @@ public class TDClient {
 	private ObjectOutputStream toServer;
 	private ObjectInputStream fromServer;
 	String username;
+	private Player playerMoney;
 	private int miniMapTick;
 
 
@@ -65,6 +66,7 @@ public class TDClient {
 			toServer.writeObject(username);
 
 			gameController = GameController.getInstance();
+			playerMoney = Player.getInstance();
 			GUI = GameGUI.getInstance();
 			GUI.setClient(this);
 
@@ -179,21 +181,21 @@ public class TDClient {
 	 */
 	public void sendMiniMap(){
 		//Only update 3 times a second
-		if(miniMapTick % 10 == 0){
-			
-			miniMapTick = 0;
+//		if(miniMapTick % 10 == 0){
+//			
+//			miniMapTick = 0;
 			//TODO gameMap needs to be serializable first for this to work!!
-			Vector<Vector<Tile>> gameMap = new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard());
-			int totalResources = Player.getInstance().getMoney();
+			//Vector<Vector<Tile>> gameMap = new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard());
+			int totalResources = playerMoney.getMoney();
 			int enemiesKilled = Ticker.getInstance().numOfAttackersDead;
 			//System.out.println("sendMiniMap: sending " + totalResources);
 			try{
-				toServer.writeObject(new UpdateMiniMapCommand(username, gameMap, totalResources, enemiesKilled));
+				toServer.writeObject(new UpdateMiniMapCommand(username, TilePanel.getInstance().tileMap.getGameBoard(), totalResources, enemiesKilled));
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		}
-		miniMapTick ++;
+//		}
+//		miniMapTick ++;
 	}
 	
 	/**
@@ -202,9 +204,10 @@ public class TDClient {
 	 * @param resources -the amount of resources received
 	 */
 	public void receiveResources(int resources) {
-		System.out.println("received " + resources + " resources");
-		Player.getInstance().addMoney(resources);
-		System.out.println("new total = " + Player.getInstance().getMoney());
+		System.out.println(username + "receiveResources: total before: "+ playerMoney.getMoney() + " and now adding " + resources + " resources");
+		playerMoney.addMoney(resources);
+		System.out.println("new total = " + playerMoney.getMoney());
+		
 	}
 	
 	/**
@@ -215,8 +218,10 @@ public class TDClient {
 	public void sendCurrency(int amount) {
 		
 		if(amount > 0){
-			if(Player.getInstance().subtractMoney(amount)){
-				System.out.println("sending " + amount + " resources to the other player");
+			System.out.println(username + " sendCurrency: total before subtracting:" + playerMoney.getMoney());
+			if(playerMoney.subtractMoney(amount)){
+				
+				System.out.println("sending " + amount + " resources to the other player. Total is now " + playerMoney.getMoney());
 				try{
 					toServer.writeObject(new TransferResourcesCommand(username, amount));
 				}catch(Exception e){

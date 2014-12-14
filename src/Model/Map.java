@@ -17,6 +17,7 @@ public abstract class Map implements Serializable {
 	private static int tileWidth = 40;
 	protected Vector<Vector<Tile>> gameBoard;
 	private int height, width;
+	
 
 	// randomizing wave spawn points easier
 
@@ -32,7 +33,6 @@ public abstract class Map implements Serializable {
 				gameBoard.get(i).add(new Tile(i, k));
 			}
 		}
-
 	}
 
 	/**
