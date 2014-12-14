@@ -56,6 +56,7 @@ public class GameGUI implements Serializable {
 	public int mapSelection;
 	private CardLayout cards;
 	Structure structure;
+	public JFrame resourceFrame;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -135,12 +136,24 @@ public class GameGUI implements Serializable {
 
 	}
 
+
 //	void loadMap(TilePanel tiles, MapPanel map) {
-//		MapPanel.getInstance() = map;
+//		mapPanel = map;
+//		for (int i = 0; i < TilePanel.getInstance().getMap().getGameBoard()
+//				.size(); i++) {
+//			for (int p = 0; p < TilePanel.getInstance().getMap().getGameBoard()
+//					.get(i).size(); p++) {
+//				if (TilePanel.getInstance().getMap().getGameBoard().get(i)
+//						.get(p) != null) {
+//					TilePanel.getInstance().getMap().getGameBoard().get(i)
+//							.get(p).getStructure().setImages();
+//				}
+//			}
+//		}
 //
-//		MapPanel.getInstance().setSize(frame.getSize().width, frame.getSize().height);
-//		MapPanel.getInstance().setLocation(0, 0);
-//		frame.setContentPane(MapPanel.getInstance());
+//		mapPanel.setSize(frame.getSize().width, frame.getSize().height);
+//		mapPanel.setLocation(0, 0);
+//		frame.setContentPane(mapPanel);
 //		frame.setJMenuBar(menuBar);
 //
 //		contentPane = frame.getContentPane();
@@ -153,7 +166,7 @@ public class GameGUI implements Serializable {
 //		tilePanel.setLocation(0, 0);
 //		tilePanel.setLayout(new CardLayout());
 //
-//		
+//		resourcePanel = ResourcePanel.getInstance();
 //
 //		contentPane.add(tilePanel);
 //
@@ -162,10 +175,6 @@ public class GameGUI implements Serializable {
 //		new Thread(Ticker.getInstance()).start();
 //		// GameController.getInstance().startWaves();
 //
-//		if (isMultiplayer) {
-//			client.setStartingServerHP();
-//			multiFrame = new MultiplayerFrame();
-//		}
 //	}
 
 	/**
@@ -355,10 +364,10 @@ public class GameGUI implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand()) {
 			case "load":
-				loadData();
+			//	loadData();
 				break;
 			case "save":
-				saveData();
+			//	saveData();
 				break;
 			case "pause":
 				if (Ticker.getInstance().running())
@@ -525,9 +534,61 @@ public class GameGUI implements Serializable {
 //		}
 //	}
 
-	public void reInit() {
-		
-		createMap(0);
-	}
+//	public void reInit() {
+//		
+//		createMap(0);
+//
+//		try {
+//			// load map
+//			inStream = new FileInputStream(new File("map.dat"));
+//			inObject = new ObjectInputStream(inStream);
+//			mapPanel = (MapPanel) inObject.readObject();
+//			inObject.close();
+//			// load tiles
+//			inStream = new FileInputStream(new File("tiles.dat"));
+//			inObject = new ObjectInputStream(inStream);
+//			tilePanel = (TilePanel) inObject.readObject();
+//			inObject.close();
+//			loadMap(tilePanel, mapPanel);
+//			System.out.println("Load successful");
+//		} catch (Exception e) {
+//			JFrame cantLoad = new JFrame();
+//			JLabel loadError = new JLabel("Could not load");
+//			cantLoad.add(loadError);
+//			cantLoad.setSize(100, 100);
+//			cantLoad.setVisible(true);
+//			e.printStackTrace();
+//			return false;
+//		}
+//		return true;
+//	}
+//
+//	/**
+//	 * This method attempts to save the account map in "./accounts.dat"
+//	 */
+//	public void saveData() {
+//		FileOutputStream outStream;
+//		ObjectOutputStream outObject;
+//		try {
+//			// save map
+//			outStream = new FileOutputStream(new File("map.dat"));
+//			outObject = new ObjectOutputStream(outStream);
+//			outObject.writeObject(mapPanel);
+//			outObject.close();
+//			// save tiles
+//			outStream = new FileOutputStream(new File("tiles.dat"));
+//			outObject = new ObjectOutputStream(outStream);
+//			outObject.writeObject(tilePanel);
+//			outObject.close();
+//			System.out.println("Save successful");
+//		} catch (Exception e) {
+//			JFrame cantSave = new JFrame();
+//			JLabel saveError = new JLabel("Error saving game");
+//			cantSave.add(saveError);
+//			cantSave.setSize(100, 100);
+//			cantSave.setVisible(true);
+//			e.printStackTrace();
+//		}
+//	}
 
 }

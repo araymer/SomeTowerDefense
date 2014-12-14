@@ -1,13 +1,11 @@
 package Controller;
 
 import Attackers.Marine;
-import Model.Player;
 import View.GameGUI;
 
 public class GameController {
 	private int waveCount;
 	private int[] spawnsPerWave = { 1, 2, 4, 6, 10 };
-	private Player player;
 	private GameGUI gui;
 	private static GameController theController;
 
@@ -24,7 +22,6 @@ public class GameController {
 
 	private GameController() {
 		waveCount = 5;
-//		player = Player.getInstance();
 		gui = GameGUI.getInstance();
 	}
 

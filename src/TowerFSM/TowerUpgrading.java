@@ -1,6 +1,7 @@
 package TowerFSM;
 
 import java.awt.Graphics2D;
+import java.io.Serializable;
 
 import Model.Structure;
 import Structures.*;
@@ -15,7 +16,7 @@ import Structures.*;
  * @author Team Something
  *
  */
-public class TowerUpgrading extends TowerState {
+public class TowerUpgrading extends TowerState implements Serializable{
 	Structure tower;
 	private int tick;
 

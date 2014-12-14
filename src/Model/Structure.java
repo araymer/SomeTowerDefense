@@ -42,7 +42,7 @@ public abstract class Structure extends Drawable implements Serializable {
 	// Variables for drawing
 	public int xIncrement;
 	public int yIncrement;
-	public BufferedImage bImage;
+	public transient BufferedImage bImage;
 	// public String imageFileName = "error.png";
 	public static String baseDir = System.getProperty("user.dir")
 			+ System.getProperty("file.separator") + "imageFiles"
@@ -81,7 +81,7 @@ public abstract class Structure extends Drawable implements Serializable {
 	/**
 	 * create static buffered images for extended classes
 	 */
-	protected abstract void setImages();
+	public abstract void setImages();
 
 	public int getHP() {
 		return hitpoints;

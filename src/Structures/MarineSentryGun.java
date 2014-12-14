@@ -43,7 +43,7 @@ public class MarineSentryGun extends Structure {
 		price = 50;
 	}
 
-	protected void setImages() {
+	public void setImages() {
 
 		if (waitImage == null) {
 			File imageFile = new File(Structure.baseDir + "topdownturret40.png");

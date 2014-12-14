@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
@@ -18,7 +19,7 @@ import View.TilePanel;
  * @author Team Something
  *
  */
-public class TowerWaiting extends TowerState {
+public class TowerWaiting extends TowerState implements Serializable{
 	// Structure tower;
 	// int HP;
 	// int range;
@@ -37,7 +38,7 @@ public class TowerWaiting extends TowerState {
 	// static String baseDir = System.getProperty("user.dir")
 	// + System.getProperty("file.separator") + "imageFiles"
 	// + System.getProperty("file.separator");
-	Thread th;
+	//Thread th;
 	boolean stateChange = false;
 	
 	/**

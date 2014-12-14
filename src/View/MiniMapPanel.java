@@ -33,13 +33,6 @@ public class MiniMapPanel extends JPanel{
 		infoPanel = new MultiplayerInfoPanel();
 		this.setBackground(Color.ORANGE);
 		this.setLayout(new BorderLayout());
-//		info = new JTextArea();
-//		info.setSize(MINI_MAP_WIDTH, 65);
-//		info.setEditable(false);
-//		this.add(info, BorderLayout.SOUTH);
-//		//info.setLocation(87, 225);
-//		info.setPreferredSize(new Dimension(MINI_MAP_WIDTH, 65));
-//		info.setText("Other player's info:\nResources available: 700\nEnemies killed: 5");
 		this.add(infoPanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 	}
@@ -94,5 +87,6 @@ public class MiniMapPanel extends JPanel{
 				}
 			}
 		}
+		otherGameMap = null;
 	}
 }

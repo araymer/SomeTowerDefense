@@ -2,6 +2,7 @@ package TowerFSM;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import Model.Attacker;
 import Model.SpecialAttack;
@@ -12,7 +13,7 @@ import Model.Structure;
  * @author Team Something
  *
  */
-public abstract class TowerState{
+public abstract class TowerState implements Serializable{
 	boolean upgrade;
 	boolean signal;
 	Attacker attacker;

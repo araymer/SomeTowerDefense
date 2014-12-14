@@ -2,6 +2,7 @@ package TowerFSM;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import Model.Structure;
 
@@ -11,7 +12,7 @@ import Model.Structure;
  * @author Team Something
  * 
  */
-public class TowerExploding extends TowerState {
+public class TowerExploding extends TowerState implements Serializable{
 
 	public TowerExploding(Structure tower) {
 		super(tower);

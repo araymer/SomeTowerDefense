@@ -57,7 +57,7 @@ public class ChatPanel extends JPanel{
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.add(textField);
 		bottomPanel.add(enterButton);
-		textField.setText("insert message");
+		textField.setText("");
 		
 		// add text area and lower panel
 		this.add(new JScrollPane(textArea), BorderLayout.CENTER);

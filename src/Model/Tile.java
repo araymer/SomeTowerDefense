@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Vector;
 
+import View.GameGUI;
+
 public class Tile extends Observable implements Serializable {
 
 	private boolean spawnable;
@@ -81,6 +83,7 @@ public class Tile extends Observable implements Serializable {
 				return false;
 			}
 			tileStructure = s;
+		//	GameGUI.getInstance().saveData();
 			return true;
 		} else {
 			System.out.println("Cannot build here");

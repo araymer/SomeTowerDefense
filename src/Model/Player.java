@@ -1,10 +1,11 @@
 package Model;
 
-import java.util.Observable;
+import java.io.Serializable;
 
 import View.ResourcePanel;
 
-public class Player extends Observable {
+
+public class Player implements Serializable {
 
 	private static Player player;
 	private int money;
@@ -13,7 +14,12 @@ public class Player extends Observable {
 
 	private Player() {
 		money = 500;
-	//	addObserver(ResourcePanel.getInstance());
+
+		updateCost();
+	}
+
+	public void updateCost() {
+		ResourcePanel.getInstance().updateMoney(getMoney());
 	}
 
 	public static Player getInstance() {
@@ -24,16 +30,15 @@ public class Player extends Observable {
 
 	public void addMoney(int add) {
 		money += add;
-		setChanged();
-		notifyObservers();
+		updateCost();
 	}
 
 	public boolean subtractMoney(int subtract) {
 		if (money - subtract < 0)
 			return false;
 		money -= subtract;
-		setChanged();
-		notifyObservers();
+
+		updateCost();
 		return true;
 	}
 
@@ -43,6 +48,12 @@ public class Player extends Observable {
 
 	public void setMoney(int money) {
 		this.money = money;
+		updateCost();
+	}
+
+	public void reset() {
+		player = new Player();
+
 	}
 
 }
