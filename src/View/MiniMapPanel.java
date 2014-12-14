@@ -11,7 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import Model.Base;
+import Model.GameMapSkeleton;
 import Model.Tile;
+import Model.TileSkeleton;
 
 /**
  * This panel displays the other player's structure and enemy locations
@@ -22,7 +24,7 @@ import Model.Tile;
 public class MiniMapPanel extends JPanel{
 	
 	//private JTextArea info;
-	private Vector<Vector<Tile>> otherGameMap;
+	private GameMapSkeleton otherGameMap;
 	private static final int MINI_MAP_HEIGHT = 150;
 	private static final int MINI_MAP_WIDTH = 200;
 	private MultiplayerInfoPanel infoPanel;
@@ -37,7 +39,7 @@ public class MiniMapPanel extends JPanel{
 		this.setVisible(true);
 	}
 	
-	public void updateMap(Vector<Vector<Tile>> gameMap, int totalResources, int enemiesKilled){
+	public void updateMap(GameMapSkeleton gameMap, int totalResources, int enemiesKilled){
 		otherGameMap = gameMap;
 		repaint();
 		infoPanel.updateInfo(totalResources, enemiesKilled, enemyNum);
@@ -54,39 +56,77 @@ public class MiniMapPanel extends JPanel{
 		
 		if(otherGameMap != null){
 			enemyNum = 0;
-			int width = otherGameMap.size();
-			int height = otherGameMap.get(0).size();
+			int width = otherGameMap.skeleton.size();
+			int height = otherGameMap.skeleton.get(0).size();
 			int tileHeight = MINI_MAP_HEIGHT/height;
 			int tileWidth = MINI_MAP_WIDTH/width;
 			
 			for(int r = 0; r < height; r++){
 				for(int c = 0; c < width; c++){
-					Tile curr = otherGameMap.get(c).get(r);
-					if(curr != null){
-						if(curr.getMove()){
-							g2.setColor(Color.DARK_GRAY);
-							g2.fillRect(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
+					TileSkeleton curr = otherGameMap.skeleton.get(c).get(r);
+					if(curr.hasPath){
+						g2.setColor(Color.DARK_GRAY);
+						g2.fillRect(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
+					}
+					if(curr.hasStructure){
+						if(curr.hasBase){
+							//Draw base in green
+							g2.setColor(Color.GREEN);
+						}else{
+							//Draw non-base structures in blue
+							g2.setColor(Color.BLUE);
 						}
-						if(curr.getStructure() != null){
-							if(curr.getStructure() instanceof Base){
-								//Draw base in green
-								g2.setColor(Color.GREEN);
-							}else{
-								//Draw non-base structures in blue
-								g2.setColor(Color.BLUE);
-							}
-							g2.fillRect(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
-						}
-						if(curr.getAttackers() != null && curr.getAttackers().size() > 0){
-							//Draw enemies in red
-							g2.setColor(Color.RED);
-							g2.fillOval(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
-							enemyNum += curr.getAttackers().size();
-						}
+						g2.fillRect(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
+					}
+					if(curr.attackerNum > 0){
+						//Draw enemies in red
+						g2.setColor(Color.RED);
+						g2.fillOval(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
+						enemyNum += curr.attackerNum;
 					}
 				}
 			}
+		}else{
+			System.out.println("MiniMapPanel: gameMap received was null");
 		}
+		
+//		if(otherGameMap != null){
+//			enemyNum = 0;
+//			int width = otherGameMap.size();
+//			int height = otherGameMap.get(0).size();
+//			int tileHeight = MINI_MAP_HEIGHT/height;
+//			int tileWidth = MINI_MAP_WIDTH/width;
+//			
+//			for(int r = 0; r < height; r++){
+//				for(int c = 0; c < width; c++){
+//					Tile curr = otherGameMap.get(c).get(r);
+//					if(curr != null){
+//						if(curr.getMove()){
+//							g2.setColor(Color.DARK_GRAY);
+//							g2.fillRect(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
+//						}
+//						if(curr.getStructure() != null){
+//							if(curr.getStructure() instanceof Base){
+//								//Draw base in green
+//								g2.setColor(Color.GREEN);
+//							}else{
+//								//Draw non-base structures in blue
+//								g2.setColor(Color.BLUE);
+//							}
+//							g2.fillRect(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
+//						}
+//						if(curr.getAttackers() != null && curr.getAttackers().size() > 0){
+//							//Draw enemies in red
+//							g2.setColor(Color.RED);
+//							g2.fillOval(tileWidth * c, tileHeight * r, tileWidth, tileHeight);
+//							enemyNum += curr.getAttackers().size();
+//						}
+//					}
+//				}
+//			}
+//		}else{
+//			System.out.println("MiniMapPanel: gameMap received was null");
+//		}
 		otherGameMap = null;
 	}
 }
