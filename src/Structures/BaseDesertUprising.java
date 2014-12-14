@@ -138,7 +138,6 @@ public class BaseDesertUprising extends Base {
 
 			GameGUI.getInstance().newTilePanel();
 			Ticker.getInstance().loopStart();
-			// new Thread(Ticker.getInstance()).start();
 
 			gameOver.dispose();
 

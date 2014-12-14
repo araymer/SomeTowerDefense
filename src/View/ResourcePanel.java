@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -44,15 +45,16 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 	 */
 	private ResourcePanel() {
 		selected = StructureType.SENTRYGUN;
-		resourceFrame = new JFrame();
-		resourceFrame.setSize(200, 200);
-		resourceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		resourceFrame.setResizable(false);
-		resourceFrame.setTitle("Resources");
-		resourceFrame.setLocation(811, 0);
-		resourceFrame.setVisible(true);
+//		resourceFrame = new JFrame();
+//		resourceFrame.setSize(200, 200);
+//		resourceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		resourceFrame.setResizable(false);
+//		resourceFrame.setTitle("Resources");
+//		resourceFrame.setLocation(811, 0);
+//		resourceFrame.setVisible(true);
 
 		this.setLayout(new GridLayout(8, 1));
+		this.setPreferredSize(new Dimension(200,600));
 		radioButtons = new ButtonGroup();
 
 		chronoTower = new JRadioButton("Chrono-Tower");
@@ -78,7 +80,7 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 		// JButton upgradeInfo = new JButton("Info");
 		upgrade.setActionCommand("Upgrade");
 
-		money = new JLabel("Funds: " + Player.getInstance().getMoney());
+		//money = new JLabel("Funds: " + Player.getInstance().getMoney());
 
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
@@ -93,7 +95,7 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 		this.add(plasmaCannonInfo);
 		this.add(upgrade);
 
-		this.add(money);
+		//this.add(money);
 	
 
 		// add action listeners
@@ -105,7 +107,7 @@ public class ResourcePanel extends JPanel implements ActionListener, Observer {
 		this.setOpaque(true);
 		this.setVisible(true);
 
-		resourceFrame.setContentPane(this);
+//		resourceFrame.setContentPane(this);
 	}
 
 	public static ResourcePanel getInstance() {

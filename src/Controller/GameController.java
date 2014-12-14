@@ -24,7 +24,7 @@ public class GameController {
 
 	private GameController() {
 		waveCount = 5;
-		player = Player.getInstance();
+//		player = Player.getInstance();
 		gui = GameGUI.getInstance();
 	}
 

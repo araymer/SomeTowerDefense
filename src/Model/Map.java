@@ -77,7 +77,9 @@ public abstract class Map implements Serializable {
 			break;
 		case UPGRADE:
 			System.out.println("trying to upgrade");
+			try {
 			StructureType upgrade = selectedTile.getStructure().getUpgradeTo();
+			
 			if (upgrade == null)
 				upgrade = StructureType.NONE;
 			switch (upgrade) {
@@ -98,8 +100,14 @@ public abstract class Map implements Serializable {
 				break;
 			default:
 				System.out.println("No upgrades available");
+				
+				}
+			} catch(Exception e) {
+				
+		}
 
-			}
+			
+		
 			break;
 		default:
 			System.out.println("Error in createStructure method");

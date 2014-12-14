@@ -2,6 +2,8 @@ package Model;
 
 import java.util.Observable;
 
+import View.ResourcePanel;
+
 public class Player extends Observable {
 
 	private static Player player;
@@ -11,7 +13,7 @@ public class Player extends Observable {
 
 	private Player() {
 		money = 500;
-		// addObserver(ResourcePanel.getInstance());
+	//	addObserver(ResourcePanel.getInstance());
 	}
 
 	public static Player getInstance() {
@@ -22,6 +24,7 @@ public class Player extends Observable {
 
 	public void addMoney(int add) {
 		money += add;
+		setChanged();
 		notifyObservers();
 	}
 
@@ -29,6 +32,7 @@ public class Player extends Observable {
 		if (money - subtract < 0)
 			return false;
 		money -= subtract;
+		setChanged();
 		notifyObservers();
 		return true;
 	}
