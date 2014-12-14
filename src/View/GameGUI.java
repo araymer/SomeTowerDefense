@@ -210,6 +210,7 @@ public class GameGUI implements Serializable {
 
 	public void newTilePanel() {
 		tilePanel = TilePanel.getInstance();
+		tilePanel.addMouseListener(new PlacementListener());
 	}
 
 	public void repaint() {
