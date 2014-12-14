@@ -43,8 +43,8 @@ public class TilePanel extends JPanel implements Serializable {
 		tileMap.getSpawnTile(1).addAttacker(
 				new Cannoneer(tileMap.getSpawnTile(1)));
 
-		 tileMap.getSpawnTile(1)
-		 .addAttacker(new Marine(tileMap.getSpawnTile(1)));
+		tileMap.getSpawnTile(1)
+				.addAttacker(new Marine(tileMap.getSpawnTile(1)));
 	}
 
 	public void setMap(int selection) {
@@ -71,9 +71,10 @@ public class TilePanel extends JPanel implements Serializable {
 				new Cannoneer(tileMap.getSpawnTile(1)));
 	}
 
-	public void reset() {
+	public TilePanel reset() {
 		Player.getInstance().reset();
 		tileMap = tileMap.reInit();
+		return tilePanel;
 	}
 
 	public static TilePanel getInstance() {

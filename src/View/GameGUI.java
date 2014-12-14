@@ -137,14 +137,11 @@ public class GameGUI implements Serializable {
 		new Thread(Ticker.getInstance()).start();
 
 	}
-	
-	public void createLoadedMap(Map map){
+
+	public void createLoadedMap(Map map) {
 		MapPanel.getInstance().setMap(map.mapImageName);
-		
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
-		
 		tilePanel = TilePanel.getInstance();
-		
 
 		MouseListener placementListener = new PlacementListener();
 
@@ -249,16 +246,9 @@ public class GameGUI implements Serializable {
 		instructions.addActionListener(new MenuListener());
 		instructions.setActionCommand("instructions");
 		help.add(instructions);
-		// menuBar.add(file);
 		menuBar.add(game);
 		menuBar.add(help);
 		menuBar.setVisible(true);
-		resetMenuBar();
-	}
-
-	public void resetMenuBar() {
-		frame.setJMenuBar(menuBar);
-
 	}
 
 	public void newTilePanel() {
@@ -279,6 +269,8 @@ public class GameGUI implements Serializable {
 	}
 
 	public void returnMenu() {
+		// TODO: fix
+		tilePanel = tilePanel.reset();
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
 	}
 

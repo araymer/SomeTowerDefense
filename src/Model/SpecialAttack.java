@@ -1,5 +1,5 @@
 package Model;
 
 public enum SpecialAttack {
-	FREEZE, SLOW, BURN, TWO_TARGETS
+	FREEZE, SLOW, BURN, TWO_TARGETS, NONE
 }
