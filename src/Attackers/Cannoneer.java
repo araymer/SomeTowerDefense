@@ -2,7 +2,6 @@ package Attackers;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Model.Attacker;
+import Model.Player;
 import Model.Structure;
 import Model.Tile;
 
@@ -26,6 +26,7 @@ public class Cannoneer extends Attacker {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
 		name = "Cannoneer";
 		imageFileName = "Attackers.png";
+		value = 20;
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class Cannoneer extends Attacker {
 	public void die() {
 		// play dying animation and remove the attacker
 		isDead = true;
-
+		Player.getInstance().addMoney(value);
 	}
 
 	public void draw(Graphics2D g2) {
@@ -54,67 +55,79 @@ public class Cannoneer extends Attacker {
 		if (xIncrement > 3) {
 			xIncrement = 0;
 		}
-		
-		
-		//This calculates the amount of offset to animate between tiles (40px/SPEED = 0.8px per tick)
-		if(pixels < 39.2 && getLoc() != null)
-			pixels += (double)40./SPEED;
+
+		// This calculates the amount of offset to animate between tiles
+		// (40px/SPEED = 0.8px per tick)
+		if (pixels < 39.2 && getLoc() != null)
+			pixels += (double) 40. / SPEED;
 		else
 			resetPixels();
-	
-		
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
-		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
-		if(count%5 == 0)
+
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
+				yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
+		// We need to slow down the animation frames so they aren't firing every
+		// tick! Use Count%5 so they're 1/5 as fast
+		if (count % 5 == 0)
 			xIncrement++;
-		
+
 		count++;
 		// variable "at" will help us manipulate sprites
 		AffineTransform at = new AffineTransform();
-		//calculate offset per tick
-		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"), getLoc().getCoordinates().y * HEIGHT + offset("y"));
-		//calculate direction they should be facing
-		at.rotate(checkTransform(), tempSubImage.getWidth()/2, tempSubImage.getHeight()/2);
+		// calculate offset per tick
+		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"),
+				getLoc().getCoordinates().y * HEIGHT + offset("y"));
+		// calculate direction they should be facing
+		at.rotate(checkTransform(), tempSubImage.getWidth() / 2,
+				tempSubImage.getHeight() / 2);
 
-		
 		g2.drawImage(tempSubImage, at, null);
 
-
 	}
-	
+
 	private double offset(String s) {
-		if(getLoc().nextTile != null){
-			if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0 && s.equals("x"))
+		if (getLoc().nextTile != null) {
+			if (getLoc().getCoordinates().x
+					- getLoc().nextTile.getCoordinates().x < 0
+					&& s.equals("x"))
 				return pixels;
-			else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0 && s.equals("x"))
+			else if (getLoc().getCoordinates().x
+					- getLoc().nextTile.getCoordinates().x > 0
+					&& s.equals("x"))
 				return -pixels;
-			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0 && s.equals("y"))
+			else if (getLoc().getCoordinates().y
+					- getLoc().nextTile.getCoordinates().y < 0
+					&& s.equals("y"))
 				return pixels;
-			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y > 0 && s.equals("y"))
+			else if (getLoc().getCoordinates().y
+					- getLoc().nextTile.getCoordinates().y > 0
+					&& s.equals("y"))
 				return -pixels;
 		}
-		
+
 		return 0;
-	
+
 	}
-	
+
 	private double checkTransform() {
-		if(getLoc().nextTile != null){
-			if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0)
-				return (Math.PI/2);
-			else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x > 0)
-				return (-Math.PI/2);
-			else if(getLoc().getCoordinates().y - getLoc().nextTile.getCoordinates().y < 0)
+		if (getLoc().nextTile != null) {
+			if (getLoc().getCoordinates().x
+					- getLoc().nextTile.getCoordinates().x < 0)
+				return (Math.PI / 2);
+			else if (getLoc().getCoordinates().x
+					- getLoc().nextTile.getCoordinates().x > 0)
+				return (-Math.PI / 2);
+			else if (getLoc().getCoordinates().y
+					- getLoc().nextTile.getCoordinates().y < 0)
 				return (Math.PI);
 		}
 
 		return 0.;
 	}
-	
-	public void resetPixels(){
+
+	public void resetPixels() {
 		pixels = 0;
 	}
-	
+
 	@Override
 	public void setLoc(Tile loc) {
 		super.setLoc(loc);
