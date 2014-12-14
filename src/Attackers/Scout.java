@@ -123,6 +123,15 @@ public class Scout extends Attacker {
 					&& s.equals("y"))
 				return -pixels;
 		}
+		
+		else {
+			
+			if(checkTransform() == 0 && s.equals("y"))
+				return -40;
+			else if(checkTransform() == Math.PI/2 && s.equals("x"))
+				return -40;
+			
+		}
 
 		return 0;
 
@@ -137,7 +146,6 @@ public class Scout extends Attacker {
 			return (Math.PI);
 		else if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0)
 			return (Math.PI/2);
-
 		else
 			return 0.;
 		}
@@ -147,7 +155,7 @@ public class Scout extends Attacker {
 				return (-Math.PI/2);
 			else if(getLoc().getCoordinates().y - TilePanel.getInstance().tileMap.getBaseY() < 0)
 				return (Math.PI);
-			else if(getLoc().getCoordinates().y - TilePanel.getInstance().tileMap.getBaseX() < 0)
+			else if(getLoc().getCoordinates().x - TilePanel.getInstance().tileMap.getBaseX() < 0)
 				return (Math.PI/2);
 
 			else

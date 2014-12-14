@@ -69,7 +69,7 @@ public class Cannoneer extends Attacker {
 		if(getLoc().nextTile != null)
 			 tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
 		else
-			 tempSubImage = bImage.getSubimage(xIncrement * (WIDTH*3), yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
+			 tempSubImage = bImage.getSubimage(xIncrement * (WIDTH*3), yIncrement * HEIGHT, WIDTH, HEIGHT*2);
 
 		
 		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
@@ -113,6 +113,15 @@ public class Cannoneer extends Attacker {
 					&& s.equals("y"))
 				return -pixels;
 		}
+		
+		else {
+			
+			if(checkTransform() == 0 && s.equals("y"))
+				return -40;
+			else if(checkTransform() == Math.PI/2 && s.equals("x"))
+				return -40;
+			
+		}
 
 		return 0;
 
@@ -137,7 +146,7 @@ public class Cannoneer extends Attacker {
 				return (-Math.PI/2);
 			else if(getLoc().getCoordinates().y - TilePanel.getInstance().tileMap.getBaseY() < 0)
 				return (Math.PI);
-			else if(getLoc().getCoordinates().y - TilePanel.getInstance().tileMap.getBaseX() < 0)
+			else if(getLoc().getCoordinates().x - TilePanel.getInstance().tileMap.getBaseX() < 0)
 				return (Math.PI/2);
 
 			else
