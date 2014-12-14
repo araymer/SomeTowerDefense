@@ -134,7 +134,7 @@ public class BeachBetrayal extends Map {
 		gameBoard.get(4).get(9).setMove(true, gameBoard.get(5).get(9)); // turn west
 		gameBoard.get(5).get(9).setBuild(false);
 		
-		gameBoard.get(5).get(9).setMove(true, gameBoard.get(5).get(9)); 
+		gameBoard.get(5).get(9).setMove(true, gameBoard.get(6).get(9)); 
 		gameBoard.get(6).get(9).setBuild(false);
 		
 		gameBoard.get(6).get(9).setMove(true, gameBoard.get(7).get(9)); 
@@ -286,8 +286,8 @@ public class BeachBetrayal extends Map {
 		gameBoard.get(17).get(5).setMove(true, gameBoard.get(18).get(5)); // turn west
 		gameBoard.get(18).get(5).setBuild(false); 
 		
-		gameBoard.get(18).get(4).setMove(true, gameBoard.get(18).get(4)); // turn north
-		gameBoard.get(18).get(4).setBuild(false); // and arrive at base
+		gameBoard.get(18).get(4).setMove(true, gameBoard.get(18).get(3)); // turn north
+		gameBoard.get(18).get(3).setBuild(false); // and arrive at base
 	}
 
 	@Override

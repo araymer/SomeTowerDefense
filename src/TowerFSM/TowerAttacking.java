@@ -21,6 +21,7 @@ import Model.Structure;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class TowerAttacking extends TowerState implements Serializable{
 	Structure tower;
 	Attacker target;
@@ -53,7 +54,7 @@ public class TowerAttacking extends TowerState implements Serializable{
 			tower.changeTo(TowerStates.WAIT, null);
 		}else if (inRange()) {
 			if(tick % tower.rateOfFire == 0){
-				target.takeDamage(tower.getDamage());
+				target.takeDamage(tower.getDamage(), tower.getSpecial());
 			}
 			
 		} else {
@@ -66,7 +67,7 @@ public class TowerAttacking extends TowerState implements Serializable{
 		if(tower.getSpecial() == SpecialAttack.TWO_TARGETS) {
 			target.location.getAttackers().trimToSize();
 			if(target.location.getAttackers().size() > 1) {
-				target.location.getAttackers().get(1).takeDamage(tower.getDamage());
+				target.location.getAttackers().get(1).takeDamage(tower.getDamage(), SpecialAttack.TWO_TARGETS);
 			}
 		}
 	}
