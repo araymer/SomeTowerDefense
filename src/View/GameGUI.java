@@ -26,6 +26,7 @@ import javax.swing.JTextArea;
 import Controller.GameController;
 import Controller.TDClient;
 import Model.Attacker;
+import Model.Map;
 import Model.Structure;
 import Model.Ticker;
 
@@ -55,6 +56,7 @@ public class GameGUI implements Serializable {
 	Structure structure;
 	public JFrame resourceFrame;
 	private int currentMap;
+	public double interpolation;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -133,6 +135,44 @@ public class GameGUI implements Serializable {
 
 		new Thread(Ticker.getInstance()).start();
 
+	}
+
+	public void loadMap(Map map) {
+		MapPanel.getInstance().setMap(map.mapImageName);
+		tilePanel = TilePanel.getInstance();
+		// tilePanel.setMap(gameMap);
+
+		MouseListener placementListener = new PlacementListener();
+
+		tilePanel.setSize(800, 600);
+
+		tilePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+
+		playPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+		playPanel.setPreferredSize(new Dimension(1080, 600));
+
+		MapPanel.getInstance().setPreferredSize(new Dimension(800, 600));
+
+		mapOverlay.setPreferredSize(new Dimension(800, 600));
+		mapOverlay.add(MapPanel.getInstance(), -1);
+		mapOverlay.add(TilePanel.getInstance(), 0);
+
+		playPanel.add(mapOverlay);
+		tilePanel.addMouseListener(placementListener);
+		playPanel.add(ResourcePanel.getInstance());
+
+		gamePanel.add(playPanel, "Play");
+
+		CardLayout c1 = (CardLayout) gamePanel.getLayout();
+
+		c1.show(gamePanel, "Play");
+
+		if (isMultiplayer) {
+			client.setStartingServerHP();
+			multiFrame = new MultiplayerFrame();
+		}
+
+		new Thread(Ticker.getInstance()).start();
 	}
 
 	/**
@@ -219,7 +259,8 @@ public class GameGUI implements Serializable {
 		tilePanel.addMouseListener(new PlacementListener());
 	}
 
-	public void repaint() {
+	public void repaint(double inter) {
+		interpolation = inter;
 		tilePanel.repaint();
 	}
 

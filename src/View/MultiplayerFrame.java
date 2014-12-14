@@ -20,6 +20,7 @@ public class MultiplayerFrame extends JFrame{
 		this.setTitle("Multi-player Info");
 		this.setLayout(new GridLayout(2,0));
 		this.setBackground(Color.YELLOW);
+		this.setResizable(false);
 		
 		chatPanel = new ChatPanel();
 		miniPanel = new MiniMapPanel();

@@ -82,10 +82,10 @@ public class GameController {
 
 		try {
 			// load map
-			inStream = new FileInputStream(new File("map.dat"));
-			inObject = new ObjectInputStream(inStream);
-			MapPanel.getInstance().setMap((String) inObject.readObject());
-			inObject.close();
+//			inStream = new FileInputStream(new File("map.dat"));
+//			inObject = new ObjectInputStream(inStream);
+//			MapPanel.getInstance().setMap((String) inObject.readObject());
+//			inObject.close();
 			// load tiles
 			inStream = new FileInputStream(new File("tiles.dat"));
 			inObject = new ObjectInputStream(inStream);
@@ -122,15 +122,14 @@ public class GameController {
 		ObjectOutputStream outObject;
 		try {
 			// save map
+//			outStream = new FileOutputStream(new File("map.dat"));
+//			outObject = new ObjectOutputStream(outStream);
+//			outObject.writeObject(MapPanel.getInstance().getFileName());
+//			outObject.close();
+			// save tiles
 			outStream = new FileOutputStream(new File("map.dat"));
 			outObject = new ObjectOutputStream(outStream);
-			outObject.writeObject(MapPanel.getInstance().getFileName());
-			outObject.close();
-			// save tiles
-			outStream = new FileOutputStream(new File("tiles.dat"));
-			outObject = new ObjectOutputStream(outStream);
-			outObject.writeObject(TilePanel.getInstance().getMap()
-					.getGameBoard());
+			outObject.writeObject(TilePanel.getInstance().getMap());
 			outObject.close();
 			System.out.println("Save successful");
 		} catch (Exception e) {

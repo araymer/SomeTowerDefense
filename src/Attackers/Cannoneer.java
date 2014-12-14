@@ -12,6 +12,7 @@ import Model.Attacker;
 import Model.Player;
 import Model.Structure;
 import Model.Tile;
+import View.GameGUI;
 
 public class Cannoneer extends Attacker {
 	private static final int HITPOINTS = 500;
@@ -51,27 +52,28 @@ public class Cannoneer extends Attacker {
 			}
 		}
 
-		// 4 is the number of shooting frames
 		if (xIncrement > 3) {
 			xIncrement = 0;
 		}
+		
+		
+		//This calculates the amount of offset to animate between tiles (40px/SPEED = 0.8px per tick)
+		if(pixels < 40-(40/SPEED) && getLoc() != null)
+			pixels += (double)40./SPEED;
 
-		// This calculates the amount of offset to animate between tiles
-		// (40px/SPEED = 0.8px per tick)
-		if (pixels < 39.2 && getLoc() != null)
-			pixels += (double) 40. / SPEED;
 		else
 			resetPixels();
+	
+		
+		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH, yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
+		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
+		if(count%4 == 0)
 
-		BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-				yIncrement * HEIGHT + 40, WIDTH, HEIGHT);
-		// We need to slow down the animation frames so they aren't firing every
-		// tick! Use Count%5 so they're 1/5 as fast
-		if (count % 5 == 0)
 			xIncrement++;
 
 		count++;
-		// variable "at" will help us manipulate sprites
+		
+		// AffineTransform will help us manipulate sprites
 		AffineTransform at = new AffineTransform();
 		// calculate offset per tick
 		at.translate(getLoc().getCoordinates().x * WIDTH + offset("x"),
@@ -81,14 +83,16 @@ public class Cannoneer extends Attacker {
 				tempSubImage.getHeight() / 2);
 
 		g2.drawImage(tempSubImage, at, null);
+		
+
 
 	}
 
 	private double offset(String s) {
-		if (getLoc().nextTile != null) {
-			if (getLoc().getCoordinates().x
-					- getLoc().nextTile.getCoordinates().x < 0
-					&& s.equals("x"))
+
+		if(getLoc().nextTile != null){
+			if(getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0 && s.equals("x"))
+
 				return pixels;
 			else if (getLoc().getCoordinates().x
 					- getLoc().nextTile.getCoordinates().x > 0
@@ -133,17 +137,6 @@ public class Cannoneer extends Attacker {
 		super.setLoc(loc);
 		resetPixels();
 	}
-	/*
-	 * 
-	 * //4 is the number of shooting frames if(xIncrement > 4){ xIncrement = 0;
-	 * }
-	 * 
-	 * BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-	 * yIncrement * HEIGHT, WIDTH, HEIGHT); xIncrement ++;
-	 * g2.drawImage(tempSubImage, getLoc().getCoordinates().x * WIDTH,
-	 * getLoc().getCoordinates().y * HEIGHT, WIDTH, HEIGHT, null);
-	 * 
-	 * }
-	 */
+
 
 }
