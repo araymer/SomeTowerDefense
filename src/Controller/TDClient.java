@@ -8,16 +8,17 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
 import java.util.Vector;
+
 import Structures.*;
 
 import javax.swing.JOptionPane;
 
+import Model.GameMapSkeleton;
 import Model.Player;
 import Model.Ticker;
 import Model.Tile;
 import View.GameGUI;
 import View.TilePanel;
-
 import command.AddMessageCommand;
 import command.BaseTakeDamageCommand;
 import command.Command;
@@ -36,7 +37,7 @@ public class TDClient {
 	private ObjectInputStream fromServer;
 	String username;
 	private Player playerMoney;
-	private int miniMapTick;
+	private int miniMapTick = 30;
 
 
 	/**
@@ -170,8 +171,7 @@ public class TDClient {
 	 * 
 	 * @param gameMap
 	 */
-	public void updateMiniMap(Vector<Vector<Tile>> gameMap, int totalResources, int enemiesKilled) {
-		System.out.println(username + "updateMiniMap: received ");
+	public void updateMiniMap(GameMapSkeleton gameMap, int totalResources, int enemiesKilled) {
 		GUI.multiFrame.miniPanel.updateMap(gameMap, totalResources, enemiesKilled);
 	}
 	
@@ -182,17 +182,17 @@ public class TDClient {
 	public void sendMiniMap(){
 		miniMapTick ++;
 		//Only update 3 times a second
-		if(miniMapTick == 30){
-			
+		if(miniMapTick >= 10){
 			miniMapTick = 0;
 			
 			Vector<Vector<Tile>> gameMap = new Vector<Vector<Tile>>(TilePanel.getInstance().tileMap.getGameBoard());
 			int totalResources = playerMoney.getMoney();
 			int enemiesKilled = Ticker.getInstance().numOfAttackersDead;
-			System.out.println(username + " sendMiniMap: sending " + totalResources);
+			//System.out.println(username + " sendMiniMap: sending " + totalResources);
 			//updateMiniMap(gameMap, totalResources, enemiesKilled);
 			try{
 				toServer.writeObject(new UpdateMiniMapCommand(username, gameMap, totalResources, enemiesKilled));
+				//toServer.flush();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
