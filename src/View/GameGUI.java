@@ -102,8 +102,7 @@ public class GameGUI implements Serializable {
 		// tilePanel.add(resourcePanel);
 		// TODO: Make the menu stay...
 		// createMenuBar();
-		frame.setJMenuBar(menuBar);
-		frame.repaint();
+		resetMenuBar();
 
 		if (isMultiplayer) {
 			client.setStartingServerHP();
@@ -172,7 +171,7 @@ public class GameGUI implements Serializable {
 		frame.getContentPane().setBackground(Color.MAGENTA);
 		frame.setTitle("Some Tower Defense");
 		createMenuBar();
-		frame.setJMenuBar(menuBar);
+		// frame.setJMenuBar(menuBar);
 
 	}
 
@@ -218,6 +217,12 @@ public class GameGUI implements Serializable {
 		menuBar.add(game);
 		menuBar.add(help);
 		menuBar.setVisible(true);
+		resetMenuBar();
+	}
+
+	public void resetMenuBar() {
+		frame.setJMenuBar(menuBar);
+
 	}
 
 	public void newTilePanel() {
