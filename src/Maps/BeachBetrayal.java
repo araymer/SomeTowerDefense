@@ -104,6 +104,7 @@ public class BeachBetrayal extends Map {
 	@Override
 	public void setPath() {
 		// SPAWN 1 PATH
+		gameBoard.get(0).get(4).setBuild(false);
 		gameBoard.get(0).get(4).setMove(true, gameBoard.get(1).get(4)); // start west
 		gameBoard.get(1).get(4).setBuild(false);
 		
@@ -186,6 +187,7 @@ public class BeachBetrayal extends Map {
 		gameBoard.get(15).get(10).setBuild(false); // arrive @ 15,10 intersection
 		
 		// SPAWN2
+		gameBoard.get(2).get(14).setBuild(false);
 		gameBoard.get(2).get(14).setMove(true, gameBoard.get(2).get(13)); // start north
 		gameBoard.get(2).get(13).setBuild(false);
 		
@@ -286,8 +288,8 @@ public class BeachBetrayal extends Map {
 		gameBoard.get(17).get(5).setMove(true, gameBoard.get(18).get(5)); // turn west
 		gameBoard.get(18).get(5).setBuild(false); 
 		
-		gameBoard.get(18).get(4).setMove(true, gameBoard.get(18).get(3)); // turn north
-		gameBoard.get(18).get(3).setBuild(false); // and arrive at base
+		gameBoard.get(18).get(5).setMove(true, gameBoard.get(18).get(4)); // turn north
+		gameBoard.get(18).get(4).setBuild(false); // and arrive at base
 	}
 
 	@Override
