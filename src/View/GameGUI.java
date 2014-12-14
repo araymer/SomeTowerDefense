@@ -117,7 +117,7 @@ public class GameGUI implements Serializable {
 		
 		playPanel.add(mapOverlay);
 		tilePanel.addMouseListener(placementListener);
-		playPanel.add(ResourcePanel.getInstance());
+		playPanel.add(ResourcePanel.getInstance()); 
 		
 		gamePanel.add(playPanel, "Play");
 		
