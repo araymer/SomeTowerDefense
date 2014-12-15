@@ -9,6 +9,8 @@ import java.util.Vector;
 import javax.swing.JPanel;
 
 import Attackers.Cannoneer;
+import Attackers.Marine;
+import Attackers.Scout;
 import Maps.BeachBetrayal;
 import Maps.BrokenPlainsPatrol;
 import Maps.DesertUprising;
@@ -57,11 +59,10 @@ public class TilePanel extends JPanel implements Serializable {
 		tileMap.getSpawnTile(1).addAttacker(
 				new Cannoneer(tileMap.getSpawnTile(1)));
 
-		// tileMap.getSpawnTile(1).addAttacker(
-		// new Scout(tileMap.getSpawnTile(1)));
-		//
-		// tileMap.getSpawnTile(1)
-		// .addAttacker(new Marine(tileMap.getSpawnTile(1)));
+		tileMap.getSpawnTile(1).addAttacker(new Scout(tileMap.getSpawnTile(1)));
+
+		tileMap.getSpawnTile(1)
+				.addAttacker(new Marine(tileMap.getSpawnTile(1)));
 	}
 
 	private void setSpawn() {

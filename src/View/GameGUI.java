@@ -221,10 +221,10 @@ public class GameGUI implements Serializable {
 		save.addActionListener(new MenuListener());
 		save.setActionCommand("save");
 		game.add(save);
-		load = new JMenuItem("Load");
-		load.addActionListener(new MenuListener());
-		load.setActionCommand("load");
-		game.add(load);
+//		load = new JMenuItem("Load");
+//		load.addActionListener(new MenuListener());
+//		load.setActionCommand("load");
+//		game.add(load);
 		pause = new JCheckBox("Pause");
 		pause.addActionListener(new MenuListener());
 		pause.setActionCommand("pause");

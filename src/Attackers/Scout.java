@@ -81,7 +81,7 @@ public class Scout extends Attacker {
 		else
 			 tempSubImage = bImage.getSubimage(xIncrement * (WIDTH*3), yIncrement * HEIGHT + 80, WIDTH, HEIGHT*2);
 		//We need to slow down the animation frames so they aren't firing every tick! Use Count%5 so they're 1/5 as fast
-		if(count%4 == 0)
+		if(count%3 == 0)
 
 			xIncrement++;
 
