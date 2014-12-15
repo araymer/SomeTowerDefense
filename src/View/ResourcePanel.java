@@ -103,6 +103,14 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		// resourceFrame.setContentPane(this);
 	}
 
+	/**
+	 * Gets the Singleton instance of ResourcePanel
+	 * 
+	 * @author Team Something
+	 *
+	 * @return ResourcePanel = Singleton instance of ResourcePanel
+	 */
+
 	public static ResourcePanel getInstance() {
 		if (resourcePanel == null) {
 			resourcePanel = new ResourcePanel();
@@ -110,15 +118,34 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		return resourcePanel;
 	}
 
+	/**
+	 * Refreshes the player fund display in the ResourcePanel
+	 * 
+	 * @author Team Something
+	 * 
+	 * @param arg1
+	 *            = integer value of the updated funds
+	 */
+
 	public void updateMoney(int arg1) {
 		System.out.println("Receiving new money amount");
 		money.setText("Funds: " + arg1);
 	}
 
+	/**
+	 * Changes the information displayed in the info section of ResourcePanel.
+	 * Can contain information about Attackers and Structures.
+	 * 
+	 * @author Team Something
+	 *
+	 * @param string
+	 *            = The info that is to be displayed in the ResourcePanel
+	 */
 	public void updateInfo(String string) {
 		info.setText(string);
 	}
 
+	// Inherits JavaDoc from Super
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -137,6 +164,14 @@ public class ResourcePanel extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * Gets the selection the user makes from the RadioButtons
+	 * 
+	 * @author Team Something
+	 *
+	 * @param e
+	 *            = ActionEvent from the selection of a radiobutton
+	 */
 	public void actionPerformed(ActionEvent e) {
 		String newSelection = e.getActionCommand();
 
@@ -160,6 +195,12 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Listener for info buttons for different types of Structures
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	private class ButtonListener implements ActionListener {
 
 		String structureName;
@@ -168,6 +209,15 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		String structureCost;
 		String structureDamage;
 
+		/**
+		 * Displays the according structure info for the structure the user
+		 * selects
+		 * 
+		 * @author Team Something
+		 *
+		 * @param e
+		 *            = The button the user selects
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO: Finish getting this info
@@ -200,6 +250,13 @@ public class ResourcePanel extends JPanel implements ActionListener {
 
 		}
 
+		/**
+		 * Sets the structure information to be displayed in the info section of
+		 * ResourcePanel.
+		 * 
+		 * @author Team Something
+		 *
+		 */
 		public void infoSetter() {
 			String info = "<html>Name: " + structureName + "<br>HP: "
 					+ structureHP + "<br>Damage: " + structureDamage
@@ -209,6 +266,13 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Reinstantiates ResourcePanel and sets it as the new Singleton
+	 * instantiation.
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public void reinit() {
 		resourcePanel = new ResourcePanel();
 

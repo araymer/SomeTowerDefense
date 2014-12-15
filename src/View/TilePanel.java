@@ -3,8 +3,6 @@ package View;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -15,15 +13,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import Attackers.Cannoneer;
-import Attackers.Marine;
-import Attackers.Scout;
 import Maps.BeachBetrayal;
 import Maps.BrokenPlainsPatrol;
 import Maps.DesertUprising;
 import Model.Attacker;
 import Model.Map;
-import Model.Ticker;
 import Model.Tile;
 
 /**
@@ -54,181 +48,198 @@ public class TilePanel extends JPanel implements Serializable {
 		display1 = false;
 	}
 
+	/**
+	 * Sets the Map that the user selects to play on.
+	 * 
+	 * @author Team Something
+	 *
+	 * @param selection
+	 *            = Integer representation of a map selected by the user.
+	 */
 	public void setMap(int selection) {
 		switch (selection) {
 		case 0:
 			tileMap = DesertUprising.getInstance();
-		
+
 			break;
 		case 1:
 			tileMap = BrokenPlainsPatrol.getInstance();
-		
+
 			break;
 		case 2:
 			tileMap = BeachBetrayal.getInstance();
-			
+
 			break;
 		default:
 			tileMap = DesertUprising.getInstance();
 			break;
 		}
-//		display = true;
-//		repaint();
-//		ActionListener imgDisplay = new ActionListener() {
-//		      public void actionPerformed(ActionEvent evt) {
-//		    	  display = false;
-//		    	  repaint(); 
-//		    	  for(int i = 0; i<15; i++) {
-//		  			for(int k = 1; k<=2; k++) {
-//		  				tileMap.getSpawnTile(k).addAttacker(
-//		  				new Marine(tileMap.getSpawnTile(k)));
-//		  				
-//		  			}
-//		  		}
-//		    	  img.stop();
-//		      }
-//		  };
-//		img =  new Timer(5000, imgDisplay);
-//		img.start();
-//		
-//		
-//		ActionListener waveStart = new ActionListener() {
-//		      public void actionPerformed(ActionEvent evt) {
-//		    	  setSpawn(wave);
-//		      }
-//		  };
-//		waveTime =  new Timer(30000, waveStart);
-//		waveTime.start();
-		
-		
+		// display = true;
+		// repaint();
+		// ActionListener imgDisplay = new ActionListener() {
+		// public void actionPerformed(ActionEvent evt) {
+		// display = false;
+		// repaint();
+		// for(int i = 0; i<15; i++) {
+		// for(int k = 1; k<=2; k++) {
+		// tileMap.getSpawnTile(k).addAttacker(
+		// new Marine(tileMap.getSpawnTile(k)));
+		//
+		// }
+		// }
+		// img.stop();
+		// }
+		// };
+		// img = new Timer(5000, imgDisplay);
+		// img.start();
+		//
+		//
+		// ActionListener waveStart = new ActionListener() {
+		// public void actionPerformed(ActionEvent evt) {
+		// setSpawn(wave);
+		// }
+		// };
+		// waveTime = new Timer(30000, waveStart);
+		// waveTime.start();
+
 	}
 
-//	private void setSpawn(int w) {
-//
-//		wave++;
-//		System.out.println("Spawn");
-//
-//		if(w<3)
-//			for(int i = 0; i<15; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Marine(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//		else if(w==4) {
-//			for(int i = 0; i<15; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Marine(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			for(int i = 0; i<6; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Scout(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//		}
-//		else if(w>4 && w<8) {
-//
-//			for(int i = 0; i<15+(w*2); i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Marine(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			for(int i = 0; i<6+w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Scout(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//
-//		}
-//
-//		else if(w==8) {
-//
-//			for(int i = 0; i<15+w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Marine(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			for(int i = 0; i<6+w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Scout(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			for(int i = 0; i<2+w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Cannoneer(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//
-//		}
-//
-//
-//
-//		else if(w==9) {
-//
-//			for(int i = 0; i<15*w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Marine(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			for(int i = 0; i<6+w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Scout(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			for(int i = 0; i<2+w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Cannoneer(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//
-//		}
-//
-//		else if(w==10) {
-//
-//			for(int i = 0; i<15*w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Marine(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			for(int i = 0; i<6*w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Scout(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			for(int i = 0; i<2*w; i++) {
-//				for(int k = 1; k<=2; k++) {
-//					tileMap.getSpawnTile(k).addAttacker(
-//							new Cannoneer(tileMap.getSpawnTile(k)));
-//				}
-//			}
-//			waveTime.stop();
-//		}
-//		display1 = true;
-//		repaint();
-//		Ticker.getInstance().loopStop();
-//	}
-	
-	
+	// private void setSpawn(int w) {
+	//
+	// wave++;
+	// System.out.println("Spawn");
+	//
+	// if(w<3)
+	// for(int i = 0; i<15; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Marine(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// else if(w==4) {
+	// for(int i = 0; i<15; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Marine(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// for(int i = 0; i<6; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Scout(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// }
+	// else if(w>4 && w<8) {
+	//
+	// for(int i = 0; i<15+(w*2); i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Marine(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// for(int i = 0; i<6+w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Scout(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	//
+	// }
+	//
+	// else if(w==8) {
+	//
+	// for(int i = 0; i<15+w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Marine(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// for(int i = 0; i<6+w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Scout(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// for(int i = 0; i<2+w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Cannoneer(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	//
+	// }
+	//
+	//
+	//
+	// else if(w==9) {
+	//
+	// for(int i = 0; i<15*w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Marine(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// for(int i = 0; i<6+w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Scout(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// for(int i = 0; i<2+w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Cannoneer(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	//
+	// }
+	//
+	// else if(w==10) {
+	//
+	// for(int i = 0; i<15*w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Marine(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// for(int i = 0; i<6*w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Scout(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// for(int i = 0; i<2*w; i++) {
+	// for(int k = 1; k<=2; k++) {
+	// tileMap.getSpawnTile(k).addAttacker(
+	// new Cannoneer(tileMap.getSpawnTile(k)));
+	// }
+	// }
+	// waveTime.stop();
+	// }
+	// display1 = true;
+	// repaint();
+	// Ticker.getInstance().loopStop();
+	// }
 
+	/**
+	 * Resets the Map instance.
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public TilePanel reset() {
 		// Player.getInstance().reset();
 		tileMap = tileMap.reInit();
 		return tilePanel;
 	}
 
+	/**
+	 * Reinstantiates TilePanel then resets the Singleton instance of it.
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public TilePanel reallyReset() {
 		tilePanel = new TilePanel();
 		return reset();
@@ -254,28 +265,31 @@ public class TilePanel extends JPanel implements Serializable {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		
-		
+
 		if (tileMap != null && tileMap.getGameBoard() != null) {
-			
-			if(display) {
+
+			if (display) {
 				try {
-					g2.drawImage(ImageIO.read(new File("imageFiles/GetReady.png")), getWidth()/2-235, getHeight()/2-41, null);
+					g2.drawImage(
+							ImageIO.read(new File("imageFiles/GetReady.png")),
+							getWidth() / 2 - 235, getHeight() / 2 - 41, null);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
-			
-			if(display1) {
+
+			if (display1) {
 				try {
-					g2.drawImage(ImageIO.read(new File("imageFiles/Congrats.png")), getWidth()/2-235, getHeight()/2-41, null);
+					g2.drawImage(
+							ImageIO.read(new File("imageFiles/Congrats.png")),
+							getWidth() / 2 - 235, getHeight() / 2 - 41, null);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
-			
+
 			try {
 
 				for (Vector<Tile> vec : tileMap.getGameBoard()) {

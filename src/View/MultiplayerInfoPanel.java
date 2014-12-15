@@ -10,27 +10,38 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
-public class MultiplayerInfoPanel extends JPanel{
+/**
+ * Displays game information in the multiplayer game mode.
+ * 
+ * @author Team Something
+ *
+ */
+public class MultiplayerInfoPanel extends JPanel {
 	private JTextArea info;
 	private JTextField textField;
 	private JButton sendButton;
-	
-	public MultiplayerInfoPanel(){
+
+	/**
+	 * Constructor for the MultiplayerInfoPanel
+	 * 
+	 * @author Team Something
+	 *
+	 */
+	public MultiplayerInfoPanel() {
 		info = new JTextArea("Other player's info:");
 		textField = new JTextField("0");
 		sendButton = new JButton("Send Resources");
 		info.setEditable(false);
-		
+
 		this.setPreferredSize(new Dimension(200, 150));
 		this.setLayout(new GridLayout(2, 1));
 		this.add(info);
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new GridLayout(2,1));
+		bottomPanel.setLayout(new GridLayout(2, 1));
 		bottomPanel.add(sendButton);
 		bottomPanel.add(textField);
 		this.add(bottomPanel);
-		
+
 		// create a listener for writing messages to server
 		ActionListener listener = new EnterListener();
 
@@ -39,27 +50,27 @@ public class MultiplayerInfoPanel extends JPanel{
 		sendButton.addActionListener(listener);
 		this.setVisible(true);
 	}
-	
+
 	/**
 	 * 
-	 * Sends the text in the textfield to the server to update the rest of clients
+	 * Sends the text in the textfield to the server to update the rest of
+	 * clients
 	 *
 	 */
 	private class EnterListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			String s = textField.getText();
-			try{
+			try {
 				int amount = Integer.parseInt(s);
 				GameGUI.getInstance().getClient().sendCurrency(amount);
 				textField.setText("");
-			}catch(Exception e){
+			} catch (Exception e) {
 				textField.setText("error: not a #");
 			}
-			
-			
+
 		}
 	}
-	
+
 	/**
 	 * Refreshes the information about other player
 	 * 
@@ -68,8 +79,9 @@ public class MultiplayerInfoPanel extends JPanel{
 	 * @param enemyNum
 	 */
 	public void updateInfo(int totalResources, int enemiesKilled, int enemyNum) {
-		info.setText("Other player's info:\nResources available: " + totalResources 
-				+ "\nEnemies killed: " + enemiesKilled + "\nEnemies on map: "+ enemyNum);
+		info.setText("Other player's info:\nResources available: "
+				+ totalResources + "\nEnemies killed: " + enemiesKilled
+				+ "\nEnemies on map: " + enemyNum);
 	}
 
 }
