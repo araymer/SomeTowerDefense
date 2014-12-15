@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Model.Base;
 import Model.Map;
 import Model.Tile;
-import Structures.BaseDesertUprising;
+import Structures.*;
 
 /**
  * The BeachBetrayal game map.
@@ -49,15 +49,77 @@ public class BeachBetrayal extends Map {
 		return theMap;
 
 	}
-
+	
+	/**
+	 * Sets the tiles where nothing can walk or be built.
+	 */
 	private void setTiles() {
 		// Set blocked (non-buildable) tiles
-
+		
 		// starting with the ocean to the north
-		for (int y = 0; y > 3; y++)
-			for (int x = 0; x > 20; x++)
-				gameBoard.get(x).get(y).setBuild(false);
-
+		gameBoard.get(0).get(0).setBuild(false);
+		gameBoard.get(1).get(0).setBuild(false);
+		gameBoard.get(2).get(0).setBuild(false);
+		gameBoard.get(3).get(0).setBuild(false);
+		gameBoard.get(4).get(0).setBuild(false);
+		gameBoard.get(5).get(0).setBuild(false);
+		gameBoard.get(6).get(0).setBuild(false);
+		gameBoard.get(7).get(0).setBuild(false);
+		gameBoard.get(8).get(0).setBuild(false);
+		gameBoard.get(9).get(0).setBuild(false);
+		gameBoard.get(10).get(0).setBuild(false);
+		gameBoard.get(11).get(0).setBuild(false);
+		gameBoard.get(12).get(0).setBuild(false);
+		gameBoard.get(13).get(0).setBuild(false);
+		gameBoard.get(14).get(0).setBuild(false);
+		gameBoard.get(15).get(0).setBuild(false);
+		gameBoard.get(16).get(0).setBuild(false);
+		gameBoard.get(17).get(0).setBuild(false);
+		gameBoard.get(18).get(0).setBuild(false);
+		gameBoard.get(19).get(0).setBuild(false);
+		
+		gameBoard.get(0).get(1).setBuild(false);
+		gameBoard.get(1).get(1).setBuild(false);
+		gameBoard.get(2).get(1).setBuild(false);
+		gameBoard.get(3).get(1).setBuild(false);
+		gameBoard.get(4).get(1).setBuild(false);
+		gameBoard.get(5).get(1).setBuild(false);
+		gameBoard.get(6).get(1).setBuild(false);
+		gameBoard.get(7).get(1).setBuild(false);
+		gameBoard.get(8).get(1).setBuild(false);
+		gameBoard.get(9).get(1).setBuild(false);
+		gameBoard.get(10).get(1).setBuild(false);
+		gameBoard.get(11).get(1).setBuild(false);
+		gameBoard.get(12).get(1).setBuild(false);
+		gameBoard.get(13).get(1).setBuild(false);
+		gameBoard.get(14).get(1).setBuild(false);
+		gameBoard.get(15).get(1).setBuild(false);
+		gameBoard.get(16).get(1).setBuild(false);
+		gameBoard.get(17).get(1).setBuild(false);
+		gameBoard.get(18).get(1).setBuild(false);
+		gameBoard.get(19).get(1).setBuild(false);
+		
+		gameBoard.get(0).get(2).setBuild(false);
+		gameBoard.get(1).get(2).setBuild(false);
+		gameBoard.get(2).get(2).setBuild(false);
+		gameBoard.get(3).get(2).setBuild(false);
+		gameBoard.get(4).get(2).setBuild(false);
+		gameBoard.get(5).get(2).setBuild(false);
+		gameBoard.get(6).get(2).setBuild(false);
+		gameBoard.get(7).get(2).setBuild(false);
+		gameBoard.get(8).get(2).setBuild(false);
+		gameBoard.get(9).get(2).setBuild(false);
+		gameBoard.get(10).get(2).setBuild(false);
+		gameBoard.get(11).get(2).setBuild(false);
+		gameBoard.get(12).get(2).setBuild(false);
+		gameBoard.get(13).get(2).setBuild(false);
+		gameBoard.get(14).get(2).setBuild(false);
+		gameBoard.get(15).get(2).setBuild(false);
+		gameBoard.get(16).get(2).setBuild(false);
+		gameBoard.get(17).get(2).setBuild(false);
+		gameBoard.get(18).get(2).setBuild(false);
+		gameBoard.get(19).get(2).setBuild(false);
+		
 		// south-east corner tree
 		gameBoard.get(0).get(13).setBuild(false);
 		gameBoard.get(0).get(14).setBuild(false);
@@ -65,8 +127,11 @@ public class BeachBetrayal extends Map {
 		// trees immediately west of SPAWN2
 		gameBoard.get(3).get(13).setBuild(false);
 		gameBoard.get(4).get(13).setBuild(false);
-		for (int c = 3; c > 8; c++)
-			gameBoard.get(c).get(14).setBuild(false);
+		gameBoard.get(3).get(14).setBuild(false);
+		gameBoard.get(4).get(14).setBuild(false);
+		gameBoard.get(5).get(14).setBuild(false);
+		gameBoard.get(6).get(14).setBuild(false);
+		gameBoard.get(7).get(14).setBuild(false);
 
 		// tree south of the paths near where the diverge and combine
 		gameBoard.get(11).get(12).setBuild(false);
@@ -75,14 +140,14 @@ public class BeachBetrayal extends Map {
 		gameBoard.get(12).get(11).setBuild(false);
 
 		// tree south of U-turn heading for final approach to base
-		gameBoard.get(15).get(14).setBuild(false);
-		gameBoard.get(13).get(14).setBuild(false);
+		gameBoard.get(17).get(14).setBuild(false);
+		gameBoard.get(16).get(14).setBuild(false);
 	}
 
 	@Override
 	public void setBase() {
 		gameBoard.get(BASE_X).get(BASE_Y)
-				.addStructure(new BaseDesertUprising(BASE_X, BASE_Y));
+				.addStructure(new BaseBeachBetrayal(BASE_X, BASE_Y));
 
 	}
 

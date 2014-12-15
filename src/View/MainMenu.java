@@ -67,7 +67,7 @@ public class MainMenu extends JPanel {
 		startPanel.add(singleplayer);
 		startPanel.add(multiplayer);
 		startPanel.add(load);
-		startPanel.setBackground(Color.BLACK);
+		startPanel.setBackground(new Color(0,0,0,0));
 		this.add(startPanel, BorderLayout.NORTH);
 
 		JPanel bottomPanel = new JPanel();
@@ -100,6 +100,11 @@ public class MainMenu extends JPanel {
 
 		repaint();
 		this.setVisible(true);
+		load.setVisible(false);
+		singleplayer.setVisible(false);
+		multiplayer.setVisible(false);
+		load.setVisible(true);
+		load.setFocusable(false);
 
 	}
 
@@ -117,6 +122,8 @@ public class MainMenu extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			singleplayer.setVisible(true);
+			multiplayer.setVisible(true);
 			if (e.getSource() == singleplayer)
 				GameGUI.getInstance().createMap(mapSelected);
 
@@ -180,6 +187,10 @@ public class MainMenu extends JPanel {
 			mainMenu = new MainMenu();
 
 		return mainMenu;
+	}
+	
+	public void reset(){
+		mainMenu = new MainMenu();
 	}
 
 	@Override

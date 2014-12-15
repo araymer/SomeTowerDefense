@@ -25,6 +25,9 @@ import javax.swing.JTextArea;
 
 import Controller.GameController;
 import Controller.TDClient;
+import Maps.BeachBetrayal;
+import Maps.BrokenPlainsPatrol;
+import Maps.DesertUprising;
 import Model.Attacker;
 import Model.Map;
 import Model.Player;
@@ -52,12 +55,14 @@ public class GameGUI implements Serializable {
 	private static GameGUI thisGUI;
 	private TDClient client;
 	public boolean isMultiplayer = false;
+	public volatile boolean isRunning = false;
 	public int mapSelection;
 	private CardLayout cards;
 	Structure structure;
 	public JFrame resourceFrame;
 	private int currentMap;
 	public double interpolation;
+	private Thread tickerThread;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -134,7 +139,9 @@ public class GameGUI implements Serializable {
 			multiFrame = new MultiplayerFrame();
 		}
 
-		new Thread(Ticker.getInstance()).start();
+		isRunning = true;
+		tickerThread = new Thread(Ticker.getInstance());
+		tickerThread.start();
 
 	}
 
@@ -175,7 +182,9 @@ public class GameGUI implements Serializable {
 		tilePanel.setMap(map);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
 
-		new Thread(Ticker.getInstance()).start();
+		isRunning = true;
+		tickerThread = new Thread(Ticker.getInstance());
+		tickerThread.start();
 		System.out.println("GameGUI: finished loading");
 	}
 
@@ -205,6 +214,7 @@ public class GameGUI implements Serializable {
 	JMenuItem restart;
 	JMenuItem main;
 	JCheckBox pause;
+	JCheckBox fast;
 	JMenuItem exit;
 	JMenu help;
 	JMenuItem options;
@@ -217,18 +227,22 @@ public class GameGUI implements Serializable {
 		restart.addActionListener(new MenuListener());
 		restart.setActionCommand("restart");
 		game.add(restart);
-		save = new JMenuItem("Save");
-		save.addActionListener(new MenuListener());
-		save.setActionCommand("save");
-		game.add(save);
-//		load = new JMenuItem("Load");
-//		load.addActionListener(new MenuListener());
-//		load.setActionCommand("load");
-//		game.add(load);
+//		save = new JMenuItem("Save");
+//		save.addActionListener(new MenuListener());
+//		save.setActionCommand("save");
+//		game.add(save);
+		// load = new JMenuItem("Load");
+		// load.addActionListener(new MenuListener());
+		// load.setActionCommand("load");
+		// game.add(load);
 		pause = new JCheckBox("Pause");
 		pause.addActionListener(new MenuListener());
 		pause.setActionCommand("pause");
 		game.add(pause);
+		fast = new JCheckBox("Fast Mode");
+		fast.addActionListener(new MenuListener());
+		fast.setActionCommand("fast");
+		game.add(fast);
 		main = new JMenuItem("Return to Menu");
 		main.addActionListener(new MenuListener());
 		main.setActionCommand("main");
@@ -270,16 +284,48 @@ public class GameGUI implements Serializable {
 
 	public void returnMenu() {
 		// TODO: fix
-		tilePanel = tilePanel.reset();
+		switch(tilePanel.tileMap.mapImageName){
+		case "desertuprising.jpg":
+			DesertUprising.getInstance().reInit();
+			break;
+		case "BrokenPlainsPatrol.jpg":
+			BrokenPlainsPatrol.getInstance().reInit();
+			break;
+		case "BeachBetrayal.jpg":
+			BeachBetrayal.getInstance().reInit();
+			break;
+		default:
+			break;
+		}
+		playPanel.remove(tilePanel);
+		gamePanel.remove(playPanel);
+		Ticker.getInstance().reset();
+		tilePanel.reallyReset();
+		tilePanel = TilePanel.getInstance();
+
 		MapPanel.getInstance().reset();
+		MainMenu.getInstance().reset();
+		gamePanel.removeAll();
+		gamePanel.add(MainMenu.getInstance());
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
+		isRunning = false;
+		if (tickerThread != null) {
+            try {
+				tickerThread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            System.out.println("Thread successfully stopped.");
+        }
 	}
 
 	private void restartMap() {
 
-		tilePanel.reset();
-		tilePanel = TilePanel.getInstance();
+		tilePanel = tilePanel.reset();
+		// tilePanel = TilePanel.getInstance();
 		tilePanel.setMap(currentMap);
+		Ticker.getInstance().loopStart();
 
 	}
 
@@ -352,8 +398,11 @@ public class GameGUI implements Serializable {
 							+ "<br>HP: " + structure.getHP() + "<br>Damage: "
 							+ structure.getDamage() + "<br>Rate of Fire: "
 							+ structure.getROF() + " shots per second</html>";
+					TilePanel.getInstance().setCirclePoints(
+							(int) Math.round(e.getPoint().getX()) / 40,
+							(int) Math.round(e.getPoint().getY()) / 40,
+							structure.getRange());
 					ResourcePanel.getInstance().updateInfo(info);
-
 				}
 			} catch (Exception exception) {
 
@@ -375,7 +424,9 @@ public class GameGUI implements Serializable {
 			case "load":
 				GameController.getInstance().loadData();
 				break;
-
+			case "fast":
+				Ticker.getInstance().changeSpeed();
+				break;
 			case "save":
 				GameController.getInstance().saveData();
 				break;
@@ -403,8 +454,8 @@ public class GameGUI implements Serializable {
 						+ "This is a Tower Defense Game, where you will protect your home base by building"
 						+ " towers that will defend against waves of enemies!\n\n"
 						+ "Getting started:\n To play, simply select"
-						+ " the single player or multiplayer game mode. Once in the game, you will be"
-						+ " able to select the map you wish to play on.\n\n"
+						+ " the map you want to play on and then choose single player or multiplayer mode."
+						+ " \n\n"
 						+ "Gameplay:\nIn the game, you'll be able to select the type of tower you wish to"
 						+ " build on the resource window on the right. Selecting a type of tower and clicking"
 						+ " on an eligible spot will build a tower there. Click on any of your towers, your base"

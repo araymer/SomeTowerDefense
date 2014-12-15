@@ -35,7 +35,6 @@ public class DesertUprising extends Map {
 	private DesertUprising() {
 		super(height, width);
 		mapImageName = "desertuprising.jpg";
-		new ArrayList<Tile>();
 		setPath();
 		setBase();
 		setSpawnPoints();
