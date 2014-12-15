@@ -78,11 +78,11 @@ public class TilePanel extends JPanel implements Serializable {
 		tileMap = tileMap.reInit();
 		return tilePanel;
 	}
-	public TilePanel reallyReset(){
-		tileMap = tileMap.reInit();
-		tilePanel = new TilePanel();
-		return tilePanel;
-	}
+
+	/*
+	 * public TilePanel reallyReset(){ tileMap = tileMap.reInit(); tilePanel =
+	 * new TilePanel(); return tilePanel; }
+	 */
 
 	public static TilePanel getInstance() {
 		if (tilePanel == null) {
