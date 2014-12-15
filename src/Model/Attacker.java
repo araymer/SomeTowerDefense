@@ -98,7 +98,7 @@ public abstract class Attacker extends Drawable implements Serializable {
 				break;
 			case SLOW:
 				if(effect == SpecialAttack.NONE || effect == SpecialAttack.BURN) {
-					speed /= 2;
+					speed *= 2;
 					effect = SpecialAttack.SLOW;
 				}
 				break;
