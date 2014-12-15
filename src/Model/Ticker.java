@@ -27,6 +27,7 @@ public class Ticker implements Runnable {
 	private int tickCount;
 	public int numOfAttackersDead = 0;
 
+
 	private LinkedList<Attacker> attackerRemoveList = new LinkedList<Attacker>();
 	private LinkedList<Attacker> atkrMoveList = new LinkedList<Attacker>();
 	private LinkedList<Structure> structureRemoveList = new LinkedList<Structure>();
