@@ -1,7 +1,9 @@
 package View;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -122,6 +124,21 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+
+		if (circleX != -1 && circleY != -1) {
+			System.out.println("OVAL");
+			g2.setColor(new Color(1, 1, 1, 0.5f));
+			g2.fillOval(circleX - 50, circleY - 50, 50, 50);
+		}
+	}
+
+	int circleX = -1;
+	int circleY = -1;
+
+	public void setCirclePoints(double x, double y) {
+		circleX = (int) x;
+		circleY = (int) y;
 	}
 
 	/**

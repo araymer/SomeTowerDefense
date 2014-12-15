@@ -205,6 +205,7 @@ public class GameGUI implements Serializable {
 	JMenuItem restart;
 	JMenuItem main;
 	JCheckBox pause;
+	JCheckBox fast;
 	JMenuItem exit;
 	JMenu help;
 	JMenuItem options;
@@ -221,14 +222,18 @@ public class GameGUI implements Serializable {
 		save.addActionListener(new MenuListener());
 		save.setActionCommand("save");
 		game.add(save);
-//		load = new JMenuItem("Load");
-//		load.addActionListener(new MenuListener());
-//		load.setActionCommand("load");
-//		game.add(load);
+		// load = new JMenuItem("Load");
+		// load.addActionListener(new MenuListener());
+		// load.setActionCommand("load");
+		// game.add(load);
 		pause = new JCheckBox("Pause");
 		pause.addActionListener(new MenuListener());
 		pause.setActionCommand("pause");
 		game.add(pause);
+		fast = new JCheckBox("Fast Mode");
+		fast.addActionListener(new MenuListener());
+		fast.setActionCommand("fast");
+		game.add(fast);
 		main = new JMenuItem("Return to Menu");
 		main.addActionListener(new MenuListener());
 		main.setActionCommand("main");
@@ -270,6 +275,9 @@ public class GameGUI implements Serializable {
 
 	public void returnMenu() {
 		// TODO: fix
+		playPanel.remove(tilePanel);
+		gamePanel.remove(playPanel);
+		// Ticker.getInstance().loopStop();
 		tilePanel = tilePanel.reset();
 		MapPanel.getInstance().reset();
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
@@ -353,7 +361,9 @@ public class GameGUI implements Serializable {
 							+ structure.getDamage() + "<br>Rate of Fire: "
 							+ structure.getROF() + " shots per second</html>";
 					ResourcePanel.updateInfo(info);
-
+					ResourcePanel.getInstance().setCirclePoints(
+							e.getPoint().getX(), e.getPoint().getY());
+					ResourcePanel.getInstance().repaint();
 				}
 			} catch (Exception exception) {
 
@@ -375,7 +385,9 @@ public class GameGUI implements Serializable {
 			case "load":
 				GameController.getInstance().loadData();
 				break;
-
+			case "fast":
+				// TODO: implement code for making things fast
+				break;
 			case "save":
 				GameController.getInstance().saveData();
 				break;
