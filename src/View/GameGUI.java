@@ -138,11 +138,10 @@ public class GameGUI implements Serializable {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
 		}
-		
+
 		isRunning = true;
 		tickerThread = new Thread(Ticker.getInstance());
 		tickerThread.start();
-		
 
 	}
 
@@ -182,7 +181,7 @@ public class GameGUI implements Serializable {
 		}
 		tilePanel.setMap(map);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
-		
+
 		isRunning = true;
 		tickerThread = new Thread(Ticker.getInstance());
 		tickerThread.start();
@@ -303,6 +302,7 @@ public class GameGUI implements Serializable {
 		Ticker.getInstance().reset();
 		tilePanel.reallyReset();
 		tilePanel = TilePanel.getInstance();
+
 		MapPanel.getInstance().reset();
 		MainMenu.getInstance().reset();
 		gamePanel.removeAll();
@@ -313,9 +313,10 @@ public class GameGUI implements Serializable {
 
 	private void restartMap() {
 
-		tilePanel.reset();
-		tilePanel = TilePanel.getInstance();
+		tilePanel = tilePanel.reset();
+		// tilePanel = TilePanel.getInstance();
 		tilePanel.setMap(currentMap);
+		Ticker.getInstance().loopStart();
 
 	}
 
