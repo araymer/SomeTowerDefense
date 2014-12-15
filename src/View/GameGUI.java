@@ -555,7 +555,8 @@ public class GameGUI implements Serializable {
 						+ "Gameplay:\nIn the game, you'll be able to select the type of tower you wish to"
 						+ " build on the resource window on the right. Selecting a type of tower and clicking"
 						+ " on an eligible spot will build a tower there. Click on any of your towers, your base"
-						+ " or even enemies to view information about them, upgrade your towers, or heal your base.";
+						+ " or even enemies to view information about them or upgrade your towers."
+						+ " You can win the game by having the base survive against all the waves.";
 
 				JPanel instrPanel = new JPanel();
 				instrPanel.setLayout(new FlowLayout());
