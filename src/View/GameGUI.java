@@ -302,6 +302,7 @@ public class GameGUI implements Serializable {
 		playPanel.remove(tilePanel);
 		gamePanel.remove(playPanel);
 		Ticker.getInstance().reset();
+		//tilePanel = null;
 		tilePanel.reallyReset();
 		tilePanel = TilePanel.getInstance();
 
