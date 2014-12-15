@@ -4,6 +4,7 @@ import View.TilePanel;
 import Attackers.Cannoneer;
 import Attackers.Marine;
 import Attackers.Scout;
+import Controller.GameController;
 
 public class Wave {
 	public int waveCount = 1;
@@ -17,12 +18,14 @@ public class Wave {
 	
 	public void setWave(int num){
 		waveCount = num;
+		innerCount = 0;
 	}
 	
 	public void startingAWave(){
 		innerCount = 0;
 		waveCount++;
 		TilePanel.getInstance().tileMap.waveNumber = waveCount;
+		GameController.getInstance().saveData();
 		System.out.println("Starting wave " + waveCount);
 	}
 	
