@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import View.GameGUI;
 
+@SuppressWarnings("serial")
 public class Tile extends Observable implements Serializable {
 
 	private boolean spawnable;

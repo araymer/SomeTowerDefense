@@ -16,6 +16,7 @@ import Structures.*;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class TowerUpgrading extends TowerState implements Serializable{
 	Structure tower;
 	

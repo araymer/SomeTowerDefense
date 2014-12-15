@@ -14,6 +14,7 @@ import Model.Structure;
 import Model.Tile;
 import View.TilePanel;
 
+@SuppressWarnings("serial")
 public class Scout extends Attacker {
 	private static final int HITPOINTS = 150;
 	private static final int DEFENSE = 10;

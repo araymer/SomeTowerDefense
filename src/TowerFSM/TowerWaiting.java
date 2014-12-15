@@ -19,26 +19,9 @@ import View.TilePanel;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class TowerWaiting extends TowerState implements Serializable{
-	// Structure tower;
-	// int HP;
-	// int range;
-	// int x, y;
-	// boolean upgrade;
-	// boolean signal;
-	// Attacker attacker;
-
-	// static final int HEIGHT = 40;
-	// static final int WIDTH = 40;
-	// //Variables for drawing
-	// int xIncrement = 0;
-	// int yIncrement = 0;
-	// BufferedImage bImage = null;
-	// String imageFileName;
-	// static String baseDir = System.getProperty("user.dir")
-	// + System.getProperty("file.separator") + "imageFiles"
-	// + System.getProperty("file.separator");
-	//Thread th;
+	
 	boolean stateChange = false;
 	
 	/**
@@ -48,14 +31,10 @@ public class TowerWaiting extends TowerState implements Serializable{
 	public TowerWaiting(Structure theTower) {
 		super(theTower);
 		tower = theTower;
-		// HP = hp;
-		// range = tower.getRange();
-		// x = tower.getX();
-		// y = tower.getY();
+		
 		upgrade = false;
 		signal = false;
-		// imageFileName = tower.imageFileName;
-		//waiting();
+		
 
 	}
 
@@ -78,10 +57,7 @@ public class TowerWaiting extends TowerState implements Serializable{
 				}	
 	}
 
-	// public void update(Attacker atk) {
-	// attacker = atk;
-	// signal = true;
-	// }
+	
 
 	public void draw(Graphics2D g2) {
 		if (tower.bImage == null) {
@@ -107,46 +83,7 @@ public class TowerWaiting extends TowerState implements Serializable{
 				* tower.HEIGHT, tower.WIDTH, tower.HEIGHT, null);
 
 	}
-
-	/**
-	 * This class is attached to attackers and defenders to determine if a
-	 * hostile unit is in range and to initiate hostile activity against them.
-	 * 
-	 * @author Team Something
-	 *
-	 */
-	// private class Detector {
-	// int x, y, range; // class attributes
-	// Map map;
-	//
-	// public Detector(int locX, int locY, Map theMap, int theRange) {
-	// x = locX;
-	// y = locY;
-	// map = theMap;
-	// range = theRange;
-	//
-	// }
-	//
-	// /**
-	// * Checks if any objects that can be attacked is within range.
-	// *
-	// * @return if something is in range and can be attacked
-	// */
-	// public boolean scan() {
-	// /*
-	// * for(int a = 0; a < MasterList.unitList.toArray().length; a++){
-	// *
-	// * if(Math.abs((x - MasterList.unitList[a].toArray().length) <=
-	// * range) && (Math.abs(y - MasterList.unitList[a].toArray().length)
-	// * <= range) && MasterList.unitList[a].hostile()) <= range {
-	// *
-	// * } }
-	// */
-	// return false;
-	// }
-	//
-	// }
-
+	
 	@Override
 	public int getCurrentHP() {
 		return tower.hitpoints;

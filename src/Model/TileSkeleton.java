@@ -9,6 +9,7 @@ import java.io.Serializable;
  *
  */
 
+@SuppressWarnings("serial")
 public class TileSkeleton implements Serializable{
 	public int attackerNum = 0;
 	public boolean hasStructure = false;

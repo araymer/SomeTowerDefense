@@ -20,8 +20,8 @@ import View.TilePanel;
 
 public class GameController {
 	private int waveCount;
-	private int[] spawnsPerWave = { 1, 2, 4, 6, 10 };
 	private GameGUI gui;
+	private int spawnsPerWave[] = {1,2,4,8,16};
 	private static GameController theController;
 
 	public static void main(String[] args) {

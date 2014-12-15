@@ -13,6 +13,7 @@ import Model.Structure;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public abstract class TowerState implements Serializable{
 	boolean upgrade;
 	boolean signal;

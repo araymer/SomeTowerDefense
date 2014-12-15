@@ -12,6 +12,7 @@ import Model.Structure;
  * @author Team Something
  * 
  */
+@SuppressWarnings("serial")
 public class TowerExploding extends TowerState implements Serializable{
 
 	public TowerExploding(Structure tower) {
