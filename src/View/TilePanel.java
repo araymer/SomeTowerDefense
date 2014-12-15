@@ -16,7 +16,6 @@ import Maps.BrokenPlainsPatrol;
 import Maps.DesertUprising;
 import Model.Attacker;
 import Model.Map;
-import Model.Player;
 import Model.Tile;
 
 /**
@@ -40,7 +39,6 @@ public class TilePanel extends JPanel implements Serializable {
 
 		tileMap = DesertUprising.getInstance();
 
-		
 	}
 
 	public void setMap(int selection) {
@@ -60,12 +58,11 @@ public class TilePanel extends JPanel implements Serializable {
 		}
 		tileMap.getSpawnTile(1).addAttacker(
 				new Cannoneer(tileMap.getSpawnTile(1)));
-		
-		 tileMap.getSpawnTile(1).addAttacker(
-				new Scout(tileMap.getSpawnTile(1)));
 
-		 tileMap.getSpawnTile(1)
-		 .addAttacker(new Marine(tileMap.getSpawnTile(1)));
+		tileMap.getSpawnTile(1).addAttacker(new Scout(tileMap.getSpawnTile(1)));
+
+		tileMap.getSpawnTile(1)
+				.addAttacker(new Marine(tileMap.getSpawnTile(1)));
 	}
 
 	private void setSpawn() {
@@ -76,7 +73,7 @@ public class TilePanel extends JPanel implements Serializable {
 	}
 
 	public TilePanel reset() {
-		Player.getInstance().reset();
+		// Player.getInstance().reset();
 		tileMap = tileMap.reInit();
 		return tilePanel;
 	}
@@ -89,7 +86,7 @@ public class TilePanel extends JPanel implements Serializable {
 	}
 
 	public void setMap(Map m) {
-		if(m.mapImageName.equals("desertuprising.jpg")){
+		if (m.mapImageName.equals("desertuprising.jpg")) {
 			DesertUprising.setMap(m);
 		}
 		tileMap = m;
@@ -101,9 +98,9 @@ public class TilePanel extends JPanel implements Serializable {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		if( tileMap != null && tileMap.getGameBoard() != null){
+		if (tileMap != null && tileMap.getGameBoard() != null) {
 			try {
-				
+
 				for (Vector<Tile> vec : tileMap.getGameBoard()) {
 					for (Tile tile : vec) {
 						if (tile.getStructure() != null) {
@@ -125,7 +122,6 @@ public class TilePanel extends JPanel implements Serializable {
 				// changes when repainting.
 			}
 		}
-		
 
 	}
 

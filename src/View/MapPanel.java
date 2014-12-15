@@ -40,6 +40,11 @@ public class MapPanel extends JPanel {
 
 	}
 
+	public MapPanel reset() {
+		mapPanel = new MapPanel();
+		return mapPanel;
+	}
+
 	public void setMap(String filename) {
 		setFileName(fileName);
 		File chosenMap = new File(baseDir + filename);

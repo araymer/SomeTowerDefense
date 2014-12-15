@@ -271,6 +271,7 @@ public class GameGUI implements Serializable {
 	public void returnMenu() {
 		// TODO: fix
 		tilePanel = tilePanel.reset();
+		MapPanel.getInstance().reset();
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
 	}
 

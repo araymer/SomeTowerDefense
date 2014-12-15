@@ -50,15 +50,16 @@ public class DesertUprising extends Map {
 
 	}
 
+	@Override
 	public Map reInit() {
 		theMap = new DesertUprising();
 		return theMap;
 	}
-	
-	public static void setMap(Map map){
+
+	public static void setMap(Map map) {
 		theMap = map;
 	}
-	
+
 	@Override
 	public int getBaseX() {
 		return BASE_X;
