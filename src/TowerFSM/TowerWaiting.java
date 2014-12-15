@@ -25,7 +25,7 @@ public class TowerWaiting extends TowerState implements Serializable{
 	boolean stateChange = false;
 	
 	/**
-	 * 
+	 * The constructor, takes the structure as it's argument.
 	 * @param theTower
 	 */
 	public TowerWaiting(Structure theTower) {
@@ -57,8 +57,9 @@ public class TowerWaiting extends TowerState implements Serializable{
 				}	
 	}
 
-	
-
+	/**
+	 * Handles the animation when the tower is in this state.
+	 */
 	public void draw(Graphics2D g2) {
 		if (tower.bImage == null) {
 			tower.setImages();
@@ -84,21 +85,30 @@ public class TowerWaiting extends TowerState implements Serializable{
 
 	}
 	
+	/**
+	 * Returns the current hit points
+	 * @return int - current hit points
+	 */
 	@Override
 	public int getCurrentHP() {
 		return tower.hitpoints;
 	}
 
+	/**
+	 * Reduces the structure's hit points when attacked.
+	 */
 	@Override
 	public void takeDamage(int dmg) {
 		tower.hitpoints -= dmg;
 	}
 	
+	/**
+	 * Looks for attackers within it's range. range is circular.
+	 */
 	private void scanForAttackers(){
 		// Check for attackers
 				for (int x = tower.x - tower.range; x <= tower.x + tower.range; x++) {
 					for (int y = tower.y - tower.range; y <= tower.y + tower.range; y++) {
-						// TODO Check to make sure x and y are within the map boundaries
 						if (x < TilePanel.getInstance().tileMap.getGameBoard().size()
 								&& x >= 0
 								&& y < TilePanel.getInstance().tileMap.getGameBoard()
@@ -115,6 +125,9 @@ public class TowerWaiting extends TowerState implements Serializable{
 				}
 	}
 
+	/**
+	 * Updates the structure's status.
+	 */
 	@Override
 	public void update() {
 		scanForAttackers();
