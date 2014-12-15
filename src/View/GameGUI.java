@@ -184,6 +184,7 @@ public class GameGUI implements Serializable {
 
 		isRunning = true;
 		tickerThread = new Thread(Ticker.getInstance());
+		Ticker.getInstance().waves.setWave(map.waveNumber);
 		tickerThread.start();
 		System.out.println("GameGUI: finished loading");
 	}

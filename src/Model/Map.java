@@ -39,8 +39,8 @@ public abstract class Map implements Serializable {
 		waveNumber = 0;
 		
 	}
-	public void nextWave(){
-		waveNumber++;
+	public void setWave( int wave){
+		waveNumber = wave;
 	}
 	public abstract Map reInit();
 

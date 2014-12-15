@@ -26,7 +26,7 @@ public class Ticker implements Runnable {
 	private static Ticker ticker;
 	private int tickCount;
 	public int numOfAttackersDead = 0;
-	private Wave waves;
+	public Wave waves;
 
 	private Vector<Attacker> attackerRemoveList = new Vector<Attacker>();
 	private Vector<Attacker> atkrMoveList = new Vector<Attacker>();
