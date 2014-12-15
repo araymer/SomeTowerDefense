@@ -19,6 +19,7 @@ public class Wave {
 	public void setWave(int num){
 		waveCount = num;
 		innerCount = 1;
+		TilePanel.getInstance().display = true;
 	}
 	
 	public void startingAWave(){
