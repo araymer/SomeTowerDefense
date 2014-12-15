@@ -135,11 +135,10 @@ public class GameGUI implements Serializable {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
 		}
-		
+
 		isRunning = true;
 		tickerThread = new Thread(Ticker.getInstance());
 		tickerThread.start();
-		
 
 	}
 
@@ -179,7 +178,7 @@ public class GameGUI implements Serializable {
 		}
 		tilePanel.setMap(map);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
-		
+
 		isRunning = true;
 		tickerThread = new Thread(Ticker.getInstance());
 		tickerThread.start();
