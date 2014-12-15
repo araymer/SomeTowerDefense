@@ -78,11 +78,13 @@ public class TilePanel extends JPanel implements Serializable {
 		tileMap = tileMap.reInit();
 		return tilePanel;
 	}
+	
+	
 	public TilePanel reallyReset(){
-		tileMap = tileMap.reInit();
 		tilePanel = new TilePanel();
-		return tilePanel;
+		return reset();
 	}
+
 
 	public static TilePanel getInstance() {
 		if (tilePanel == null) {
@@ -130,7 +132,7 @@ public class TilePanel extends JPanel implements Serializable {
 		}
 
 		if (circleX != -1 && circleY != -1) {
-			g2.setColor(new Color(1, 1, 1, 0.5f));
+			g2.setColor(new Color(1, 1, 1, 0.2f));
 			g2.fillOval(circleX - range / 4, circleY - range / 4, range, range);
 		}
 	}

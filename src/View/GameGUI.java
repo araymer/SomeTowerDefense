@@ -25,6 +25,9 @@ import javax.swing.JTextArea;
 
 import Controller.GameController;
 import Controller.TDClient;
+import Maps.BeachBetrayal;
+import Maps.BrokenPlainsPatrol;
+import Maps.DesertUprising;
 import Model.Attacker;
 import Model.Map;
 import Model.Player;
@@ -52,7 +55,7 @@ public class GameGUI implements Serializable {
 	private static GameGUI thisGUI;
 	private TDClient client;
 	public boolean isMultiplayer = false;
-	public boolean isRunning = false;
+	public volatile boolean isRunning = false;
 	public int mapSelection;
 	private CardLayout cards;
 	Structure structure;
@@ -135,11 +138,10 @@ public class GameGUI implements Serializable {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
 		}
-		
+
 		isRunning = true;
 		tickerThread = new Thread(Ticker.getInstance());
 		tickerThread.start();
-		
 
 	}
 
@@ -179,7 +181,7 @@ public class GameGUI implements Serializable {
 		}
 		tilePanel.setMap(map);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
-		
+
 		isRunning = true;
 		tickerThread = new Thread(Ticker.getInstance());
 		tickerThread.start();
@@ -225,10 +227,10 @@ public class GameGUI implements Serializable {
 		restart.addActionListener(new MenuListener());
 		restart.setActionCommand("restart");
 		game.add(restart);
-		save = new JMenuItem("Save");
-		save.addActionListener(new MenuListener());
-		save.setActionCommand("save");
-		game.add(save);
+//		save = new JMenuItem("Save");
+//		save.addActionListener(new MenuListener());
+//		save.setActionCommand("save");
+//		game.add(save);
 		// load = new JMenuItem("Load");
 		// load.addActionListener(new MenuListener());
 		// load.setActionCommand("load");
@@ -282,23 +284,48 @@ public class GameGUI implements Serializable {
 
 	public void returnMenu() {
 		// TODO: fix
+		switch(tilePanel.tileMap.mapImageName){
+		case "desertuprising.jpg":
+			DesertUprising.getInstance().reInit();
+			break;
+		case "BrokenPlainsPatrol.jpg":
+			BrokenPlainsPatrol.getInstance().reInit();
+			break;
+		case "BeachBetrayal.jpg":
+			BeachBetrayal.getInstance().reInit();
+			break;
+		default:
+			break;
+		}
 		playPanel.remove(tilePanel);
 		gamePanel.remove(playPanel);
 		Ticker.getInstance().reset();
-		tilePanel = tilePanel.reallyReset();
+		tilePanel.reallyReset();
+		tilePanel = TilePanel.getInstance();
+
 		MapPanel.getInstance().reset();
 		MainMenu.getInstance().reset();
 		gamePanel.removeAll();
 		gamePanel.add(MainMenu.getInstance());
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
 		isRunning = false;
+		if (tickerThread != null) {
+            try {
+				tickerThread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            System.out.println("Thread successfully stopped.");
+        }
 	}
 
 	private void restartMap() {
 
-		tilePanel.reset();
-		tilePanel = TilePanel.getInstance();
+		tilePanel = tilePanel.reset();
+		// tilePanel = TilePanel.getInstance();
 		tilePanel.setMap(currentMap);
+		Ticker.getInstance().loopStart();
 
 	}
 
@@ -398,7 +425,7 @@ public class GameGUI implements Serializable {
 				GameController.getInstance().loadData();
 				break;
 			case "fast":
-				// TODO: implement code for making things fast
+				Ticker.getInstance().changeSpeed();
 				break;
 			case "save":
 				GameController.getInstance().saveData();

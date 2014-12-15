@@ -17,7 +17,7 @@ public class Ticker implements Runnable {
 	private boolean isRunning;
 	private boolean paused;
 	private final double fps = 30.0;
-	private final double timeBetweenFrames = 1000000000 / fps;
+	private double timeBetweenFrames = 1000000000 / fps;
 	private final int maxUpdatesBetweenRenders = 5;
 	private double lastUpdateTime = System.nanoTime();
 	private double lastRenderTime = System.nanoTime();
@@ -26,7 +26,7 @@ public class Ticker implements Runnable {
 	private static Ticker ticker;
 	private int tickCount;
 	public int numOfAttackersDead = 0;
-	
+
 	private LinkedList<Attacker> attackerRemoveList = new LinkedList<Attacker>();
 	private LinkedList<Attacker> atkrMoveList = new LinkedList<Attacker>();
 	private LinkedList<Structure> structureRemoveList = new LinkedList<Structure>();
@@ -48,7 +48,8 @@ public class Ticker implements Runnable {
 				updateCount = 0;
 
 				if (!paused) {
-					while (GameGUI.getInstance().isRunning && now - lastUpdateTime > timeBetweenFrames
+					while (GameGUI.getInstance().isRunning
+							&& now - lastUpdateTime > timeBetweenFrames
 							&& updateCount < maxUpdatesBetweenRenders) {
 
 						update();
@@ -84,22 +85,34 @@ public class Ticker implements Runnable {
 		System.out.println("Ticker: this thread stopped");
 	}
 
+	boolean fast = false;
+
+	public void changeSpeed() {
+		if (!fast) {
+			timeBetweenFrames = timeBetweenFrames = 500000000 / fps;
+			fast = true;
+		} else {
+			timeBetweenFrames = timeBetweenFrames = 1000000000 / fps;
+			fast = false;
+		}
+		// 1/2th the time between frames
+	}
+
 	private void drawGame(double interpolation) {
 		// Iterate through all game objects and call their draw methods with
 		// interpolation
-		
-		
-		
-		GameGUI.getInstance().repaint(interpolation); // This is temporary, we'll want to
-											// replace this with
-											// some way to feed interpolation
+
+		GameGUI.getInstance().repaint(interpolation); // This is temporary,
+														// we'll want to
+		// replace this with
+		// some way to feed interpolation
 
 	}
 
 	public int getTicks() {
 		return tickCount;
 	}
-	
+
 	/**
 	 * Updates each attacker and structure and removes or moves them if needed
 	 */
@@ -140,8 +153,7 @@ public class Ticker implements Runnable {
 		attackerRemoveList.clear();
 		atkrMoveList.clear();
 		structureRemoveList.clear();
-		
-		
+
 		try {
 
 			// Check for dead structures and attackers
@@ -177,7 +189,6 @@ public class Ticker implements Runnable {
 					}
 				}
 			}
-			
 
 			// Move attackers
 			for (Attacker attacker : atkrMoveList) {
@@ -189,7 +200,6 @@ public class Ticker implements Runnable {
 					}
 				}
 
-				
 				attacker.location.getNextTile().getAttackers().add(attacker);
 				attacker.setLoc(attacker.location.getNextTile());
 				;
@@ -212,10 +222,10 @@ public class Ticker implements Runnable {
 				}
 			}
 		}
-		
+
 		numOfAttackersDead += attackerRemoveList.size();
-		//Update other players minimap
-		if(GameGUI.getInstance().isMultiplayer){
+		// Update other players minimap
+		if (GameGUI.getInstance().isMultiplayer) {
 			GameGUI.getInstance().getClient().sendMiniMap();
 		}
 	}
@@ -244,8 +254,8 @@ public class Ticker implements Runnable {
 			ticker = new Ticker();
 		return ticker;
 	}
-	
-	public void reset(){
+
+	public void reset() {
 		ticker = new Ticker();
 	}
 
