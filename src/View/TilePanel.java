@@ -142,7 +142,7 @@ public class TilePanel extends JPanel implements Serializable {
 	public void setCirclePoints(int x, int y, int range) {
 		circleX = x * 40 - 20;
 		circleY = y * 40 - 20;
-		this.range = range * 60; // 80 to account for both ways
+		this.range = range * 60; // 60 to account for both ways + half a tile
 	}
 
 	public Map getMap() {
