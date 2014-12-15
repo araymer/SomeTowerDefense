@@ -18,15 +18,16 @@ public class Wave {
 	
 	public void setWave(int num){
 		waveCount = num;
-		innerCount = 0;
+		innerCount = 1;
 	}
 	
 	public void startingAWave(){
-		innerCount = 0;
+		innerCount = 1;
 		waveCount++;
 		TilePanel.getInstance().tileMap.waveNumber = waveCount;
 		GameController.getInstance().saveData();
 		System.out.println("Starting wave " + waveCount);
+		TilePanel.getInstance().display = true;
 	}
 	
 	public void finishedWaves(){
