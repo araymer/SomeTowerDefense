@@ -36,6 +36,11 @@ public class ChronoTower extends Structure {
 	private static final int RATEOFFIRE = 5;// The smaller, the faster
 	private static final int COST = 2500;
 
+	/**
+	 * The constructor, arguments are the x and y coordinates of the tower.
+	 * @param x
+	 * @param y
+	 */
 	public ChronoTower(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
 				x, y, SpecialAttack.SLOW);
@@ -47,6 +52,9 @@ public class ChronoTower extends Structure {
 		price = 50;
 	}
 
+	/**
+	 * Establishes the images for the various states.
+	 */
 	public void setImages() {
 
 		if (waitImage == null) {
@@ -85,6 +93,9 @@ public class ChronoTower extends Structure {
 		}
 	}
 
+	/**
+	 * Determines which sprite sheet to use.
+	 */
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {
 		BufferedImage correctImage = null;
@@ -107,9 +118,11 @@ public class ChronoTower extends Structure {
 		return correctImage;
 	}
 
+	/**
+	 * Unused
+	 */
 	@Override
 	public void die() {
-		// TODO: implement dying
 
 	}
 

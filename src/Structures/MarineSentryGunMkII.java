@@ -35,6 +35,11 @@ public class MarineSentryGunMkII extends Structure {
 	private static final int RATEOFFIRE = 5;// The smaller, the faster
 	private static final int COST = 3000;
 
+	/**
+	 * The constructor, arguments are the x and y coordinates of the tower.
+	 * @param x
+	 * @param y
+	 */
 	public MarineSentryGunMkII(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
 				x, y, SpecialAttack.TWO_TARGETS);
@@ -46,6 +51,9 @@ public class MarineSentryGunMkII extends Structure {
 		price = 50;
 	}
 
+	/**
+	 * Establishes the images for the various states.
+	 */
 	@Override
 	public void setImages() {
 		if (waitImage == null) {
@@ -87,12 +95,17 @@ public class MarineSentryGunMkII extends Structure {
 		}
 	}
 
+	/**
+	 * Unused
+	 */
 	@Override
 	public void die() {
-		// TODO: implement dying
 
 	}
 
+	/**
+	 * Determines which sprite sheet to use.
+	 */
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {
 		BufferedImage correctImage = null;
