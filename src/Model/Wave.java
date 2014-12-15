@@ -5,7 +5,11 @@ import Attackers.Cannoneer;
 import Attackers.Marine;
 import Attackers.Scout;
 import Controller.GameController;
-
+/**
+ * 
+ * @author Team Something
+ *
+ */
 public class Wave {
 	public int waveCount = 1;
 	
@@ -15,13 +19,18 @@ public class Wave {
 	public Wave(){
 		TilePanel.getInstance().display = true;
 	}
-	
+	/**
+	 * 
+	 * @param num - (int)waveCount
+	 */
 	public void setWave(int num){
 		waveCount = num;
 		innerCount = 1;
 		TilePanel.getInstance().display = true;
 	}
-	
+	/**
+	 * Starts a wave
+	 */
 	public void startingAWave(){
 		innerCount = 1;
 		waveCount++;
@@ -30,7 +39,9 @@ public class Wave {
 		System.out.println("Starting wave " + waveCount);
 		TilePanel.getInstance().display = true;
 	}
-	
+		/**
+		 * All waves complete, trigger win condition.
+		 */
 	public void finishedWaves(){
 		innerCount = 1;
 		waveCount++;
@@ -39,11 +50,17 @@ public class Wave {
 		System.out.println("YOU WON");
 		TilePanel.getInstance().display1 = true;
 	}
-	
+	/**
+	 * 
+	 * @param bool - set enemiesAlive
+	 */
 	public void setEnemiesAlive(boolean bool){
 		enemiesAlive = bool;
 	}
-	
+	/**
+	 * Begin to spawn waves
+	 * @param tick - (int)
+	 */
 	public void attemptSpawn(int tick){
 		if(tick % 70 == 0){
 			System.out.println("Wave: attempting to spawn wave:" + waveCount + " inner:" + innerCount);
