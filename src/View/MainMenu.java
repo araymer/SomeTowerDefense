@@ -79,7 +79,7 @@ public class MainMenu extends JPanel {
 		startPanel.add(singleplayer);
 		startPanel.add(multiplayer);
 		startPanel.add(load);
-		startPanel.setBackground(new Color(0, 0, 0, 0));
+		startPanel.setBackground(new Color(0, 0, 0));
 		this.add(startPanel, BorderLayout.NORTH);
 
 		JPanel bottomPanel = new JPanel();
