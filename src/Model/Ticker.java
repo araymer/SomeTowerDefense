@@ -28,10 +28,9 @@ public class Ticker implements Runnable {
 	public int numOfAttackersDead = 0;
 	private Wave waves;
 
-
-	private LinkedList<Attacker> attackerRemoveList = new LinkedList<Attacker>();
-	private LinkedList<Attacker> atkrMoveList = new LinkedList<Attacker>();
-	private LinkedList<Structure> structureRemoveList = new LinkedList<Structure>();
+	private Vector<Attacker> attackerRemoveList = new Vector<Attacker>();
+	private Vector<Attacker> atkrMoveList = new Vector<Attacker>();
+	private Vector<Structure> structureRemoveList = new Vector<Structure>();
 
 	// many objects will need to access the same timer
 	private Ticker() {

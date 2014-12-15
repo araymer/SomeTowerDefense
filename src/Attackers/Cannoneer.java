@@ -15,8 +15,9 @@ import Model.Tile;
 import View.GameGUI;
 import View.TilePanel;
 
+@SuppressWarnings("serial")
 public class Cannoneer extends Attacker {
-	private static final int HITPOINTS = 500;
+	private static final int HITPOINTS = 1000;
 	private static final int DEFENSE = 10;
 	private static final int ATTACK_RATING = 50;
 	private static final int RANGE = 3;

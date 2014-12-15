@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 import View.TilePanel;
 
+@SuppressWarnings("serial")
 public abstract class Attacker extends Drawable implements Serializable {
 
 	protected String name;

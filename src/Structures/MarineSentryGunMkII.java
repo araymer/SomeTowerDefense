@@ -20,6 +20,7 @@ import TowerFSM.TowerWaiting;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class MarineSentryGunMkII extends Structure {
 	protected static BufferedImage waitImage;
 	protected static BufferedImage attackImage;

@@ -22,6 +22,7 @@ import TowerFSM.TowerWaiting;
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public abstract class Structure extends Drawable implements Serializable {
 
 	public String name;
