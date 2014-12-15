@@ -100,6 +100,9 @@ public class GameGUI implements Serializable {
 	 *            = integer representation of selected map
 	 */
 	void createMap(int selection) {
+		//gamePanel = new JPanel();
+		playPanel = new JPanel();
+		mapOverlay = new JLayeredPane();
 
 		currentMap = selection;
 		switch (selection) {
@@ -148,7 +151,12 @@ public class GameGUI implements Serializable {
 		}
 
 		isRunning = true;
-		tickerThread = new Thread(Ticker.getInstance());
+		if(tickerThread == null){
+			tickerThread = new Thread(Ticker.getInstance());
+		}
+		
+		Ticker.getInstance().waves.setWave(1);
+		Ticker.getInstance().loopStart();
 		tickerThread.start();
 
 	}
@@ -330,45 +338,12 @@ public class GameGUI implements Serializable {
 	 *
 	 */
 	public void returnMenu() {
-		switch (tilePanel.tileMap.mapImageName) {
-		case "desertuprising.jpg":
-			DesertUprising.getInstance().reInit();
-			break;
-		case "BrokenPlainsPatrol.jpg":
-			BrokenPlainsPatrol.getInstance().reInit();
-			break;
-		case "BeachBetrayal.jpg":
-			BeachBetrayal.getInstance().reInit();
-			break;
-		default:
-			break;
-		}
-		playPanel.removeAll();
-		playPanel.remove(tilePanel);
+		Ticker.getInstance().loopStop();
 		gamePanel.remove(playPanel);
-		Ticker.getInstance().reset();
-		tilePanel.reallyReset();
-		tilePanel = TilePanel.getInstance();
-
-		MapPanel.getInstance().reset();
-		MainMenu.getInstance().reset();
-		ResourcePanel.getInstance().reinit();
-		gamePanel.removeAll();
-		gamePanel.add(MainMenu.getInstance());
-		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
-
-		gamePanel.add(playPanel, "Play");
-
-		isRunning = false;
-		if (tickerThread != null) {
-			try {
-				tickerThread.join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("Thread successfully stopped.");
-		}
+		tilePanel = tilePanel.reset();
+		tilePanel.setMap(currentMap);
+		
+		
 	}
 
 	/**
@@ -537,7 +512,7 @@ public class GameGUI implements Serializable {
 				System.exit(0);
 				break;
 			case "options":
-				// TODO: implement any game options
+				// implement any game options
 				break;
 			case "instructions":
 				JFrame instr = new JFrame();

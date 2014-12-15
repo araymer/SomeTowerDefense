@@ -160,10 +160,10 @@ public class BrokenPlainsPatrol extends Map {
 	public void setSpawnPoints() {
 		gameBoard.get(19).get(10).setSpawn(true);
 		gameBoard.get(0).get(1).setSpawn(true);
-		gameBoard.get(9).get(14).setSpawn(true);
-		spawnTile1 = gameBoard.get(19).get(10);
-		spawnTile2 = gameBoard.get(0).get(1);
-		spawnTile3 = gameBoard.get(9).get(14);
+		gameBoard.get(8).get(14).setSpawn(true);
+		spawnTile3 = gameBoard.get(19).get(10);
+		spawnTile1 = gameBoard.get(0).get(1);
+		spawnTile2 = gameBoard.get(8).get(14);
 
 	}
 
@@ -251,28 +251,33 @@ public class BrokenPlainsPatrol extends Map {
 
 		gameBoard.get(8).get(11).setMove(true, gameBoard.get(8).get(10));
 		gameBoard.get(8).get(11).setBuild(false);
-
-		gameBoard.get(8).get(10).setMove(true, gameBoard.get(9).get(10)); // turn
-																			// west
+		
+		gameBoard.get(8).get(10).setMove(true, gameBoard.get(9).get(10));
 		gameBoard.get(8).get(10).setBuild(false);
 
-		gameBoard.get(9).get(10).setMove(true, gameBoard.get(10).get(10));
+		gameBoard.get(9).get(10).setMove(true, gameBoard.get(10).get(10)); // turn
+																			// west
 		gameBoard.get(9).get(10).setBuild(false);
 
-		gameBoard.get(10).get(10).setMove(true, gameBoard.get(10).get(9)); // turn
-																			// north
+		gameBoard.get(10).get(10).setMove(true, gameBoard.get(10).get(9));
 		gameBoard.get(10).get(10).setBuild(false);
 
-		gameBoard.get(10).get(9).setMove(true, gameBoard.get(10).get(8));
+		gameBoard.get(10).get(9).setMove(true, gameBoard.get(10).get(8)); // turn
+																			// north
 		gameBoard.get(10).get(9).setBuild(false);
 
-		gameBoard.get(10).get(8).setMove(true, gameBoard.get(9).get(7)); // turn
-																			// east
+		gameBoard.get(10).get(8).setMove(true, gameBoard.get(9).get(8));
 		gameBoard.get(10).get(8).setBuild(false);
+
+		gameBoard.get(9).get(8).setMove(true, gameBoard.get(9).get(7)); // turn
+																			// west
+		gameBoard.get(9).get(8).setBuild(false);
 
 		gameBoard.get(9).get(7).setMove(true, gameBoard.get(9).get(6));
 		gameBoard.get(9).get(7).setBuild(false);
 
+
+		
 		// gap between 9,6 and 14,10
 		gameBoard.get(9).get(6).setMove(true, gameBoard.get(10).get(6)); // combine
 																			// forces
