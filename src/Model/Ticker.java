@@ -126,7 +126,7 @@ public class Ticker implements Runnable {
 		attackerRemoveList.clear();
 		atkrMoveList.clear();
 		structureRemoveList.clear();
-
+		int attackersAlive = 0;
 		try {
 
 			// Check for dead structures and attackers
@@ -139,6 +139,7 @@ public class Ticker implements Runnable {
 						}
 					}
 					for (Attacker attacker : tile.getAttackers()) {
+						attackersAlive ++;
 						if (attacker.isFinished()) {
 							attackerRemoveList.add(attacker);
 						} else if (attacker.needsToMove) {
@@ -185,6 +186,11 @@ public class Ticker implements Runnable {
 		}
 		
 		//Attempt to spawn attackers
+		if(attackersAlive > 0){
+			waves.setEnemiesAlive(true);
+		}else{
+			waves.setEnemiesAlive(false);
+		}
 		waves.attemptSpawn(tickCount);
 
 		// Update all structures and enemies
