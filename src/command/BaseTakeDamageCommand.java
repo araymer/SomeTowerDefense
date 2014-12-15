@@ -3,9 +3,23 @@ package command;
 import Controller.TDClient;
 import Controller.TDServer;
 
-public class BaseTakeDamageCommand extends Command{
+/**
+ * Command for the Base taking damage
+ *
+ * @author TeamSomething
+ */
+public class BaseTakeDamageCommand extends Command {
 	private int amountDamaged;
 
+	/**
+	 * Constructs a new Command for the base taking damage
+	 *
+	 * @author TeamSomething
+	 * @param username
+	 *            = the name of the client
+	 * @param amtdmgd
+	 *            = the amount of damage done to the base
+	 */
 	public BaseTakeDamageCommand(String username, int amtdmged) {
 		super(username);
 		amountDamaged = amtdmged;
@@ -18,7 +32,7 @@ public class BaseTakeDamageCommand extends Command{
 
 	@Override
 	public void clientExecute(TDClient client) {
-		
+
 	}
 
 }
