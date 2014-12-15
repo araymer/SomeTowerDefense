@@ -132,7 +132,7 @@ public class TilePanel extends JPanel implements Serializable {
 		}
 
 		if (circleX != -1 && circleY != -1) {
-			g2.setColor(new Color(1, 1, 1, 0.5f));
+			g2.setColor(new Color(1, 1, 1, 0.2f));
 			g2.fillOval(circleX - range / 4, circleY - range / 4, range, range);
 		}
 	}

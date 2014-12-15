@@ -55,7 +55,7 @@ public class GameGUI implements Serializable {
 	private static GameGUI thisGUI;
 	private TDClient client;
 	public boolean isMultiplayer = false;
-	public boolean isRunning = false;
+	public volatile boolean isRunning = false;
 	public int mapSelection;
 	private CardLayout cards;
 	Structure structure;
@@ -309,6 +309,15 @@ public class GameGUI implements Serializable {
 		gamePanel.add(MainMenu.getInstance());
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
 		isRunning = false;
+		if (tickerThread != null) {
+            try {
+				tickerThread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            System.out.println("Thread successfully stopped.");
+        }
 	}
 
 	private void restartMap() {
