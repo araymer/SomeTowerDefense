@@ -22,7 +22,7 @@ public class Scout extends Attacker {
 	private static final int SPEED = 15;// The smaller, the faster
 	double pixels = 0;
 	int count = 0;
-	BufferedImage tempSubImage;
+	transient BufferedImage tempSubImage;
 	boolean firing;
 	int frames;
 

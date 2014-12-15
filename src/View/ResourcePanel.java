@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import Model.StructureType;
 
@@ -38,7 +40,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	JButton sentryGunInfo;
 	JButton plasmaCannonInfo;
 	JLabel money;
-	static JLabel info;
+	JLabel info;
 
 	/**
 	 * Constructs the ResourcePanel for use in the GameGUI
@@ -46,7 +48,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	private ResourcePanel() {
 		selected = StructureType.SENTRYGUN;
 
-		this.setLayout(new GridLayout(6, 2));
+		this.setLayout(new GridLayout(5, 2));
 		this.setPreferredSize(new Dimension(200, 600));
 		radioButtons = new ButtonGroup();
 
@@ -75,7 +77,6 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		money = new JLabel("Funds: 500");
 
 		info = new JLabel("");
-		info.setSize(15, 20);
 
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
@@ -117,7 +118,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		money.setText("Funds: " + arg1);
 	}
 
-	public static void updateInfo(String string) {
+	public void updateInfo(String string) {
 		info.setText(string);
 	}
 
@@ -220,7 +221,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 					+ structureHP + "<br>Damage: " + structureDamage
 					+ "<br>Rate of Fire: " + structureROF + " shots per second"
 					+ "<br>Cost: " + structureCost + "</html>";
-			ResourcePanel.updateInfo(info);
+			resourcePanel.updateInfo(info);
 		}
 	}
 

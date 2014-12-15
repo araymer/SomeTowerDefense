@@ -340,7 +340,7 @@ public class GameGUI implements Serializable {
 							+ "<br>HP: " + attackers.get(0).getHP()
 							+ "<br>Attack: " + attackers.get(0).getAttack()
 							+ "</html>";
-					ResourcePanel.updateInfo(info);
+					ResourcePanel.getInstance().updateInfo(info);
 				}
 			} catch (Exception exception) {
 
@@ -360,10 +360,10 @@ public class GameGUI implements Serializable {
 							+ "<br>HP: " + structure.getHP() + "<br>Damage: "
 							+ structure.getDamage() + "<br>Rate of Fire: "
 							+ structure.getROF() + " shots per second</html>";
-					ResourcePanel.updateInfo(info);
 					ResourcePanel.getInstance().setCirclePoints(
 							e.getPoint().getX(), e.getPoint().getY());
 					ResourcePanel.getInstance().repaint();
+					ResourcePanel.getInstance().updateInfo(info);
 				}
 			} catch (Exception exception) {
 

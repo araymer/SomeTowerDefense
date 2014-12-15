@@ -23,7 +23,7 @@ public class Cannoneer extends Attacker {
 	private static final int SPEED = 50;// The smaller, the faster
 	double pixels = 0;
 	int count = 0;
-	BufferedImage tempSubImage;
+	transient BufferedImage tempSubImage;
 	int frames;
 	boolean firing;
 
