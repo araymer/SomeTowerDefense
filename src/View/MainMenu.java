@@ -24,6 +24,12 @@ import Controller.TDServer;
 
 public class MainMenu extends JPanel {
 
+	/**
+	 * MainMenu that displays on startup
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	private static MainMenu mainMenu;
 	Image bgImage;
 	Image logo;
@@ -42,7 +48,12 @@ public class MainMenu extends JPanel {
 	BufferedImage map;
 	int mapSelected;
 
-
+	/**
+	 * Private constructor for MainMenu
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	private MainMenu() {
 
 		this.setLayout(new BorderLayout());
@@ -53,7 +64,8 @@ public class MainMenu extends JPanel {
 		beachButton = new JButton("Beach Betrayal");
 		plainsButton = new JButton("Broken Plains Patrol");
 		desertButton = new JButton("Desert Uprising");
-		chooseLabel = new JLabel("Choose A Map First Then Select Single/Multiplayer");
+		chooseLabel = new JLabel(
+				"Choose A Map First Then Select Single/Multiplayer");
 		ButtonListener buttonListener = new ButtonListener();
 		// desertMap.addActionListener(buttonListener);
 		singleplayer.addActionListener(buttonListener);
@@ -67,7 +79,7 @@ public class MainMenu extends JPanel {
 		startPanel.add(singleplayer);
 		startPanel.add(multiplayer);
 		startPanel.add(load);
-		startPanel.setBackground(new Color(0,0,0,0));
+		startPanel.setBackground(new Color(0, 0, 0, 0));
 		this.add(startPanel, BorderLayout.NORTH);
 
 		JPanel bottomPanel = new JPanel();
@@ -108,6 +120,11 @@ public class MainMenu extends JPanel {
 
 	}
 
+	/**
+	 * Resets the game's logo.
+	 * 
+	 * @author Team Something
+	 */
 	public void resetLogo() {
 		File logoImage = new File(baseDir + "logo.png");
 		try {
@@ -118,6 +135,12 @@ public class MainMenu extends JPanel {
 		mainMenu.repaint();
 	}
 
+	/**
+	 * Listens for the user to click on the game selection buttons
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	private class ButtonListener implements ActionListener {
 
 		@Override
@@ -143,13 +166,14 @@ public class MainMenu extends JPanel {
 				// multiplayer.setVisible(false);
 				mainMenu.repaint();
 			}
-			if (e.getSource() == load){
+			if (e.getSource() == load) {
 				GameController.getInstance().loadData();
 			}
-			if (e.getSource() == beachButton){
+			if (e.getSource() == beachButton) {
 
 				try {
-					map = ImageIO.read(new File("imageFiles/BeachBetrayal.jpg"));
+					map = ImageIO
+							.read(new File("imageFiles/BeachBetrayal.jpg"));
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -157,10 +181,11 @@ public class MainMenu extends JPanel {
 				repaint();
 				mapSelected = 2;
 			}
-			if (e.getSource() == plainsButton){
+			if (e.getSource() == plainsButton) {
 
 				try {
-					map = ImageIO.read(new File("imageFiles/BrokenPlainsPatrol.jpg"));
+					map = ImageIO.read(new File(
+							"imageFiles/BrokenPlainsPatrol.jpg"));
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -168,9 +193,10 @@ public class MainMenu extends JPanel {
 				repaint();
 				mapSelected = 1;
 			}
-			if (e.getSource() == desertButton){
+			if (e.getSource() == desertButton) {
 				try {
-					map = ImageIO.read(new File("imageFiles/DesertUprising.jpg"));
+					map = ImageIO
+							.read(new File("imageFiles/DesertUprising.jpg"));
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -182,14 +208,27 @@ public class MainMenu extends JPanel {
 		}
 	}
 
+	/**
+	 * Returns Singleton instance of MainMenu
+	 * 
+	 * @author Team Something
+	 *
+	 * @return MainMenu = Singleton instance of MainMenu
+	 */
 	public static MainMenu getInstance() {
 		if (mainMenu == null)
 			mainMenu = new MainMenu();
 
 		return mainMenu;
 	}
-	
-	public void reset(){
+
+	/**
+	 * Reinstantiates MainMenu
+	 * 
+	 * @author Team Something
+	 *
+	 */
+	public void reset() {
 		mainMenu = new MainMenu();
 	}
 
@@ -199,8 +238,8 @@ public class MainMenu extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		AffineTransform at = new AffineTransform();
 		at.scale(0.5, 0.5);
-		at.translate(getWidth()/2+150, getHeight()/2+200);
-		
+		at.translate(getWidth() / 2 + 150, getHeight() / 2 + 200);
+
 		g.drawImage(bgImage, 0, 0, null);
 		g.drawImage(logo, 266, 100, null);
 		g2.drawImage(map, at, null);
