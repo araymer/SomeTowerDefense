@@ -14,7 +14,7 @@ import TowerFSM.TowerWaiting;
 
 /**
  * This is the upgraded version of the Chrono Tower. The target is held in a
- * stasis field, unable to move or attack
+ * stasis field, unable to move beyond it's current tile.
  * 
  * @author Team Something
  *
@@ -34,7 +34,9 @@ public class StasisTower extends Structure {
 	private static final int COST = 2500;
 
 	/**
-	 * Constructor for Stasis Tower.
+	 * The constructor, arguments are the x and y coordinates of the tower.
+	 * @param x
+	 * @param y
 	 */
 	public StasisTower(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
@@ -47,6 +49,9 @@ public class StasisTower extends Structure {
 		price = 50;
 	}
 
+	/**
+	 * Establishes the images for the various states.
+	 */
 	public void setImages() {
 
 		if (waitImage == null) {
@@ -86,6 +91,9 @@ public class StasisTower extends Structure {
 		}
 	}
 
+	/**
+	 * Determines which sprite sheet to use.
+	 */
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {
 		BufferedImage correctImage = null;
@@ -108,10 +116,13 @@ public class StasisTower extends Structure {
 		return correctImage;
 	}
 
+	/**
+	 * Unused
+	 */
 	@Override
 	public void die() {
-		// TODO: implement dying
 
 	}
+
 
 }

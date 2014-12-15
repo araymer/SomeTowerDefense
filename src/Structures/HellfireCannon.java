@@ -35,7 +35,9 @@ public class HellfireCannon extends Structure {
 	private static final int COST = 2500;
 
 	/**
-	 * Constructor for Hell Fire Cannon.
+	 * The constructor, arguments are the x and y coordinates of the tower.
+	 * @param x
+	 * @param y
 	 */
 	public HellfireCannon(int x, int y) {
 		super(HITPOINTS, PRODUCTION, RANGE, DAMAGE, SPLASH, RATEOFFIRE, COST,
@@ -48,6 +50,9 @@ public class HellfireCannon extends Structure {
 		price = 50;
 	}
 
+	/**
+	 * Establishes the images for the various states.
+	 */
 	public void setImages() {
 
 		if (waitImage == null) {
@@ -87,6 +92,9 @@ public class HellfireCannon extends Structure {
 		}
 	}
 
+	/**
+	 * Determines which sprite sheet to use.
+	 */
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {
 		BufferedImage correctImage = null;
@@ -109,10 +117,13 @@ public class HellfireCannon extends Structure {
 		return correctImage;
 	}
 
+	/**
+	 * Unused
+	 */
 	@Override
 	public void die() {
-		// TODO: implement dying
 
 	}
+
 
 }

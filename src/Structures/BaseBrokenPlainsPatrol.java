@@ -10,6 +10,12 @@ import Model.Base;
 import Model.Structure;
 import TowerFSM.TowerStates;
 
+/**
+ * This class represents the player's base in "Broken Plains Patrol". It cannot
+ * attack, but if it is destroyed, the game is over.
+ * @author Team Something
+ *
+ */
 @SuppressWarnings("serial")
 public class BaseBrokenPlainsPatrol extends Base {
 
@@ -18,12 +24,20 @@ public class BaseBrokenPlainsPatrol extends Base {
 	protected static BufferedImage upgradeImage;
 	protected static BufferedImage explodeImage;
 
+	/**
+	 * The constructor, arguments are the x and y coordinates of the base.
+	 * @param x
+	 * @param y
+	 */
 	public BaseBrokenPlainsPatrol(int x, int y) {
 		super(500, 0, 0, 0, 0, 0, 0, x, y, null);
 		name = "Broken Plains Patrol Base";
 		price = 0;
 	}
 
+	/**
+	 * Establishes the images for the various states.
+	 */
 	@Override
 	public void setImages() {
 		if (waitImage == null) {
@@ -63,6 +77,9 @@ public class BaseBrokenPlainsPatrol extends Base {
 
 	}
 
+	/**
+	 * Determines which image to use.
+	 */
 	@Override
 	protected BufferedImage getImage(TowerStates newState) {
 		BufferedImage correctImage = null;
