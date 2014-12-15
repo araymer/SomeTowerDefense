@@ -35,6 +35,7 @@ public abstract class Map implements Serializable {
 			}
 		}
 		playerMoney.setMoney(500);
+		
 	}
 
 	public abstract Map reInit();

@@ -25,6 +25,9 @@ import javax.swing.JTextArea;
 
 import Controller.GameController;
 import Controller.TDClient;
+import Maps.BeachBetrayal;
+import Maps.BrokenPlainsPatrol;
+import Maps.DesertUprising;
 import Model.Attacker;
 import Model.Map;
 import Model.Player;
@@ -282,10 +285,24 @@ public class GameGUI implements Serializable {
 
 	public void returnMenu() {
 		// TODO: fix
+		switch(tilePanel.tileMap.mapImageName){
+		case "desertuprising.jpg":
+			DesertUprising.getInstance().reInit();
+			break;
+		case "BrokenPlainsPatrol.jpg":
+			BrokenPlainsPatrol.getInstance().reInit();
+			break;
+		case "BeachBetrayal.jpg":
+			BeachBetrayal.getInstance().reInit();
+			break;
+		default:
+			break;
+		}
 		playPanel.remove(tilePanel);
 		gamePanel.remove(playPanel);
 		Ticker.getInstance().reset();
-		tilePanel = tilePanel.reallyReset();
+		tilePanel.reallyReset();
+		tilePanel = TilePanel.getInstance();
 		MapPanel.getInstance().reset();
 		MainMenu.getInstance().reset();
 		gamePanel.removeAll();
