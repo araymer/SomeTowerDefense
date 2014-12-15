@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import Model.Base;
 import Model.Map;
 import Model.Tile;
-import Structures.BaseDesertUprising;
+import Structures.*;
 
 /**
  * 
  * @author Team Something
  *
  */
+@SuppressWarnings("serial")
 public class BrokenPlainsPatrol extends Map {
 	private static int guiHeight = 600;
 	private static int guiWidth = 800;
@@ -139,7 +140,7 @@ public class BrokenPlainsPatrol extends Map {
 	@Override
 	public void setBase() {
 		gameBoard.get(BASE_X).get(BASE_Y)
-				.addStructure(new BaseDesertUprising(BASE_X, BASE_Y));
+				.addStructure(new BaseBrokenPlainsPatrol(BASE_X, BASE_Y));
 	}
 
 	/**
