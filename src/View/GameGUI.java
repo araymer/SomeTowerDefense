@@ -331,6 +331,7 @@ public class GameGUI implements Serializable {
 		tilePanel = tilePanel.reset();
 		// tilePanel = TilePanel.getInstance();
 		tilePanel.setMap(currentMap);
+		Ticker.getInstance().waves.setWave(1);
 		Ticker.getInstance().loopStart();
 
 	}

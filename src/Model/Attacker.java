@@ -95,7 +95,7 @@ public abstract class Attacker extends Drawable implements Serializable {
 				break;
 			case FREEZE:
 				effect = SpecialAttack.FREEZE;
-				speed = 0;
+				speed = 100;
 				break;
 			case SLOW:
 				if(effect == SpecialAttack.NONE || effect == SpecialAttack.BURN) {
@@ -177,11 +177,10 @@ public abstract class Attacker extends Drawable implements Serializable {
 		}
 		int framedif = 0;
 		// Moves every speed amount of ticks
-		if(speed != 0) {
-			if (tick % speed == 0) {
-				move();
-			}
+		if (tick % speed == 0) {
+			move();
 		}
+			
 		// Shoots if at base
 		if (tick % attackRating == 0) {
 			if (location.getNextTile() == null) {

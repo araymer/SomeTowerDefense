@@ -40,11 +40,25 @@ public class MapPanel extends JPanel {
 
 	}
 
+	/**
+	 * Resets the MapPanel
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public MapPanel reset() {
 		mapPanel = new MapPanel();
 		return mapPanel;
 	}
 
+	/**
+	 * Sets the image to be used in the game.
+	 * 
+	 * @author Team Something
+	 *
+	 * @param filename
+	 *            = name of file to be used as map background
+	 */
 	public void setMap(String filename) {
 		setFileName(fileName);
 		File chosenMap = new File(baseDir + filename);
@@ -55,14 +69,36 @@ public class MapPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Returns filename of background image
+	 * 
+	 * @author Team Something
+	 *
+	 * @return String = name of background image
+	 */
 	public String getFileName() {
 		return fileName;
 	}
 
+	/**
+	 * Sets filename of background image
+	 * 
+	 * @author Team Something
+	 *
+	 * @param fileName
+	 *            = file name of background
+	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
+	/**
+	 * Returns Singleton instance of MapPanel
+	 * 
+	 * @author Team Something
+	 *
+	 * @return MapPanel = Singleton instance of MapPanel
+	 */
 	public static MapPanel getInstance() {
 		if (mapPanel == null) {
 			mapPanel = new MapPanel();

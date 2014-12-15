@@ -245,6 +245,13 @@ public class TilePanel extends JPanel implements Serializable {
 		return reset();
 	}
 
+	/**
+	 * Returns Singleton instance of TilePanel
+	 * 
+	 * @author Team Something
+	 *
+	 * @return TilePanel = Singleton instance of TilePanel
+	 */
 	public static TilePanel getInstance() {
 		if (tilePanel == null) {
 			tilePanel = new TilePanel();
@@ -252,10 +259,15 @@ public class TilePanel extends JPanel implements Serializable {
 		return tilePanel;
 	}
 
+	/**
+	 * Sets the map for the game.
+	 * 
+	 * @author Team Something
+	 *
+	 * @param m
+	 *            = the map
+	 */
 	public void setMap(Map m) {
-		if (m.mapImageName.equals("desertuprising.jpg")) {
-			DesertUprising.setMap(m);
-		}
 		tileMap = m;
 		tileMap.setGameBoard(m.getGameBoard());
 		tilePanel = new TilePanel();
@@ -324,12 +336,31 @@ public class TilePanel extends JPanel implements Serializable {
 	int circleY = -1;
 	int range;
 
+	/**
+	 * Sets the points for the range circle
+	 * 
+	 * @author Team Something
+	 *
+	 * @param x
+	 *            = x coordinate for circle placement
+	 * @param y
+	 *            = y coordinate for circle placement
+	 * @param range
+	 *            = range of the tower (radius of circle)
+	 */
 	public void setCirclePoints(int x, int y, int range) {
 		circleX = x * 40 - 20;
 		circleY = y * 40 - 20;
 		this.range = range * 60; // 60 to account for both ways + half a tile
 	}
 
+	/**
+	 * Returns the current map.
+	 * 
+	 * @author Team Something
+	 *
+	 * @return Map = returns the current Map
+	 */
 	public Map getMap() {
 		return tileMap;
 	}
