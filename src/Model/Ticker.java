@@ -42,14 +42,13 @@ public class Ticker implements Runnable {
 	// Only run this in another Thread!
 	@Override
 	public void run() {
-		while (true) {
-			while (isRunning) {
-				
+		while (GameGUI.getInstance().isRunning) {
+			while (GameGUI.getInstance().isRunning && isRunning) {
 				now = System.nanoTime();
 				updateCount = 0;
 
 				if (!paused) {
-					while (now - lastUpdateTime > timeBetweenFrames
+					while (GameGUI.getInstance().isRunning && now - lastUpdateTime > timeBetweenFrames
 							&& updateCount < maxUpdatesBetweenRenders) {
 
 						update();
@@ -82,6 +81,7 @@ public class Ticker implements Runnable {
 				}
 			}
 		}
+		System.out.println("Ticker: this thread stopped");
 	}
 
 	private void drawGame(double interpolation) {
@@ -243,6 +243,10 @@ public class Ticker implements Runnable {
 		if (ticker == null)
 			ticker = new Ticker();
 		return ticker;
+	}
+	
+	public void reset(){
+		ticker = new Ticker();
 	}
 
 }

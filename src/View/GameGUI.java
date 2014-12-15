@@ -52,12 +52,14 @@ public class GameGUI implements Serializable {
 	private static GameGUI thisGUI;
 	private TDClient client;
 	public boolean isMultiplayer = false;
+	public boolean isRunning = false;
 	public int mapSelection;
 	private CardLayout cards;
 	Structure structure;
 	public JFrame resourceFrame;
 	private int currentMap;
 	public double interpolation;
+	private Thread tickerThread;
 
 	/**
 	 * Constructs the Tower Defense GUI
@@ -133,8 +135,11 @@ public class GameGUI implements Serializable {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
 		}
-
-		new Thread(Ticker.getInstance()).start();
+		
+		isRunning = true;
+		tickerThread = new Thread(Ticker.getInstance());
+		tickerThread.start();
+		
 
 	}
 
@@ -174,8 +179,10 @@ public class GameGUI implements Serializable {
 		}
 		tilePanel.setMap(map);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
-
-		new Thread(Ticker.getInstance()).start();
+		
+		isRunning = true;
+		tickerThread = new Thread(Ticker.getInstance());
+		tickerThread.start();
 		System.out.println("GameGUI: finished loading");
 	}
 
@@ -277,10 +284,14 @@ public class GameGUI implements Serializable {
 		// TODO: fix
 		playPanel.remove(tilePanel);
 		gamePanel.remove(playPanel);
-		// Ticker.getInstance().loopStop();
+		Ticker.getInstance().reset();
 		tilePanel = tilePanel.reset();
 		MapPanel.getInstance().reset();
+		MainMenu.getInstance().reset();
+		gamePanel.removeAll();
+		gamePanel.add(MainMenu.getInstance());
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
+		isRunning = false;
 	}
 
 	private void restartMap() {
@@ -416,8 +427,8 @@ public class GameGUI implements Serializable {
 						+ "This is a Tower Defense Game, where you will protect your home base by building"
 						+ " towers that will defend against waves of enemies!\n\n"
 						+ "Getting started:\n To play, simply select"
-						+ " the single player or multiplayer game mode. Once in the game, you will be"
-						+ " able to select the map you wish to play on.\n\n"
+						+ " the map you want to play on and then choose single player or multiplayer mode."
+						+ " \n\n"
 						+ "Gameplay:\nIn the game, you'll be able to select the type of tower you wish to"
 						+ " build on the resource window on the right. Selecting a type of tower and clicking"
 						+ " on an eligible spot will build a tower there. Click on any of your towers, your base"

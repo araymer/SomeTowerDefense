@@ -76,6 +76,7 @@ public class TilePanel extends JPanel implements Serializable {
 	public TilePanel reset() {
 		// Player.getInstance().reset();
 		tileMap = tileMap.reInit();
+		tilePanel = new TilePanel();
 		return tilePanel;
 	}
 
