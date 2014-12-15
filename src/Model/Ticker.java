@@ -88,7 +88,10 @@ public class Ticker implements Runnable {
 	}
 
 	boolean fast = false;
-
+	/**
+	 * Changes speed of game for "fast mode" play.
+	 * 
+	 */
 	public void changeSpeed() {
 		if (!fast) {
 			timeBetweenFrames = timeBetweenFrames = 500000000 / fps;
@@ -99,7 +102,10 @@ public class Ticker implements Runnable {
 		}
 		// 1/2th the time between frames
 	}
-
+	/**
+	 * Calls GameGUI's repaint method to draw the game each tick.
+	 * @param interpolation - deprecated
+	 */
 	private void drawGame(double interpolation) {
 		// Iterate through all game objects and call their draw methods with
 		// interpolation
@@ -110,7 +116,9 @@ public class Ticker implements Runnable {
 		// some way to feed interpolation
 
 	}
-
+	/**
+	 * @returns tickCount - number of ticks. Overflow imminent. Modulus arithmetic recommended
+	 */
 	public int getTicks() {
 		return tickCount;
 	}
@@ -213,17 +221,24 @@ public class Ticker implements Runnable {
 			GameGUI.getInstance().getClient().sendMiniMap();
 		}
 	}
-
+	/**
+	 * sets isRunning to true so game logic starts within the game loop.
+	 */
 	public void loopStart() {
 		System.out.println("Resuming loop");
 		isRunning = true;
 	}
-
+	/**
+	 * sets isRunning to false to stop game loop.
+	 */
 	public void loopStop() {
 		System.out.println("Stopping loop");
 		isRunning = false;
 	}
-
+	/**
+	 * 
+	 * @return isRunning
+	 */
 	public boolean running() {
 		return isRunning;
 	}
@@ -238,7 +253,9 @@ public class Ticker implements Runnable {
 			ticker = new Ticker();
 		return ticker;
 	}
-
+	/**
+	 * Re-instantiates Ticker
+	 */
 	public void reset() {
 		ticker = new Ticker();
 	}
