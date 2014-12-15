@@ -31,10 +31,10 @@ import Model.Tile;
 public class TilePanel extends JPanel implements Serializable {
 	private static TilePanel tilePanel;
 	public Map tileMap;
-	private boolean display, display1;
-	private int wave = 0;
-	Timer img;
-	Timer waveTime;
+	public boolean display, display1;
+//	private int wave = 0;
+//	Timer img;
+//	Timer waveTime;
 
 	/**
 	 * Constructs the TilePanel for use in the GameGUI
