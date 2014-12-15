@@ -18,7 +18,11 @@ import command.UpdateBaseCommand;
 import command.UpdateChatCommand;
 import command.UpdateMiniMapCommand;
 
-
+/**
+ * Handles the server in multiplayer.
+ * @author Team Something
+ *
+ */
 public class TDServer {
 	private ServerSocket socket;
 	private int port;
@@ -37,7 +41,7 @@ public class TDServer {
 	private List<String> messages;
 
 	/**
-	 * Constructor for NPServer. Creates a new ServerSocket on port 4007 and
+	 * Constructor for TDServer. Creates a new ServerSocket on port 4007 and
 	 * then creates a new thread to accept clients.
 	 */
 	public TDServer() {
@@ -163,6 +167,10 @@ public class TDServer {
 		}
 	}
 
+	/**
+	 * Disconnects from client.
+	 * @param String - clientName
+	 */
 	public void disconnect(String clientName) {
 		try {
 			outputs.get(clientName).close(); // close output stream
@@ -186,11 +194,17 @@ public class TDServer {
 		
 	}
 	
+	/**
+	 * Damage to team base.
+	 * @param int - amountDamaged
+	 */
 	public void masterHealthTakeDamage(int amountDamaged){
 		masterBaseHP -= amountDamaged;
 		shareBaseHP();
 	}
-	
+	/**
+	 * Shares the hit points for both players.
+	 */
 	private void shareBaseHP(){
 		// make a command, write to all connected users
 		UpdateBaseCommand update = new UpdateBaseCommand(null, masterBaseHP);
@@ -203,6 +217,11 @@ public class TDServer {
 
 	}
 
+	/**
+	 * sets starting hitpoints
+	 * @param String - username
+	 * @param int - newBaseHP
+	 */
 	public void setStartingHP(String username, int newBaseHP) {
 		if(!hpIsSet){
 			masterBaseHP = newBaseHP;
@@ -212,6 +231,9 @@ public class TDServer {
 		
 	}
 	
+	/**
+	 * Starts a new game.
+	 */
 	public void startGame(){
 		CreateGameCommand cmd = new CreateGameCommand(null);
 		try {
@@ -222,11 +244,18 @@ public class TDServer {
 		}
 	}
 
+	/**
+	 * Adds a message to chat.
+	 * @param message
+	 */
 	public void addToChat(String message) {
 		messages.add(message);
 		updateChats();
 	}
 
+	/**
+	 * updates the chat.
+	 */
 	private void updateChats() {
 		UpdateChatCommand update = new UpdateChatCommand(null, messages);
 		try{
