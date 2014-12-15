@@ -100,6 +100,8 @@ public class GameGUI implements Serializable {
 	 *            = integer representation of selected map
 	 */
 	void createMap(int selection) {
+		playPanel = new JPanel();
+		mapOverlay = new JLayeredPane();
 
 		currentMap = selection;
 		switch (selection) {
@@ -148,7 +150,12 @@ public class GameGUI implements Serializable {
 		}
 
 		isRunning = true;
-		tickerThread = new Thread(Ticker.getInstance());
+		if(tickerThread == null){
+			tickerThread = new Thread(Ticker.getInstance());
+		}
+		
+		Ticker.getInstance().waves.setWave(1);
+		Ticker.getInstance().loopStart();
 		tickerThread.start();
 
 	}
@@ -162,6 +169,9 @@ public class GameGUI implements Serializable {
 	 *            = loaded map data
 	 */
 	public void createLoadedMap(Map map) {
+//		playPanel = new JPanel();
+//		mapOverlay = new JLayeredPane();
+		
 		MapPanel.getInstance().setMap(map.mapImageName);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
 		tilePanel = TilePanel.getInstance();
@@ -199,8 +209,12 @@ public class GameGUI implements Serializable {
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
 
 		isRunning = true;
-		tickerThread = new Thread(Ticker.getInstance());
+		//if(tickerThread == null){
+			tickerThread = new Thread(Ticker.getInstance());
+		//}
+		
 		Ticker.getInstance().waves.setWave(map.waveNumber);
+		//Ticker.getInstance().loopStart();
 		tickerThread.start();
 		System.out.println("GameGUI: finished loading");
 	}
@@ -330,45 +344,11 @@ public class GameGUI implements Serializable {
 	 *
 	 */
 	public void returnMenu() {
-		switch (tilePanel.tileMap.mapImageName) {
-		case "desertuprising.jpg":
-			DesertUprising.getInstance().reInit();
-			break;
-		case "BrokenPlainsPatrol.jpg":
-			BrokenPlainsPatrol.getInstance().reInit();
-			break;
-		case "BeachBetrayal.jpg":
-			BeachBetrayal.getInstance().reInit();
-			break;
-		default:
-			break;
-		}
-		playPanel.removeAll();
-		playPanel.remove(tilePanel);
+		Ticker.getInstance().loopStop();
 		gamePanel.remove(playPanel);
-		Ticker.getInstance().reset();
-		tilePanel.reallyReset();
-		tilePanel = TilePanel.getInstance();
-
-		MapPanel.getInstance().reset();
-		MainMenu.getInstance().reset();
-		ResourcePanel.getInstance().reinit();
-		gamePanel.removeAll();
-		gamePanel.add(MainMenu.getInstance());
-		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
-
-		gamePanel.add(playPanel, "Play");
-
-		isRunning = false;
-		if (tickerThread != null) {
-			try {
-				tickerThread.join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("Thread successfully stopped.");
-		}
+		tilePanel = tilePanel.reset();
+		tilePanel.setMap(currentMap);
+		
 	}
 
 	/**
@@ -537,7 +517,7 @@ public class GameGUI implements Serializable {
 				System.exit(0);
 				break;
 			case "options":
-				// TODO: implement any game options
+				// implement any game options
 				break;
 			case "instructions":
 				JFrame instr = new JFrame();
@@ -555,7 +535,8 @@ public class GameGUI implements Serializable {
 						+ "Gameplay:\nIn the game, you'll be able to select the type of tower you wish to"
 						+ " build on the resource window on the right. Selecting a type of tower and clicking"
 						+ " on an eligible spot will build a tower there. Click on any of your towers, your base"
-						+ " or even enemies to view information about them, upgrade your towers, or heal your base.";
+						+ " or even enemies to view information about them or upgrade your towers."
+						+ " You can win the game by having the base survive against all the waves.";
 
 				JPanel instrPanel = new JPanel();
 				instrPanel.setLayout(new FlowLayout());

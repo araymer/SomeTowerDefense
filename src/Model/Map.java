@@ -82,7 +82,6 @@ public abstract class Map implements Serializable {
 	 * @param point
 	 *            The position on the panel where the user clicked
 	 */
-
 	public void createStructure(StructureType selectedStructure, Point point) {
 		// Calculate the tile that was clicked
 		int selectedX = point.x / getTileWidth();

@@ -32,14 +32,15 @@ public class Wave {
 	}
 	
 	public void finishedWaves(){
+		innerCount = 1;
+		waveCount++;
+		TilePanel.getInstance().tileMap.waveNumber = waveCount;
+		GameController.getInstance().saveData();
 		System.out.println("YOU WON");
 		TilePanel.getInstance().display1 = true;
 	}
 	
 	public void setEnemiesAlive(boolean bool){
-		if(!bool){
-			//System.out.println("Wave: set to false!");
-		}
 		enemiesAlive = bool;
 	}
 	
@@ -89,7 +90,6 @@ public class Wave {
 						new Cannoneer(TilePanel.getInstance().tileMap.getSpawnTile(2)));
 				
 				}else if(!enemiesAlive){
-					startingAWave();
 					finishedWaves();
 				}
 				break;

@@ -29,9 +29,9 @@ public class HellfireCannon extends Structure {
 	private static final int HITPOINTS = 100;
 	private static final int PRODUCTION = 0;
 	private static final int RANGE = 4;
-	private static final int DAMAGE = 5;
+	private static final int DAMAGE = 20;
 	private static final int SPLASH = 0;
-	private static final int RATEOFFIRE = 5;// The smaller, the faster
+	private static final int RATEOFFIRE = 7;// The smaller, the faster
 	private static final int COST = 2500;
 
 	/**

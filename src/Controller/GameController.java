@@ -83,27 +83,11 @@ public class GameController {
 	public boolean loadData() {
 
 		try {
-			// load map
-//			inStream = new FileInputStream(new File("map.dat"));
-//			inObject = new ObjectInputStream(inStream);
-//			MapPanel.getInstance().setMap((String) inObject.readObject());
-//			inObject.close();
 			// load tiles
 			inStream = new FileInputStream(new File("map.dat"));
 			inObject = new ObjectInputStream(inStream);
 			Map loadedMap = (Map) inObject.readObject();
 			inObject.close();
-//			for (int i = 0; i < TilePanel.getInstance().getMap().getGameBoard()
-//					.size(); i++) {
-//				for (int p = 0; p < TilePanel.getInstance().getMap()
-//						.getGameBoard().get(i).size(); p++) {
-//					if (TilePanel.getInstance().getMap().getGameBoard().get(i)
-//							.get(p) != null) {
-//						TilePanel.getInstance().getMap().getGameBoard().get(i)
-//								.get(p).getStructure().setImages();
-//					}
-//				}
-//			}
 			System.out.println("Map info:");
 			System.out.println("Money was " + loadedMap.playerMoney.getMoney());
 			System.out.println("Map was " + loadedMap.mapImageName);
@@ -125,12 +109,7 @@ public class GameController {
 		FileOutputStream outStream;
 		ObjectOutputStream outObject;
 		try {
-			// save map
-//			outStream = new FileOutputStream(new File("map.dat"));
-//			outObject = new ObjectOutputStream(outStream);
-//			outObject.writeObject(MapPanel.getInstance().getFileName());
-//			outObject.close();
-			// save tiles
+			//save map
 			outStream = new FileOutputStream(new File("map.dat"));
 			outObject = new ObjectOutputStream(outStream);
 			outObject.writeObject(TilePanel.getInstance().getMap());
