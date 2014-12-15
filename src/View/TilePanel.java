@@ -78,13 +78,11 @@ public class TilePanel extends JPanel implements Serializable {
 		tileMap = tileMap.reInit();
 		return tilePanel;
 	}
-	
-	
-	public TilePanel reallyReset(){
+
+	public TilePanel reallyReset() {
 		tilePanel = new TilePanel();
 		return reset();
 	}
-
 
 	public static TilePanel getInstance() {
 		if (tilePanel == null) {
@@ -144,7 +142,7 @@ public class TilePanel extends JPanel implements Serializable {
 	public void setCirclePoints(int x, int y, int range) {
 		circleX = x * 40 - 20;
 		circleY = y * 40 - 20;
-		this.range = range * 80; // 80 to account for both ways
+		this.range = range * 60; // 80 to account for both ways
 	}
 
 	public Map getMap() {
