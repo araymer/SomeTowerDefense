@@ -188,6 +188,10 @@ public class MainMenu extends JPanel {
 
 		return mainMenu;
 	}
+	
+	public void reset(){
+		mainMenu = new MainMenu();
+	}
 
 	@Override
 	protected void paintComponent(Graphics g) {

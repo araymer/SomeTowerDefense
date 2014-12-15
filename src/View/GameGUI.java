@@ -269,9 +269,12 @@ public class GameGUI implements Serializable {
 	}
 
 	public void returnMenu() {
-		// TODO: fix
+		// TODO: fix. Needs to reset everything
 		tilePanel = tilePanel.reset();
 		MapPanel.getInstance().reset();
+		MainMenu.getInstance().reset();
+		gamePanel.removeAll();
+		gamePanel.add(MainMenu.getInstance());
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
 	}
 
@@ -403,8 +406,8 @@ public class GameGUI implements Serializable {
 						+ "This is a Tower Defense Game, where you will protect your home base by building"
 						+ " towers that will defend against waves of enemies!\n\n"
 						+ "Getting started:\n To play, simply select"
-						+ " the single player or multiplayer game mode. Once in the game, you will be"
-						+ " able to select the map you wish to play on.\n\n"
+						+ " the map you want to play on and then choose single player or multiplayer mode."
+						+ " \n\n"
 						+ "Gameplay:\nIn the game, you'll be able to select the type of tower you wish to"
 						+ " build on the resource window on the right. Selecting a type of tower and clicking"
 						+ " on an eligible spot will build a tower there. Click on any of your towers, your base"
