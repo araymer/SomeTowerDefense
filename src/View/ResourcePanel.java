@@ -39,7 +39,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	JButton sentryGunInfo;
 	JButton plasmaCannonInfo;
 	JLabel money;
-	JTextArea info;
+	JLabel info;
 
 	/**
 	 * Constructs the ResourcePanel for use in the GameGUI
@@ -75,7 +75,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 
 		money = new JLabel("Funds: 500");
 
-		info = new JTextArea("");
+		info = new JLabel("");
 		info.setSize(20, 100);
 		info.setPreferredSize(new Dimension(20, 100));
 		info.setBackground(Color.YELLOW);
