@@ -4,6 +4,7 @@ import View.TilePanel;
 import Attackers.Cannoneer;
 import Attackers.Marine;
 import Attackers.Scout;
+import Controller.GameController;
 
 public class Wave {
 	public int waveCount = 1;
@@ -12,21 +13,26 @@ public class Wave {
 	public boolean enemiesAlive = true;
 	
 	public Wave(){
-		
+		TilePanel.getInstance().display = true;
 	}
 	
 	public void setWave(int num){
 		waveCount = num;
+		innerCount = 1;
 	}
 	
 	public void startingAWave(){
-		innerCount = 0;
+		innerCount = 1;
 		waveCount++;
+		TilePanel.getInstance().tileMap.waveNumber = waveCount;
+		GameController.getInstance().saveData();
 		System.out.println("Starting wave " + waveCount);
+		TilePanel.getInstance().display = true;
 	}
 	
 	public void finishedWaves(){
 		System.out.println("YOU WON");
+		TilePanel.getInstance().display1 = true;
 	}
 	
 	public void setEnemiesAlive(boolean bool){
@@ -38,8 +44,10 @@ public class Wave {
 	
 	public void attemptSpawn(int tick){
 		if(tick % 70 == 0){
+			TilePanel.getInstance().display = false;
 			switch(waveCount){
 			case 1:
+				
 				if(innerCount == 1){
 					TilePanel.getInstance().tileMap.getSpawnTile(1).addAttacker(
 							new Marine(TilePanel.getInstance().tileMap.getSpawnTile(1)));

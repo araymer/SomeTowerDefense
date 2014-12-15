@@ -35,12 +35,12 @@ public abstract class Map implements Serializable {
 				gameBoard.get(i).add(new Tile(i, k));
 			}
 		}
-		playerMoney.setMoney(500);
+		playerMoney.setMoney(300);
 		waveNumber = 0;
 		
 	}
-	public void nextWave(){
-		waveNumber++;
+	public void setWave( int wave){
+		waveNumber = wave;
 	}
 	public abstract Map reInit();
 

@@ -15,26 +15,36 @@ import Model.Structure;
 @SuppressWarnings("serial")
 public class TowerExploding extends TowerState implements Serializable{
 
+	/**
+	 * The constructor, just calls super-class constructor.
+	 * @param tower
+	 */
 	public TowerExploding(Structure tower) {
 		super(tower);
-		// int x = tower.getX();
-		// int y = tower.getY();
-
-		// tower explosion animation
+		
 	}
 
+	/**
+	 * Unused.
+	 */
 	@Override
 	public int getCurrentHP() {
 		// You are exploding, so the highest it could possibly be is:
 		return 0;
 	}
 
+	/**
+	 * Unused.
+	 */
 	@Override
 	public void takeDamage(int dmg) {
 		// Already being scattered across the landscape in small pieces!
 		// What more do you want?
 	}
 
+	/**
+	 * Provides a satisfying explosion.
+	 */
 	@Override
 	public void draw(Graphics2D g2) {
 		if (tower.bImage == null) {
@@ -62,9 +72,11 @@ public class TowerExploding extends TowerState implements Serializable{
 
 	}
 
+	/**
+	 * Unused.
+	 */
 	@Override
 	public void update() {
-		// TODO update
 
 	}
 
