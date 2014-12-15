@@ -11,6 +11,11 @@ import View.GameGUI;
 
 public abstract class Base extends Structure implements Serializable {
 
+	/**
+	 * Abstract class for base
+	 *
+	 * @author TeamSomething
+	 */
 	public Base(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
 		super(hp, prod, rng, dmg, splash, rate, cost, x, y, sp);
@@ -19,6 +24,13 @@ public abstract class Base extends Structure implements Serializable {
 
 	}
 
+	/**
+	 * Sets the base HP
+	 *
+	 * @author TeamSomething
+	 * @param newHP
+	 *            = hp of base
+	 */
 	public void setHP(int newHP) {
 		hitpoints = newHP;
 		System.out.println("New base hp is: " + hitpoints);
