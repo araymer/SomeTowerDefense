@@ -5,13 +5,12 @@ import java.io.Serializable;
 
 import Model.Structure;
 import Structures.*;
-//TODO: decide if we need to keep this class
 
 /**
  * This class controls the behavior of the tower while it is in the process of
  * upgrading. Note: towers take X2 damage while upgrading.
  * 
- * CURRENTLY UNUSED, UPGRADES HANDLED IN: Map class
+ * NOTE: UNUSED, UPGRADES HANDLED IN: Map class. 
  * 
  * @author Team Something
  *
@@ -45,6 +44,9 @@ public class TowerUpgrading extends TowerState implements Serializable{
 		tower.hitpoints -= (dmg * 2);
 	}
 
+	/**
+	 * Draws the graphics.
+	 */
 	@Override
 	public void draw(Graphics2D g2) {
 		if (tower.bImage == null) {

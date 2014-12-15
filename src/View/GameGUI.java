@@ -91,6 +91,14 @@ public class GameGUI implements Serializable {
 
 	}
 
+	/**
+	 * Creates the background image for the map
+	 * 
+	 * @author Team Something
+	 *
+	 * @param selection
+	 *            = integer representation of selected map
+	 */
 	void createMap(int selection) {
 
 		currentMap = selection;
@@ -145,6 +153,14 @@ public class GameGUI implements Serializable {
 
 	}
 
+	/**
+	 * Creates the map from load data
+	 * 
+	 * @author Team Something
+	 *
+	 * @param map
+	 *            = loaded map data
+	 */
 	public void createLoadedMap(Map map) {
 		MapPanel.getInstance().setMap(map.mapImageName);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
@@ -221,6 +237,12 @@ public class GameGUI implements Serializable {
 	JMenuItem options;
 	JMenuItem instructions;
 
+	/**
+	 * Creates the JMenuBar
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	void createMenuBar() {
 		menuBar = new JMenuBar();
 		game = new JMenu("Game");
@@ -228,10 +250,10 @@ public class GameGUI implements Serializable {
 		restart.addActionListener(new MenuListener());
 		restart.setActionCommand("restart");
 		game.add(restart);
-//		save = new JMenuItem("Save");
-//		save.addActionListener(new MenuListener());
-//		save.setActionCommand("save");
-//		game.add(save);
+		// save = new JMenuItem("Save");
+		// save.addActionListener(new MenuListener());
+		// save.setActionCommand("save");
+		// game.add(save);
 		// load = new JMenuItem("Load");
 		// load.addActionListener(new MenuListener());
 		// load.setActionCommand("load");
@@ -266,16 +288,34 @@ public class GameGUI implements Serializable {
 		menuBar.setVisible(true);
 	}
 
+	/**
+	 * Alerts the GUI that there is a new tile panel.
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public void newTilePanel() {
 		tilePanel = TilePanel.getInstance();
 		tilePanel.addMouseListener(new PlacementListener());
 	}
 
+	/**
+	 * Implements interpolated animations
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public void repaint(double inter) {
 		interpolation = inter;
 		tilePanel.repaint();
 	}
 
+	/**
+	 * Returns the instance of the GameGUI
+	 * 
+	 * @author Team Something
+	 * @return GameGUI = instance of GameGUI
+	 */
 	public static GameGUI getInstance() {
 		if (thisGUI == null)
 			thisGUI = new GameGUI();
@@ -283,9 +323,14 @@ public class GameGUI implements Serializable {
 		return thisGUI;
 	}
 
+	/**
+	 * Returns to the Main Menu
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public void returnMenu() {
-		// TODO: fix
-		switch(tilePanel.tileMap.mapImageName){
+		switch (tilePanel.tileMap.mapImageName) {
 		case "desertuprising.jpg":
 			DesertUprising.getInstance().reInit();
 			break;
@@ -302,7 +347,6 @@ public class GameGUI implements Serializable {
 		playPanel.remove(tilePanel);
 		gamePanel.remove(playPanel);
 		Ticker.getInstance().reset();
-		//tilePanel = null;
 		tilePanel.reallyReset();
 		tilePanel = TilePanel.getInstance();
 
@@ -314,19 +358,25 @@ public class GameGUI implements Serializable {
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
 
 		gamePanel.add(playPanel, "Play");
-		
+
 		isRunning = false;
 		if (tickerThread != null) {
-            try {
+			try {
 				tickerThread.join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            System.out.println("Thread successfully stopped.");
-        }
+			System.out.println("Thread successfully stopped.");
+		}
 	}
 
+	/**
+	 * Restarts the map
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	private void restartMap() {
 
 		tilePanel = tilePanel.reset();
@@ -337,6 +387,12 @@ public class GameGUI implements Serializable {
 
 	}
 
+	/**
+	 * Sets up the client for a multiplayer game
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public void setClient(TDClient cli) {
 		client = cli;
 		isMultiplayer = true;
@@ -348,19 +404,44 @@ public class GameGUI implements Serializable {
 		});
 	}
 
+	/**
+	 * Returns the client
+	 * 
+	 * @author Team Something
+	 * @return TDClient = the game client
+	 */
 	public TDClient getClient() {
 		return client;
 	}
 
+	/**
+	 * Delivers damage to the base.
+	 * 
+	 * @author Team Something
+	 * @param damageAmount
+	 *            = damage to be delivered to base
+	 */
 	public void baseTakeDamage(int damageAmount) {
 		client.baseTakeDamage(damageAmount);
 	}
 
+	/**
+	 * Starts a multiplayer game
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	public void startMultiplayerGame() {
 		createMap(mapSelection);
 		MainMenu.getInstance().resetLogo();
 	}
 
+	/**
+	 * Listens to the mouse to carry out various operations in the game
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	private class PlacementListener extends MouseAdapter {
 
 		@Override
@@ -418,6 +499,13 @@ public class GameGUI implements Serializable {
 		}
 	}
 
+	/**
+	 * Listens to the JMenuBar to perform various actions
+	 * 
+	 * 
+	 * @author Team Something
+	 *
+	 */
 	private class MenuListener implements ActionListener {
 
 		@Override
