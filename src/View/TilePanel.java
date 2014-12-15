@@ -270,7 +270,7 @@ public class TilePanel extends JPanel implements Serializable {
 	public void setMap(Map m) {
 		tileMap = m;
 		tileMap.setGameBoard(m.getGameBoard());
-		tilePanel = new TilePanel();
+		//tilePanel = new TilePanel();
 	}
 
 	@Override
