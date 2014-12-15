@@ -295,9 +295,10 @@ public class GameGUI implements Serializable {
 
 	private void restartMap() {
 
-		tilePanel.reset();
-		tilePanel = TilePanel.getInstance();
+		tilePanel = tilePanel.reset();
+		// tilePanel = TilePanel.getInstance();
 		tilePanel.setMap(currentMap);
+		Ticker.getInstance().loopStart();
 
 	}
 
