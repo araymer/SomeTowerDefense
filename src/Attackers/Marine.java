@@ -14,6 +14,11 @@ import Model.Structure;
 import Model.Tile;
 import View.TilePanel;
 
+/**
+ * This class represents the basic attacking unit, a Space Marine.
+ * @author Team Something
+ *
+ */
 @SuppressWarnings("serial")
 public class Marine extends Attacker {
 	private static final int HITPOINTS = 300;
@@ -24,6 +29,10 @@ public class Marine extends Attacker {
 	int count = 0;
 	double pixels = 0;
 
+	/**
+	 * The constructor.
+	 * @param startingLocation - tile that it starts on
+	 */
 	public Marine(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
 		name = "Marine";
@@ -44,6 +53,9 @@ public class Marine extends Attacker {
 
 	}
 
+	/**
+	 * Handles the drawing of the unit on the map.
+	 */
 	public void draw(Graphics2D g2) {
 		if (bImage == null) {
 			File imageFile = new File(baseDir + imageFileName);
@@ -88,6 +100,9 @@ public class Marine extends Attacker {
 
 	}
 
+	/**
+	 * Positions the unit in the square.
+	 */
 	private double offset(String s) {
 		if(getLoc().nextTile != null) {
 		if (getLoc().getCoordinates().x - getLoc().nextTile.getCoordinates().x < 0
@@ -112,6 +127,10 @@ public class Marine extends Attacker {
 
 	}
 
+	/**
+	 * Has the unit facing the correct direction.
+	 * @return double - represents the direction in radians
+	 */
 	private double checkTransform() {
 		if(getLoc().nextTile != null) {
 
@@ -141,6 +160,9 @@ public class Marine extends Attacker {
 		}
 	}
 	
+	/**
+	 * Resets the pixels.
+	 */
 	public void resetPixels(){
 		pixels = 0;
 	}
@@ -151,17 +173,4 @@ public class Marine extends Attacker {
 		resetPixels();
 	}
 	
-	/*
-	 * 
-	 * //4 is the number of shooting frames if(xIncrement > 4){ xIncrement = 0;
-	 * }
-	 * 
-	 * BufferedImage tempSubImage = bImage.getSubimage(xIncrement * WIDTH,
-	 * yIncrement * HEIGHT, WIDTH, HEIGHT); xIncrement ++;
-	 * g2.drawImage(tempSubImage, getLoc().getCoordinates().x * WIDTH,
-	 * getLoc().getCoordinates().y * HEIGHT, WIDTH, HEIGHT, null);
-	 * 
-	 * }
-	 */
-
 }
