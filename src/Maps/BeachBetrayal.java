@@ -65,8 +65,11 @@ public class BeachBetrayal extends Map {
 		// trees immediately west of SPAWN2
 		gameBoard.get(3).get(13).setBuild(false);
 		gameBoard.get(4).get(13).setBuild(false);
-		for (int c = 3; c > 8; c++)
-			gameBoard.get(c).get(14).setBuild(false);
+		gameBoard.get(3).get(14).setBuild(false);
+		gameBoard.get(4).get(14).setBuild(false);
+		gameBoard.get(5).get(14).setBuild(false);
+		gameBoard.get(6).get(14).setBuild(false);
+		gameBoard.get(7).get(14).setBuild(false);
 
 		// tree south of the paths near where the diverge and combine
 		gameBoard.get(11).get(12).setBuild(false);
@@ -75,8 +78,8 @@ public class BeachBetrayal extends Map {
 		gameBoard.get(12).get(11).setBuild(false);
 
 		// tree south of U-turn heading for final approach to base
-		gameBoard.get(15).get(14).setBuild(false);
-		gameBoard.get(13).get(14).setBuild(false);
+		gameBoard.get(17).get(14).setBuild(false);
+		gameBoard.get(16).get(14).setBuild(false);
 	}
 
 	@Override

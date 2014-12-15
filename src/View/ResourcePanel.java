@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 import Model.StructureType;
 
@@ -127,19 +124,6 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-		if (circleX != -1 && circleY != -1) {
-			System.out.println("OVAL");
-			g2.setColor(new Color(1, 1, 1, 0.5f));
-			g2.fillOval(circleX - 50, circleY - 50, 50, 50);
-		}
-	}
-
-	int circleX = -1;
-	int circleY = -1;
-
-	public void setCirclePoints(double x, double y) {
-		circleX = (int) x;
-		circleY = (int) y;
 	}
 
 	/**
