@@ -30,7 +30,7 @@ public class TowerAttacking extends TowerState implements Serializable{
 	private int tick;
 
 	/**
-	 * 
+	 * The Constructor
 	 * @param structure
 	 * @param atk
 	 * @param hp
@@ -63,7 +63,7 @@ public class TowerAttacking extends TowerState implements Serializable{
 		}
 		
 		// if the tower has TWO_TARGETS special attack, it see if there is more than one
-		// enemy on the same tile, and attacks the second one
+		// enemy on the same tile, and attacks the second one as well
 		if(tower.getSpecial() == SpecialAttack.TWO_TARGETS) {
 			target.location.getAttackers().trimToSize();
 			if(target.location.getAttackers().size() > 1) {
@@ -75,7 +75,7 @@ public class TowerAttacking extends TowerState implements Serializable{
 	/**
 	 * Determines if a target is in range of the tower.
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	private boolean inRange() {
 		// if range to target => tower.getRange(), then damage
@@ -95,20 +95,25 @@ public class TowerAttacking extends TowerState implements Serializable{
 	/**
 	 * Gets the current hit points of the structure.
 	 * 
-	 * @return int
+	 * @return int - current hit points of the structure
 	 */
 	@Override
 	public int getCurrentHP() {
 		return tower.hitpoints;
 	}
 
+	/**
+	 * Hit points removed due to attack.
+	 */
 	@Override
 	public void takeDamage(int dmg) {
 		tower.hitpoints -= dmg;
 
 	}
 
-	
+	/**
+	 * Changes state if required.
+	 */
 	private void attacking() {
 				boolean stateChange = false;
 				if (!stateChange) {
@@ -127,7 +132,9 @@ public class TowerAttacking extends TowerState implements Serializable{
 				}
 	}
 	
-	//TODO Will work on spites next iteration
+	/**
+	 * Handles the animation of the tower.
+	 */
 	@Override
 	public void draw(Graphics2D g2) {
 		if (tower.bImage == null) {
@@ -153,6 +160,9 @@ public class TowerAttacking extends TowerState implements Serializable{
 				* tower.HEIGHT, tower.WIDTH, tower.HEIGHT, null);
 	}
 
+	/**
+	 * Updates once every 1000 ticks.
+	 */
 	@Override
 	public void update() {
 		if(tick == 1000){
