@@ -12,6 +12,12 @@ import Structures.MarineSentryGunMkII;
 import Structures.PlasmaCannon;
 import Structures.StasisTower;
 
+/**
+ * Keeps track of the gameBoard and waves
+ * 
+ * @author TeamSomething
+ *
+ */
 public abstract class Map implements Serializable {
 
 	private static int tileWidth = 40;
@@ -22,7 +28,15 @@ public abstract class Map implements Serializable {
 	public int waveNumber;
 
 	// randomizing wave spawn points easier
-
+	/**
+	 * Creates an instance of map
+	 * 
+	 * @author TeamSomething
+	 * @param h
+	 *            = height of map
+	 * @param w
+	 *            = width of map
+	 */
 	public Map(int h, int w) { // Default constructor sets empty board
 		height = h;
 		width = w;
@@ -37,11 +51,26 @@ public abstract class Map implements Serializable {
 		}
 		playerMoney.setMoney(300);
 		waveNumber = 0;
-		
+
 	}
-	public void setWave( int wave){
+
+	/**
+	 * Sets the wave number
+	 * 
+	 * @author TeamSomething
+	 * @param wave
+	 *            = wave number
+	 */
+	public void setWave(int wave) {
 		waveNumber = wave;
 	}
+
+	/**
+	 * Resets the map
+	 * 
+	 * @author TeamSomething
+	 * @return Map = the reset map instance
+	 */
 	public abstract Map reInit();
 
 	/**
@@ -94,34 +123,32 @@ public abstract class Map implements Serializable {
 					upgrade = StructureType.NONE;
 				switch (upgrade) {
 				case SENTRYGUN2:
-					MarineSentryGunMkII m = new MarineSentryGunMkII(
-							selectedX, selectedY);
-					if(Player.getInstance().getMoney() >= m.getPrice()){
+					MarineSentryGunMkII m = new MarineSentryGunMkII(selectedX,
+							selectedY);
+					if (Player.getInstance().getMoney() >= m.getPrice()) {
 						selectedTile.removeStructure();
 						selectedTile.addStructure(m);
-					}else{
+					} else {
 						System.out.println("Map: Insufficient funds");
 					}
-					
+
 					break;
 				case HELLFIRECANNON:
-					HellfireCannon h = new HellfireCannon(selectedX,
-							selectedY);
-					if(Player.getInstance().getMoney() >= h.getPrice()){
+					HellfireCannon h = new HellfireCannon(selectedX, selectedY);
+					if (Player.getInstance().getMoney() >= h.getPrice()) {
 						selectedTile.removeStructure();
 						selectedTile.addStructure(h);
-					}else{
+					} else {
 						System.out.println("Map: Insufficient funds");
 					}
 					break;
 				case STASISTOWER:
 					selectedTile.removeStructure();
-					StasisTower s = new StasisTower(selectedX,
-							selectedY);
-					if(Player.getInstance().getMoney() >= s.getPrice()){
+					StasisTower s = new StasisTower(selectedX, selectedY);
+					if (Player.getInstance().getMoney() >= s.getPrice()) {
 						selectedTile.removeStructure();
 						selectedTile.addStructure(s);
-					}else{
+					} else {
 						System.out.println("Map: Insufficient funds");
 					}
 					break;
@@ -140,33 +167,97 @@ public abstract class Map implements Serializable {
 		}
 	}
 
+	/**
+	 * Places the base in the map
+	 * 
+	 * @author TeamSomething
+	 */
 	public abstract void setBase();
 
+	/**
+	 * Returns the Base
+	 * 
+	 * @author TeamSomething
+	 * @return Base = our base
+	 */
 	public abstract Base getBase();
-	
+
+	/**
+	 * Gets the X coordinate of the base
+	 *
+	 * @author TeamSomething
+	 * @return int = base's X coordinate
+	 */
 	public abstract int getBaseX();
-	
+
+	/**
+	 * Gets the Y coordinate of the base
+	 *
+	 * @author TeamSomething
+	 * @return int = base's Y coordinate
+	 */
 	public abstract int getBaseY();
 
-
+	/**
+	 * Sets the spawn points of the map
+	 *
+	 * @author TeamSomething
+	 */
 	public abstract void setSpawnPoints();
 
+	/**
+	 * Sets the path for the enemies to travel
+	 *
+	 * @author TeamSomething
+	 */
 	public abstract void setPath();
 
+	/**
+	 * Gets the game board
+	 *
+	 * @author TeamSomething
+	 * @return Vector<Vector<Tile>> = The Game board
+	 */
 	public Vector<Vector<Tile>> getGameBoard() {
 		return gameBoard;
 	}
 
+	/**
+	 * Sets the game board
+	 *
+	 * @author TeamSomething
+	 * @param board
+	 *            = The Game board
+	 */
 	public void setGameBoard(Vector<Vector<Tile>> board) {
 		gameBoard = board;
 	}
 
+	/**
+	 * Gets the spawn tile in accordance to the number given
+	 *
+	 * @author TeamSomething
+	 * @return Tile = the spawn tile
+	 */
 	public abstract Tile getSpawnTile(int n);
 
+	/**
+	 * Gets the width of the tiles
+	 *
+	 * @author TeamSomething
+	 * @return int = tile width
+	 */
 	public static int getTileWidth() {
 		return tileWidth;
 	}
 
+	/**
+	 * Sets the width of the tiles
+	 *
+	 * @author TeamSomething
+	 * @param tileWidth
+	 *            = tile width
+	 */
 	public static void setTileWidth(int tileWidth) {
 		Map.tileWidth = tileWidth;
 	}
