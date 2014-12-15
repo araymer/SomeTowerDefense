@@ -47,7 +47,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	private ResourcePanel() {
 		selected = StructureType.SENTRYGUN;
 
-		this.setLayout(new GridLayout(6, 2));
+		this.setLayout(new GridLayout(5, 2));
 		this.setPreferredSize(new Dimension(200, 600));
 		radioButtons = new ButtonGroup();
 
@@ -76,9 +76,6 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		money = new JLabel("Funds: 500");
 
 		info = new JLabel("");
-		info.setSize(20, 100);
-		info.setPreferredSize(new Dimension(20, 100));
-		info.setBackground(Color.YELLOW);
 
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
@@ -94,7 +91,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		this.add(upgrade);
 
 		this.add(money);
-		this.add(new JScrollPane(info));
+		this.add(info);
 
 		// add action listeners
 		chronoTower.addActionListener(this);
