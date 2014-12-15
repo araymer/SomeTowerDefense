@@ -7,8 +7,6 @@
 
 package Maps;
 
-import java.util.ArrayList;
-
 import Model.Base;
 import Model.Map;
 import Model.Tile;
