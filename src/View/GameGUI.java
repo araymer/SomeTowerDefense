@@ -398,7 +398,7 @@ public class GameGUI implements Serializable {
 				GameController.getInstance().loadData();
 				break;
 			case "fast":
-				// TODO: implement code for making things fast
+				Ticker.getInstance().changeSpeed();
 				break;
 			case "save":
 				GameController.getInstance().saveData();
