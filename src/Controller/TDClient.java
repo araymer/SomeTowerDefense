@@ -27,6 +27,11 @@ import command.TransferResourcesCommand;
 import command.UpdateBaseCommand;
 import command.UpdateMiniMapCommand;
 
+/**
+ * This class handles the client in multiplayer.
+ * @author Team Something
+ *
+ */
 public class TDClient {
 
 	@SuppressWarnings("unused")
@@ -121,10 +126,18 @@ public class TDClient {
 		}
 	}
 
+	/**
+	 * Changes base hit points.
+	 * @param int - newHP
+	 */
 	public void updateBaseHP(int newHP) {
 		GUI.tilePanel.tileMap.getBase().setHP(newHP);
 	}
 
+	/**
+	 * Damages the base.
+	 * @param int - damageAmount
+	 */
 	public void baseTakeDamage(int damageAmount) {
 		BaseTakeDamageCommand dmgCommand = new BaseTakeDamageCommand(username,
 				damageAmount);
@@ -135,6 +148,9 @@ public class TDClient {
 		}
 	}
 
+	/**
+	 * The starting hit points for the base.
+	 */
 	public void setStartingServerHP() {
 		UpdateBaseCommand update = new UpdateBaseCommand(username,
 				GUI.tilePanel.tileMap.getBase().getHP());
@@ -145,10 +161,17 @@ public class TDClient {
 		}
 	}
 
+	/**
+	 * Starts the multiplayer game.
+	 */
 	public void startMultiplayerGame(){
 		GUI.startMultiplayerGame();
 	}
 	
+	/**
+	 * Send a message to the other player.
+	 * @param String - message
+	 */
 	public void addMessage(String message){
 		try{
 			toServer.writeObject(new AddMessageCommand(username, message));

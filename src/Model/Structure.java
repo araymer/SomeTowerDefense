@@ -54,7 +54,12 @@ public abstract class Structure extends Drawable implements Serializable {
 	protected int upgradeCost;
 
 	protected TowerState tower;
-
+	
+	/**
+	 * @param (int)hit points, @param (int)production rate, @param (int)attack range, @param (int)attack damage, 
+	 * @param (int)splash, @param (int)rate of fire, @param (int)cost to build, @param (int)x-pos, @param (int)y-pos, @param (SpecialAttack)ENUM
+	 */
+	
 	public Structure(int hp, int prod, int rng, int dmg, int splash, int rate,
 			int cost, int x, int y, SpecialAttack sp) {
 
@@ -74,7 +79,9 @@ public abstract class Structure extends Drawable implements Serializable {
 		setImages();
 		this.changeTo(TowerStates.WAIT, null);
 	}
-
+	
+	
+	
 	public void draw(Graphics2D g2) {
 		tower.draw(g2);
 	}
@@ -84,56 +91,85 @@ public abstract class Structure extends Drawable implements Serializable {
 	 */
 	public abstract void setImages();
 
+	
+	/**
+	 * @returns (int)current hit points
+	 */
 	public int getHP() {
 		return hitpoints;
 	}
-
+	
+	/**
+	 * @returns (int)production rate
+	 */
 	public int getProd() {
 		return production;
 	}
-
+	/**
+	 * @returns (int)tower range
+	 */
 	public int getRange() {
 		return range;
 	}
-
+	/**
+	 * @returns (int)tower damage
+	 * 
+	 */
 	public int getDamage() {
 		return damage;
 	}
-
+	/**
+	 * @returns (int)splash radius
+	 */
 	public int getSplash() {
 		return splashRadius;
 	}
-
+	/**
+	 * @returns (int) rate of fire
+	 */
 	public int getROF() {
 		return rateOfFire;
 	}
-
+	/**
+	 * @returns (int)x-pos
+	 */
 	public int getX() {
 		return x;
 	}
-
+	/**
+	 * @return (int)y-pos
+	 */
 	public int getY() {
 		return y;
 	}
-
+	/**
+	 * @returns (SpecialAttack)SpecialAttack type
+	 */
 	public SpecialAttack getSpecial() {
 		return special;
 	}
-
+	
 	public void update() {
 		// System.out.println("structure update");
 		tower.update();
 	}
-
+	/**
+	 * @return void
+	 * death sequence for structure
+	 */
 	public abstract void die();
-
+	/**
+	 * @returns void
+	 * @params (int)damage
+	 * Subtracts from current hitpoints of structures.
+	 */
 	public void takeDamage(int dmg) {
 		System.out.println("beep boop!");
 		hitpoints -= dmg;
 	}
 
 	/**
-	 * returns true if structure is destroyed
+	 * @returns true if structure is destroyed
 	 */
 	public boolean isFinished() {
 		// TODO Not finished, lol
@@ -201,11 +237,15 @@ public abstract class Structure extends Drawable implements Serializable {
 		}
 
 	}
-
+	/**
+	 * @returns name of structure
+	 */
 	public String getName() {
 		return name;
 	}
-
+	/**
+	 * @returns (int)price
+	 */
 	public int getPrice() {
 		return price;
 	}

@@ -18,30 +18,48 @@ import View.GameGUI;
 import View.MapPanel;
 import View.TilePanel;
 
+/**
+ * The basic game controller, handles waves, saving, loading and input/output streams.
+ * This uses the Singleton pattern.
+ * @author Team Something
+ *
+ */
 public class GameController {
 	private int waveCount;
 	private GameGUI gui;
 	private int spawnsPerWave[] = {1,2,4,8,16};
 	private static GameController theController;
 
+	/**
+	 * The method that makes this executable.
+	 * @param args - not used
+	 */
 	public static void main(String[] args) {
 
 		GameController.getInstance();
 	}
 
+	/**
+	 * The only instance of this class can be called from anywhere.
+	 * @return GameController
+	 */
 	public static GameController getInstance() {
 		if (theController == null)
 			theController = new GameController();
 		return theController;
 	}
 
+	/**
+	 * Private constructor so that there is only one instance at a time.
+	 */
 	private GameController() {
 		waveCount = 5;
 		gui = GameGUI.getInstance();
 	}
 
-	// TODO This needs to be dependent on ticker, so pausing will also pause the
-	// waves
+	/**
+	 * Sends the waves to attack the player.
+	 */
 	public void startWaves() {
 
 		for (int i = 0; i < waveCount; i++) {
@@ -65,7 +83,7 @@ public class GameController {
 					e.printStackTrace();
 				}
 			}
-			// TODO Wait for all enemies to die
+			
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -76,9 +94,14 @@ public class GameController {
 
 	}
 
+	// for multiplayer
 	FileInputStream inStream;
 	ObjectInputStream inObject;
 
+	/**
+	 * Loads a previously saved game.
+	 * @return boolean - if there is a game saved.
+	 */
 	@SuppressWarnings("unchecked")
 	public boolean loadData() {
 
@@ -105,6 +128,9 @@ public class GameController {
 		return true;
 	}
 
+	/**
+	 * Saves the game.
+	 */
 	public void saveData() {
 		FileOutputStream outStream;
 		ObjectOutputStream outObject;

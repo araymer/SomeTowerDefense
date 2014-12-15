@@ -21,7 +21,7 @@ import View.TilePanel;
  */
 @SuppressWarnings("serial")
 public class Scout extends Attacker {
-	private static final int HITPOINTS = 300;
+	private static final int HITPOINTS = 600;
 	private static final int DEFENSE = 10;
 	private static final int ATTACK_RATING = 10;
 	private static final int RANGE = 1;
