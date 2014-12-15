@@ -12,7 +12,7 @@ public class Wave {
 	public boolean enemiesAlive = true;
 	
 	public Wave(){
-		
+		TilePanel.getInstance().display = true;
 	}
 	
 	public void setWave(int num){
@@ -22,11 +22,13 @@ public class Wave {
 	public void startingAWave(){
 		innerCount = 0;
 		waveCount++;
+		TilePanel.getInstance().tileMap.waveNumber = waveCount;
 		System.out.println("Starting wave " + waveCount);
 	}
 	
 	public void finishedWaves(){
 		System.out.println("YOU WON");
+		TilePanel.getInstance().display1 = true;
 	}
 	
 	public void setEnemiesAlive(boolean bool){
@@ -38,8 +40,10 @@ public class Wave {
 	
 	public void attemptSpawn(int tick){
 		if(tick % 70 == 0){
+			TilePanel.getInstance().display = false;
 			switch(waveCount){
 			case 1:
+				
 				if(innerCount == 1){
 					TilePanel.getInstance().tileMap.getSpawnTile(1).addAttacker(
 							new Marine(TilePanel.getInstance().tileMap.getSpawnTile(1)));
