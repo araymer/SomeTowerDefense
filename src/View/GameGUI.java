@@ -297,6 +297,7 @@ public class GameGUI implements Serializable {
 		default:
 			break;
 		}
+		playPanel.removeAll();
 		playPanel.remove(tilePanel);
 		gamePanel.remove(playPanel);
 		Ticker.getInstance().reset();
@@ -305,9 +306,13 @@ public class GameGUI implements Serializable {
 
 		MapPanel.getInstance().reset();
 		MainMenu.getInstance().reset();
+		ResourcePanel.getInstance().reinit();
 		gamePanel.removeAll();
 		gamePanel.add(MainMenu.getInstance());
 		((CardLayout) gamePanel.getLayout()).show(gamePanel, "Main");
+
+		gamePanel.add(playPanel, "Play");
+		
 		isRunning = false;
 		if (tickerThread != null) {
             try {

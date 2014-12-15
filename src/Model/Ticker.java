@@ -26,6 +26,7 @@ public class Ticker implements Runnable {
 	private static Ticker ticker;
 	private int tickCount;
 	public int numOfAttackersDead = 0;
+	private Wave waves;
 
 	private Vector<Attacker> attackerRemoveList = new Vector<Attacker>();
 	private Vector<Attacker> atkrMoveList = new Vector<Attacker>();
@@ -33,6 +34,7 @@ public class Ticker implements Runnable {
 
 	// many objects will need to access the same timer
 	private Ticker() {
+		waves = new Wave();
 		isRunning = true;
 		paused = false;
 		tickCount = 0;
@@ -117,43 +119,14 @@ public class Ticker implements Runnable {
 	 * Updates each attacker and structure and removes or moves them if needed
 	 */
 	private void update() {
-		// add in information for structures and towers for
-		// position, direction and last drawn image (so it actually animates)
-		//
-
-		// for (int i = 0; i < TilePanel.getInstance().tileMap.gameBoard.size();
-		// i++) {
-		// for (int p = 0; p < TilePanel.getInstance().tileMap.gameBoard
-		// .get(i).size(); p++) {
-		// for (int r = 0; r < TilePanel.getInstance().tileMap.gameBoard
-		// .get(i).get(p).getAttackers().size(); r++)
-		// TilePanel.getInstance().tileMap.gameBoard.get(i).get(p)
-		// .getAttackers().get(r).move();
-		// }
-		//
-		// }
-		// for (int i = 0; i < TilePanel.getInstance().tileMap.gameBoard.size();
-		// i++) {
-		// for (int p = 0; p <
-		// TilePanel.getInstance().tileMap.gameBoard.get(i).size(); p++) {
-		// for (int r = 0; r <
-		// TilePanel.getInstance().tileMap.gameBoard.get(i).get(p).getAttackers().size();
-		// r++){
-		// if(TilePanel.getInstance().tileMap.gameBoard.get(i).get(p).getStructure()
-		// != null)
-		// TilePanel.getInstance().tileMap.gameBoard.get(i).get(p).getStructure().update();
-		// }
-		//
-		// }
-		//
-		// }
+		
 
 		// Had to add this to avoid ConcurrentModificationException
 		// Checking if any attackers/structures need to be removed or moved
 		attackerRemoveList.clear();
 		atkrMoveList.clear();
 		structureRemoveList.clear();
-
+		int attackersAlive = 0;
 		try {
 
 			// Check for dead structures and attackers
@@ -166,6 +139,7 @@ public class Ticker implements Runnable {
 						}
 					}
 					for (Attacker attacker : tile.getAttackers()) {
+						attackersAlive ++;
 						if (attacker.isFinished()) {
 							attackerRemoveList.add(attacker);
 						} else if (attacker.needsToMove) {
@@ -202,7 +176,7 @@ public class Ticker implements Runnable {
 
 				attacker.location.getNextTile().getAttackers().add(attacker);
 				attacker.setLoc(attacker.location.getNextTile());
-				;
+				
 				attacker.needsToMove = false;
 			}
 
@@ -210,6 +184,14 @@ public class Ticker implements Runnable {
 			System.out.println("removing an enemy threw exception");
 			e.printStackTrace();
 		}
+		
+		//Attempt to spawn attackers
+		if(attackersAlive > 0){
+			waves.setEnemiesAlive(true);
+		}else{
+			waves.setEnemiesAlive(false);
+		}
+		waves.attemptSpawn(tickCount);
 
 		// Update all structures and enemies
 		for (Vector<Tile> vec : TilePanel.getInstance().tileMap.getGameBoard()) {
@@ -222,6 +204,8 @@ public class Ticker implements Runnable {
 				}
 			}
 		}
+		
+		
 
 		numOfAttackersDead += attackerRemoveList.size();
 		// Update other players minimap
