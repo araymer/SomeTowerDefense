@@ -100,6 +100,7 @@ public class GameGUI implements Serializable {
 	 *            = integer representation of selected map
 	 */
 	void createMap(int selection) {
+		//gamePanel = new JPanel();
 		playPanel = new JPanel();
 		mapOverlay = new JLayeredPane();
 
@@ -169,8 +170,8 @@ public class GameGUI implements Serializable {
 	 *            = loaded map data
 	 */
 	public void createLoadedMap(Map map) {
-//		playPanel = new JPanel();
-//		mapOverlay = new JLayeredPane();
+		playPanel = new JPanel();
+		mapOverlay = new JLayeredPane();
 		
 		MapPanel.getInstance().setMap(map.mapImageName);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
@@ -205,16 +206,17 @@ public class GameGUI implements Serializable {
 			client.setStartingServerHP();
 			multiFrame = new MultiplayerFrame();
 		}
+		
 		tilePanel.setMap(map);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
 
 		isRunning = true;
-		//if(tickerThread == null){
+		if(tickerThread == null){
 			tickerThread = new Thread(Ticker.getInstance());
-		//}
+		}
 		
 		Ticker.getInstance().waves.setWave(map.waveNumber);
-		//Ticker.getInstance().loopStart();
+		Ticker.getInstance().loopStart();
 		tickerThread.start();
 		System.out.println("GameGUI: finished loading");
 	}
@@ -347,7 +349,9 @@ public class GameGUI implements Serializable {
 		Ticker.getInstance().loopStop();
 		gamePanel.remove(playPanel);
 		tilePanel = tilePanel.reset();
+		// tilePanel = TilePanel.getInstance();
 		tilePanel.setMap(currentMap);
+		
 		
 	}
 
