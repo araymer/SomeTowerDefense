@@ -6,7 +6,7 @@ import Attackers.Marine;
 import Attackers.Scout;
 
 public class Wave {
-	public int waveCount;
+	public int waveCount = 1;
 	
 	private int innerCount = 1;
 	public boolean enemiesAlive = true;
@@ -20,21 +20,26 @@ public class Wave {
 	}
 	
 	public void startingAWave(){
-		
+		innerCount = 0;
+		waveCount++;
+		System.out.println("Starting wave " + waveCount);
 	}
 	
 	public void finishedWaves(){
-		
+		System.out.println("YOU WON");
 	}
 	
 	public void setEnemiesAlive(boolean bool){
+		if(!bool){
+			//System.out.println("Wave: set to false!");
+		}
 		enemiesAlive = bool;
 	}
 	
 	public void attemptSpawn(int tick){
-		if(tick % 40 == 0){
+		if(tick % 70 == 0){
 			switch(waveCount){
-			case 0:
+			case 1:
 				if(innerCount == 1){
 					TilePanel.getInstance().tileMap.getSpawnTile(1).addAttacker(
 							new Marine(TilePanel.getInstance().tileMap.getSpawnTile(1)));
@@ -43,11 +48,10 @@ public class Wave {
 							new Marine(TilePanel.getInstance().tileMap.getSpawnTile(2)));
 					
 				}else if(!enemiesAlive){
-					waveCount++;
 					startingAWave();
 				}
 				break;
-			case 1:
+			case 2:
 				if(innerCount == 1){
 					TilePanel.getInstance().tileMap.getSpawnTile(1).addAttacker(
 							new Marine(TilePanel.getInstance().tileMap.getSpawnTile(1)));
@@ -60,11 +64,10 @@ public class Wave {
 						new Marine(TilePanel.getInstance().tileMap.getSpawnTile(2)));
 				
 				}else if(!enemiesAlive){
-					waveCount++;
 					startingAWave();
 				}
 				break;
-			case 2:
+			case 3:
 				if(innerCount == 1){
 					TilePanel.getInstance().tileMap.getSpawnTile(1).addAttacker(
 							new Scout(TilePanel.getInstance().tileMap.getSpawnTile(1)));
@@ -77,8 +80,8 @@ public class Wave {
 						new Cannoneer(TilePanel.getInstance().tileMap.getSpawnTile(2)));
 				
 				}else if(!enemiesAlive){
-					waveCount++;
 					startingAWave();
+					finishedWaves();
 				}
 				break;
 			}
