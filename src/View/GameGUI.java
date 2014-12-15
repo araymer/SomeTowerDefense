@@ -154,9 +154,9 @@ public class GameGUI implements Serializable {
 		if(tickerThread == null){
 			tickerThread = new Thread(Ticker.getInstance());
 		}
-		
-		Ticker.getInstance().waves.setWave(1);
 		Ticker.getInstance().loopStart();
+		Ticker.getInstance().waves.setWave(1);
+		
 		tickerThread.start();
 
 	}
@@ -207,6 +207,7 @@ public class GameGUI implements Serializable {
 			multiFrame = new MultiplayerFrame();
 		}
 		
+		TilePanel.getInstance().setMap(map);
 		tilePanel.setMap(map);
 		Player.getInstance().setMoney(map.playerMoney.getMoney());
 
@@ -217,7 +218,12 @@ public class GameGUI implements Serializable {
 		
 		Ticker.getInstance().waves.setWave(map.waveNumber);
 		Ticker.getInstance().loopStart();
-		tickerThread.start();
+		try{
+			tickerThread.start();
+		}catch(Exception e){
+			
+		}
+		
 		System.out.println("GameGUI: finished loading");
 	}
 
