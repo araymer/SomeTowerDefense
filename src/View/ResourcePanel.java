@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -12,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import Model.StructureType;
 
@@ -36,7 +39,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 	JButton sentryGunInfo;
 	JButton plasmaCannonInfo;
 	JLabel money;
-	static JLabel info;
+	JTextArea info;
 
 	/**
 	 * Constructs the ResourcePanel for use in the GameGUI
@@ -72,8 +75,10 @@ public class ResourcePanel extends JPanel implements ActionListener {
 
 		money = new JLabel("Funds: 500");
 
-		info = new JLabel("");
-		info.setSize(15, 20);
+		info = new JTextArea("");
+		info.setSize(20, 100);
+		info.setPreferredSize(new Dimension(20, 100));
+		info.setBackground(Color.YELLOW);
 
 		radioButtons.add(chronoTower);
 		radioButtons.add(sentryGun);
@@ -89,7 +94,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		this.add(upgrade);
 
 		this.add(money);
-		this.add(info);
+		this.add(new JScrollPane(info));
 
 		// add action listeners
 		chronoTower.addActionListener(this);
@@ -115,7 +120,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 		money.setText("Funds: " + arg1);
 	}
 
-	public static void updateInfo(String string) {
+	public void updateInfo(String string) {
 		info.setText(string);
 	}
 
@@ -203,7 +208,7 @@ public class ResourcePanel extends JPanel implements ActionListener {
 					+ structureHP + "<br>Damage: " + structureDamage
 					+ "<br>Rate of Fire: " + structureROF + " shots per second"
 					+ "<br>Cost: " + structureCost + "</html>";
-			ResourcePanel.updateInfo(info);
+			resourcePanel.updateInfo(info);
 		}
 	}
 
