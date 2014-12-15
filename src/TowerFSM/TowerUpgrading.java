@@ -18,7 +18,7 @@ import Structures.*;
  */
 public class TowerUpgrading extends TowerState implements Serializable{
 	Structure tower;
-	private int tick;
+	
 
 	public TowerUpgrading(Structure structure) {
 		super(structure);
@@ -81,9 +81,6 @@ public class TowerUpgrading extends TowerState implements Serializable{
 			}
 		}
 		
-		
-		
-		tick = 0;
 
 	}
 

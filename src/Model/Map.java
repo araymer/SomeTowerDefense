@@ -89,19 +89,36 @@ public abstract class Map implements Serializable {
 					upgrade = StructureType.NONE;
 				switch (upgrade) {
 				case SENTRYGUN2:
-					selectedTile.removeStructure();
-					selectedTile.addStructure(new MarineSentryGunMkII(
-							selectedX, selectedY));
+					MarineSentryGunMkII m = new MarineSentryGunMkII(
+							selectedX, selectedY);
+					if(Player.getInstance().getMoney() >= m.getPrice()){
+						selectedTile.removeStructure();
+						selectedTile.addStructure(m);
+					}else{
+						System.out.println("Map: Insufficient funds");
+					}
+					
 					break;
 				case HELLFIRECANNON:
-					selectedTile.removeStructure();
-					selectedTile.addStructure(new HellfireCannon(selectedX,
-							selectedY));
+					HellfireCannon h = new HellfireCannon(selectedX,
+							selectedY);
+					if(Player.getInstance().getMoney() >= h.getPrice()){
+						selectedTile.removeStructure();
+						selectedTile.addStructure(h);
+					}else{
+						System.out.println("Map: Insufficient funds");
+					}
 					break;
 				case STASISTOWER:
 					selectedTile.removeStructure();
-					selectedTile.addStructure(new StasisTower(selectedX,
-							selectedY));
+					StasisTower s = new StasisTower(selectedX,
+							selectedY);
+					if(Player.getInstance().getMoney() >= s.getPrice()){
+						selectedTile.removeStructure();
+						selectedTile.addStructure(s);
+					}else{
+						System.out.println("Map: Insufficient funds");
+					}
 					break;
 				default:
 					System.out.println("No upgrades available");
