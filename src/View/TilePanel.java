@@ -104,118 +104,118 @@ public class TilePanel extends JPanel implements Serializable {
 	}
 
 	private void setSpawn(int w) {
-		
+
 		wave++;
 		System.out.println("Spawn");
-		
+
 		if(w<3)
-		for(int i = 0; i<15; i++) {
-			for(int k = 1; k<=2; k++) {
+			for(int i = 0; i<15; i++) {
+				for(int k = 1; k<=2; k++) {
 					tileMap.getSpawnTile(k).addAttacker(
-					new Marine(tileMap.getSpawnTile(k)));
+							new Marine(tileMap.getSpawnTile(k)));
+				}
 			}
-		}
 		else if(w==4) {
 			for(int i = 0; i<15; i++) {
 				for(int k = 1; k<=2; k++) {
-						tileMap.getSpawnTile(k).addAttacker(
-						new Marine(tileMap.getSpawnTile(k)));
+					tileMap.getSpawnTile(k).addAttacker(
+							new Marine(tileMap.getSpawnTile(k)));
 				}
 			}
 			for(int i = 0; i<6; i++) {
 				for(int k = 1; k<=2; k++) {
-						tileMap.getSpawnTile(k).addAttacker(
-						new Scout(tileMap.getSpawnTile(k)));
+					tileMap.getSpawnTile(k).addAttacker(
+							new Scout(tileMap.getSpawnTile(k)));
 				}
 			}
 		}
 		else if(w>4 && w<8) {
-			
+
 			for(int i = 0; i<15+(w*2); i++) {
 				for(int k = 1; k<=2; k++) {
-						tileMap.getSpawnTile(k).addAttacker(
-						new Marine(tileMap.getSpawnTile(k)));
+					tileMap.getSpawnTile(k).addAttacker(
+							new Marine(tileMap.getSpawnTile(k)));
 				}
 			}
 			for(int i = 0; i<6+w; i++) {
 				for(int k = 1; k<=2; k++) {
-						tileMap.getSpawnTile(k).addAttacker(
-						new Scout(tileMap.getSpawnTile(k)));
+					tileMap.getSpawnTile(k).addAttacker(
+							new Scout(tileMap.getSpawnTile(k)));
 				}
 			}
-			
+
 		}
-		
+
 		else if(w==8) {
-			
+
 			for(int i = 0; i<15+w; i++) {
 				for(int k = 1; k<=2; k++) {
-						tileMap.getSpawnTile(k).addAttacker(
-						new Marine(tileMap.getSpawnTile(k)));
+					tileMap.getSpawnTile(k).addAttacker(
+							new Marine(tileMap.getSpawnTile(k)));
 				}
 			}
 			for(int i = 0; i<6+w; i++) {
 				for(int k = 1; k<=2; k++) {
-						tileMap.getSpawnTile(k).addAttacker(
-						new Scout(tileMap.getSpawnTile(k)));
+					tileMap.getSpawnTile(k).addAttacker(
+							new Scout(tileMap.getSpawnTile(k)));
 				}
 			}
 			for(int i = 0; i<2+w; i++) {
 				for(int k = 1; k<=2; k++) {
-						tileMap.getSpawnTile(k).addAttacker(
-						new Cannoneer(tileMap.getSpawnTile(k)));
+					tileMap.getSpawnTile(k).addAttacker(
+							new Cannoneer(tileMap.getSpawnTile(k)));
 				}
 			}
-			
+
 		}
-		
-		
-		
+
+
+
 		else if(w==9) {
-	
-	for(int i = 0; i<15*w; i++) {
-		for(int k = 1; k<=2; k++) {
-				tileMap.getSpawnTile(k).addAttacker(
-				new Marine(tileMap.getSpawnTile(k)));
+
+			for(int i = 0; i<15*w; i++) {
+				for(int k = 1; k<=2; k++) {
+					tileMap.getSpawnTile(k).addAttacker(
+							new Marine(tileMap.getSpawnTile(k)));
+				}
+			}
+			for(int i = 0; i<6+w; i++) {
+				for(int k = 1; k<=2; k++) {
+					tileMap.getSpawnTile(k).addAttacker(
+							new Scout(tileMap.getSpawnTile(k)));
+				}
+			}
+			for(int i = 0; i<2+w; i++) {
+				for(int k = 1; k<=2; k++) {
+					tileMap.getSpawnTile(k).addAttacker(
+							new Cannoneer(tileMap.getSpawnTile(k)));
+				}
+			}
+
 		}
-	}
-	for(int i = 0; i<6+w; i++) {
-		for(int k = 1; k<=2; k++) {
-				tileMap.getSpawnTile(k).addAttacker(
-				new Scout(tileMap.getSpawnTile(k)));
+
+		else if(w==10) {
+
+			for(int i = 0; i<15*w; i++) {
+				for(int k = 1; k<=2; k++) {
+					tileMap.getSpawnTile(k).addAttacker(
+							new Marine(tileMap.getSpawnTile(k)));
+				}
+			}
+			for(int i = 0; i<6*w; i++) {
+				for(int k = 1; k<=2; k++) {
+					tileMap.getSpawnTile(k).addAttacker(
+							new Scout(tileMap.getSpawnTile(k)));
+				}
+			}
+			for(int i = 0; i<2*w; i++) {
+				for(int k = 1; k<=2; k++) {
+					tileMap.getSpawnTile(k).addAttacker(
+							new Cannoneer(tileMap.getSpawnTile(k)));
+				}
+			}
+			waveTime.stop();
 		}
-	}
-	for(int i = 0; i<2+w; i++) {
-		for(int k = 1; k<=2; k++) {
-				tileMap.getSpawnTile(k).addAttacker(
-				new Cannoneer(tileMap.getSpawnTile(k)));
-		}
-	}
-	
-}
-		
-	else if(w==10) {
-	
-	for(int i = 0; i<15*w; i++) {
-		for(int k = 1; k<=2; k++) {
-				tileMap.getSpawnTile(k).addAttacker(
-				new Marine(tileMap.getSpawnTile(k)));
-		}
-	}
-	for(int i = 0; i<6*w; i++) {
-		for(int k = 1; k<=2; k++) {
-				tileMap.getSpawnTile(k).addAttacker(
-				new Scout(tileMap.getSpawnTile(k)));
-		}
-	}
-	for(int i = 0; i<2*w; i++) {
-		for(int k = 1; k<=2; k++) {
-				tileMap.getSpawnTile(k).addAttacker(
-				new Cannoneer(tileMap.getSpawnTile(k)));
-		}
-	}
-	waveTime.stop();
-}
 		display1 = true;
 		repaint();
 		Ticker.getInstance().loopStop();

@@ -19,6 +19,7 @@ public abstract class Map implements Serializable {
 	private int height, width;
 	public Player playerMoney = Player.getInstance();
 	public String mapImageName;
+	public int waveNumber;
 
 	// randomizing wave spawn points easier
 
@@ -35,9 +36,12 @@ public abstract class Map implements Serializable {
 			}
 		}
 		playerMoney.setMoney(500);
+		waveNumber = 0;
 		
 	}
-
+	public void nextWave(){
+		waveNumber++;
+	}
 	public abstract Map reInit();
 
 	/**
