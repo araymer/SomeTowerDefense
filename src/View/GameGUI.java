@@ -360,9 +360,10 @@ public class GameGUI implements Serializable {
 							+ "<br>HP: " + structure.getHP() + "<br>Damage: "
 							+ structure.getDamage() + "<br>Rate of Fire: "
 							+ structure.getROF() + " shots per second</html>";
-					ResourcePanel.getInstance().setCirclePoints(
-							e.getPoint().getX(), e.getPoint().getY());
-					ResourcePanel.getInstance().repaint();
+					TilePanel.getInstance().setCirclePoints(
+							(int) Math.round(e.getPoint().getX()) / 40,
+							(int) Math.round(e.getPoint().getY()) / 40,
+							structure.getRange());
 					ResourcePanel.getInstance().updateInfo(info);
 				}
 			} catch (Exception exception) {

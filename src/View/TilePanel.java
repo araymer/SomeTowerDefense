@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.Serializable;
@@ -123,6 +124,20 @@ public class TilePanel extends JPanel implements Serializable {
 			}
 		}
 
+		if (circleX != -1 && circleY != -1) {
+			g2.setColor(new Color(1, 1, 1, 0.5f));
+			g2.fillOval(circleX - range / 4, circleY - range / 4, range, range);
+		}
+	}
+
+	int circleX = -1;
+	int circleY = -1;
+	int range;
+
+	public void setCirclePoints(int x, int y, int range) {
+		circleX = x * 40 - 20;
+		circleY = y * 40 - 20;
+		this.range = range * 80; // 80 to account for both ways
 	}
 
 	public Map getMap() {
