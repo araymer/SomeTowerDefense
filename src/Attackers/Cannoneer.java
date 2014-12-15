@@ -15,6 +15,11 @@ import Model.Tile;
 import View.GameGUI;
 import View.TilePanel;
 
+/**
+ * This class represents the Cannoneer, a hard hitting, but slow moving attacker.
+ * @author Team Something
+ *
+ */
 @SuppressWarnings("serial")
 public class Cannoneer extends Attacker {
 	private static final int HITPOINTS = 1000;
@@ -28,6 +33,10 @@ public class Cannoneer extends Attacker {
 	int frames;
 	boolean firing;
 
+	/**
+	 * The constructor.
+	 * @param startingLocation - tile that it starts on
+	 */
 	public Cannoneer(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
 		name = "Cannoneer";
@@ -47,6 +56,9 @@ public class Cannoneer extends Attacker {
 		Player.getInstance().addMoney(value);
 	}
 
+	/**
+	 * Handles the drawing of the unit on the map.
+	 */
 	public void draw(Graphics2D g2) {
 		if (bImage == null) {
 			File imageFile = new File(baseDir + imageFileName);
@@ -105,6 +117,9 @@ public class Cannoneer extends Attacker {
 
 	}
 
+	/**
+	 * Positions the unit in the square.
+	 */
 	private double offset(String s) {
 
 		if(getLoc().nextTile != null){
@@ -138,6 +153,10 @@ public class Cannoneer extends Attacker {
 
 	}
 
+	/**
+	 * Has the unit facing the correct direction.
+	 * @return double - represents the direction in radians
+	 */
 	private double checkTransform() {
 		if(getLoc().nextTile != null) {
 
@@ -166,6 +185,9 @@ public class Cannoneer extends Attacker {
 		}
 	}
 	
+	/**
+	 * Resets the pixels.
+	 */
 	public void resetPixels() {
 		pixels = 0;
 	}

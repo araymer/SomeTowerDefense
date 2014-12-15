@@ -63,6 +63,7 @@ public class Wave {
 	 */
 	public void attemptSpawn(int tick){
 		if(tick % 70 == 0){
+			System.out.println("Wave: attempting to spawn wave:" + waveCount + " inner:" + innerCount);
 			TilePanel.getInstance().display = false;
 			switch(waveCount){
 			case 1:

@@ -6,6 +6,12 @@ import java.io.Serializable;
 
 import View.TilePanel;
 
+/**
+ * Abstract class for attacker
+ * 
+ * @author TeamSomething
+ *
+ */
 @SuppressWarnings("serial")
 public abstract class Attacker extends Drawable implements Serializable {
 
@@ -40,9 +46,15 @@ public abstract class Attacker extends Drawable implements Serializable {
 	private int tick;
 
 	Map map;
-	
+
 	protected SpecialAttack effect;
 
+	/**
+	 * Constructor for Attacker class
+	 * 
+	 * @author TeamSomething
+	 *
+	 */
 	public Attacker(int hp, int def, int ar, int range, int spd,
 			Tile startingLocation) {
 
@@ -52,27 +64,44 @@ public abstract class Attacker extends Drawable implements Serializable {
 		speed = spd;
 		defenseRating = def;
 		effect = SpecialAttack.NONE;
-		
+
 		xIncrement = 0;
 		yIncrement = 0;
 
 		location = startingLocation;
 		setX();
 		setY();
-		
 
 	}
 
+	/**
+	 * Sets the Y variable for the attacker
+	 * 
+	 * @author TeamSomething
+	 *
+	 */
 	public void setY() {
 		x = (int) location.getCoordinates().getX();
 
 	}
 
+	/**
+	 * Sets the X variable for the attacker
+	 * 
+	 * @author TeamSomething
+	 *
+	 */
 	public void setX() {
 		y = (int) location.getCoordinates().getY();
 
 	}
 
+	/**
+	 * Moves the attacker
+	 * 
+	 * @author TeamSomething
+	 *
+	 */
 	public void move() {
 		// Wont work because you can't modify a list while it's being iterated
 		// over somewhere else
@@ -81,33 +110,57 @@ public abstract class Attacker extends Drawable implements Serializable {
 		}
 	}
 
+	/**
+	 * Draws the attacker
+	 * 
+	 * @author TeamSomething
+	 *
+	 */
 	public abstract void draw(Graphics2D g2);
 
+	/**
+	 * Inflicts damage on target
+	 * 
+	 * @author TeamSomething
+	 *
+	 */
 	public abstract void attack(Structure s);
 
+	/**
+	 * Plays dying animation
+	 * 
+	 * @author TeamSomething
+	 *
+	 */
 	public abstract void die();
 
+	/**
+	 * Takes damage and reduces health
+	 * 
+	 * @author TeamSomething
+	 *
+	 */
 	public void takeDamage(int dmg, SpecialAttack special) {
 		System.out.println("ouch!");
-		switch(special) {
-			case NONE: // do nothing
-			case TWO_TARGETS:
-				break;
-			case FREEZE:
-				effect = SpecialAttack.FREEZE;
-				speed = 100;
-				break;
-			case SLOW:
-				if(effect == SpecialAttack.NONE || effect == SpecialAttack.BURN) {
-					speed *= 2;
-					effect = SpecialAttack.SLOW;
-				}
-				break;
-			case BURN:
-				effect = SpecialAttack.BURN;
-				break;
-			default:
-				System.out.println("error in attacker.takeDamage method");
+		switch (special) {
+		case NONE: // do nothing
+		case TWO_TARGETS:
+			break;
+		case FREEZE:
+			effect = SpecialAttack.FREEZE;
+			speed = 100;
+			break;
+		case SLOW:
+			if (effect == SpecialAttack.NONE || effect == SpecialAttack.BURN) {
+				speed *= 2;
+				effect = SpecialAttack.SLOW;
+			}
+			break;
+		case BURN:
+			effect = SpecialAttack.BURN;
+			break;
+		default:
+			System.out.println("error in attacker.takeDamage method");
 		}
 		hitpoints -= dmg;
 
@@ -117,34 +170,83 @@ public abstract class Attacker extends Drawable implements Serializable {
 	}
 
 	// getters
+	/**
+	 * Returns the name of the attacker
+	 * 
+	 * @author TeamSomething
+	 * @return String = name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Returns the value of the HP
+	 * 
+	 * @author TeamSomething
+	 * @return int = HP of the attacker
+	 */
 	public int getHP() {
 		return hitpoints;
 	}
 
+	/**
+	 * Gets the attack rating
+	 * 
+	 * @author TeamSomething
+	 * @return int = attack value
+	 */
 	public int getAttack() {
 		return attackRating;
 	}
 
+	/**
+	 * Gets the range
+	 * 
+	 * @author TeamSomething
+	 * @return int = range value
+	 */
 	public int getRange() {
 		return range;
 	}
 
+	/**
+	 * Gets the speed rating
+	 * 
+	 * @author TeamSomething
+	 * @return int = speed value
+	 */
 	public int getSpeed() {
 		return speed;
 	}
+
+	/**
+	 * Gets the defense rating
+	 * 
+	 * @author TeamSomething
+	 * @return int = defense value
+	 */
 
 	public int getAC() {
 		return defenseRating;
 	}
 
+	/**
+	 * Gets the tile the attacker is located on
+	 * 
+	 * @author TeamSomething
+	 * @return Tile = location
+	 */
 	public Tile getLoc() {
 		return location;
 	}
 
+	/**
+	 * Gets the attack rating
+	 * 
+	 * @author TeamSomething
+	 * @return int = attack value
+	 */
 	public void setLoc(Tile loc) {
 		location = loc;
 		setX();
@@ -169,6 +271,11 @@ public abstract class Attacker extends Drawable implements Serializable {
 		return y;
 	}
 
+	/**
+	 * Updates the action of the attacker
+	 * 
+	 * @author TeamSomething
+	 */
 	public void update() {
 		if (tick == 1000) {
 			tick = 1;
@@ -180,7 +287,7 @@ public abstract class Attacker extends Drawable implements Serializable {
 		if (tick % speed == 0) {
 			move();
 		}
-			
+
 		// Shoots if at base
 		if (tick % attackRating == 0) {
 			if (location.getNextTile() == null) {
@@ -188,10 +295,16 @@ public abstract class Attacker extends Drawable implements Serializable {
 			}
 		}
 		// takes damage if effected by BURN
-		if(effect == SpecialAttack.BURN)
+		if (effect == SpecialAttack.BURN)
 			takeDamage(10, SpecialAttack.NONE);
 	}
 
+	/**
+	 * Tells if the attacker is dead
+	 * 
+	 * @author TeamSomething
+	 * @return boolean = if the attacker is dead
+	 */
 	public boolean isFinished() {
 		return isDead;
 	}

@@ -14,6 +14,11 @@ import Model.Structure;
 import Model.Tile;
 import View.TilePanel;
 
+/**
+ * The Scout unit, fast and deadly.
+ * @author Team Something
+ *
+ */
 @SuppressWarnings("serial")
 public class Scout extends Attacker {
 	private static final int HITPOINTS = 300;
@@ -27,6 +32,10 @@ public class Scout extends Attacker {
 	boolean firing;
 	int frames;
 
+	/**
+	 * The constructor.
+	 * @param startingLocation - tile that it starts on
+	 */
 	public Scout(Tile startingLocation) {
 		super(HITPOINTS, DEFENSE, ATTACK_RATING, RANGE, SPEED, startingLocation);
 		name = "Sergeant";
@@ -48,6 +57,9 @@ public class Scout extends Attacker {
 
 	}
 
+	/**
+	 * Handles the drawing of the unit on the map.
+	 */
 	public void draw(Graphics2D g2) {
 		if (bImage == null) {
 			File imageFile = new File(baseDir + imageFileName);
@@ -103,6 +115,9 @@ public class Scout extends Attacker {
 
 	}
 
+	/**
+	 * Positions the unit in the square.
+	 */
 	private double offset(String s) {
 
 		if(getLoc().nextTile != null){
@@ -138,6 +153,10 @@ public class Scout extends Attacker {
 
 	}
 
+	/**
+	 * Has the unit facing the correct direction.
+	 * @return double - represents the direction in radians
+	 */
 	private double checkTransform() {
 		if(getLoc().nextTile != null) {
 
@@ -165,7 +184,9 @@ public class Scout extends Attacker {
 		}
 	}
 	
-	
+	/**
+	 * Resets the pixels.
+	 */
 	public void resetPixels() {
 		pixels = 0;
 	}
