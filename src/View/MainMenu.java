@@ -196,7 +196,7 @@ public class MainMenu extends JPanel {
 			if (e.getSource() == desertButton) {
 				try {
 					map = ImageIO
-							.read(new File("imageFiles/DesertUprising.jpg"));
+							.read(new File("imageFiles/desertuprising.jpg"));
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
