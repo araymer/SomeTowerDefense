@@ -3,3 +3,5 @@ bin
 .DS_Store
 map.dat
 tiles.dat
+.idea
+out
